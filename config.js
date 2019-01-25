@@ -19,10 +19,15 @@ const gitLabRepositories = [
   "leipert/gitlab-ce",
 ];
 
+const prBodyNotes = [
+  "/cc @leipert",
+  `Created by [${process.env.CI_PROJECT_PATH}](${process.env.CI_PROJECT_URL})`
+];
+
 const leipertRepositories = ["leipert-projects/yarn-why-json"];
 
 module.exports = {
-  dryRun: true,
+  dryRun: process.env.CI_COMMIT_REF_SLUG !== "master",
   autodiscover: false,
   platform: "gitlab",
   onboarding: false,
@@ -31,13 +36,13 @@ module.exports = {
     ...gitLabRepositories.map(repository => ({
       repository,
       ...baseConfig,
-      prBodyNotes: ["/cc @leipert"],
+      prBodyNotes,
       packageRules: [updateNothing, updateGitLabScope]
     })),
     ...leipertRepositories.map(repository => ({
       repository,
       ...baseConfig,
-      prBodyNotes: ["/cc @leipert"],
+      prBodyNotes,
       rangeStrategy: "bump"
     }))
   ]
