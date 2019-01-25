@@ -15,13 +15,17 @@ const updateGitLabScope = {
   rangeStrategy: "bump"
 };
 
-const gitLabRepositories = [
-  "leipert/gitlab-ce",
-];
-
 const prBodyNotes = [
   "/cc @leipert",
-  `Created by [${process.env.CI_PROJECT_PATH}](${process.env.CI_PROJECT_URL})`
+  `MR created with the help of [${process.env.CI_PROJECT_PATH}](${
+    process.env.CI_PROJECT_URL
+  })`
+];
+
+const gitLabRepositories = [
+  "gitlab-org/gitlab-ce",
+  "gitlab-org/gitlab-svgs",
+  "gitlab-org/gitlab-ui"
 ];
 
 const leipertRepositories = ["leipert-projects/yarn-why-json"];
@@ -29,6 +33,7 @@ const leipertRepositories = ["leipert-projects/yarn-why-json"];
 module.exports = {
   dryRun: process.env.CI_COMMIT_REF_SLUG !== "master",
   autodiscover: false,
+  logLevel: "info",
   platform: "gitlab",
   onboarding: false,
   printConfig: false,
@@ -37,6 +42,7 @@ module.exports = {
       repository,
       ...baseConfig,
       prBodyNotes,
+      labels: ["frontend", "dependency update", "backstage"],
       packageRules: [updateNothing, updateGitLabScope]
     })),
     ...leipertRepositories.map(repository => ({

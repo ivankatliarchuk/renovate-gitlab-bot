@@ -10,7 +10,7 @@
     "renovate": "^14.3.13"
   },
   "scripts": {
-    "pretty": "prettier --write '*.{js,json,yml}'"
+    "pretty": "./update-readme.js && prettier --write '*.{js,json,yml,md}'"
   },
   "devDependencies": {
     "prettier": "^1.16.1"
