@@ -1,0 +1,6 @@
+image: node:latest
+
+build-and-check:
+  stage: build
+  script:
+    - bash ./run-renovate.sh
