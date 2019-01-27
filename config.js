@@ -1,6 +1,7 @@
 const baseConfig = {
   lockFileMaintenance: { enabled: false, schedule: [] },
   enabledManagers: ["npm"],
+  prConcurrentLimit: 1,
   assignees: ["@leipert"]
 };
 

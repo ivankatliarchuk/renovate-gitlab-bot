@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "renovate": "^14.3.13"
+    "renovate": "git+https://github.com/leipert/renovate.git#make-gitlab-more-efficient"
   },
   "scripts": {
     "pretty": "./update-readme.js && prettier --write '*.{js,json,yml,md}'"
