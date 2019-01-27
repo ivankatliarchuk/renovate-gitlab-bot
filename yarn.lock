@@ -3532,10 +3532,9 @@ remark@^9.0.0:
     remark-stringify "^5.0.0"
     unified "^6.0.0"
 
-renovate@^14.3.13:
-  version "14.3.13"
-  resolved "https://registry.yarnpkg.com/renovate/-/renovate-14.3.13.tgz#812c09580f07ec2232f5a6c9b7a67e5c70cbfef1"
-  integrity sha512-ueF4xz8OVlJ9+DXTwqe80YFFgsPc1z6kpXbTksVY7nOoD2NpY5+hqW8jCDRr+x8XJlr7bKhfI3T8iwhYb9ijKQ==
+"renovate@git+https://github.com/leipert/renovate.git#make-gitlab-more-efficient":
+  version "0.0.0-semantic-release"
+  resolved "git+https://github.com/leipert/renovate.git#a23814468faefd9ba8f5c2c56e17c324e3883cd6"
   dependencies:
     "@renovate/pep440" "0.4.1"
     "@renovatebot/docker-registry-client" "3.3.0"
