@@ -23,13 +23,19 @@ const prBodyNotes = [
   })`
 ];
 
-const gitLabRepositories = [
+const onlyGitLabScope = [
   "gitlab-org/gitlab-ce",
   "gitlab-org/gitlab-svgs",
-  "gitlab-org/gitlab-ui"
+  "gitlab-org/gitlab-ui",
+  "gitlab-org/design.gitlab.com"
 ];
 
-const leipertRepositories = ["leipert-projects/yarn-why-json"];
+const allDependencies = [
+  "leipert-projects/yarn-why-json",
+  "leipert-projects/gettext-extractor-vue",
+  "leipert-projects/is-gitlab-pretty-yet",
+  "gitlab-com/teampage-map"
+];
 
 module.exports = {
   dryRun: process.env.CI_COMMIT_REF_SLUG !== "master",
@@ -39,14 +45,14 @@ module.exports = {
   onboarding: false,
   printConfig: false,
   repositories: [
-    ...gitLabRepositories.map(repository => ({
+    ...onlyGitLabScope.map(repository => ({
       repository,
       ...baseConfig,
       prBodyNotes,
       labels: ["frontend", "dependency update", "backstage"],
       packageRules: [updateNothing, updateGitLabScope]
     })),
-    ...leipertRepositories.map(repository => ({
+    ...allDependencies.map(repository => ({
       repository,
       ...baseConfig,
       prBodyNotes,
