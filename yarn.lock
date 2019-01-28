@@ -3534,7 +3534,7 @@ remark@^9.0.0:
 
 "renovate@git+https://github.com/leipert/renovate.git#make-gitlab-more-efficient":
   version "0.0.0-semantic-release"
-  resolved "git+https://github.com/leipert/renovate.git#a23814468faefd9ba8f5c2c56e17c324e3883cd6"
+  resolved "git+https://github.com/leipert/renovate.git#bf7fcca0bc28d3c98e77b7d1c8f122b23157d373"
   dependencies:
     "@renovate/pep440" "0.4.1"
     "@renovatebot/docker-registry-client" "3.3.0"
