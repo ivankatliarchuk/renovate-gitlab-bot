@@ -3532,9 +3532,19 @@ remark@^9.0.0:
     remark-stringify "^5.0.0"
     unified "^6.0.0"
 
+renovate-config-monorepo@^0.22.0:
+  version "0.22.0"
+  resolved "https://registry.yarnpkg.com/renovate-config-monorepo/-/renovate-config-monorepo-0.22.0.tgz#fe3a2c8a579fd78cfaf6a993c9f23ee79e306d33"
+  integrity sha512-A7Gye7LYFi1CRTA45Jywfi/NRDO/fRixpizmbWVptj9XbhANedOXZzqqmJr79OoFmZezEtNw6ko1EPd5fkT/9A==
+
+renovate-config-packages@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/renovate-config-packages/-/renovate-config-packages-0.3.0.tgz#bbec31433e0a5a334637bd89d8e03f3e0bfc436e"
+  integrity sha512-pPODN084NCx7jPD8LGecqN3deWyBwtm7zZPHoiL2TnBKDJUfiMyxKuLGsHLwhnCZHPXhh1ymZpbnBUd6NFVFAw==
+
 "renovate@git+https://github.com/leipert/renovate.git#make-gitlab-more-efficient":
   version "0.0.0-semantic-release"
-  resolved "git+https://github.com/leipert/renovate.git#bf7fcca0bc28d3c98e77b7d1c8f122b23157d373"
+  resolved "git+https://github.com/leipert/renovate.git#f037c5fd85b4eaf713285c4a455da28bc32f7628"
   dependencies:
     "@renovate/pep440" "0.4.1"
     "@renovatebot/docker-registry-client" "3.3.0"

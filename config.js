@@ -56,7 +56,22 @@ module.exports = {
       repository,
       ...baseConfig,
       prBodyNotes,
-      rangeStrategy: "bump"
+      rangeStrategy: "bump",
+      packageRules: [
+        {
+          extends: ["monorepo:jest", "packages:jsUnitTest"],
+          groupName: "testing"
+        },
+        {
+          extends: ["monorepo:vue"],
+          groupName: "vue monorepo"
+        },
+        {
+          extends: ["packages:linters"],
+          packageNames: ["prettier", "pretty-quick", "husky"],
+          groupName: "linters and prettier"
+        }
+      ]
     }))
   ]
 };
