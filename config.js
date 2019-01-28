@@ -13,7 +13,7 @@ const updateNothing = {
 const updateGitLabScope = {
   packagePatterns: ["@gitlab/.*"],
   enabled: true,
-  rangeStrategy: "lockfile-update"
+  rangeStrategy: "bump"
 };
 
 const prBodyNotes = [
@@ -56,7 +56,7 @@ module.exports = {
       repository,
       ...baseConfig,
       prBodyNotes,
-      rangeStrategy: "lockfile-update"
+      rangeStrategy: "bump"
     }))
   ]
 };
