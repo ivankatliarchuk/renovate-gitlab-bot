@@ -40,7 +40,7 @@ const allDependencies = [
 module.exports = {
   dryRun: process.env.CI_COMMIT_REF_SLUG !== "master",
   autodiscover: false,
-  logLevel: "info",
+  logLevel: "debug",
   platform: "gitlab",
   onboarding: false,
   printConfig: false,
