@@ -23,11 +23,34 @@ const prBodyNotes = [
   })`
 ];
 
-const onlyGitLabScope = [
-  "gitlab-org/gitlab-ce",
-  "gitlab-org/gitlab-svgs",
-  "gitlab-org/gitlab-ui",
-  "gitlab-org/design.gitlab.com"
+const updateOnlyGitLabScope = {
+  ...baseConfig,
+  prBodyNotes,
+  labels: ["frontend", "dependency update", "backstage"],
+  packageRules: [updateNothing, updateGitLabScope]
+};
+
+const gitlab = [
+  {
+    repository: "gitlab-org/gitlab-ce",
+    ...updateOnlyGitLabScope,
+    semanticCommits: false
+  },
+  {
+    repository: "gitlab-org/gitlab-svgs",
+    ...updateOnlyGitLabScope,
+    semanticCommits: false
+  },
+  {
+    repository: "gitlab-org/gitlab-ui",
+    ...updateOnlyGitLabScope,
+    semanticCommits: true
+  },
+  {
+    repository: "gitlab-org/design.gitlab.com",
+    ...updateOnlyGitLabScope,
+    semanticCommits: false
+  }
 ];
 
 const allDependencies = [
@@ -45,13 +68,7 @@ module.exports = {
   onboarding: false,
   printConfig: false,
   repositories: [
-    ...onlyGitLabScope.map(repository => ({
-      repository,
-      ...baseConfig,
-      prBodyNotes,
-      labels: ["frontend", "dependency update", "backstage"],
-      packageRules: [updateNothing, updateGitLabScope]
-    })),
+    ...gitlab,
     ...allDependencies.map(repository => ({
       repository,
       ...baseConfig,
