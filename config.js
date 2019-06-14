@@ -4,9 +4,9 @@ const baseConfig = {
   prConcurrentLimit: 1,
   assignees: ["@leipert"],
   // Only include the first level of dependency files
-  includePaths: ['*'],
+  includePaths: ["*"],
   // Dedupe yarn dependencies
-  postUpdateOptions: ['yarnDedupeFewer']
+  postUpdateOptions: ["yarnDedupeFewer"]
 };
 
 const updateNothing = {
@@ -22,9 +22,7 @@ const updateGitLabScope = {
 
 const prBodyNotes = [
   "/cc @leipert",
-  `MR created with the help of [${process.env.CI_PROJECT_PATH}](${
-    process.env.CI_PROJECT_URL
-  })`
+  `MR created with the help of [${process.env.CI_PROJECT_PATH}](${process.env.CI_PROJECT_URL})`
 ];
 
 const updateOnlyGitLabScope = {
