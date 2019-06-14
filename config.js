@@ -2,7 +2,11 @@ const baseConfig = {
   lockFileMaintenance: { enabled: false, schedule: [] },
   enabledManagers: ["npm"],
   prConcurrentLimit: 1,
-  assignees: ["@leipert"]
+  assignees: ["@leipert"],
+  // Only include the first level of dependency files
+  includePaths: ['*'],
+  // Dedupe yarn dependencies
+  postUpdateOptions: ['yarnDedupeFewer']
 };
 
 const updateNothing = {
@@ -66,12 +70,14 @@ module.exports = {
   logLevel: "debug",
   platform: "gitlab",
   onboarding: false,
+  requireConfig: false,
   printConfig: false,
   repositories: [
     ...gitlab,
     ...allDependencies.map(repository => ({
       repository,
       ...baseConfig,
+      automerge: true,
       prBodyNotes,
       rangeStrategy: "bump",
       packageRules: [
