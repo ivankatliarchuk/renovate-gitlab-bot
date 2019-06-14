@@ -3616,7 +3616,7 @@ renovate-config-packages@^0.5.1:
 
 "renovate@git+https://github.com/leipert/renovate.git#make-gitlab-more-efficient-update":
   version "0.0.0-semantic-release"
-  resolved "git+https://github.com/leipert/renovate.git#e345355b0a805f1e4133d4210561f3a958e18979"
+  resolved "git+https://github.com/leipert/renovate.git#4475ad0dc32cb5b81c7d23f13ae2b2a1d31b8aa2"
   dependencies:
     "@renovate/pep440" "0.4.1"
     "@renovatebot/docker-registry-client" "3.3.0"
