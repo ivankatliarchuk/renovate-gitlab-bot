@@ -2,12 +2,11 @@ variables:
   DOCKER_IMAGE: $CI_REGISTRY_IMAGE/renovate:$CI_COMMIT_SHORT_SHA
 
 stages:
-  - build
   - run
 
-build-image:
+beep-boop:
   image: docker:stable
-  stage: build
+  stage: run
   variables:
     DOCKER_HOST: tcp://docker:2375/
     DOCKER_DRIVER: overlay2
@@ -15,7 +14,6 @@ build-image:
   services:
     - docker:stable-dind
   script:
-    - docker info
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - |
       if docker manifest inspect $DOCKER_IMAGE >/dev/null; then
@@ -23,12 +21,4 @@ build-image:
       else
         docker build . --tag "$DOCKER_IMAGE" && docker push "$DOCKER_IMAGE"
       fi
-
-update-projects:
-  image: $DOCKER_IMAGE
-  stage: run
-  variables:
-    GIT_STRATEGY: none
-  script:
-    - cd /workdir
-    - bash ./run-renovate.sh
+    - docker run --rm -e RENOVATE_TOKEN -t "$DOCKER_IMAGE" bash /workdir/run-renovate.sh
