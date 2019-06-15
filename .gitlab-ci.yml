@@ -21,7 +21,7 @@ beep-boop:
       else
         docker build . --tag "$DOCKER_IMAGE" && docker push "$DOCKER_IMAGE"
       fi
-    - >
+    - >-
       docker run --rm -t
-        -e RENOVATE_TOKEN -e CI_PROJECT_PATH -e CI_PROJECT_URL -e CI_COMMIT_REF_SLUG
-        "$DOCKER_IMAGE" bash /workdir/run-renovate.sh
+      -e RENOVATE_TOKEN -e CI_PROJECT_PATH -e CI_PROJECT_URL -e CI_COMMIT_REF_SLUG
+      "$DOCKER_IMAGE" bash /workdir/run-renovate.sh
