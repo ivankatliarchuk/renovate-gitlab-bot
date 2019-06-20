@@ -70,6 +70,7 @@ module.exports = {
   onboarding: false,
   requireConfig: false,
   printConfig: false,
+  gitAuthor: "Lukas Eipert <git@leipert.io>",
   repositories: [
     ...gitlab,
     ...allDependencies.map(repository => ({
