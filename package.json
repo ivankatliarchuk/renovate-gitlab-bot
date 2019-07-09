@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "renovate": "git+https://github.com/leipert/renovate.git#make-gitlab-more-efficient-update",
+    "renovate": "^18.22.2",
     "renovate-config-monorepo": "^0.31.0",
     "renovate-config-packages": "^0.5.1"
   },
