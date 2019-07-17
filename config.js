@@ -49,7 +49,7 @@ const gitlab = [
     semanticCommits: true
   },
   {
-    repository: "gitlab-org/design.gitlab.com",
+    repository: "gitlab-org/gitlab-services/design.gitlab.com",
     ...updateOnlyGitLabScope,
     semanticCommits: false
   }
