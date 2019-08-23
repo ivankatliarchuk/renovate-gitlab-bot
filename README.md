@@ -8,8 +8,8 @@ For more info have a look at the config [config](./config.js).
 <!-- rep -->
 
 - [gitlab-com/teampage-map](https://gitlab.com/gitlab-com/teampage-map)
-- [gitlab-org/design.gitlab.com](https://gitlab.com/gitlab-org/design.gitlab.com)
 - [gitlab-org/gitlab-ce](https://gitlab.com/gitlab-org/gitlab-ce)
+- [gitlab-org/gitlab-services/design.gitlab.com](https://gitlab.com/gitlab-org/gitlab-services/design.gitlab.com)
 - [gitlab-org/gitlab-svgs](https://gitlab.com/gitlab-org/gitlab-svgs)
 - [gitlab-org/gitlab-ui](https://gitlab.com/gitlab-org/gitlab-ui)
 - [leipert-projects/gettext-extractor-vue](https://gitlab.com/leipert-projects/gettext-extractor-vue)
