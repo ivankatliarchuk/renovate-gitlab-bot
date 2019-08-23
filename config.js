@@ -17,7 +17,8 @@ const updateNothing = {
 const updateGitLabScope = {
   packagePatterns: ["@gitlab/.*"],
   enabled: true,
-  rangeStrategy: "bump"
+  rangeStrategy: "bump",
+  groupName: "GitLab Packages"
 };
 
 const prBodyNotes = [

@@ -7,9 +7,9 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "renovate": "^18.24.1",
-    "renovate-config-monorepo": "^0.31.0",
-    "renovate-config-packages": "^0.5.1"
+    "renovate": "^19.32.0",
+    "renovate-config-monorepo": "^0.34.2",
+    "renovate-config-packages": "^0.6.0"
   },
   "scripts": {
     "pretty": "./update-readme.js && prettier --write '*.{js,json,yml,md}'"
