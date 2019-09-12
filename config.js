@@ -35,7 +35,7 @@ const updateOnlyGitLabScope = {
 
 const gitlab = [
   {
-    repository: "gitlab-org/gitlab-ce",
+    repository: "gitlab-org/gitlab-ee",
     ...updateOnlyGitLabScope,
     semanticCommits: false
   },
