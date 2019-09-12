@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 export RENOVATE_CONFIG_FILE="./config.js"
 export RENOVATE_DISABLE_FILE_RECURSION=true
 
