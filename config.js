@@ -2,7 +2,7 @@ const baseConfig = {
   lockFileMaintenance: { enabled: false, schedule: [] },
   enabledManagers: ["npm"],
   prConcurrentLimit: 1,
-  assignees: ["@leipert"],
+  assignees: ["@pgascouvaillancourt"],
   // Only include the first level of dependency files
   includePaths: ["*"],
   // Dedupe yarn dependencies
@@ -22,7 +22,7 @@ const updateGitLabScope = {
 };
 
 const prBodyNotes = [
-  "/cc @leipert",
+  "/cc @leipert @pgascouvaillancourt",
   `MR created with the help of [${process.env.CI_PROJECT_PATH}](${process.env.CI_PROJECT_URL})`
 ];
 
@@ -77,6 +77,7 @@ module.exports = {
     ...allDependencies.map(repository => ({
       repository,
       ...baseConfig,
+      assignees: ['@leipert'],
       automerge: true,
       prBodyNotes,
       rangeStrategy: "bump",
