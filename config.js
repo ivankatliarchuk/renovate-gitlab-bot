@@ -22,7 +22,7 @@ const updateGitLabScope = {
 };
 
 const prBodyNotes = [
-  "/cc @leipert @pgascouvaillancourt",
+  "/cc @leipert",
   `MR created with the help of [${process.env.CI_PROJECT_PATH}](${process.env.CI_PROJECT_URL})`
 ];
 
