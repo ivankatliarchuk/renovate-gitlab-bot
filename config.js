@@ -21,6 +21,12 @@ const updateGitLabScope = {
   groupName: "GitLab Packages"
 };
 
+const updateSourcegraph = {
+  packageNames: ["@sourcegraph/code-host-integration"],
+  enabled: true,
+  rangeStrategy: "bump"
+};
+
 const prBodyNotes = [
   "/cc @leipert",
   `MR created with the help of [${process.env.CI_PROJECT_PATH}](${process.env.CI_PROJECT_URL})`
@@ -30,7 +36,7 @@ const updateOnlyGitLabScope = {
   ...baseConfig,
   prBodyNotes,
   labels: ["frontend", "dependency update", "backstage"],
-  packageRules: [updateNothing, updateGitLabScope]
+  packageRules: [updateNothing, updateGitLabScope, updateSourcegraph]
 };
 
 const gitlab = [
@@ -56,12 +62,7 @@ const gitlab = [
   }
 ];
 
-const allDependencies = [
-  "leipert-projects/yarn-why-json",
-  "leipert-projects/gettext-extractor-vue",
-  "leipert-projects/is-gitlab-pretty-yet",
-  "gitlab-com/teampage-map"
-];
+const allDependencies = ["gitlab-com/teampage-map"];
 
 module.exports = {
   dryRun: process.env.CI_COMMIT_REF_SLUG !== "master",
@@ -71,13 +72,13 @@ module.exports = {
   onboarding: false,
   requireConfig: false,
   printConfig: false,
-  gitAuthor: "Lukas Eipert <leipert@gitlab.com>",
+  gitAuthor: "GitLab Bot <gitlab-bot@gitlab.com>",
   repositories: [
     ...gitlab,
     ...allDependencies.map(repository => ({
       repository,
       ...baseConfig,
-      assignees: ['@leipert'],
+      assignees: ["@leipert"],
       automerge: true,
       prBodyNotes,
       rangeStrategy: "bump",
