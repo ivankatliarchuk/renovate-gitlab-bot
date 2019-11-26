@@ -39,6 +39,13 @@ const updateOnlyGitLabScope = {
   packageRules: [updateNothing, updateGitLabScope, updateSourcegraph]
 };
 
+const autoMergeMinorAndPatch = {
+  "automerge": true,
+  "major": {
+    "automerge": false
+  }
+};
+
 const gitlab = [
   {
     repository: "gitlab-org/gitlab",
@@ -58,7 +65,8 @@ const gitlab = [
   {
     repository: "gitlab-org/gitlab-services/design.gitlab.com",
     ...updateOnlyGitLabScope,
-    semanticCommits: false
+    ...autoMergeMinorAndPatch,
+    semanticCommits: false,
   }
 ];
 
