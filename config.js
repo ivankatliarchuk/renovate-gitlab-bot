@@ -2,7 +2,7 @@ const baseConfig = {
   lockFileMaintenance: { enabled: false, schedule: [] },
   enabledManagers: ["npm"],
   prConcurrentLimit: 1,
-  assignees: ["@pgascouvaillancourt"],
+  assignees: ["@pslaughter"],
   // Only include the first level of dependency files
   includePaths: ["*"],
   // Dedupe yarn dependencies
