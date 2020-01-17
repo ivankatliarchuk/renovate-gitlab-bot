@@ -1,7 +1,7 @@
 const baseConfig = {
   lockFileMaintenance: { enabled: false, schedule: [] },
   enabledManagers: ["npm"],
-  prConcurrentLimit: 1,
+  prConcurrentLimit: 2,
   assignees: ["@pgascouvaillancourt"],
   // Only include the first level of dependency files
   includePaths: ["*"],
