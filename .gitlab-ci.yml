@@ -1,5 +1,5 @@
 variables:
-  DOCKER_IMAGE: $CI_REGISTRY_IMAGE/renovate:$CI_COMMIT_SHORT_SHA
+  DOCKER_IMAGE: $CI_REGISTRY_IMAGE/renovate:$CI_COMMIT_REF_SLUG
 
 stages:
   - run
@@ -17,12 +17,27 @@ beep-boop:
   script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - |
+      BUILD_IMAGE=true
       if docker manifest inspect $DOCKER_IMAGE >/dev/null; then
         echo "Image already exists"
-      else
-        docker build . --tag "$DOCKER_IMAGE" && docker push "$DOCKER_IMAGE"
+        docker pull $DOCKER_IMAGE
+        label=$(docker inspect --format='{{.Config.Labels.commitRef}}' $DOCKER_IMAGE)
+        if [ "$label" == "$CI_COMMIT_SHORT_SHA" ]; then
+          echo "Image has correct ref, so we skip building"
+          BUILD_IMAGE=false
+        fi
+      fi
+      if [ "$BUILD_IMAGE" == "true" ]; then
+        echo "Building image"
+        docker build . --tag "$DOCKER_IMAGE" --label commitRef=$CI_COMMIT_SHORT_SHA
       fi
     - >-
       docker run --rm -t
       -e RENOVATE_TOKEN -e CI_PROJECT_PATH -e CI_PROJECT_URL -e CI_COMMIT_REF_SLUG
       "$DOCKER_IMAGE" sh /workdir/run-renovate.sh
+    - |
+      if [ "$BUILD_IMAGE" == "true" ]; then
+        echo "Pushing image"
+        docker push "$DOCKER_IMAGE"
+      fi
+
