@@ -17,9 +17,20 @@ const updateNothing = {
 const updateGitLabScope = {
   packagePatterns: ["@gitlab/.*"],
   enabled: true,
-  rangeStrategy: "bump",
-  groupName: "GitLab Packages"
+  rangeStrategy: "bump"
 };
+
+const updateGitLabScopeProduction = {
+  ...updateGitLabScope,
+  depTypeList: ['dependencies', 'peerDependencies'],
+  groupName: "GitLab Packages"
+}
+
+const updateGitLabScopeDev = {
+  ...updateGitLabScope,
+  depTypeList: ['devDependencies'],
+  groupName: "GitLab Dev Packages"
+}
 
 const updateSourcegraph = {
   packageNames: ["@sourcegraph/code-host-integration"],
@@ -36,7 +47,7 @@ const updateOnlyGitLabScope = {
   ...baseConfig,
   prBodyNotes,
   labels: ["frontend", "dependency update", "backstage"],
-  packageRules: [updateNothing, updateGitLabScope, updateSourcegraph]
+  packageRules: [updateNothing, updateGitLabScopeProduction, updateGitLabScopeDev, updateSourcegraph]
 };
 
 const autoMergeMinorAndPatch = {
@@ -67,7 +78,17 @@ const gitlab = [
     ...updateOnlyGitLabScope,
     ...autoMergeMinorAndPatch,
     semanticCommits: false,
-  }
+  },
+  // Customer Portal:
+  {
+    repository: "gitlab-org/customers-gitlab-com",
+    ...baseConfig,
+    prBodyNotes,
+    labels: ["frontend", "dependency update", "backstage"],
+    assignees: ["@vitallium"],
+    packageRules: [updateNothing, updateGitLabScopeProduction],
+    semanticCommits: false
+  },
 ];
 
 const allDependencies = ["gitlab-com/teampage-map"];
