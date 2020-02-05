@@ -91,7 +91,10 @@ const gitlab = [
   },
 ];
 
-const allDependencies = ["gitlab-com/teampage-map"];
+const allDependencies = [
+  "gitlab-com/teampage-map",
+  "gitlab-org/frontend/renovate-gitlab-bot"
+];
 
 module.exports = {
   dryRun: process.env.CI_COMMIT_REF_SLUG !== "master",
