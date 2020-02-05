@@ -22,15 +22,15 @@ const updateGitLabScope = {
 
 const updateGitLabScopeProduction = {
   ...updateGitLabScope,
-  depTypeList: ['dependencies', 'peerDependencies'],
+  depTypeList: ["dependencies", "peerDependencies"],
   groupName: "GitLab Packages"
-}
+};
 
 const updateGitLabScopeDev = {
   ...updateGitLabScope,
-  depTypeList: ['devDependencies'],
+  depTypeList: ["devDependencies"],
   groupName: "GitLab Dev Packages"
-}
+};
 
 const updateSourcegraph = {
   packageNames: ["@sourcegraph/code-host-integration"],
@@ -47,13 +47,18 @@ const updateOnlyGitLabScope = {
   ...baseConfig,
   prBodyNotes,
   labels: ["frontend", "dependency update", "backstage"],
-  packageRules: [updateNothing, updateGitLabScopeProduction, updateGitLabScopeDev, updateSourcegraph]
+  packageRules: [
+    updateNothing,
+    updateGitLabScopeProduction,
+    updateGitLabScopeDev,
+    updateSourcegraph
+  ]
 };
 
 const autoMergeMinorAndPatch = {
-  "automerge": true,
-  "major": {
-    "automerge": false
+  automerge: true,
+  major: {
+    automerge: false
   }
 };
 
@@ -77,7 +82,7 @@ const gitlab = [
     repository: "gitlab-org/gitlab-services/design.gitlab.com",
     ...updateOnlyGitLabScope,
     ...autoMergeMinorAndPatch,
-    semanticCommits: false,
+    semanticCommits: false
   },
   // Customer Portal:
   {
@@ -88,7 +93,7 @@ const gitlab = [
     assignees: ["@vitallium"],
     packageRules: [updateNothing, updateGitLabScopeProduction],
     semanticCommits: false
-  },
+  }
 ];
 
 const allDependencies = [
