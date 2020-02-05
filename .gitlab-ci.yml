@@ -5,6 +5,7 @@ stages:
   - run
 
 beep-boop:
+  resource_group: $CI_COMMIT_REF_SLUG
   image: docker:stable
   stage: run
   variables:
