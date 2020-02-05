@@ -3268,10 +3268,10 @@ renovate-config-monorepo@^0.39.0:
   resolved "https://registry.yarnpkg.com/renovate-config-monorepo/-/renovate-config-monorepo-0.39.0.tgz#fb81ca5bd8861307eddabb401cad7521f017e186"
   integrity sha512-bYxZ72rt301md+OKeQ3JqoM8zKo+SILrDaZ8dj4No/sUdzIAvTmN7A0IxMlgDO2dufrkDgtnBHbhiqLek7acaA==
 
-renovate-config-packages@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/renovate-config-packages/-/renovate-config-packages-0.6.0.tgz#b7a139a78d765631ad9eae68fa9418352201cf89"
-  integrity sha512-S594iuyP2M5XMXKjCc/OhscVANxd8i1GLeVcFuQ92TBX8+VIKRpu1uEmtxMuTxyslObCscorekWYaBfPIovPmg==
+renovate-config-packages@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/renovate-config-packages/-/renovate-config-packages-0.7.0.tgz#06807b8355b781fa3351a30db48870ebc46ab01e"
+  integrity sha512-Soi9+YVL52kd4Qj0iGcs7i8Vf4wKHCGuWp1VoobL2fq5Wy+GENMpJF5uKKHPbNyNHnzIqKCRpnqI9CFwnHrD9w==
 
 renovate@^19.43.1:
   version "19.43.1"
