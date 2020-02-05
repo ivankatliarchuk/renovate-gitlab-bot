@@ -3263,10 +3263,10 @@ remark@^9.0.0:
     remark-stringify "^5.0.0"
     unified "^6.0.0"
 
-renovate-config-monorepo@^0.34.2:
-  version "0.34.2"
-  resolved "https://registry.yarnpkg.com/renovate-config-monorepo/-/renovate-config-monorepo-0.34.2.tgz#eaca25b3e3a1de01cbfef8818616b9b825b6c3c7"
-  integrity sha512-NJzXcDmQmkC2vDvuSw5je2I8lp5Wi5BRGuhn78u7BfziBFIYl9CEhkeq/7IWA/W7hTXnMrVOqNpSn3Dqc39rrg==
+renovate-config-monorepo@^0.39.0:
+  version "0.39.0"
+  resolved "https://registry.yarnpkg.com/renovate-config-monorepo/-/renovate-config-monorepo-0.39.0.tgz#fb81ca5bd8861307eddabb401cad7521f017e186"
+  integrity sha512-bYxZ72rt301md+OKeQ3JqoM8zKo+SILrDaZ8dj4No/sUdzIAvTmN7A0IxMlgDO2dufrkDgtnBHbhiqLek7acaA==
 
 renovate-config-packages@^0.6.0:
   version "0.6.0"
