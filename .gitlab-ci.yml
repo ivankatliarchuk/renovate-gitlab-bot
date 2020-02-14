@@ -40,4 +40,3 @@ beep-boop:
         echo "Pushing image"
         docker push "$DOCKER_IMAGE"
       fi
-

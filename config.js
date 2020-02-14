@@ -1,4 +1,5 @@
 const baseConfig = {
+  assignAutomerge: true,
   lockFileMaintenance: { enabled: false, schedule: [] },
   enabledManagers: ["npm"],
   prConcurrentLimit: 2,
@@ -15,20 +16,22 @@ const updateNothing = {
 };
 
 const updateGitLabScope = {
-  packagePatterns: ["@gitlab/.*"],
   enabled: true,
   rangeStrategy: "bump"
 };
 
+const productionPackages = ["@gitlab/ui", "@gitlab/svgs"];
+
 const updateGitLabScopeProduction = {
   ...updateGitLabScope,
-  depTypeList: ["dependencies", "peerDependencies"],
+  packageNames: productionPackages,
   groupName: "GitLab Packages"
 };
 
 const updateGitLabScopeDev = {
   ...updateGitLabScope,
-  depTypeList: ["devDependencies"],
+  packagePatterns: ["@gitlab/.*"],
+  excludePackageNames: productionPackages,
   groupName: "GitLab Dev Packages"
 };
 
