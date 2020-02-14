@@ -1,9 +1,17 @@
 const baseConfig = {
-  assignAutomerge: true,
   lockFileMaintenance: { enabled: false, schedule: [] },
   enabledManagers: ["npm"],
   prConcurrentLimit: 2,
-  assignees: ["@pgascouvaillancourt"],
+  assignees: [
+    "@ealcantara",
+    "@jboyson",
+    "@lauraMon",
+    "@mishunov",
+    "@pgascouvaillancourt",
+    "@sarahghp"
+  ],
+  assignAutomerge: true,
+  assigneesSampleSize: 2,
   // Only include the first level of dependency files
   includePaths: ["*"],
   // Dedupe yarn dependencies
