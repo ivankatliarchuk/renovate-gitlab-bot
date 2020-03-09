@@ -3428,10 +3428,10 @@ renovate-config-packages@^0.7.0:
   resolved "https://registry.yarnpkg.com/renovate-config-packages/-/renovate-config-packages-0.7.0.tgz#06807b8355b781fa3351a30db48870ebc46ab01e"
   integrity sha512-Soi9+YVL52kd4Qj0iGcs7i8Vf4wKHCGuWp1VoobL2fq5Wy+GENMpJF5uKKHPbNyNHnzIqKCRpnqI9CFwnHrD9w==
 
-renovate@^19.165.0:
-  version "19.165.0"
-  resolved "https://registry.yarnpkg.com/renovate/-/renovate-19.165.0.tgz#7e21624eda72cf8ccae46050be31dfdc97f5121a"
-  integrity sha512-u9Uj5IGnzZeTDMwOiZUAQ0mO4GCkgd5uXWrBwcPyUDZN93m047qZI5AVD2ZzOmBDV/woEHpAehS/1iaOA5DatA==
+renovate@^19.165.3:
+  version "19.165.3"
+  resolved "https://registry.yarnpkg.com/renovate/-/renovate-19.165.3.tgz#17bc69185496885b15596bcde231cce85c968def"
+  integrity sha512-2djbeoSbQqt1GOBOTu0GtNxQr5GkRs5rqxF8Y1qj+aTxXwkComo1TDWPFUcBDjFzza0TMVzjzMnJ/tVq0E11ig==
   dependencies:
     "@renovate/pep440" "0.4.1"
     "@sindresorhus/is" "1.2.0"
