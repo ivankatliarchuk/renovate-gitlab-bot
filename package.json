@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "renovate": "^19.178.0",
+    "renovate": "^19.179.0",
     "renovate-config-monorepo": "^0.42.0",
     "renovate-config-packages": "^0.7.0"
   },
