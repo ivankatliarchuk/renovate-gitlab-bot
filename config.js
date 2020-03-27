@@ -50,7 +50,6 @@ const updateSourcegraph = {
 };
 
 const prBodyNotes = [
-  "/cc @leipert",
   `MR created with the help of [${process.env.CI_PROJECT_PATH}](${process.env.CI_PROJECT_URL})`,
 ];
 
@@ -109,10 +108,7 @@ const gitlab = [
     repository: "gitlab-org/status-page",
     ...baseConfig,
     ...updateOnlyGitLabScope,
-    prBodyNotes: [
-      `MR created with the help of [${process.env.CI_PROJECT_PATH}](${process.env.CI_PROJECT_URL})`,
-    ],
-    assignees: ["@lauraMon","@ohoral","@oregand", "@tristan.read"],
+    assignees: ["@lauraMon", "@ohoral", "@oregand", "@tristan.read"],
     semanticCommits: false,
   },
 ];
