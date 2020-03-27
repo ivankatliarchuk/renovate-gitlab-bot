@@ -104,6 +104,15 @@ const gitlab = [
     assignees: ["@vitallium"],
     packageRules: [updateNothing, updateGitLabScopeProduction],
     semanticCommits: false
+  },
+  {
+    repository: "gitlab-org/status-page",
+    ...baseConfig,
+    prBodyNotes: [`MR created with the help of [${process.env.CI_PROJECT_PATH}](${process.env.CI_PROJECT_URL})`],
+    labels: ["frontend", "dependency update", "backstage"],
+    assignees: ["@oregand"],
+    packageRules: [updateNothing, updateGitLabScopeProduction],
+    semanticCommits: false
   }
 ];
 
