@@ -3,10 +3,10 @@
 const fs = require("fs");
 const config = require("./config");
 
-const listItem = path => `- [${path}](https://gitlab.com/${path})`;
+const listItem = (path) => `- [${path}](https://gitlab.com/${path})`;
 
 const repositories = config.repositories
-  .map(x => {
+  .map((x) => {
     if (x.repository) {
       return listItem(x.repository);
     }

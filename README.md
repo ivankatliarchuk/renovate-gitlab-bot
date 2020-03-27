@@ -14,5 +14,6 @@ For more info have a look at the [config](./config.js).
 - [gitlab-org/gitlab-svgs](https://gitlab.com/gitlab-org/gitlab-svgs)
 - [gitlab-org/gitlab-ui](https://gitlab.com/gitlab-org/gitlab-ui)
 - [gitlab-org/gitlab](https://gitlab.com/gitlab-org/gitlab)
+- [gitlab-org/status-page](https://gitlab.com/gitlab-org/status-page)
 
 <!-- rep -->
