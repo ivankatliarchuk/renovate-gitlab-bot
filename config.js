@@ -108,12 +108,11 @@ const gitlab = [
   {
     repository: "gitlab-org/status-page",
     ...baseConfig,
+    ...updateOnlyGitLabScope,
     prBodyNotes: [
       `MR created with the help of [${process.env.CI_PROJECT_PATH}](${process.env.CI_PROJECT_URL})`,
     ],
-    labels: ["frontend", "dependency update", "backstage"],
-    assignees: ["@oregand"],
-    packageRules: [updateNothing, updateGitLabScopeProduction],
+    assignees: ["@lauraMon","@ohoral","@oregand", "@tristan.read"],
     semanticCommits: false,
   },
 ];
