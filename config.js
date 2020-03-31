@@ -25,7 +25,7 @@ const updateNothing = {
 
 const updateGitLabScope = {
   enabled: true,
-  rangeStrategy: "bump",
+  rangeStrategy: "auto",
 };
 
 const productionPackages = ["@gitlab/ui", "@gitlab/svgs"];
