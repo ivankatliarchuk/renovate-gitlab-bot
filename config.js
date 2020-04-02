@@ -86,6 +86,7 @@ const gitlab = [
   {
     repository: "gitlab-org/gitlab-ui",
     ...updateOnlyGitLabScope,
+    ...autoMergeMinorAndPatch,
     semanticCommits: true,
   },
   {
