@@ -16,6 +16,9 @@ const baseConfig = {
   includePaths: ["*"],
   // Dedupe yarn dependencies
   postUpdateOptions: ["yarnDedupeFewer"],
+  prBodyNotes: [
+    `MR created with the help of [${process.env.CI_PROJECT_PATH}](${process.env.CI_PROJECT_URL})`,
+  ],
 };
 
 const updateNothing = {
@@ -28,41 +31,32 @@ const updateGitLabScope = {
   rangeStrategy: "auto",
 };
 
-const productionPackages = ["@gitlab/ui", "@gitlab/svgs"];
-
-const updateGitLabScopeProduction = {
+const updateGitLabUIandSVG = {
   ...updateGitLabScope,
-  packageNames: productionPackages,
-  groupName: "GitLab Packages",
+  packageNames: ["@gitlab/ui", "@gitlab/svgs"],
+  groupName: "GitLab UI/SVG",
+};
+
+const updateGitLabVisualReviewTools = {
+  ...updateGitLabScope,
+  packageNames: ["@gitlab/visual-review-tools"],
+  groupName: "GitLab Visual Review Tools",
 };
 
 const updateGitLabScopeDev = {
   ...updateGitLabScope,
   packagePatterns: ["@gitlab/.*"],
-  excludePackageNames: productionPackages,
-  groupName: "GitLab Dev Packages",
+  excludePackageNames: [
+    ...updateGitLabUIandSVG.packageNames,
+    ...updateGitLabVisualReviewTools.packageNames,
+  ],
+  groupName: "GitLab Packages",
 };
-
-const updateSourcegraph = {
-  packageNames: ["@sourcegraph/code-host-integration"],
-  enabled: true,
-  rangeStrategy: "bump",
-};
-
-const prBodyNotes = [
-  `MR created with the help of [${process.env.CI_PROJECT_PATH}](${process.env.CI_PROJECT_URL})`,
-];
 
 const updateOnlyGitLabScope = {
   ...baseConfig,
-  prBodyNotes,
   labels: ["frontend", "dependency update", "backstage"],
-  packageRules: [
-    updateNothing,
-    updateGitLabScopeProduction,
-    updateGitLabScopeDev,
-    updateSourcegraph,
-  ],
+  packageRules: [updateNothing, updateGitLabUIandSVG, updateGitLabScopeDev],
 };
 
 const autoMergeMinorAndPatch = {
@@ -76,6 +70,14 @@ const gitlab = [
   {
     repository: "gitlab-org/gitlab",
     ...updateOnlyGitLabScope,
+    packageRules: [
+      ...updateOnlyGitLabScope.packageRules,
+      {
+        packageNames: ["@sourcegraph/code-host-integration"],
+        enabled: true,
+        rangeStrategy: "bump",
+      },
+    ],
     semanticCommits: false,
   },
   {
@@ -132,7 +134,6 @@ module.exports = {
       ...baseConfig,
       assignees: ["@leipert"],
       automerge: true,
-      prBodyNotes,
       rangeStrategy: "bump",
       packageRules: [
         {
