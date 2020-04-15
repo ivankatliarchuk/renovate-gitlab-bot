@@ -98,11 +98,8 @@ const gitlab = [
   // Customer Portal:
   {
     repository: "gitlab-org/customers-gitlab-com",
-    ...baseConfig,
-    prBodyNotes,
-    labels: ["frontend", "dependency update", "backstage"],
+    ...updateOnlyGitLabScope,
     assignees: ["@vitallium"],
-    packageRules: [updateNothing, updateGitLabScopeProduction],
     semanticCommits: false,
   },
   {
