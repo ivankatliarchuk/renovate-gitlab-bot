@@ -5,6 +5,8 @@ stages:
   - run
 
 beep-boop:
+  tags:
+    - gitlab-org-docker
   resource_group: $CI_COMMIT_REF_SLUG
   image: docker:stable
   stage: run
