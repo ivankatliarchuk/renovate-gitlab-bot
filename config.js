@@ -3,10 +3,10 @@ const baseConfig = {
   enabledManagers: ["npm"],
   prConcurrentLimit: 2,
   assignees: [
+    "@dmishunov",
     "@ealcantara",
     "@jboyson",
     "@lauraMon",
-    "@mishunov",
     "@pgascouvaillancourt",
     "@sarahghp",
   ],
