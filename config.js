@@ -83,6 +83,7 @@ const gitlab = [
   {
     repository: "gitlab-org/gitlab-svgs",
     ...updateOnlyGitLabScope,
+    ...autoMergeMinorAndPatch,
     semanticCommits: false,
   },
   {
