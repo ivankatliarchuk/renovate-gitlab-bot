@@ -9,10 +9,10 @@
   dependencies:
     xregexp "4.2.0"
 
-"@sindresorhus/is@2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-2.1.0.tgz#6ad4ca610f696098e92954ab431ff83bea0ce13f"
-  integrity sha512-lXKXfypKo644k4Da4yXkPCrwcvn6SlUW2X2zFbuflKHNjf0w9htru01bo26uMhleMXsDmnZ12eJLdrAZa9MANg==
+"@sindresorhus/is@2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-2.1.1.tgz#ceff6a28a5b4867c2dd4a1ba513de278ccbe8bb1"
+  integrity sha512-/aPsuoj/1Dw/kzhkgz+ES6TxG0zfTMGLwuK2ZG00k/iJzYHTLCE8mVU8EPqEOp/lmxPoq1C1C9RYToRKb2KEfg==
 
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"
@@ -3511,13 +3511,13 @@ renovate-config-packages@^0.7.0:
   resolved "https://registry.yarnpkg.com/renovate-config-packages/-/renovate-config-packages-0.7.0.tgz#06807b8355b781fa3351a30db48870ebc46ab01e"
   integrity sha512-Soi9+YVL52kd4Qj0iGcs7i8Vf4wKHCGuWp1VoobL2fq5Wy+GENMpJF5uKKHPbNyNHnzIqKCRpnqI9CFwnHrD9w==
 
-renovate@^19.216.4:
-  version "19.216.4"
-  resolved "https://registry.yarnpkg.com/renovate/-/renovate-19.216.4.tgz#6cd1cdd981d27126e82bfc774ecb9819da053101"
-  integrity sha512-T3PfUq1BWpWC+tsGcUQODrR37ndEhUnzi+3cr29o9Syeb+HxhzBtRLlxSMzsWd6EiTeRpDoVa1lhsIrmw83AJg==
+renovate@^19.216.6:
+  version "19.216.6"
+  resolved "https://registry.yarnpkg.com/renovate/-/renovate-19.216.6.tgz#d4879f1c8ff5dcf5bcac11c2229f8d03714cdddd"
+  integrity sha512-DRR+QAlFwHsRIDP9/LkKjkqYJgDwa5X8dKxHRG8VyIQXg0QJXEWvYYxcO77zrdIcmrvjBKJEENo826g0/4ET2w==
   dependencies:
     "@renovate/pep440" "0.4.1"
-    "@sindresorhus/is" "2.1.0"
+    "@sindresorhus/is" "2.1.1"
     "@snyk/ruby-semver" "2.1.0"
     "@yarnpkg/lockfile" "1.1.0"
     aws-sdk "2.656.0"
