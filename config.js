@@ -19,6 +19,14 @@ const baseConfig = {
   prBodyNotes: [
     `MR created with the help of [${process.env.CI_PROJECT_PATH}](${process.env.CI_PROJECT_URL})`,
   ],
+  hostRules: process.env.GITHUB_TOKEN
+    ? [
+        {
+          domainName: "github.com",
+          token: process.env.GITHUB_TOKEN,
+        },
+      ]
+    : [],
 };
 
 const updateNothing = {
