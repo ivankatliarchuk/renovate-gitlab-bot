@@ -8,7 +8,7 @@
   "private": true,
   "dependencies": {
     "renovate": "^19.219.9",
-    "renovate-config-monorepo": "^0.42.0",
+    "renovate-config-monorepo": "^0.43.0",
     "renovate-config-packages": "^0.7.0"
   },
   "scripts": {
