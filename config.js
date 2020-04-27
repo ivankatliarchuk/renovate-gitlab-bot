@@ -104,7 +104,7 @@ const gitlab = [
     repository: "gitlab-org/gitlab-services/design.gitlab.com",
     ...updateOnlyGitLabScope,
     ...autoMergeMinorAndPatch,
-    semanticCommits: false,
+    semanticCommits: true,
   },
   // Customer Portal:
   {
