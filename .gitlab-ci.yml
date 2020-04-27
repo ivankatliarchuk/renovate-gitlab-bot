@@ -35,7 +35,7 @@ beep-boop:
       fi
     - >-
       docker run --rm -t
-      -e RENOVATE_TOKEN -e CI_PROJECT_PATH -e CI_PROJECT_URL -e CI_COMMIT_REF_SLUG
+      -e GITHUB_TOKEN -e RENOVATE_TOKEN -e CI_PROJECT_PATH -e CI_PROJECT_URL -e CI_COMMIT_REF_SLUG
       "$DOCKER_IMAGE" sh /workdir/run-renovate.sh
     - |
       if [ "$BUILD_IMAGE" == "true" ]; then
