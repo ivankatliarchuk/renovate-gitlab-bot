@@ -1,4 +1,4 @@
-FROM node:12-alpine AS builder
+FROM node:12.16.3-alpine AS builder
 
 ADD / /workdir
 WORKDIR /workdir
@@ -7,7 +7,7 @@ RUN apk add --update --no-cache python make g++
 
 RUN yarn install --production --frozen-lockfile --force
 
-FROM node:12-alpine
+FROM node:12.16.3-alpine
 
 RUN apk add --update --no-cache git bash
 
