@@ -124,7 +124,7 @@ const gitlab = [
 
 const allDependencies = [
   "gitlab-com/teampage-map",
-  "gitlab-org/frontend/renovate-gitlab-bot",
+  // "gitlab-org/frontend/renovate-gitlab-bot",
 ];
 
 module.exports = {
