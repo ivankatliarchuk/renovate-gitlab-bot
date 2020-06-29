@@ -6,7 +6,6 @@ const baseConfig = {
     "@dmishunov",
     "@ealcantara",
     "@jboyson",
-    "@lauraMon",
     "@pgascouvaillancourt",
     "@sarahghp",
   ],
@@ -117,7 +116,7 @@ const gitlab = [
     repository: "gitlab-org/status-page",
     ...baseConfig,
     ...updateOnlyGitLabScope,
-    assignees: ["@lauraMon", "@ohoral", "@oregand", "@tristan.read"],
+    assignees: ["@ohoral", "@oregand", "@tristan.read"],
     semanticCommits: false,
   },
 ];
