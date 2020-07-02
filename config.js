@@ -88,6 +88,21 @@ const gitlab = [
     semanticCommits: false,
   },
   {
+    repository: "gitlab-org/gitlab",
+    ...baseConfig,
+    branchPrefix: "renovate-toast/",
+    assignees: ["@ealcantara", "@derek-knox", "@jerasmus"],
+    packageRules: [
+      updateNothing,
+      {
+        packagePatterns: ["^@toast-ui/*"],
+        enabled: true,
+        rangeStrategy: "bump",
+      },
+    ],
+    semanticCommits: false,
+  },
+  {
     repository: "gitlab-org/gitlab-svgs",
     ...updateOnlyGitLabScope,
     ...autoMergeMinorAndPatch,
