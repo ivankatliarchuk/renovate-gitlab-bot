@@ -5,14 +5,17 @@ const config = require("./config");
 
 const listItem = (path) => `- [${path}](https://gitlab.com/${path})`;
 
-const repositories = config.repositories
-  .map((x) => {
-    if (x.repository) {
-      return listItem(x.repository);
-    }
+const repositories = [
+  ...new Set(
+    config.repositories.map((x) => {
+      if (x.repository) {
+        return listItem(x.repository);
+      }
 
-    return listItem(x);
-  })
+      return listItem(x);
+    })
+  ),
+]
   .sort()
   .join("\n");
 
