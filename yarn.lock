@@ -16,6 +16,11 @@
   dependencies:
     xregexp "4.2.0"
 
+"@renovatebot/ruby-semver@0.1.6":
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/@renovatebot/ruby-semver/-/ruby-semver-0.1.6.tgz#5f31ef2299254263084a3340a94b9d5fb2de46dc"
+  integrity sha512-dxIRRJBLpIdrGOgqJU3nLbnp1BDUtGC4yVH9OliEjRx0yx8wDgRWg7SGKze5B5uQxnPV8e7UKvbByBh0X8G+aA==
+
 "@sindresorhus/is@2.1.1":
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-2.1.1.tgz#ceff6a28a5b4867c2dd4a1ba513de278ccbe8bb1"
@@ -25,15 +30,6 @@
   version "0.14.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.14.0.tgz#9fb3a3cf3132328151f353de4632e01e52102bea"
   integrity sha512-9NET910DNaIPngYnLLPeg+Ogzqsi9uM4mSboU5y6p8S5DzMTVEsJZrawi+BoDNUVBa2DhJqQYUFvMDfgU062LQ==
-
-"@snyk/ruby-semver@2.2.2":
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/@snyk/ruby-semver/-/ruby-semver-2.2.2.tgz#69efa5fc3a884ccc7f6a053c37a25b616ef7ce8b"
-  integrity sha512-zhWqr31fwU+kwh12X6LTWNMWp7QqpO6Z4qTqh/ItmCj/ImN1wO0Rv6AE1RafEbiAmTxG6kguCW3a9jzwLSWuBQ==
-  dependencies:
-    lodash.escaperegexp "^4.1.0"
-    lodash.flatten "^4.4.0"
-    lodash.uniq "^4.5.0"
 
 "@szmarczak/http-timer@^1.1.2":
   version "1.1.2"
@@ -159,12 +155,12 @@ at-least-node@^1.0.0:
   resolved "https://registry.yarnpkg.com/at-least-node/-/at-least-node-1.0.0.tgz#602cd4b46e844ad4effc92a8011a3c46e0238dc2"
   integrity sha512-+q/t7Ekv1EDY2l6Gda6LLiX14rU9TV20Wa3ofeQmwPFZbOMo9DXrLbOjFaaclkXKWidIaopwAObQDqwWtGUjqg==
 
-aws-sdk@2.686.0:
-  version "2.686.0"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.686.0.tgz#c58c3874eff4c76c763d137df617e87971321eb7"
-  integrity sha512-QhYhJ5y8tUG5SlmY3CSf9RBaa3EFbta28oarOyiwceHKmY80cMCafRI1YypT6CVDx/q91dbnSNQfWhs0cZPbBQ==
+aws-sdk@2.709.0:
+  version "2.709.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.709.0.tgz#33b0c0fe8b9420c65610545394be047ac2d93c8f"
+  integrity sha512-F3sKXsCiutj9RglVXdqb/XJ3Ko3G+pX081Nf1YjVJpLydwE2v16FGxrLqE5pqyWMDeUf5nZHnBoMuOYD8ip+Kw==
   dependencies:
-    buffer "4.9.1"
+    buffer "4.9.2"
     events "1.1.1"
     ieee754 "1.1.13"
     jmespath "0.15.0"
@@ -233,10 +229,10 @@ brace-expansion@^1.1.7:
     balanced-match "^1.0.0"
     concat-map "0.0.1"
 
-buffer@4.9.1:
-  version "4.9.1"
-  resolved "https://registry.yarnpkg.com/buffer/-/buffer-4.9.1.tgz#6d1bb601b07a4efced97094132093027c95bc298"
-  integrity sha1-bRu2AbB6TvztlwlBMgkwJ8lbwpg=
+buffer@4.9.2:
+  version "4.9.2"
+  resolved "https://registry.yarnpkg.com/buffer/-/buffer-4.9.2.tgz#230ead344002988644841ab0244af8c44bbe3ef8"
+  integrity sha512-xq+q3SRMOxGivLhBNaUdC64hDTQwejJ+H0T/NB1XMtTVEwNTrfFF3gAxiyW0Bu/xWEGhjVKgUcMhCrUy2+uCWg==
   dependencies:
     base64-js "^1.0.2"
     ieee754 "^1.1.4"
@@ -1190,16 +1186,6 @@ lodash._reinterpolate@^3.0.0:
   resolved "https://registry.yarnpkg.com/lodash._reinterpolate/-/lodash._reinterpolate-3.0.0.tgz#0ccf2d89166af03b3663c796538b75ac6e114d9d"
   integrity sha1-DM8tiRZq8Ds2Y8eWU4t1rG4RTZ0=
 
-lodash.escaperegexp@^4.1.0:
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/lodash.escaperegexp/-/lodash.escaperegexp-4.1.2.tgz#64762c48618082518ac3df4ccf5d5886dae20347"
-  integrity sha1-ZHYsSGGAglGKw99Mz11YhtriA0c=
-
-lodash.flatten@^4.4.0:
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/lodash.flatten/-/lodash.flatten-4.4.0.tgz#f31c22225a9632d2bbf8e4addbef240aa765a61f"
-  integrity sha1-8xwiIlqWMtK7+OSt2+8kCqdlph8=
-
 lodash.template@^4.0.2:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.template/-/lodash.template-4.5.0.tgz#f976195cf3f347d0d5f52483569fe8031ccce8ab"
@@ -1219,11 +1205,6 @@ lodash.toarray@^4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/lodash.toarray/-/lodash.toarray-4.4.0.tgz#24c4bfcd6b2fba38bfd0594db1179d8e9b656561"
   integrity sha1-JMS/zWsvuji/0FlNsRedjptlZWE=
-
-lodash.uniq@^4.5.0:
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
-  integrity sha1-0CJTc662Uq3BvILklFM5qEJ1R3M=
 
 longest-streak@^2.0.1:
   version "2.0.3"
@@ -1952,16 +1933,16 @@ renovate-config-packages@^0.7.0:
   resolved "https://registry.yarnpkg.com/renovate-config-packages/-/renovate-config-packages-0.7.0.tgz#06807b8355b781fa3351a30db48870ebc46ab01e"
   integrity sha512-Soi9+YVL52kd4Qj0iGcs7i8Vf4wKHCGuWp1VoobL2fq5Wy+GENMpJF5uKKHPbNyNHnzIqKCRpnqI9CFwnHrD9w==
 
-renovate@^21.22.3:
-  version "21.22.3"
-  resolved "https://registry.yarnpkg.com/renovate/-/renovate-21.22.3.tgz#f78ab5b2e35121637a2e41f166505ab494e082d0"
-  integrity sha512-2YpUY8LAv3E2rKOoMPNCNFmgfLa1mUbAlULr4Vmitl3bZbOBGDZeXNFwfkyYBFxzMz1SBgKraGqxCyzEImtitQ==
+renovate@^21.23.1:
+  version "21.23.1"
+  resolved "https://registry.yarnpkg.com/renovate/-/renovate-21.23.1.tgz#1610c3da403652dcd02f7b3ba5901fd3d934e896"
+  integrity sha512-fc7JEs/bnr0qSI7mKdSBwnZB2VHIIIIPRahKKwOtmEXmUfZndBVOIQ7pBVpBCxw4kSvgQpeJDljl55d3nkk7tA==
   dependencies:
     "@renovate/pep440" "0.4.1"
+    "@renovatebot/ruby-semver" "0.1.6"
     "@sindresorhus/is" "2.1.1"
-    "@snyk/ruby-semver" "2.2.2"
     "@yarnpkg/lockfile" "1.1.0"
-    aws-sdk "2.686.0"
+    aws-sdk "2.709.0"
     azure-devops-node-api "10.1.1"
     bunyan "1.8.14"
     cacache "15.0.4"
