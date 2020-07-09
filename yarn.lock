@@ -1933,10 +1933,10 @@ renovate-config-packages@^0.7.0:
   resolved "https://registry.yarnpkg.com/renovate-config-packages/-/renovate-config-packages-0.7.0.tgz#06807b8355b781fa3351a30db48870ebc46ab01e"
   integrity sha512-Soi9+YVL52kd4Qj0iGcs7i8Vf4wKHCGuWp1VoobL2fq5Wy+GENMpJF5uKKHPbNyNHnzIqKCRpnqI9CFwnHrD9w==
 
-renovate@^21.25.0:
-  version "21.25.0"
-  resolved "https://registry.yarnpkg.com/renovate/-/renovate-21.25.0.tgz#8a2430de82ae836675651869ab6e41999698109e"
-  integrity sha512-gNsHo+PM3D/CzbYaO+Xxt/QOwlb/PiYpzHC3xvR2BqcKSqQ/E2MXVCu1wYQI6+2RWA6kuKeiM9yPXKrxTKqmZA==
+renovate@^21.25.3:
+  version "21.25.3"
+  resolved "https://registry.yarnpkg.com/renovate/-/renovate-21.25.3.tgz#69b83ab3ce374d0db80b98a122e840bef8c344a3"
+  integrity sha512-6Prt+1UXi8VmcJJfM3dLAhOuWpiD+A2gRbJW3Ap9aEDq4L3UVkmcGB3yMeZPHXlO80+Q4xUMCoM0eEG76TXIlg==
   dependencies:
     "@renovate/pep440" "0.4.1"
     "@renovatebot/ruby-semver" "0.1.6"
