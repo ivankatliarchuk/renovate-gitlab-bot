@@ -62,7 +62,7 @@ const updateGitLabScopeDev = {
 
 const updateOnlyGitLabScope = {
   ...baseConfig,
-  labels: ["frontend", "dependency update", "backstage"],
+  labels: ["frontend", "dependency update", "feature::maintenance"],
   packageRules: [updateNothing, updateGitLabUIandSVG, updateGitLabScopeDev],
 };
 
