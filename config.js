@@ -1,4 +1,5 @@
 const baseConfig = {
+  labels: ["frontend", "dependency update", "feature::maintenance"],
   lockFileMaintenance: { enabled: false, schedule: [] },
   enabledManagers: ["npm"],
   prConcurrentLimit: 2,
@@ -62,7 +63,6 @@ const updateGitLabScopeDev = {
 
 const updateOnlyGitLabScope = {
   ...baseConfig,
-  labels: ["frontend", "dependency update", "feature::maintenance"],
   packageRules: [updateNothing, updateGitLabUIandSVG, updateGitLabScopeDev],
 };
 
@@ -77,10 +77,17 @@ const gitlab = [
   {
     repository: "gitlab-org/gitlab",
     ...updateOnlyGitLabScope,
+    semanticCommits: false,
+  },
+  {
+    repository: "gitlab-org/gitlab",
+    ...baseConfig,
+    branchPrefix: "renovate-sourcegraph/",
+    assignees: ["@pslaughter"],
     packageRules: [
-      ...updateOnlyGitLabScope.packageRules,
+      updateNothing,
       {
-        packageNames: ["@sourcegraph/code-host-integration"],
+        packagePatterns: ["^@sourcegraph/*"],
         enabled: true,
         rangeStrategy: "bump",
       },
@@ -111,7 +118,7 @@ const gitlab = [
   {
     repository: "gitlab-org/gitlab-ui",
     ...updateOnlyGitLabScope,
-    // ...autoMergeMinorAndPatch,
+    ...autoMergeMinorAndPatch,
     semanticCommits: true,
   },
   {
@@ -155,6 +162,7 @@ module.exports = {
     ...allDependencies.map((repository) => ({
       repository,
       ...baseConfig,
+      labels: [],
       assignees: ["@leipert"],
       automerge: true,
       rangeStrategy: "bump",
