@@ -77,10 +77,17 @@ const gitlab = [
   {
     repository: "gitlab-org/gitlab",
     ...updateOnlyGitLabScope,
+    semanticCommits: false,
+  },
+  {
+    repository: "gitlab-org/gitlab",
+    ...baseConfig,
+    branchPrefix: "renovate-sourcegraph/",
+    assignees: ["@pslaughter"],
     packageRules: [
-      ...updateOnlyGitLabScope.packageRules,
+      updateNothing,
       {
-        packageNames: ["@sourcegraph/code-host-integration"],
+        packagePatterns: ["^@sourcegraph/*"],
         enabled: true,
         rangeStrategy: "bump",
       },
