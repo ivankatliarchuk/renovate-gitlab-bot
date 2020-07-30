@@ -90,6 +90,7 @@ const gitlab = [
         packagePatterns: ["^@sourcegraph/*"],
         enabled: true,
         rangeStrategy: "bump",
+        groupName: "Toast UI",
       },
     ],
     semanticCommits: false,
