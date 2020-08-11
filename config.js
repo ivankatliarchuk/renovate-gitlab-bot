@@ -90,14 +90,25 @@ const gitlab = [
         packageNames: [
           'vue',
           'vue-loader',
-          'vue-router',
           'vue-template-compiler',
-          'vuex'
         ],
         enabled: true,
-        rangeStrategy: "bump",
-        groupName: "Vue",
+        groupName: "Vue and related",
       },
+      {
+        packageNames: [
+        'vue-router',
+        ],
+        rangeStrategy: "bump",
+        enabled: true,
+      },
+      {
+        packageNames: [
+        'vuex',
+        ],
+        rangeStrategy: "bump",
+        enabled: true,
+      }
     ],
     semanticCommits: false,
   },
