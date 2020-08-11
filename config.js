@@ -82,6 +82,22 @@ const gitlab = [
   {
     repository: "gitlab-org/gitlab",
     ...baseConfig,
+    branchPrefix: "renovate-vue/",
+    assignees: ["@leipert"],
+    packageRules: [
+      updateNothing,
+      {
+        extends: ["monorepo:vue"],
+        enabled: true,
+        groupName: "vue monorepo",
+        rangeStrategy: "bump",
+      },
+    ],
+    semanticCommits: false,
+  },
+  {
+    repository: "gitlab-org/gitlab",
+    ...baseConfig,
     branchPrefix: "renovate-sourcegraph/",
     assignees: ["@pslaughter"],
     packageRules: [
