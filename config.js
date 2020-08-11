@@ -166,7 +166,7 @@ const allDependencies = [
 ];
 
 module.exports = {
-  dryRun: process.env.CI_COMMIT_REF_SLUG !== "master",
+  dryRun: process.env.CI_COMMIT_REF_SLUG !== "main",
   autodiscover: false,
   logLevel: "debug",
   platform: "gitlab",
