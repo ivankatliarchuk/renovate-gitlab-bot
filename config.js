@@ -87,10 +87,16 @@ const gitlab = [
     packageRules: [
       updateNothing,
       {
-        extends: ["monorepo:vue"],
+        packageNames: [
+          'vue',
+          'vue-loader',
+          'vue-router',
+          'vue-template-compiler',
+          'vuex'
+        ],
         enabled: true,
-        groupName: "vue monorepo",
         rangeStrategy: "bump",
+        groupName: "Vue",
       },
     ],
     semanticCommits: false,
