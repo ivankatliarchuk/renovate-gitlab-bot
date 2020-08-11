@@ -87,28 +87,20 @@ const gitlab = [
     packageRules: [
       updateNothing,
       {
-        packageNames: [
-          'vue',
-          'vue-loader',
-          'vue-template-compiler',
-        ],
+        packageNames: ["vue", "vue-loader", "vue-template-compiler"],
         enabled: true,
-        groupName: "Vue and related",
+        groupName: "Vue and related dependencies",
       },
       {
-        packageNames: [
-        'vue-router',
-        ],
+        packageNames: ["vue-router"],
         rangeStrategy: "bump",
         enabled: true,
       },
       {
-        packageNames: [
-        'vuex',
-        ],
+        packageNames: ["vuex"],
         rangeStrategy: "bump",
         enabled: true,
-      }
+      },
     ],
     semanticCommits: false,
   },
