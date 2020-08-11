@@ -169,6 +169,10 @@ module.exports = {
       rangeStrategy: "bump",
       packageRules: [
         {
+          packagePatterns: ["^renovate"],
+          extends: ["schedule:weekly"],
+        },
+        {
           extends: ["monorepo:jest", "packages:jsUnitTest"],
           groupName: "testing",
         },
