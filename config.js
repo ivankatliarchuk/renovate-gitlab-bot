@@ -128,10 +128,9 @@ const gitlab = [
     packageRules: [
       updateNothing,
       {
-        packagePatterns: ["^@vue-virtual-scroll-list/*"],
+        packageNames: ["vue-virtual-scroll-list"],
         enabled: true,
         rangeStrategy: "bump",
-        groupName: "Vue Virtual Scroll List",
       },
     ],
     semanticCommits: false,
