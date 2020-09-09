@@ -123,6 +123,21 @@ const gitlab = [
   {
     repository: "gitlab-org/gitlab",
     ...baseConfig,
+    branchPrefix: "renovate-vue-virtual-scroll-list/",
+    assignees: ["@samdbeckham"],
+    packageRules: [
+      updateNothing,
+      {
+        packageNames: ["vue-virtual-scroll-list"],
+        enabled: true,
+        rangeStrategy: "bump",
+      },
+    ],
+    semanticCommits: false,
+  },
+  {
+    repository: "gitlab-org/gitlab",
+    ...baseConfig,
     branchPrefix: "renovate-toast/",
     assignees: ["@ealcantara", "@derek-knox", "@jerasmus"],
     packageRules: [
