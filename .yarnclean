@@ -52,8 +52,8 @@ wercker.yml
 *.css
 *.coffee
 *.gif
-*min.map
-*min.js
+*.min.map
+*.min.js
 *.log
 *.txt
 .coveralls.yml
