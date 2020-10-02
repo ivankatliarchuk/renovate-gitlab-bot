@@ -83,7 +83,7 @@ const gitlab = [
     repository: "gitlab-org/gitlab",
     ...baseConfig,
     branchPrefix: "renovate-vue/",
-    assignees: ["@leipert"],
+    assignees: ["@samdbeckham"],
     packageRules: [
       updateNothing,
       {
