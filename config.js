@@ -77,7 +77,7 @@ const gitlab = [
   {
     repository: "gitlab-org/gitlab",
     ...updateOnlyGitLabScope,
-    semanticCommits: false,
+    semanticCommits: "disabled",
   },
   {
     repository: "gitlab-org/gitlab",
@@ -99,7 +99,7 @@ const gitlab = [
         groupName: "Vue and related dependencies",
       },
     ],
-    semanticCommits: false,
+    semanticCommits: "disabled",
   },
   {
     repository: "gitlab-org/gitlab",
@@ -115,7 +115,7 @@ const gitlab = [
         groupName: "Sourcegraph",
       },
     ],
-    semanticCommits: false,
+    semanticCommits: "disabled",
   },
   {
     repository: "gitlab-org/gitlab",
@@ -130,7 +130,7 @@ const gitlab = [
         rangeStrategy: "bump",
       },
     ],
-    semanticCommits: false,
+    semanticCommits: "disabled",
   },
   {
     repository: "gitlab-org/gitlab",
@@ -146,39 +146,39 @@ const gitlab = [
         groupName: "Toast UI",
       },
     ],
-    semanticCommits: false,
+    semanticCommits: "disabled",
   },
   {
     repository: "gitlab-org/gitlab-svgs",
     ...updateOnlyGitLabScope,
     ...autoMergeMinorAndPatch,
-    semanticCommits: false,
+    semanticCommits: "disabled",
   },
   {
     repository: "gitlab-org/gitlab-ui",
     ...updateOnlyGitLabScope,
     ...autoMergeMinorAndPatch,
-    semanticCommits: true,
+    semanticCommits: "enabled",
   },
   {
     repository: "gitlab-org/gitlab-services/design.gitlab.com",
     ...updateOnlyGitLabScope,
     ...autoMergeMinorAndPatch,
-    semanticCommits: true,
+    semanticCommits: "enabled",
   },
   // Customer Portal:
   {
     repository: "gitlab-org/customers-gitlab-com",
     ...updateOnlyGitLabScope,
     assignees: ["@vitallium"],
-    semanticCommits: false,
+    semanticCommits: "disabled",
   },
   {
     repository: "gitlab-org/status-page",
     ...baseConfig,
     ...updateOnlyGitLabScope,
     assignees: ["@ohoral", "@oregand", "@tristan.read"],
-    semanticCommits: false,
+    semanticCommits: "disabled",
   },
   {
     ...baseConfig,
@@ -186,18 +186,16 @@ const gitlab = [
     repository: "gitlab-org/gitlab-docs",
     enabledManagers: ["npm", "bundler"],
     prConcurrentLimit: 4,
-    semanticCommits: false,
+    semanticCommits: "disabled",
     packageRules: [
       {
         packagePatterns: [".+"],
-        updateTypes: ["minor", "patch"],
-        managers: ["bundler"],
         rangeStrategy: "bump",
+        managers: ["bundler"],
         groupName: "Ruby dependencies",
       },
       {
         packagePatterns: [".+"],
-        updateTypes: ["minor", "patch"],
         rangeStrategy: "bump",
         managers: ["npm"],
         groupName: "NodeJS dependencies",
