@@ -183,18 +183,21 @@ const gitlab = [
   {
     ...baseConfig,
     assignees: ["@axil", "@eread", "@marcel.amirault"],
+    assigneesSampleSize: 3,
     repository: "gitlab-org/gitlab-docs",
     enabledManagers: ["npm", "bundler"],
     prConcurrentLimit: 4,
     semanticCommits: "disabled",
     packageRules: [
       {
+        extends: ["schedule:weekly"],
         packagePatterns: [".+"],
         rangeStrategy: "bump",
         managers: ["bundler"],
         groupName: "Ruby dependencies",
       },
       {
+        extends: ["schedule:weekly"],
         packagePatterns: [".+"],
         rangeStrategy: "bump",
         managers: ["npm"],
