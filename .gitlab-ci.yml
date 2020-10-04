@@ -12,12 +12,11 @@ stages:
   - build-image
   - run
 
-build-image:
+.build-image:
   tags:
     - gitlab-org-docker
   resource_group: $CI_COMMIT_REF_SLUG
   image: docker:stable
-  stage: build-image
   variables:
     DOCKER_HOST: tcp://docker:2375/
     DOCKER_DRIVER: overlay2
@@ -35,15 +34,24 @@ build-image:
           echo "Image has correct ref, so we skip building"
           exit 0
         fi
-        echo "Building image"
-        docker build . --tag "$DOCKER_IMAGE" --label commitRef=$CI_COMMIT_SHORT_SHA
-        echo "Pushing image"
-        docker push "$DOCKER_IMAGE"
       fi
+      echo "Building image"
+      docker build . --tag "$DOCKER_IMAGE" --label commitRef=$CI_COMMIT_SHORT_SHA
+      echo "Pushing image"
+      docker push "$DOCKER_IMAGE"
+
+build-image:
+  extends: .build-image
+  stage: build-image
+  rules:
+    - if: '$CI_PIPELINE_SOURCE != "schedule"'
+
+build-image-manual:
+  extends: .build-image
+  stage: run
   rules:
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
       when: manual
-    - when: always
 
 beep-boop:
   image: $DOCKER_IMAGE
