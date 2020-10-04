@@ -180,6 +180,30 @@ const gitlab = [
     assignees: ["@ohoral", "@oregand", "@tristan.read"],
     semanticCommits: false,
   },
+  {
+    ...baseConfig,
+    assignees: ["@axil", "@eread", "@marcel.amirault"],
+    repository: "gitlab-org/gitlab-docs",
+    enabledManagers: ["npm", "bundler"],
+    prConcurrentLimit: 4,
+    semanticCommits: false,
+    packageRules: [
+      {
+        packagePatterns: [".+"],
+        updateTypes: ["minor", "patch"],
+        managers: ["bundler"],
+        rangeStrategy: "bump",
+        groupName: "Ruby dependencies",
+      },
+      {
+        packagePatterns: [".+"],
+        updateTypes: ["minor", "patch"],
+        rangeStrategy: "bump",
+        managers: ["npm"],
+        groupName: "NodeJS dependencies",
+      },
+    ],
+  },
 ];
 
 const allDependencies = [
