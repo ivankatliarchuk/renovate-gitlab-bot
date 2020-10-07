@@ -66,6 +66,18 @@ const updateOnlyGitLabScope = {
   packageRules: [updateNothing, updateGitLabUIandSVG, updateGitLabScopeDev],
 };
 
+const updateDOMPurifyConfig = {
+  ...baseConfig,
+  branchPrefix: "renovate-dompurify/",
+  assignees: ["@djadmin", "@markrian"],
+  packageRules: [
+    updateNothing,
+    {
+      packageNames: ["dompurify"],
+    },
+  ],
+};
+
 const autoMergeMinorAndPatch = {
   automerge: true,
   major: {
@@ -149,6 +161,11 @@ const gitlab = [
     semanticCommits: "disabled",
   },
   {
+    repository: "gitlab-org/gitlab",
+    ...updateDOMPurifyConfig,
+    semanticCommits: "disabled",
+  },
+  {
     repository: "gitlab-org/gitlab-svgs",
     ...updateOnlyGitLabScope,
     ...autoMergeMinorAndPatch,
@@ -158,6 +175,11 @@ const gitlab = [
     repository: "gitlab-org/gitlab-ui",
     ...updateOnlyGitLabScope,
     ...autoMergeMinorAndPatch,
+    semanticCommits: "enabled",
+  },
+  {
+    repository: "gitlab-org/gitlab-ui",
+    ...updateDOMPurifyConfig,
     semanticCommits: "enabled",
   },
   {
