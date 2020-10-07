@@ -69,11 +69,13 @@ const updateOnlyGitLabScope = {
 const updateDOMPurifyConfig = {
   ...baseConfig,
   branchPrefix: "renovate-dompurify/",
-  assignees: ["@djadmin", "@markrian"],
   packageRules: [
     updateNothing,
     {
       packageNames: ["dompurify"],
+      rangeStrategy: "bump",
+      enabled: true,
+      assignees: ["@djadmin", "@markrian"],
     },
   ],
 };
