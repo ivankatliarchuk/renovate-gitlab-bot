@@ -7,7 +7,7 @@ RUN apk add --update --no-cache python3 make g++
 
 RUN yarn install --production --frozen-lockfile --force
 
-FROM ruby:2.6.6-alpine3.12
+FROM ruby:2.7.2-alpine3.12
 
 COPY --from=builder /workdir /workdir
 COPY --from=builder /usr/local/bin/node /usr/local/bin/node
