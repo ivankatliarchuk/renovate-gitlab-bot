@@ -2916,10 +2916,10 @@ renovate-config-packages@^0.7.0:
   resolved "https://registry.yarnpkg.com/renovate-config-packages/-/renovate-config-packages-0.7.0.tgz#06807b8355b781fa3351a30db48870ebc46ab01e"
   integrity sha512-Soi9+YVL52kd4Qj0iGcs7i8Vf4wKHCGuWp1VoobL2fq5Wy+GENMpJF5uKKHPbNyNHnzIqKCRpnqI9CFwnHrD9w==
 
-renovate@^23.84.10:
-  version "23.84.10"
-  resolved "https://registry.yarnpkg.com/renovate/-/renovate-23.84.10.tgz#62e23888ab0c60722c8156a9fc4c4a4ac6647db7"
-  integrity sha512-pCu1cx/5Y0yaZBCtLwT/+Y/twVVIYTxHFtjmxlLu9MN3sSaIX+KmuXSiAmhJnQCy8h+fJ0w3jhsBcl/D/h8aRA==
+renovate@^23.89.3:
+  version "23.89.3"
+  resolved "https://registry.yarnpkg.com/renovate/-/renovate-23.89.3.tgz#708f880643fad90a7435acb0f255280958af0291"
+  integrity sha512-VxzhfVC7F5U9zP/+5xVbFcVpPBBqRKoKA3GANaYIBW/Sw2KEqWBHN+xc7qeQE0MJQAA2m2HSdjVfDHbHWiPO8Q==
   dependencies:
     "@breejs/later" "4.0.2"
     "@iarna/toml" "2.2.5"
