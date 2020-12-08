@@ -232,6 +232,10 @@ const gitlab = [
       {
         extends: ["schedule:weekly"],
         packagePatterns: [".+"],
+        excludePackageNames: [
+          "rollup-plugin-vue",
+          "rollup/plugin-node-resolve",
+        ],
         rangeStrategy: "bump",
         managers: ["npm"],
         groupName: "NodeJS dependencies",
