@@ -150,7 +150,7 @@ const gitlab = [
     repository: "gitlab-org/gitlab",
     ...baseConfig,
     branchPrefix: "renovate-toast/",
-    assignees: ["@ealcantara", "@derek-knox", "@jerasmus"],
+    assignees: ["@ealcantara", "@jerasmus"],
     packageRules: [
       updateNothing,
       {
@@ -158,6 +158,35 @@ const gitlab = [
         enabled: true,
         rangeStrategy: "bump",
         groupName: "Toast UI",
+      },
+    ],
+    semanticCommits: "disabled",
+  },
+  {
+    repository: "gitlab-org/gitlab",
+    ...baseConfig,
+    branchPrefix: "renovate-misc/",
+    assignees: ["@mikegreiling"],
+    packageRules: [
+      updateNothing,
+      {
+        packageNames: ["file-loader", "url-loader", "raw-loader"],
+        assignees: ["@leipert"],
+        enabled: true,
+        rangeStrategy: "bump",
+        groupName: "Misc Loader",
+      },
+      {
+        packageNames: ["worker-loader"],
+        enabled: true,
+        rangeStrategy: "bump",
+        groupName: "Worker Loader",
+      },
+      {
+        packageNames: ["style-loader"],
+        enabled: true,
+        rangeStrategy: "bump",
+        groupName: "Style Loader",
       },
     ],
     semanticCommits: "disabled",
