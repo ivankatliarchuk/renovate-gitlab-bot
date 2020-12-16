@@ -1,0 +1,9 @@
+pre-commit:
+  piped: true
+  commands:
+    1_update_readme:
+      run: yarn run update-readme
+    2_stage_readme:
+      run: git add README.md
+    3_prettier:
+      run: yarn run pretty-quick --staged

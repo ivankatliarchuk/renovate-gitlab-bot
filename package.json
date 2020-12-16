@@ -12,16 +12,10 @@
     "renovate-config-packages": "^0.7.0"
   },
   "scripts": {
-    "pretty": "./update-readme.js && prettier --write '*.{js,json,yml,md}'"
+    "update-readme": "./update-readme.js"
   },
   "devDependencies": {
-    "husky": "^5.0.6",
     "prettier": "^2.2.1",
     "pretty-quick": "^3.1.0"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick --staged"
-    }
   }
 }

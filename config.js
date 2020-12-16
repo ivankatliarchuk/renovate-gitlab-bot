@@ -87,48 +87,15 @@ const autoMergeMinorAndPatch = {
   },
 };
 
+const foundationPackages = {
+  assignees: ["@leipert"],
+  addLabels: ["group::ecosystem"],
+};
+
 const gitlab = [
   {
     repository: "gitlab-org/gitlab",
     ...updateOnlyGitLabScope,
-    semanticCommits: "disabled",
-  },
-  {
-    repository: "gitlab-org/gitlab",
-    ...baseConfig,
-    branchPrefix: "renovate-vue/",
-    assignees: ["@samdbeckham"],
-    packageRules: [
-      updateNothing,
-      {
-        packageNames: [
-          "vue",
-          "vue-loader",
-          "vue-router",
-          "vue-template-compiler",
-          "vuex",
-        ],
-        enabled: true,
-        rangeStrategy: "bump",
-        groupName: "Vue and related dependencies",
-      },
-    ],
-    semanticCommits: "disabled",
-  },
-  {
-    repository: "gitlab-org/gitlab",
-    ...baseConfig,
-    branchPrefix: "renovate-sourcegraph/",
-    assignees: ["@pslaughter"],
-    packageRules: [
-      updateNothing,
-      {
-        packagePatterns: ["^@sourcegraph/*"],
-        enabled: true,
-        rangeStrategy: "bump",
-        groupName: "Sourcegraph",
-      },
-    ],
     semanticCommits: "disabled",
   },
   {
@@ -149,27 +116,39 @@ const gitlab = [
   {
     repository: "gitlab-org/gitlab",
     ...baseConfig,
-    branchPrefix: "renovate-toast/",
-    assignees: ["@ealcantara", "@jerasmus"],
+    branchPrefix: "renovate-misc/",
+    semanticCommits: "disabled",
     packageRules: [
       updateNothing,
       {
+        assignees: ["@samdbeckham"],
+        packageNames: [
+          "vue",
+          "vue-loader",
+          "vue-router",
+          "vue-template-compiler",
+          "vuex",
+        ],
+        enabled: true,
+        rangeStrategy: "bump",
+        groupName: "Vue and related dependencies",
+      },
+      {
+        packagePatterns: ["^@sourcegraph/*"],
+        assignees: ["@pslaughter"],
+        enabled: true,
+        rangeStrategy: "bump",
+        groupName: "Sourcegraph",
+      },
+      {
+        assignees: ["@ealcantara", "@jerasmus"],
         packagePatterns: ["^@toast-ui/*"],
         enabled: true,
         rangeStrategy: "bump",
         groupName: "Toast UI",
       },
-    ],
-    semanticCommits: "disabled",
-  },
-  {
-    repository: "gitlab-org/gitlab",
-    ...baseConfig,
-    branchPrefix: "renovate-misc/",
-    assignees: ["@mikegreiling"],
-    packageRules: [
-      updateNothing,
       {
+        ...foundationPackages,
         packageNames: ["file-loader", "url-loader", "raw-loader"],
         assignees: ["@leipert"],
         enabled: true,
@@ -177,19 +156,20 @@ const gitlab = [
         groupName: "Misc Loader",
       },
       {
+        ...foundationPackages,
         packageNames: ["worker-loader"],
         enabled: true,
         rangeStrategy: "bump",
         groupName: "Worker Loader",
       },
       {
+        ...foundationPackages,
         packageNames: ["style-loader"],
         enabled: true,
         rangeStrategy: "bump",
         groupName: "Style Loader",
       },
     ],
-    semanticCommits: "disabled",
   },
   {
     repository: "gitlab-org/gitlab",
@@ -252,6 +232,10 @@ const gitlab = [
       {
         extends: ["schedule:weekly"],
         packagePatterns: [".+"],
+        excludePackageNames: [
+          "rollup-plugin-vue",
+          "rollup/plugin-node-resolve",
+        ],
         rangeStrategy: "bump",
         managers: ["npm"],
         groupName: "NodeJS dependencies",
