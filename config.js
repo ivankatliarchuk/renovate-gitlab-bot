@@ -265,10 +265,11 @@ module.exports = {
       automerge: true,
       rangeStrategy: "bump",
       packageRules: [
-        {
-          packagePatterns: ["^renovate"],
-          extends: ["schedule:weekly"],
-        },
+        // Disable updating of renovate
+        // {
+        //   packagePatterns: ["^renovate"],
+        //   extends: ["schedule:weekly"],
+        // },
         {
           extends: ["monorepo:jest", "packages:jsUnitTest"],
           groupName: "testing",
