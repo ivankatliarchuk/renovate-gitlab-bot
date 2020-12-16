@@ -2,7 +2,7 @@ const baseConfig = {
   labels: ["frontend", "dependency update", "feature::maintenance"],
   lockFileMaintenance: { enabled: false, schedule: [] },
   enabledManagers: ["npm"],
-  prConcurrentLimit: 2,
+  prConcurrentLimit: 5,
   assignees: [
     "@dmishunov",
     "@ealcantara",
@@ -66,18 +66,12 @@ const updateOnlyGitLabScope = {
   packageRules: [updateNothing, updateGitLabUIandSVG, updateGitLabScopeDev],
 };
 
-const updateDOMPurifyConfig = {
-  ...baseConfig,
-  branchPrefix: "renovate-dompurify/",
-  packageRules: [
-    updateNothing,
-    {
-      packageNames: ["dompurify"],
-      rangeStrategy: "bump",
-      enabled: true,
-      assignees: ["@djadmin", "@markrian"],
-    },
-  ],
+const updateDOMPurify = {
+  packageNames: ["dompurify"],
+  rangeStrategy: "bump",
+  enabled: true,
+  assignees: ["@djadmin", "@markrian"],
+  automerge: false,
 };
 
 const autoMergeMinorAndPatch = {
@@ -95,31 +89,11 @@ const foundationPackages = {
 const gitlab = [
   {
     repository: "gitlab-org/gitlab",
-    ...updateOnlyGitLabScope,
-    semanticCommits: "disabled",
-  },
-  {
-    repository: "gitlab-org/gitlab",
     ...baseConfig,
-    branchPrefix: "renovate-vue-virtual-scroll-list/",
-    assignees: ["@samdbeckham"],
     packageRules: [
       updateNothing,
-      {
-        packageNames: ["vue-virtual-scroll-list"],
-        enabled: true,
-        rangeStrategy: "bump",
-      },
-    ],
-    semanticCommits: "disabled",
-  },
-  {
-    repository: "gitlab-org/gitlab",
-    ...baseConfig,
-    branchPrefix: "renovate-misc/",
-    semanticCommits: "disabled",
-    packageRules: [
-      updateNothing,
+      updateGitLabUIandSVG,
+      updateGitLabScopeDev,
       {
         assignees: ["@samdbeckham"],
         packageNames: [
@@ -149,18 +123,44 @@ const gitlab = [
       },
       {
         ...foundationPackages,
+        packageNames: ["worker-loader"],
+        enabled: true,
+        rangeStrategy: "bump",
+        groupName: "Worker Loader",
+      },
+      updateDOMPurify,
+    ],
+    semanticCommits: "disabled",
+  },
+  {
+    repository: "gitlab-org/gitlab",
+    ...baseConfig,
+    branchPrefix: "renovate-vue-virtual-scroll-list/",
+    assignees: ["@samdbeckham"],
+    packageRules: [
+      updateNothing,
+      {
+        packageNames: ["vue-virtual-scroll-list"],
+        enabled: true,
+        rangeStrategy: "bump",
+      },
+    ],
+    semanticCommits: "disabled",
+  },
+  {
+    repository: "gitlab-org/gitlab",
+    ...baseConfig,
+    branchPrefix: "renovate-misc/",
+    semanticCommits: "disabled",
+    packageRules: [
+      updateNothing,
+      {
+        ...foundationPackages,
         packageNames: ["file-loader", "url-loader", "raw-loader"],
         assignees: ["@leipert"],
         enabled: true,
         rangeStrategy: "bump",
         groupName: "Misc Loader",
-      },
-      {
-        ...foundationPackages,
-        packageNames: ["worker-loader"],
-        enabled: true,
-        rangeStrategy: "bump",
-        groupName: "Worker Loader",
       },
       {
         ...foundationPackages,
@@ -172,11 +172,6 @@ const gitlab = [
     ],
   },
   {
-    repository: "gitlab-org/gitlab",
-    ...updateDOMPurifyConfig,
-    semanticCommits: "disabled",
-  },
-  {
     repository: "gitlab-org/gitlab-svgs",
     ...updateOnlyGitLabScope,
     ...autoMergeMinorAndPatch,
@@ -184,13 +179,14 @@ const gitlab = [
   },
   {
     repository: "gitlab-org/gitlab-ui",
-    ...updateOnlyGitLabScope,
+    ...baseConfig,
+    packageRules: [
+      updateNothing,
+      updateGitLabUIandSVG,
+      updateGitLabScopeDev,
+      updateDOMPurify,
+    ],
     ...autoMergeMinorAndPatch,
-    semanticCommits: "enabled",
-  },
-  {
-    repository: "gitlab-org/gitlab-ui",
-    ...updateDOMPurifyConfig,
     semanticCommits: "enabled",
   },
   {
@@ -222,6 +218,7 @@ const gitlab = [
     prConcurrentLimit: 4,
     semanticCommits: "disabled",
     packageRules: [
+      updateNothing,
       {
         extends: ["schedule:weekly"],
         packagePatterns: [".+"],
