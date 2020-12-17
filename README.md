@@ -1,9 +1,9 @@
 # renovate-gitlab-bot
 
-The bot uses [renovatebot](https://github.com/renovatebot/renovate) to automatically create MRs for updating dependencies.
-It is running on a [tight schedule](https://gitlab.com/gitlab-org/frontend/renovate-gitlab-bot/-/pipeline_schedules).
-The following repositories are currently being updated automatically.
-For more info have a look at the [config](./config.js).
+The bot uses [renovatebot](https://github.com/renovatebot/renovate) to
+automatically create MRs for updating dependencies. It is running on a [tight schedule](https://gitlab.com/gitlab-org/frontend/renovate-gitlab-bot/-/pipeline_schedules).
+
+The following repositories are currently being updated automatically:
 
 <!-- rep -->
 
@@ -16,5 +16,8 @@ For more info have a look at the [config](./config.js).
 - [gitlab-org/gitlab-ui](https://gitlab.com/gitlab-org/gitlab-ui)
 - [gitlab-org/gitlab](https://gitlab.com/gitlab-org/gitlab)
 - [gitlab-org/status-page](https://gitlab.com/gitlab-org/status-page)
+- [gitlab-org/gitlab-development-kit](https://gitlab.com/gitlab-org/gitlab-development-kit)
 
 <!-- rep -->
+
+For more info have a look at the [config](./config.js).
