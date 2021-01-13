@@ -128,6 +128,12 @@ const gitlab = [
         rangeStrategy: "bump",
         groupName: "Worker Loader",
       },
+      {
+        ...foundationPackages,
+        packageNames: ["core-js"],
+        enabled: true,
+        rangeStrategy: "bump",
+      },
       updateDOMPurify,
     ],
     semanticCommits: "disabled",
