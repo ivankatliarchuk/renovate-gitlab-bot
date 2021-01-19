@@ -224,7 +224,6 @@ const gitlab = [
     prConcurrentLimit: 4,
     semanticCommits: "disabled",
     packageRules: [
-      updateNothing,
       {
         extends: ["schedule:weekly"],
         packagePatterns: [".+"],
@@ -251,7 +250,6 @@ const gitlab = [
     assignees: ["@ashmckenzie", "@tigerwnz", "@toon"],
     enabledManagers: ["npm", "bundler"],
     packageRules: [
-      updateNothing,
       {
         extends: ["schedule:weekly"],
         packagePatterns: [".+"],
