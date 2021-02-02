@@ -197,6 +197,7 @@ const gitlab = [
         assignees: ["@pgascouvaillancourt"],
         rangeStrategy: "bump",
         enabled: true,
+        groupName: "Storybook",
       },
     ],
     ...autoMergeMinorAndPatch,
