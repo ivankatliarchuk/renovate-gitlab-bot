@@ -191,6 +191,13 @@ const gitlab = [
       updateGitLabUIandSVG,
       updateGitLabScopeDev,
       updateDOMPurify,
+      {
+        ...autoMergeMinorAndPatch,
+        packagePatterns: ["@storybook/.*"],
+        assignees: ["@pgascouvaillancourt"],
+        rangeStrategy: "bump",
+        enabled: true,
+      },
     ],
     ...autoMergeMinorAndPatch,
     semanticCommits: "enabled",
