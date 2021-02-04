@@ -51,19 +51,33 @@ const updateGitLabVisualReviewTools = {
   groupName: "GitLab Visual Review Tools",
 };
 
+const ESLint = {
+  ...updateGitLabScope,
+  packageNames: ["@gitlab/eslint-plugin", "eslint"],
+  packagePatterns: ["eslint-.+"],
+  assignees: ["@markrian", "@vitallium"],
+  groupName: "ESLint and related",
+};
+
 const updateGitLabScopeDev = {
   ...updateGitLabScope,
   packagePatterns: ["@gitlab/.*"],
   excludePackageNames: [
     ...updateGitLabUIandSVG.packageNames,
     ...updateGitLabVisualReviewTools.packageNames,
+    ...ESLint.packageNames,
   ],
   groupName: "GitLab Packages",
 };
 
 const updateOnlyGitLabScope = {
   ...baseConfig,
-  packageRules: [updateNothing, updateGitLabUIandSVG, updateGitLabScopeDev],
+  packageRules: [
+    updateNothing,
+    updateGitLabUIandSVG,
+    ESLint,
+    updateGitLabScopeDev,
+  ],
 };
 
 const updateDOMPurify = {
@@ -93,6 +107,7 @@ const gitlab = [
     packageRules: [
       updateNothing,
       updateGitLabUIandSVG,
+      ESLint,
       updateGitLabScopeDev,
       {
         assignees: ["@samdbeckham"],
@@ -189,6 +204,7 @@ const gitlab = [
     packageRules: [
       updateNothing,
       updateGitLabUIandSVG,
+      ESLint,
       updateGitLabScopeDev,
       updateDOMPurify,
       {

@@ -10,13 +10,13 @@ The following repositories are currently being updated automatically:
 - [gitlab-com/teampage-map](https://gitlab.com/gitlab-com/teampage-map)
 - [gitlab-org/customers-gitlab-com](https://gitlab.com/gitlab-org/customers-gitlab-com)
 - [gitlab-org/frontend/renovate-gitlab-bot](https://gitlab.com/gitlab-org/frontend/renovate-gitlab-bot)
+- [gitlab-org/gitlab-development-kit](https://gitlab.com/gitlab-org/gitlab-development-kit)
 - [gitlab-org/gitlab-docs](https://gitlab.com/gitlab-org/gitlab-docs)
 - [gitlab-org/gitlab-services/design.gitlab.com](https://gitlab.com/gitlab-org/gitlab-services/design.gitlab.com)
 - [gitlab-org/gitlab-svgs](https://gitlab.com/gitlab-org/gitlab-svgs)
 - [gitlab-org/gitlab-ui](https://gitlab.com/gitlab-org/gitlab-ui)
 - [gitlab-org/gitlab](https://gitlab.com/gitlab-org/gitlab)
 - [gitlab-org/status-page](https://gitlab.com/gitlab-org/status-page)
-- [gitlab-org/gitlab-development-kit](https://gitlab.com/gitlab-org/gitlab-development-kit)
 
 <!-- rep -->
 
