@@ -96,7 +96,7 @@ const autoMergeMinorAndPatch = {
 };
 
 const foundationPackages = {
-  assignees: ["@leipert"],
+  assignees: ["@leipert", "@mikegreiling"],
   addLabels: ["group::ecosystem"],
 };
 
@@ -138,10 +138,27 @@ const gitlab = [
       },
       {
         ...foundationPackages,
-        packageNames: ["worker-loader"],
+        packagePatterns: [
+          ".*-loader",
+          ".*-webpack-plugin",
+          "webpack-bundle-analyzer",
+        ],
+        excludePackageNames: [
+          "three-stl-loader",
+          "karma-sourcemap-loader",
+          "jest-raw-loader",
+          "monaco-editor-webpack-plugin",
+        ],
         enabled: true,
         rangeStrategy: "bump",
-        groupName: "Worker Loader",
+        groupName: "Webpack related packages",
+      },
+      {
+        ...foundationPackages,
+        packageNames: ["webpack", "webpack-cli", "webpack-dev-server"],
+        enabled: true,
+        rangeStrategy: "bump",
+        groupName: "Webpack core packages",
       },
       {
         ...foundationPackages,
@@ -167,30 +184,6 @@ const gitlab = [
       },
     ],
     semanticCommits: "disabled",
-  },
-  {
-    repository: "gitlab-org/gitlab",
-    ...baseConfig,
-    branchPrefix: "renovate-misc/",
-    semanticCommits: "disabled",
-    packageRules: [
-      updateNothing,
-      {
-        ...foundationPackages,
-        packageNames: ["file-loader", "url-loader", "raw-loader"],
-        assignees: ["@leipert"],
-        enabled: true,
-        rangeStrategy: "bump",
-        groupName: "Misc Loader",
-      },
-      {
-        ...foundationPackages,
-        packageNames: ["style-loader"],
-        enabled: true,
-        rangeStrategy: "bump",
-        groupName: "Style Loader",
-      },
-    ],
   },
   {
     repository: "gitlab-org/gitlab-svgs",
