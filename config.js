@@ -186,6 +186,24 @@ const gitlab = [
     semanticCommits: "disabled",
   },
   {
+    repository: "gitlab-org/gitlab",
+    ...baseConfig,
+    labels: ["backend", "dependency update", "feature", "feature::maintenance"],
+    branchPrefix: "renovate-development-gems/",
+    assignees: ["@rymai"],
+    enabledManagers: ["bundler"],
+    semanticCommits: "disabled",
+    packageRules: [
+      updateNothing,
+      {
+        packageNames: ["brakeman", "danger", "lefthook", "letter_opener_web", "better_errors", "thin"],
+        enabled: true,
+        rangeStrategy: "bump",
+        groupName: "Ruby development dependencies",
+      },
+    ],
+  },
+  {
     repository: "gitlab-org/gitlab-svgs",
     ...updateOnlyGitLabScope,
     ...autoMergeMinorAndPatch,
