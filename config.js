@@ -1,4 +1,5 @@
 const baseConfig = {
+  includeForks: true,
   labels: ["frontend", "dependency update", "feature::maintenance"],
   lockFileMaintenance: { enabled: false, schedule: [] },
   enabledManagers: ["npm"],
@@ -196,7 +197,14 @@ const gitlab = [
     packageRules: [
       updateNothing,
       {
-        packageNames: ["brakeman", "danger", "lefthook", "letter_opener_web", "better_errors", "thin"],
+        packageNames: [
+          "brakeman",
+          "danger",
+          "lefthook",
+          "letter_opener_web",
+          "better_errors",
+          "thin",
+        ],
         enabled: true,
         rangeStrategy: "bump",
         groupName: "Ruby development dependencies",
@@ -297,8 +305,8 @@ const gitlab = [
 ];
 
 const allDependencies = [
-  "gitlab-com/teampage-map",
-  "gitlab-org/frontend/renovate-gitlab-bot",
+  "gitlab-renovate-forks/teampage-map",
+  // "gitlab-org/frontend/renovate-gitlab-bot",
 ];
 
 module.exports = {
@@ -309,9 +317,10 @@ module.exports = {
   onboarding: false,
   requireConfig: false,
   printConfig: false,
-  gitAuthor: "GitLab Bot <gitlab-bot@gitlab.com>",
+  gitAuthor: "GitLab Renovate Bot <gitlab-bot@gitlab.com>",
   repositories: [
-    ...gitlab,
+    // Disable all repos but the team page map
+    // ...gitlab,
     ...allDependencies.map((repository) => ({
       repository,
       ...baseConfig,
