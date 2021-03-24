@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "renovate": "24.94.1",
+    "renovate": "file:./renovate-fork.tgz",
     "renovate-config-monorepo": "^0.43.0",
     "renovate-config-packages": "^0.7.0"
   },
