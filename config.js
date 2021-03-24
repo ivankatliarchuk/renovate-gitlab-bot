@@ -1,5 +1,6 @@
 const baseConfig = {
   includeForks: true,
+  automerge: false,
   labels: ["frontend", "dependency update", "feature::maintenance"],
   lockFileMaintenance: { enabled: false, schedule: [] },
   enabledManagers: ["npm"],
@@ -86,14 +87,6 @@ const updateDOMPurify = {
   rangeStrategy: "bump",
   enabled: true,
   assignees: ["@djadmin", "@markrian"],
-  automerge: false,
-};
-
-const autoMergeMinorAndPatch = {
-  automerge: true,
-  major: {
-    automerge: false,
-  },
 };
 
 const foundationPackages = {
@@ -214,34 +207,11 @@ const gitlab = [
   {
     repository: "gitlab-org/gitlab-svgs",
     ...updateOnlyGitLabScope,
-    ...autoMergeMinorAndPatch,
     semanticCommits: "disabled",
-  },
-  {
-    repository: "gitlab-org/gitlab-ui",
-    ...baseConfig,
-    packageRules: [
-      updateNothing,
-      updateGitLabUIandSVG,
-      ESLint,
-      updateGitLabScopeDev,
-      updateDOMPurify,
-      {
-        ...autoMergeMinorAndPatch,
-        packagePatterns: ["@storybook/.*"],
-        assignees: ["@pgascouvaillancourt"],
-        rangeStrategy: "bump",
-        enabled: true,
-        groupName: "Storybook",
-      },
-    ],
-    ...autoMergeMinorAndPatch,
-    semanticCommits: "enabled",
   },
   {
     repository: "gitlab-org/gitlab-services/design.gitlab.com",
     ...updateOnlyGitLabScope,
-    ...autoMergeMinorAndPatch,
     semanticCommits: "enabled",
   },
   // Customer Portal:
@@ -320,13 +290,31 @@ module.exports = {
   gitAuthor: "GitLab Renovate Bot <gitlab-bot@gitlab.com>",
   repositories: [
     // Disable all repos but the team page map
-    // ...gitlab,
+    {
+      repository: "gitlab-renovate-forks/gitlab-ui",
+      ...baseConfig,
+      packageRules: [
+        updateNothing,
+        updateGitLabUIandSVG,
+        ESLint,
+        updateGitLabScopeDev,
+        updateDOMPurify,
+        {
+          packagePatterns: ["@storybook/.*"],
+          assignees: ["@pgascouvaillancourt"],
+          rangeStrategy: "bump",
+          enabled: true,
+          groupName: "Storybook",
+        },
+      ],
+      semanticCommits: "enabled",
+    },
     ...allDependencies.map((repository) => ({
       repository,
       ...baseConfig,
       labels: [],
       assignees: ["@leipert"],
-      automerge: true,
+      automerge: false,
       rangeStrategy: "bump",
       packageRules: [
         // Disable updating of renovate
