@@ -3,15 +3,17 @@ FROM node:12.18.4-alpine3.12 AS builder
 ADD / /workdir
 WORKDIR /workdir
 
-RUN apk add --update --no-cache python3 make g++
+ENV DOCKER_BUILD=true
 
-RUN yarn install --production --frozen-lockfile --force
+RUN apk add --update --no-cache python3 make g++ git
+
+RUN sh build.sh
 
 FROM ruby:2.7.2-alpine3.12
 
 COPY --from=builder /workdir /workdir
 COPY --from=builder /usr/local/bin/node /usr/local/bin/node
-COPY --from=builder /usr/local/lib/node_modules /usr/local/lib/node_modules 
+COPY --from=builder /usr/local/lib/node_modules /usr/local/lib/node_modules
 COPY --from=builder /usr/local/include/node /usr/local/lib/node
 COPY --from=builder /opt/yarn-* /opt/yarn
 
