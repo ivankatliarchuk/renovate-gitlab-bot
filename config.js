@@ -156,6 +156,27 @@ const gitlab = [
     ],
   },
   {
+    repository: "gitlab-org/gitlab",
+    ...baseConfig,
+    labels: ["backend", "dependency update", "feature", "feature::maintenance"],
+    branchPrefix: "renovate-gitlab-tooling-gems/",
+    assignees: ["@rymai"],
+    enabledManagers: ["bundler"],
+    semanticCommits: "disabled",
+    packageRules: [
+      updateNothing,
+      {
+        packageNames: [
+          "gitlab-styles",
+          "gitlab-dangerfiles",
+        ],
+        enabled: true,
+        rangeStrategy: "bump",
+        groupName: "GitLab Tooling Ruby dependencies",
+      },
+    ],
+  },
+  {
     repository: "gitlab-org/gitlab-svgs",
     ...updateOnlyGitLabScope,
     semanticCommits: "disabled",
