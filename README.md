@@ -8,6 +8,7 @@ The following repositories are currently being updated automatically:
 <!-- rep -->
 
 - [gitlab-renovate-forks/gitlab-ui](https://gitlab.com/gitlab-renovate-forks/gitlab-ui)
+- [gitlab-renovate-forks/gitlab](https://gitlab.com/gitlab-renovate-forks/gitlab)
 - [gitlab-renovate-forks/teampage-map](https://gitlab.com/gitlab-renovate-forks/teampage-map)
 
 <!-- rep -->

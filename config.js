@@ -97,39 +97,7 @@ const foundationPackages = {
 const gitlab = [
   {
     repository: "gitlab-org/gitlab",
-    ...baseConfig,
     packageRules: [
-      updateNothing,
-      updateGitLabUIandSVG,
-      ESLint,
-      updateGitLabScopeDev,
-      {
-        assignees: ["@samdbeckham"],
-        packageNames: [
-          "vue",
-          "vue-loader",
-          "vue-router",
-          "vue-template-compiler",
-          "vuex",
-        ],
-        enabled: true,
-        rangeStrategy: "bump",
-        groupName: "Vue and related dependencies",
-      },
-      {
-        packagePatterns: ["^@sourcegraph/*"],
-        assignees: ["@pslaughter"],
-        enabled: true,
-        rangeStrategy: "bump",
-        groupName: "Sourcegraph",
-      },
-      {
-        assignees: ["@ealcantara", "@jerasmus"],
-        packagePatterns: ["^@toast-ui/*"],
-        enabled: true,
-        rangeStrategy: "bump",
-        groupName: "Toast UI",
-      },
       {
         ...foundationPackages,
         packagePatterns: [
@@ -160,24 +128,7 @@ const gitlab = [
         enabled: true,
         rangeStrategy: "bump",
       },
-      updateDOMPurify,
     ],
-    semanticCommits: "disabled",
-  },
-  {
-    repository: "gitlab-org/gitlab",
-    ...baseConfig,
-    branchPrefix: "renovate-vue-virtual-scroll-list/",
-    assignees: ["@samdbeckham"],
-    packageRules: [
-      updateNothing,
-      {
-        packageNames: ["vue-virtual-scroll-list"],
-        enabled: true,
-        rangeStrategy: "bump",
-      },
-    ],
-    semanticCommits: "disabled",
   },
   {
     repository: "gitlab-org/gitlab",
@@ -289,7 +240,51 @@ module.exports = {
   printConfig: false,
   gitAuthor: "GitLab Renovate Bot <gitlab-bot@gitlab.com>",
   repositories: [
-    // Disable all repos but the team page map
+    {
+      repository: "gitlab-renovate-forks/gitlab",
+      ...baseConfig,
+      packageRules: [
+        updateNothing,
+        updateGitLabUIandSVG,
+        ESLint,
+        updateGitLabScopeDev,
+        {
+          assignees: ["@samdbeckham"],
+          packageNames: [
+            "vue",
+            "vue-loader",
+            "vue-router",
+            "vue-template-compiler",
+            "vuex",
+          ],
+          enabled: true,
+          rangeStrategy: "bump",
+          groupName: "Vue and related dependencies",
+        },
+        {
+          assignees: ["@samdbeckham"],
+          packageNames: ["vue-virtual-scroll-list"],
+          enabled: true,
+          rangeStrategy: "bump",
+        },
+        {
+          packagePatterns: ["^@sourcegraph/*"],
+          assignees: ["@pslaughter"],
+          enabled: true,
+          rangeStrategy: "bump",
+          groupName: "Sourcegraph",
+        },
+        {
+          assignees: ["@ealcantara", "@jerasmus"],
+          packagePatterns: ["^@toast-ui/*"],
+          enabled: true,
+          rangeStrategy: "bump",
+          groupName: "Toast UI",
+        },
+        updateDOMPurify,
+      ],
+      semanticCommits: "disabled",
+    },
     {
       repository: "gitlab-renovate-forks/gitlab-ui",
       ...baseConfig,
