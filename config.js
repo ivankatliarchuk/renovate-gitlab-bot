@@ -100,23 +100,6 @@ const gitlab = [
     packageRules: [
       {
         ...foundationPackages,
-        packagePatterns: [
-          ".*-loader",
-          ".*-webpack-plugin",
-          "webpack-bundle-analyzer",
-        ],
-        excludePackageNames: [
-          "three-stl-loader",
-          "karma-sourcemap-loader",
-          "jest-raw-loader",
-          "monaco-editor-webpack-plugin",
-        ],
-        enabled: true,
-        rangeStrategy: "bump",
-        groupName: "Webpack related packages",
-      },
-      {
-        ...foundationPackages,
         packageNames: ["webpack", "webpack-cli", "webpack-dev-server"],
         enabled: true,
         rangeStrategy: "bump",
@@ -248,6 +231,28 @@ module.exports = {
         updateGitLabUIandSVG,
         ESLint,
         updateGitLabScopeDev,
+        {
+          ...foundationPackages,
+          packagePatterns: [
+            ".*-loader",
+            ".*-webpack-plugin",
+            "webpack-bundle-analyzer",
+          ],
+          excludePackageNames: [
+            "three-stl-loader",
+            "karma-sourcemap-loader",
+            "jest-raw-loader",
+            "monaco-editor-webpack-plugin",
+          ],
+          minor: {
+            groupName: "Webpack related packages",
+          },
+          patch: {
+            groupName: "Webpack related packages",
+          },
+          enabled: true,
+          rangeStrategy: "bump",
+        },
         {
           assignees: ["@samdbeckham"],
           packageNames: [
