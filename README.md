@@ -7,8 +7,13 @@ The following repositories are currently being updated automatically:
 
 <!-- rep -->
 
+- [gitlab-renovate-forks/design.gitlab.com](https://gitlab.com/gitlab-renovate-forks/design.gitlab.com)
+- [gitlab-renovate-forks/gitlab-development-kit](https://gitlab.com/gitlab-renovate-forks/gitlab-development-kit)
+- [gitlab-renovate-forks/gitlab-docs](https://gitlab.com/gitlab-renovate-forks/gitlab-docs)
+- [gitlab-renovate-forks/gitlab-svgs](https://gitlab.com/gitlab-renovate-forks/gitlab-svgs)
 - [gitlab-renovate-forks/gitlab-ui](https://gitlab.com/gitlab-renovate-forks/gitlab-ui)
 - [gitlab-renovate-forks/gitlab](https://gitlab.com/gitlab-renovate-forks/gitlab)
+- [gitlab-renovate-forks/status-page](https://gitlab.com/gitlab-renovate-forks/status-page)
 - [gitlab-renovate-forks/teampage-map](https://gitlab.com/gitlab-renovate-forks/teampage-map)
 
 <!-- rep -->

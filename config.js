@@ -95,34 +95,6 @@ const foundationPackages = {
 };
 
 const gitlab = [
-  {
-    repository: "gitlab-org/gitlab",
-    packageRules: [
-      {
-        ...foundationPackages,
-        packageNames: ["webpack", "webpack-cli", "webpack-dev-server"],
-        enabled: true,
-        rangeStrategy: "bump",
-        groupName: "Webpack core packages",
-      },
-      {
-        ...foundationPackages,
-        packageNames: ["core-js"],
-        enabled: true,
-        rangeStrategy: "bump",
-      },
-    ],
-  },
-  {
-    repository: "gitlab-org/gitlab-svgs",
-    ...updateOnlyGitLabScope,
-    semanticCommits: "disabled",
-  },
-  {
-    repository: "gitlab-org/gitlab-services/design.gitlab.com",
-    ...updateOnlyGitLabScope,
-    semanticCommits: "enabled",
-  },
   // Customer Portal:
   {
     repository: "gitlab-org/customers-gitlab-com",
@@ -130,62 +102,6 @@ const gitlab = [
     assignees: ["@vitallium"],
     semanticCommits: "disabled",
   },
-  {
-    repository: "gitlab-org/status-page",
-    ...baseConfig,
-    ...updateOnlyGitLabScope,
-    assignees: ["@ohoral", "@oregand", "@tristan.read"],
-    semanticCommits: "disabled",
-  },
-  {
-    repository: "gitlab-org/gitlab-docs",
-    ...baseConfig,
-    assignees: ["@axil", "@eread", "@marcel.amirault"],
-    assigneesSampleSize: 3,
-    enabledManagers: ["npm", "bundler"],
-    prConcurrentLimit: 4,
-    semanticCommits: "disabled",
-    packageRules: [
-      {
-        extends: ["schedule:weekly"],
-        packagePatterns: [".+"],
-        rangeStrategy: "bump",
-        managers: ["bundler"],
-        groupName: "Ruby dependencies",
-      },
-      {
-        extends: ["schedule:weekly"],
-        packagePatterns: [".+"],
-        excludePackageNames: [
-          "rollup-plugin-vue",
-          "rollup/plugin-node-resolve",
-        ],
-        rangeStrategy: "bump",
-        managers: ["npm"],
-        groupName: "NodeJS dependencies",
-      },
-    ],
-  },
-  {
-    repository: "gitlab-org/gitlab-development-kit",
-    ...baseConfig,
-    assignees: ["@ashmckenzie", "@tigerwnz", "@toon"],
-    enabledManagers: ["npm", "bundler"],
-    packageRules: [
-      {
-        extends: ["schedule:weekly"],
-        packagePatterns: [".+"],
-        rangeStrategy: "bump",
-        managers: ["bundler"],
-        groupName: "Ruby dependencies",
-      },
-    ],
-  },
-];
-
-const allDependencies = [
-  "gitlab-renovate-forks/teampage-map",
-  // "gitlab-org/frontend/renovate-gitlab-bot",
 ];
 
 module.exports = {
@@ -225,6 +141,19 @@ module.exports = {
           patch: {
             groupName: "Webpack related packages",
           },
+          enabled: true,
+          rangeStrategy: "bump",
+        },
+        {
+          ...foundationPackages,
+          packageNames: ["webpack", "webpack-cli", "webpack-dev-server"],
+          enabled: true,
+          rangeStrategy: "bump",
+          groupName: "Webpack core packages",
+        },
+        {
+          ...foundationPackages,
+          packageNames: ["core-js"],
           enabled: true,
           rangeStrategy: "bump",
         },
@@ -320,19 +249,75 @@ module.exports = {
       ],
       semanticCommits: "enabled",
     },
-    ...allDependencies.map((repository) => ({
-      repository,
+    {
+      repository: "gitlab-renovate-forks/gitlab-svgs",
+      ...updateOnlyGitLabScope,
+      semanticCommits: "disabled",
+    },
+    {
+      repository: "gitlab-renovate-forks/design.gitlab.com",
+      ...updateOnlyGitLabScope,
+      semanticCommits: "enabled",
+    },
+    {
+      repository: "gitlab-renovate-forks/status-page",
+      ...baseConfig,
+      ...updateOnlyGitLabScope,
+      assignees: ["@ohoral", "@oregand", "@tristan.read"],
+      semanticCommits: "disabled",
+    },
+    {
+      repository: "gitlab-renovate-forks/gitlab-development-kit",
+      ...baseConfig,
+      assignees: ["@ashmckenzie", "@tigerwnz", "@toon"],
+      enabledManagers: ["npm", "bundler"],
+      packageRules: [
+        {
+          extends: ["schedule:weekly"],
+          packagePatterns: [".+"],
+          rangeStrategy: "bump",
+          managers: ["bundler"],
+          groupName: "Ruby dependencies",
+        },
+      ],
+    },
+    {
+      repository: "gitlab-renovate-forks/gitlab-docs",
+      ...baseConfig,
+      assignees: ["@axil", "@eread", "@marcel.amirault"],
+      assigneesSampleSize: 3,
+      enabledManagers: ["npm", "bundler"],
+      prConcurrentLimit: 4,
+      semanticCommits: "disabled",
+      packageRules: [
+        {
+          extends: ["schedule:weekly"],
+          packagePatterns: [".+"],
+          rangeStrategy: "bump",
+          managers: ["bundler"],
+          groupName: "Ruby dependencies",
+        },
+        {
+          extends: ["schedule:weekly"],
+          packagePatterns: [".+"],
+          excludePackageNames: [
+            "rollup-plugin-vue",
+            "rollup/plugin-node-resolve",
+          ],
+          rangeStrategy: "bump",
+          managers: ["npm"],
+          groupName: "NodeJS dependencies",
+        },
+      ],
+    },
+    {
+      repository: "gitlab-renovate-forks/teampage-map",
       ...baseConfig,
       labels: [],
       assignees: ["@leipert"],
       automerge: false,
       rangeStrategy: "bump",
       packageRules: [
-        // Disable updating of renovate
-        // {
-        //   packagePatterns: ["^renovate"],
-        //   extends: ["schedule:weekly"],
-        // },
         {
           extends: ["monorepo:jest", "packages:jsUnitTest"],
           groupName: "testing",
@@ -347,6 +332,6 @@ module.exports = {
           groupName: "linters and prettier",
         },
       ],
-    })),
+    },
   ],
 };
