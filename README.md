@@ -1,9 +1,12 @@
 # renovate-gitlab-bot
 
+> Currently open MRs can be [found here](https://gitlab.com/dashboard/merge_requests?scope=all&utf8=%E2%9C%93&state=opened&author_username=gitlab-renovate-bot)
+
 The bot uses [renovatebot](https://github.com/renovatebot/renovate) to
 automatically create MRs for updating dependencies.
 
-The following repositories are currently being updated automatically:
+The following repositories are currently being updated automatically.
+For more info on how to add a project, see the section on [setting up a new project](#setting-up-a-new-project)
 
 <!-- rep -->
 
@@ -77,3 +80,20 @@ sequenceDiagram
     end
     end
 ```
+
+## Setting up a new project
+
+1.  Open a private tab or different browser and log in with the
+    [@gitlab-renovate-bot](https://gitlab.com/gitlab-renovate-bot) credentials from 1Password.
+2.  Locate the project you want to renovate and fork it into the [gitlab-renovate-forks]
+3.  Go into the project settings and set up mirroring (Settings -> Repository).
+
+    1. You need to enter the upstream repo
+    2. Enable "overwrite diverged branches" (should never happen, but upstream should be the single source of truth)
+    3. Enable "only protected branches" which probably helps with performance
+
+    ![](./docs/mirror-setup.png)
+
+4.  Create an MR which adds your fork to [the config](./config.js).
+
+[gitlab-renovate-forks]: https://gitlab.com/gitlab-renovate-forks
