@@ -32,7 +32,7 @@ const baseConfig = {
 };
 
 const updateNothing = {
-  packagePatterns: [".*"],
+  matchPackagePatterns: [".*"],
   enabled: false,
 };
 
@@ -43,31 +43,31 @@ const updateGitLabScope = {
 
 const updateGitLabUIandSVG = {
   ...updateGitLabScope,
-  packageNames: ["@gitlab/ui", "@gitlab/svgs"],
+  matchPackageNames: ["@gitlab/ui", "@gitlab/svgs"],
   groupName: "GitLab UI/SVG",
 };
 
 const updateGitLabVisualReviewTools = {
   ...updateGitLabScope,
-  packageNames: ["@gitlab/visual-review-tools"],
+  matchPackageNames: ["@gitlab/visual-review-tools"],
   groupName: "GitLab Visual Review Tools",
 };
 
 const ESLint = {
   ...updateGitLabScope,
-  packageNames: ["@gitlab/eslint-plugin", "eslint"],
-  packagePatterns: ["eslint-.+"],
+  matchPackageNames: ["@gitlab/eslint-plugin", "eslint"],
+  matchPackagePatterns: ["eslint-.+"],
   assignees: ["@markrian", "@vitallium"],
   groupName: "ESLint and related",
 };
 
 const updateGitLabScopeDev = {
   ...updateGitLabScope,
-  packagePatterns: ["@gitlab/.*"],
+  matchPackagePatterns: ["@gitlab/.*"],
   excludePackageNames: [
-    ...updateGitLabUIandSVG.packageNames,
-    ...updateGitLabVisualReviewTools.packageNames,
-    ...ESLint.packageNames,
+    ...updateGitLabUIandSVG.matchPackageNames,
+    ...updateGitLabVisualReviewTools.matchPackageNames,
+    ...ESLint.matchPackageNames,
   ],
   groupName: "GitLab Packages",
 };
@@ -83,7 +83,7 @@ const updateOnlyGitLabScope = {
 };
 
 const updateDOMPurify = {
-  packageNames: ["dompurify"],
+  matchPackageNames: ["dompurify"],
   rangeStrategy: "bump",
   enabled: true,
   assignees: ["@djadmin", "@markrian"],
@@ -120,11 +120,12 @@ module.exports = {
       packageRules: [
         updateNothing,
         updateGitLabUIandSVG,
+        updateGitLabVisualReviewTools,
         ESLint,
         updateGitLabScopeDev,
         {
           ...foundationPackages,
-          packagePatterns: [
+          matchPackagePatterns: [
             ".*-loader",
             ".*-webpack-plugin",
             "webpack-bundle-analyzer",
@@ -146,20 +147,20 @@ module.exports = {
         },
         {
           ...foundationPackages,
-          packageNames: ["webpack", "webpack-cli", "webpack-dev-server"],
+          matchPackageNames: ["webpack", "webpack-cli", "webpack-dev-server"],
           enabled: true,
           rangeStrategy: "bump",
           groupName: "Webpack core packages",
         },
         {
           ...foundationPackages,
-          packageNames: ["core-js"],
+          matchPackageNames: ["core-js"],
           enabled: true,
           rangeStrategy: "bump",
         },
         {
           assignees: ["@samdbeckham"],
-          packageNames: [
+          matchPackageNames: [
             "vue",
             "vue-loader",
             "vue-router",
@@ -172,12 +173,12 @@ module.exports = {
         },
         {
           assignees: ["@samdbeckham"],
-          packageNames: ["vue-virtual-scroll-list"],
+          matchPackageNames: ["vue-virtual-scroll-list"],
           enabled: true,
           rangeStrategy: "bump",
         },
         {
-          packagePatterns: ["^@sourcegraph/*"],
+          matchPackagePatterns: ["^@sourcegraph/*"],
           assignees: ["@pslaughter"],
           enabled: true,
           rangeStrategy: "bump",
@@ -185,7 +186,7 @@ module.exports = {
         },
         {
           assignees: ["@ealcantara", "@jerasmus"],
-          packagePatterns: ["^@toast-ui/*"],
+          matchPackagePatterns: ["^@toast-ui/*"],
           enabled: true,
           rangeStrategy: "bump",
           groupName: "Toast UI",
@@ -210,7 +211,7 @@ module.exports = {
       packageRules: [
         updateNothing,
         {
-          packageNames: [
+          matchPackageNames: [
             "brakeman",
             "danger",
             "lefthook",
@@ -223,7 +224,7 @@ module.exports = {
           groupName: "Ruby development dependencies",
         },
         {
-          packageNames: ["gitlab-styles", "gitlab-dangerfiles"],
+          matchPackageNames: ["gitlab-styles", "gitlab-dangerfiles"],
           enabled: true,
           rangeStrategy: "bump",
           groupName: "GitLab Tooling Ruby dependencies",
@@ -240,7 +241,7 @@ module.exports = {
         updateGitLabScopeDev,
         updateDOMPurify,
         {
-          packagePatterns: ["@storybook/.*"],
+          matchPackagePatterns: ["@storybook/.*"],
           assignees: ["@pgascouvaillancourt"],
           rangeStrategy: "bump",
           enabled: true,
@@ -274,9 +275,9 @@ module.exports = {
       packageRules: [
         {
           extends: ["schedule:weekly"],
-          packagePatterns: [".+"],
+          matchPackagePatterns: [".+"],
           rangeStrategy: "bump",
-          managers: ["bundler"],
+          matchManagers: ["bundler"],
           groupName: "Ruby dependencies",
         },
       ],
@@ -292,20 +293,20 @@ module.exports = {
       packageRules: [
         {
           extends: ["schedule:weekly"],
-          packagePatterns: [".+"],
+          matchPackagePatterns: [".+"],
           rangeStrategy: "bump",
-          managers: ["bundler"],
+          matchManagers: ["bundler"],
           groupName: "Ruby dependencies",
         },
         {
           extends: ["schedule:weekly"],
-          packagePatterns: [".+"],
+          matchPackagePatterns: [".+"],
           excludePackageNames: [
             "rollup-plugin-vue",
             "rollup/plugin-node-resolve",
           ],
           rangeStrategy: "bump",
-          managers: ["npm"],
+          matchManagers: ["npm"],
           groupName: "NodeJS dependencies",
         },
       ],
@@ -328,7 +329,7 @@ module.exports = {
         },
         {
           extends: ["packages:linters"],
-          packageNames: ["prettier", "pretty-quick", "husky"],
+          matchPackageNames: ["prettier", "pretty-quick", "husky"],
           groupName: "linters and prettier",
         },
       ],
