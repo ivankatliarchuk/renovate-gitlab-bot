@@ -76,3 +76,10 @@ beep-boop:
     - cd /workdir/
     - ./run-renovate.sh
     - node ./post-process.js
+    - cp -r /workdir/renovate-log.txt $CI_PROJECT_DIR/renovate-log.txt
+  artifacts:
+    paths:
+      - renovate-log.txt
+    expire_in: 1 week
+    public: false
+    when: always
