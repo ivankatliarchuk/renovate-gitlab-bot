@@ -115,6 +115,7 @@ module.exports = {
   onboarding: false,
   requireConfig: false,
   printConfig: false,
+  renovateMetaCommentTemplate: "TEST",
   gitAuthor: "GitLab Renovate Bot <gitlab-bot@gitlab.com>",
   repositories: [
     {
