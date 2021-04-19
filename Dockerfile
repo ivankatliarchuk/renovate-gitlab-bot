@@ -7,7 +7,7 @@ ENV DOCKER_BUILD=true
 
 RUN apk add --update --no-cache python3 make g++ git
 
-RUN sh build.sh
+RUN sh scripts/build.sh
 
 FROM ruby:2.7.2-alpine3.12
 
@@ -19,7 +19,7 @@ COPY --from=builder /opt/yarn-* /opt/yarn
 
 ENV PATH=/opt/yarn/bin:${PATH}
 
-RUN  apk add --update --no-cache git bash \
+RUN apk add --update --no-cache git bash \
   && node -v && cd /usr/local/bin/ \
   && ln -s ../lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm \
   && ln -s ../lib/node_modules/npm/bin/npx-cli.js /usr/local/bin/npx \
