@@ -1,3 +1,4 @@
+const fs = require("fs");
 const path = require("path");
 
 const baseConfig = {
@@ -115,7 +116,10 @@ module.exports = {
   onboarding: false,
   requireConfig: false,
   printConfig: false,
-  renovateMetaCommentTemplate: "TEST",
+  renovateMetaCommentTemplate: fs.readFileSync(
+    path.join(__dirname, "comment_template.md"),
+    "utf-8"
+  ),
   gitAuthor: "GitLab Renovate Bot <gitlab-bot@gitlab.com>",
   repositories: [
     {
