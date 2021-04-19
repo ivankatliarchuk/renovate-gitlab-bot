@@ -59,13 +59,14 @@ async function main() {
       web_url,
       assignees: prevAssignees,
       labels: prevLabelsRaw,
+      reviewers: prevReviewers,
     } = mr;
     log(`Checking ${web_url}`);
 
     const prevLabels = cleanLabels(prevLabelsRaw);
 
-    if (prevAssignees.length && prevLabels.length) {
-      log("Already has assignees and labels set, nothing to do");
+    if (prevReviewers.length && prevLabels.length) {
+      log("Already has reviewers and labels set, nothing to do");
       continue;
     }
 
@@ -83,17 +84,24 @@ async function main() {
     const payload = {};
     let update = false;
 
-    if (!prevAssignees.length && assignees.length) {
+    if (!prevAssignees.length) {
+      update = true;
+      payload.assignee_ids = await Promise.all(
+        [RENOVATE_BOT_USER].map(getUserId)
+      );
+    }
+
+    if (!prevReviewers.length && assignees.length) {
       update = true;
       const newAssignees = sampleSize(assignees, SAMPLE_SIZE);
-      log(`No assignees set, setting ${newAssignees}`);
+      log(`No reviewers set, setting ${newAssignees.join(", ")}`);
 
-      payload.assignee_ids = await Promise.all(newAssignees.map(getUserId));
+      payload.reviewer_ids = await Promise.all(newAssignees.map(getUserId));
     }
 
     if (!prevLabels.length && labels.length) {
       update = true;
-      log(`No labels set, setting ${labels}`);
+      log(`No labels set, setting ${labels.join(", ")}`);
       payload.labels = labels;
     }
 
