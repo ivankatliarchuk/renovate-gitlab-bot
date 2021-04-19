@@ -7,6 +7,16 @@ const MATCHER = /```json\s*(?<json>.+?)\s*```/m;
 const RENOVATE_BOT_USER = "gitlab-renovate-bot";
 const SAMPLE_SIZE = 2;
 
+const DRY_RUN = (process.env.DRY_RUN ?? "true") === "true";
+
+function log(msg1, ...msg) {
+  console.log(`[Post-Processing] ${msg1}`, ...msg);
+}
+
+function warn(msg1, ...msg) {
+  console.warn(`[Post-Processing] ${msg1}`, ...msg);
+}
+
 const MRIterator = new GitLabAPIIterator("/merge_requests", {
   author_username: RENOVATE_BOT_USER,
   state: "opened",
@@ -49,13 +59,14 @@ async function main() {
       web_url,
       assignees: prevAssignees,
       labels: prevLabelsRaw,
+      reviewers: prevReviewers,
     } = mr;
-    console.log(`Checking ${web_url}`);
+    log(`Checking ${web_url}`);
 
     const prevLabels = cleanLabels(prevLabelsRaw);
 
-    if (prevAssignees.length && prevLabels.length) {
-      console.log("Already has assignees and labels set, nothing to do");
+    if (prevReviewers.length && prevLabels.length) {
+      log("Already has reviewers and labels set, nothing to do");
       continue;
     }
 
@@ -64,7 +75,7 @@ async function main() {
     try {
       metadata = await findRenovateComment(`${apiBase}/notes`);
     } catch (e) {
-      console.log(e.message);
+      log(e.message);
       continue;
     }
 
@@ -73,29 +84,46 @@ async function main() {
     const payload = {};
     let update = false;
 
-    if (!prevAssignees.length && assignees.length) {
+    if (!prevAssignees.length) {
+      update = true;
+      payload.assignee_ids = await Promise.all(
+        [RENOVATE_BOT_USER].map(getUserId)
+      );
+    }
+
+    if (!prevReviewers.length && assignees.length) {
       update = true;
       const newAssignees = sampleSize(assignees, SAMPLE_SIZE);
-      console.log(`No assignees set, setting ${newAssignees}`);
+      log(`No reviewers set, setting ${newAssignees.join(", ")}`);
 
-      payload.assignee_ids = await Promise.all(newAssignees.map(getUserId));
+      payload.reviewer_ids = await Promise.all(newAssignees.map(getUserId));
     }
 
     if (!prevLabels.length && labels.length) {
       update = true;
-      console.log(`No labels set, setting ${labels}`);
+      log(`No labels set, setting ${labels.join(", ")}`);
       payload.labels = labels;
     }
 
     if (update) {
-      console.log(`Updating MR ${iid} with ${JSON.stringify(payload)}`);
-      GitLabAPI.put(apiBase, payload);
+      log(`Updating MR ${iid} with ${JSON.stringify(payload)}`);
+      if (DRY_RUN) {
+        log("Not executing, due to dry run is set");
+      } else {
+        GitLabAPI.put(apiBase, payload);
+      }
     } else {
-      console.log("Nothing to do");
+      log("Nothing to do");
     }
   }
 }
 
-main().then(() => {
-  console.log("Done");
-});
+main()
+  .then(() => {
+    log("Done");
+  })
+  .catch((e) => {
+    warn("An error happened");
+    warn(e.message);
+    process.exit(1);
+  });

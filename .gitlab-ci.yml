@@ -68,7 +68,6 @@ beep-boop:
   script:
     - cd /workdir/
     - ./run-renovate.sh
-    - node ./post-process.js
     - cp -r /workdir/renovate-log.txt $CI_PROJECT_DIR/renovate-log.txt
   artifacts:
     paths:

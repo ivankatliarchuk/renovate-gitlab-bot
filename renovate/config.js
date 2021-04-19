@@ -1,3 +1,4 @@
+const fs = require("fs");
 const path = require("path");
 
 const baseConfig = {
@@ -107,14 +108,18 @@ const gitlab = [
 ];
 
 module.exports = {
-  dryRun: process.env.CI_COMMIT_REF_SLUG !== "main",
+  dryRun: (process.env.DRY_RUN ?? "true") === "true",
   autodiscover: false,
-  logFile: path.join(__dirname, "renovate-log.txt"),
+  logFile: path.join(__dirname, "..", "renovate-log.txt"),
   logFileLevel: "debug",
   platform: "gitlab",
   onboarding: false,
   requireConfig: false,
   printConfig: false,
+  renovateMetaCommentTemplate: fs.readFileSync(
+    path.join(__dirname, "comment_template.md"),
+    "utf-8"
+  ),
   gitAuthor: "GitLab Renovate Bot <gitlab-bot@gitlab.com>",
   repositories: [
     {

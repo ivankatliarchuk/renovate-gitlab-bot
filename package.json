@@ -14,7 +14,7 @@
     "renovate-config-packages": "^0.7.0"
   },
   "scripts": {
-    "update-readme": "./update-readme.js"
+    "update-readme": "scripts/update-readme.js"
   },
   "devDependencies": {
     "prettier": "^2.2.1",
