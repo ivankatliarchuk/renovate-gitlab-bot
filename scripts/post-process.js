@@ -7,6 +7,8 @@ const MATCHER = /```json\s*(?<json>.+?)\s*```/m;
 const RENOVATE_BOT_USER = "gitlab-renovate-bot";
 const SAMPLE_SIZE = 2;
 
+const DRY_RUN = (process.env.DRY_RUN ?? "true") === "true";
+
 function log(msg1, ...msg) {
   console.log(`[Post-Processing] ${msg1}`, ...msg);
 }
@@ -97,7 +99,11 @@ async function main() {
 
     if (update) {
       log(`Updating MR ${iid} with ${JSON.stringify(payload)}`);
-      GitLabAPI.put(apiBase, payload);
+      if (DRY_RUN) {
+        log("Not executing, due to dry run is set");
+      } else {
+        GitLabAPI.put(apiBase, payload);
+      }
     } else {
       log("Nothing to do");
     }

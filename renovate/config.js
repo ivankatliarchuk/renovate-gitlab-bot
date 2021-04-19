@@ -108,7 +108,7 @@ const gitlab = [
 ];
 
 module.exports = {
-  dryRun: process.env.CI_COMMIT_REF_SLUG !== "main",
+  dryRun: (process.env.DRY_RUN ?? "true") === "true",
   autodiscover: false,
   logFile: path.join(__dirname, "..", "renovate-log.txt"),
   logFileLevel: "debug",

@@ -5,6 +5,10 @@ IFS=$'\n\t'
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
 export NODE_OPTIONS="--max-old-space-size=4096"
+case "${CI_COMMIT_REF_SLUG:-not_main}" in
+ main) export DRY_RUN="false" ;;
+    *) export DRY_RUN="true" ;;
+esac
 
 FAIL=""
 
