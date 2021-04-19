@@ -57,13 +57,6 @@ build-image:
   rules:
     - if: '$CI_PIPELINE_SOURCE != "schedule"'
 
-build-image-manual:
-  extends: .build-image
-  stage: run
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "schedule"'
-      when: manual
-
 beep-boop:
   image: $DOCKER_IMAGE
   variables:
