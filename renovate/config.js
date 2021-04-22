@@ -249,6 +249,19 @@ module.exports = {
         updateGitLabScopeDev,
         updateDOMPurify,
         {
+          matchPackagePatterns: [
+            "bootstrap-vue",
+            // "bootstrap", // comment in, once we are up to date for bootstrap vue
+          ],
+          // hack to update minor version by minor version
+          allowedVersions: "<2.17.0",
+          separateMultipleMajor: true,
+          assignees: ["@pgascouvaillancourt"],
+          rangeStrategy: "bump",
+          enabled: true,
+          groupName: "Bootstrap Vue",
+        },
+        {
           matchPackagePatterns: ["@storybook/.*"],
           assignees: ["@pgascouvaillancourt"],
           rangeStrategy: "bump",
