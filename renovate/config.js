@@ -254,7 +254,7 @@ module.exports = {
             // "bootstrap", // comment in, once we are up to date for bootstrap vue
           ],
           // hack to update minor version by minor version
-          allowedVersions: "<2.17.0",
+          allowedVersions: "<2.18.0",
           separateMultipleMajor: true,
           assignees: ["@pgascouvaillancourt"],
           rangeStrategy: "bump",
