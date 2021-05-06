@@ -242,6 +242,7 @@ module.exports = {
     {
       repository: "gitlab-renovate-forks/gitlab-ui",
       ...baseConfig,
+      dependencyDashboard: true,
       packageRules: [
         updateNothing,
         updateGitLabUIandSVG,
