@@ -192,13 +192,6 @@ module.exports = {
           rangeStrategy: "bump",
           groupName: "Sourcegraph",
         },
-        {
-          assignees: ["@ealcantara", "@jerasmus"],
-          matchPackagePatterns: ["^@toast-ui/*"],
-          enabled: true,
-          rangeStrategy: "bump",
-          groupName: "Toast UI",
-        },
         updateDOMPurify,
       ],
       semanticCommits: "disabled",
