@@ -307,6 +307,10 @@ module.exports = {
       semanticCommits: "disabled",
       packageRules: [
         {
+          matchPackagePattern: ["rollup", "bootstrap"],
+          enabled: false
+        },
+        {
           extends: ["schedule:weekly"],
           matchPackagePatterns: [".+"],
           rangeStrategy: "bump",
@@ -316,10 +320,6 @@ module.exports = {
         {
           extends: ["schedule:weekly"],
           matchPackagePatterns: [".+"],
-          excludePackagePatterns: [
-            "rollup",
-            "bootstrap",
-          ],
           rangeStrategy: "bump",
           matchManagers: ["npm"],
           groupName: "NodeJS dependencies",
