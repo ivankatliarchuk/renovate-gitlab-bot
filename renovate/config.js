@@ -316,9 +316,9 @@ module.exports = {
         {
           extends: ["schedule:weekly"],
           matchPackagePatterns: [".+"],
-          excludePackageNames: [
-            "rollup-plugin-vue",
-            "rollup/plugin-node-resolve",
+          excludePackagePatterns: [
+            "rollup",
+            "bootstrap",
           ],
           rangeStrategy: "bump",
           matchManagers: ["npm"],
