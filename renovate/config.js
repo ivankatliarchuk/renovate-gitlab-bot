@@ -97,16 +97,6 @@ const foundationPackages = {
   addLabels: ["group::ecosystem"],
 };
 
-const gitlab = [
-  // Customer Portal:
-  {
-    repository: "gitlab-org/customers-gitlab-com",
-    ...updateOnlyGitLabScope,
-    assignees: ["@vitallium"],
-    semanticCommits: "disabled",
-  },
-];
-
 module.exports = {
   dryRun: (process.env.DRY_RUN ?? "true") === "true",
   autodiscover: false,
@@ -264,6 +254,12 @@ module.exports = {
         },
       ],
       semanticCommits: "enabled",
+    },
+    {
+      repository: "gitlab-renovate-forks/customers-gitlab-com",
+      ...updateOnlyGitLabScope,
+      assignees: ["@vitallium"],
+      semanticCommits: "disabled",
     },
     {
       repository: "gitlab-renovate-forks/gitlab-svgs",
