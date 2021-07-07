@@ -258,7 +258,7 @@ module.exports = {
     {
       repository: "gitlab-renovate-forks/customers-gitlab-com",
       ...updateOnlyGitLabScope,
-      assignees: ["@vitallium"],
+      assignees: ["@vitallium", "@aalakkad"],
       semanticCommits: "disabled",
     },
     {
