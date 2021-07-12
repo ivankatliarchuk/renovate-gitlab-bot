@@ -303,7 +303,7 @@ module.exports = {
       semanticCommits: "disabled",
       packageRules: [
         {
-          matchPackagePattern: ["rollup", "bootstrap"],
+          matchPackagePatterns: ["rollup", "bootstrap"],
           enabled: false
         },
         {
