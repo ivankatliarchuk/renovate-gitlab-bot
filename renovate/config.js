@@ -11,7 +11,6 @@ const baseConfig = {
   assignees: [
     "@dmishunov",
     "@ealcantara",
-    "@jboyson",
     "@pgascouvaillancourt",
     "@sarahghp",
   ],
