@@ -40,12 +40,15 @@ function cleanLabels(labels) {
 
 const usermap = {};
 
-async function getUserId(username) {
+async function getUserId(usernameRaw) {
+  const username = usernameRaw.startsWith("@")
+    ? usernameRaw.substr(1)
+    : usernameRaw;
+
   if (!usermap[username]) {
-    const { data } = await GitLabAPI.get(
-      `/users?username=${username.substr(1)}`
-    );
-    usermap[username] = data.find((u) => u.username === username.substr(1)).id;
+    log(`Retrieving ID for ${username}`);
+    const { data } = await GitLabAPI.get(`/users?username=${username}`);
+    usermap[username] = data.find((u) => u.username === username).id;
   }
 
   return usermap[username];
