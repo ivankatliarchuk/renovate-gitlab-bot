@@ -159,6 +159,18 @@ module.exports = {
           rangeStrategy: "bump",
         },
         {
+          ...foundationPackages,
+          matchPackageNames: ["commander"],
+          enabled: true,
+          rangeStrategy: "bump",
+        },
+        {
+          ...foundationPackages,
+          matchPackageNames: ["yarn-deduplicate"],
+          enabled: true,
+          rangeStrategy: "bump",
+        },
+        {
           assignees: ["@samdbeckham"],
           matchPackageNames: [
             "vue",
@@ -306,7 +318,7 @@ module.exports = {
       packageRules: [
         {
           matchPackagePatterns: ["rollup", "bootstrap"],
-          enabled: false
+          enabled: false,
         },
         {
           extends: ["schedule:weekly"],
