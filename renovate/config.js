@@ -87,6 +87,14 @@ const updateOnlyGitLabScope = {
   ],
 };
 
+const updateFrontendObservability = {
+  matchPackagePatterns: ["@sentry/browser"],
+  rangeStrategy: "bump",
+  enabled: true,
+  assignees: ["@jivanvl"],
+  groupName: "Frontend Observability Packages",
+};
+
 const updateDOMPurify = {
   matchPackageNames: ["dompurify"],
   rangeStrategy: "bump",
@@ -205,6 +213,7 @@ module.exports = {
           groupName: "Content Editor Packages",
         },
         updateDOMPurify,
+        updateFrontendObservability,
       ],
       semanticCommits: "disabled",
     },
