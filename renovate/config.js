@@ -205,6 +205,13 @@ module.exports = {
           groupName: "Sourcegraph",
         },
         {
+          matchPackageNames: ["monaco-editor", "monaco-yaml", "monaco-editor-webpack-plugin"],
+          assignees: ["@himkp", "@dmishunov"],
+          enabled: true,
+          rangeStrategy: "bump",
+          groupName: "Monaco Editor and related packages",
+        },
+        {
           matchPackageNames: ["tiptap", "tiptap-extensions"],
           matchPackagePatterns: ["@tiptap/.*", "prosemirror-.*"],
           enabled: true,
