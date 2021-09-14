@@ -104,7 +104,7 @@ const updateDOMPurify = {
 
 const foundationPackages = {
   assignees: ["@leipert", "@mikegreiling"],
-  addLabels: ["group::ecosystem"],
+  addLabels: ["group::foundations"],
 };
 
 module.exports = {
