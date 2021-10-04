@@ -334,7 +334,7 @@ module.exports = {
     {
       repository: "gitlab-renovate-forks/gitlab-docs",
       ...baseConfig,
-      assignees: ["@axil", "@eread", "@marcel.amirault"],
+      assignees: ["@eread", "@marcel.amirault"],
       assigneesSampleSize: 3,
       enabledManagers: ["npm", "bundler"],
       prConcurrentLimit: 4,
