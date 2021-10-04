@@ -66,6 +66,13 @@ const ESLint = {
   groupName: "ESLint and related",
 };
 
+const Stylelint = {
+  ...updateGitLabScope,
+  matchPackageNames: ["@gitlab/stylelint-config"],
+  assignees: ["@vitallium"],
+  groupName: "GitLab Stylelint config",
+}
+
 const updateGitLabScopeDev = {
   ...updateGitLabScope,
   matchPackagePatterns: ["@gitlab/.*"],
@@ -73,6 +80,7 @@ const updateGitLabScopeDev = {
     ...updateGitLabUIandSVG.matchPackageNames,
     ...updateGitLabVisualReviewTools.matchPackageNames,
     ...ESLint.matchPackageNames,
+    ...Stylelint.matchPackageNames,
   ],
   groupName: "GitLab Packages",
 };
