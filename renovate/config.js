@@ -69,7 +69,7 @@ const ESLint = {
 const Stylelint = {
   ...updateGitLabScope,
   matchPackageNames: ["@gitlab/stylelint-config"],
-  assignees: ["@vitallium"],
+  assignees: ["@vitallium", "@pgascouvaillancourt"],
   groupName: "GitLab Stylelint config",
 }
 
