@@ -71,7 +71,7 @@ const Stylelint = {
   matchPackageNames: ["@gitlab/stylelint-config"],
   assignees: ["@vitallium", "@pgascouvaillancourt"],
   groupName: "GitLab Stylelint config",
-}
+};
 
 const updateGitLabScopeDev = {
   ...updateGitLabScope,
@@ -213,7 +213,11 @@ module.exports = {
           groupName: "Sourcegraph",
         },
         {
-          matchPackageNames: ["monaco-editor", "monaco-yaml", "monaco-editor-webpack-plugin"],
+          matchPackageNames: [
+            "monaco-editor",
+            "monaco-yaml",
+            "monaco-editor-webpack-plugin",
+          ],
           assignees: ["@himkp", "@dmishunov"],
           enabled: true,
           rangeStrategy: "bump",
@@ -279,12 +283,7 @@ module.exports = {
         updateGitLabScopeDev,
         updateDOMPurify,
         {
-          matchPackagePatterns: [
-            "bootstrap-vue",
-            // "bootstrap", // comment in, once we are up to date for bootstrap vue
-          ],
-          // hack to update minor version by minor version
-          allowedVersions: "<2.21.0",
+          matchPackagePatterns: ["bootstrap-vue"],
           separateMultipleMajor: true,
           assignees: ["@pgascouvaillancourt"],
           rangeStrategy: "bump",
