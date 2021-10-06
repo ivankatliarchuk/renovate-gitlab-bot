@@ -85,14 +85,16 @@ const updateGitLabScopeDev = {
   groupName: "GitLab Packages",
 };
 
+const updateOnlyGitLabScopePackageRules = [
+  updateNothing,
+  updateGitLabUIandSVG,
+  ESLint,
+  updateGitLabScopeDev,
+];
+
 const updateOnlyGitLabScope = {
   ...baseConfig,
-  packageRules: [
-    updateNothing,
-    updateGitLabUIandSVG,
-    ESLint,
-    updateGitLabScopeDev,
-  ],
+  packageRules: updateOnlyGitLabScopePackageRules,
 };
 
 const updateFrontendObservability = {
@@ -330,8 +332,11 @@ module.exports = {
     },
     {
       repository: "gitlab-renovate-forks/design.gitlab.com",
-      ...updateOnlyGitLabScope,
-      packageRules: semanticPrefixFixDepsChoreOthers,
+      ...baseConfig,
+      packageRules: [
+        ...updateOnlyGitLabScopePackageRules,
+        ...semanticPrefixFixDepsChoreOthers,
+      ],
       semanticCommits: "enabled",
     },
     {
