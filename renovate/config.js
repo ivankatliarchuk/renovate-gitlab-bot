@@ -71,7 +71,7 @@ const Stylelint = {
   matchPackageNames: ["@gitlab/stylelint-config"],
   assignees: ["@vitallium", "@pgascouvaillancourt"],
   groupName: "GitLab Stylelint config",
-}
+};
 
 const updateGitLabScopeDev = {
   ...updateGitLabScope,
@@ -114,6 +114,17 @@ const foundationPackages = {
   assignees: ["@leipert", "@mikegreiling"],
   addLabels: ["group::foundations"],
 };
+
+const semanticPrefixFixDepsChoreOthers = [
+  {
+    matchPackagePatterns: ["*"],
+    semanticCommitType: "chore",
+  },
+  {
+    matchDepTypes: ["dependencies", "require"],
+    semanticCommitType: "fix",
+  },
+];
 
 module.exports = {
   dryRun: (process.env.DRY_RUN ?? "true") === "true",
@@ -213,7 +224,11 @@ module.exports = {
           groupName: "Sourcegraph",
         },
         {
-          matchPackageNames: ["monaco-editor", "monaco-yaml", "monaco-editor-webpack-plugin"],
+          matchPackageNames: [
+            "monaco-editor",
+            "monaco-yaml",
+            "monaco-editor-webpack-plugin",
+          ],
           assignees: ["@himkp", "@dmishunov"],
           enabled: true,
           rangeStrategy: "bump",
@@ -298,6 +313,7 @@ module.exports = {
           enabled: true,
           groupName: "Storybook",
         },
+        ...semanticPrefixFixDepsChoreOthers,
       ],
       semanticCommits: "enabled",
     },
@@ -315,6 +331,7 @@ module.exports = {
     {
       repository: "gitlab-renovate-forks/design.gitlab.com",
       ...updateOnlyGitLabScope,
+      packageRules: semanticPrefixFixDepsChoreOthers,
       semanticCommits: "enabled",
     },
     {
