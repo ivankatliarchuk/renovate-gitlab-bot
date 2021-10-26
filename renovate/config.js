@@ -69,8 +69,9 @@ const ESLint = {
 const Stylelint = {
   ...updateGitLabScope,
   matchPackageNames: ["@gitlab/stylelint-config"],
+  matchPackagePatterns: ["stylelint-.+"],
   assignees: ["@vitallium", "@pgascouvaillancourt"],
-  groupName: "GitLab Stylelint config",
+  groupName: "Stylelint and related",
 };
 
 const updateGitLabScopeDev = {
@@ -89,6 +90,7 @@ const updateOnlyGitLabScopePackageRules = [
   updateNothing,
   updateGitLabUIandSVG,
   ESLint,
+  Stylelint,
   updateGitLabScopeDev,
 ];
 
@@ -151,6 +153,7 @@ module.exports = {
         updateGitLabUIandSVG,
         updateGitLabVisualReviewTools,
         ESLint,
+        Stylelint,
         updateGitLabScopeDev,
         {
           ...foundationPackages,
@@ -293,6 +296,7 @@ module.exports = {
         updateNothing,
         updateGitLabUIandSVG,
         ESLint,
+        Stylelint,
         updateGitLabScopeDev,
         updateDOMPurify,
         {
