@@ -2,7 +2,7 @@
 
 This repo consists of three main components:
 
-1. A [config file](../config.js) with definitions on how to update which dependency.
+1. A [config file](../renovate/config.js) with definitions on how to update which dependency.
    See https://docs.renovatebot.com/configuration-options/ for reference
 2. A post-processing script which runs on created MRs.
 3. The build of a docker image containing renovate and aforementioned config.
