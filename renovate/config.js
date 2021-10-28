@@ -4,7 +4,7 @@ const path = require("path");
 const baseConfig = {
   includeForks: true,
   automerge: false,
-  labels: ["frontend", "dependency update", "feature::maintenance"],
+  labels: ["frontend", "dependency update", "type::maintenance"],
   lockFileMaintenance: { enabled: false, schedule: [] },
   enabledManagers: ["npm"],
   prConcurrentLimit: 11,
@@ -258,8 +258,7 @@ module.exports = {
       labels: [
         "backend",
         "dependency update",
-        "feature",
-        "feature::maintenance",
+        "type::maintenance",
       ],
       branchPrefix: "renovate-gems/",
       assignees: ["@rymai"],
