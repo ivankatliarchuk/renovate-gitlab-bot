@@ -130,6 +130,11 @@ const semanticPrefixFixDepsChoreOthers = [
   },
 ];
 
+const enableWithBumpStrategy = {
+  rangeStrategy: "bump",
+  enabled: true,
+}
+
 module.exports = {
   dryRun: (process.env.DRY_RUN ?? "true") === "true",
   autodiscover: false,
@@ -409,6 +414,44 @@ module.exports = {
           matchPackageNames: ["prettier", "pretty-quick", "husky"],
           groupName: "linters and prettier",
         },
+      ],
+    },
+    {
+      repository: "gitlab-renovate-forks/gitlab-vscode-extension",
+      ...baseConfig,
+      labels: ["dependency update", "type::maintenance"],
+      assignees: ["@viktomas"],
+      packageRules: [
+        {
+          ...enableWithBumpStrategy,
+          matchPackageNames: ["@types/jest", "jest", "ts-jest", "jest-junit"],
+          groupName: "Unit testing",
+        },
+        {
+          ...enableWithBumpStrategy,
+          matchPackageNames: ["@types/sinon", "sinon", "mocha", "mocha-junit-reporter"],
+          groupName: "Integration testing",
+        },
+        {
+          ...enableWithBumpStrategy,
+          matchPackageNames: ["cross-fetch", "graphql-request", "graphql", "https-proxy-agent"],
+          groupName: "Fetch frameworks",
+        },
+        {
+          ...enableWithBumpStrategy,
+          matchPackageNames: ["request", "request-promise"],
+          groupName: "Legacy fetch frameworks",
+        },
+        {
+          ...enableWithBumpStrategy,
+          matchPackageNames: ["eslint", "eslint-config-airbnb-base", "eslint-config-prettier", "eslint-plugin-import", "@typescript-eslint/eslint-plugin", "@typescript-eslint/parser", "prettier"],
+          groupName: "Linting",
+        },
+        {
+          matchPackageNames: ["@types/node", "@types/vscode"],
+          enabled: false,
+        },
+
       ],
     },
   ],
