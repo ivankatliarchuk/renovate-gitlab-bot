@@ -419,7 +419,7 @@ module.exports = {
     {
       repository: "gitlab-renovate-forks/gitlab-vscode-extension",
       ...baseConfig,
-      labels: ["dependency update", "type::maintenance"],
+      labels: ["dependency update", "type::maintenance", "group::code review", "devops::create"],
       assignees: ["@viktomas"],
       packageRules: [
         {
