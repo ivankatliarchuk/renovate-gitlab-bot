@@ -132,7 +132,7 @@ const semanticPrefixFixDepsChoreOthers = [
 const enableWithBumpStrategy = {
   rangeStrategy: "bump",
   enabled: true,
-}
+};
 
 module.exports = {
   dryRun: (process.env.DRY_RUN ?? "true") === "true",
@@ -259,11 +259,7 @@ module.exports = {
     {
       repository: "gitlab-renovate-forks/gitlab",
       ...baseConfig,
-      labels: [
-        "backend",
-        "dependency update",
-        "type::maintenance",
-      ],
+      labels: ["backend", "dependency update", "type::maintenance"],
       branchPrefix: "renovate-gems/",
       assignees: ["@rymai"],
       enabledManagers: ["bundler"],
@@ -366,7 +362,7 @@ module.exports = {
     {
       repository: "gitlab-renovate-forks/gitlab-docs",
       ...baseConfig,
-      assignees: ["@eread", "@marcel.amirault"],
+      assignees: ["@axil", "@eread", "@kpaizee", "@marcel.amirault"],
       assigneesSampleSize: 3,
       enabledManagers: ["npm", "bundler"],
       prConcurrentLimit: 4,
@@ -418,7 +414,12 @@ module.exports = {
     {
       repository: "gitlab-renovate-forks/gitlab-vscode-extension",
       ...baseConfig,
-      labels: ["dependency update", "type::maintenance", "group::code review", "devops::create"],
+      labels: [
+        "dependency update",
+        "type::maintenance",
+        "group::code review",
+        "devops::create",
+      ],
       assignees: ["@viktomas"],
       packageRules: [
         {
@@ -428,12 +429,22 @@ module.exports = {
         },
         {
           ...enableWithBumpStrategy,
-          matchPackageNames: ["@types/sinon", "sinon", "mocha", "mocha-junit-reporter"],
+          matchPackageNames: [
+            "@types/sinon",
+            "sinon",
+            "mocha",
+            "mocha-junit-reporter",
+          ],
           groupName: "Integration testing",
         },
         {
           ...enableWithBumpStrategy,
-          matchPackageNames: ["cross-fetch", "graphql-request", "graphql", "https-proxy-agent"],
+          matchPackageNames: [
+            "cross-fetch",
+            "graphql-request",
+            "graphql",
+            "https-proxy-agent",
+          ],
           groupName: "Fetch frameworks",
         },
         {
@@ -443,14 +454,21 @@ module.exports = {
         },
         {
           ...enableWithBumpStrategy,
-          matchPackageNames: ["eslint", "eslint-config-airbnb-base", "eslint-config-prettier", "eslint-plugin-import", "@typescript-eslint/eslint-plugin", "@typescript-eslint/parser", "prettier"],
+          matchPackageNames: [
+            "eslint",
+            "eslint-config-airbnb-base",
+            "eslint-config-prettier",
+            "eslint-plugin-import",
+            "@typescript-eslint/eslint-plugin",
+            "@typescript-eslint/parser",
+            "prettier",
+          ],
           groupName: "Linting",
         },
         {
           matchPackageNames: ["@types/node", "@types/vscode"],
           enabled: false,
         },
-
       ],
     },
   ],
