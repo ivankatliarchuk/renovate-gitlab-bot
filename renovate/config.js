@@ -7,7 +7,7 @@ const baseConfig = {
   labels: ["frontend", "dependency update", "type::maintenance"],
   lockFileMaintenance: { enabled: false, schedule: [] },
   enabledManagers: ["npm"],
-  prConcurrentLimit: 11,
+  prConcurrentLimit: 20,
   assignees: [
     "@dmishunov",
     "@ealcantara",
