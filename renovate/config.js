@@ -4,7 +4,7 @@ const path = require("path");
 const baseConfig = {
   includeForks: true,
   automerge: false,
-  labels: ["frontend", "dependency update", "type::maintenance"],
+  labels: ["frontend", "dependency update", "type::maintenance", "automation:bot"],
   lockFileMaintenance: { enabled: false, schedule: [] },
   enabledManagers: ["npm"],
   prConcurrentLimit: 20,
@@ -115,7 +115,7 @@ const updateDOMPurify = {
 
 const foundationPackages = {
   assignees: ["@leipert", "@mikegreiling"],
-  addLabels: ["group::foundations"],
+  addLabels: ["group::foundations", "automation:bot"],
 };
 
 const semanticPrefixFixDepsChoreOthers = [
@@ -259,7 +259,7 @@ module.exports = {
     {
       repository: "gitlab-renovate-forks/gitlab",
       ...baseConfig,
-      labels: ["backend", "dependency update", "type::maintenance"],
+      labels: ["backend", "dependency update", "type::maintenance", "automation:bot"],
       branchPrefix: "renovate-gems/",
       assignees: ["@rymai"],
       enabledManagers: ["bundler"],
@@ -391,7 +391,7 @@ module.exports = {
     {
       repository: "gitlab-renovate-forks/teampage-map",
       ...baseConfig,
-      labels: [],
+      labels: ["automation:bot"],
       assignees: ["@leipert"],
       automerge: false,
       rangeStrategy: "bump",
@@ -419,6 +419,7 @@ module.exports = {
         "type::maintenance",
         "group::code review",
         "devops::create",
+        "automation:bot",
       ],
       assignees: ["@viktomas"],
       packageRules: [
