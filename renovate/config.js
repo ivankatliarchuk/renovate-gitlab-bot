@@ -4,7 +4,7 @@ const path = require("path");
 const baseConfig = {
   includeForks: true,
   automerge: false,
-  labels: ["frontend", "dependency update", "type::maintenance", "automation:bot"],
+  labels: ["frontend", "dependency update", "type::maintenance", "automation:bot-authored"],
   lockFileMaintenance: { enabled: false, schedule: [] },
   enabledManagers: ["npm"],
   prConcurrentLimit: 20,
