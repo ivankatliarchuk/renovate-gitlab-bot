@@ -115,7 +115,7 @@ const updateDOMPurify = {
 
 const foundationPackages = {
   assignees: ["@leipert", "@mikegreiling"],
-  addLabels: ["group::foundations", "automation:bot"],
+  addLabels: ["group::foundations", "automation:bot-authored"],
 };
 
 const semanticPrefixFixDepsChoreOthers = [
@@ -259,7 +259,7 @@ module.exports = {
     {
       repository: "gitlab-renovate-forks/gitlab",
       ...baseConfig,
-      labels: ["backend", "dependency update", "type::maintenance", "automation:bot"],
+      labels: ["backend", "dependency update", "type::maintenance", "automation:bot-authored"],
       branchPrefix: "renovate-gems/",
       assignees: ["@rymai"],
       enabledManagers: ["bundler"],
@@ -284,6 +284,31 @@ module.exports = {
           enabled: true,
           rangeStrategy: "bump",
           groupName: "GitLab Tooling Ruby dependencies",
+        },
+      ],
+    },
+    {
+      repository: "gitlab-renovate-forks/triage-ops",
+      ...baseConfig,
+      labels: ["backend", "dependency update", "type::maintenance", "automation:bot-authored"],
+      branchPrefix: "renovate-gems/",
+      assignees: ["@rymai"],
+      enabledManagers: ["bundler"],
+      semanticCommits: "disabled",
+      packageRules: [
+        {
+          enabled: true,
+          matchPackagePatterns: [".+"],
+          rangeStrategy: "bump",
+          matchManagers: ["bundler"],
+          groupName: "Ruby production dependencies",
+        },
+        {
+          enabled: true,
+          matchDepTypes: ["test", "development"],
+          rangeStrategy: "bump",
+          matchManagers: ["bundler"],
+          groupName: "Ruby development dependencies",
         },
       ],
     },
@@ -391,7 +416,7 @@ module.exports = {
     {
       repository: "gitlab-renovate-forks/teampage-map",
       ...baseConfig,
-      labels: ["automation:bot"],
+      labels: ["automation:bot-authored"],
       assignees: ["@leipert"],
       automerge: false,
       rangeStrategy: "bump",
@@ -419,7 +444,7 @@ module.exports = {
         "type::maintenance",
         "group::code review",
         "devops::create",
-        "automation:bot",
+        "automation:bot-authored",
       ],
       assignees: ["@viktomas"],
       packageRules: [
