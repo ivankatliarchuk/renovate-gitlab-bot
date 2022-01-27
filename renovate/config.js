@@ -15,6 +15,7 @@ const baseConfig = {
     "@mikegreiling",
     "@ohoral",
     "@markrian",
+    "@svedova",
   ],
   assignAutomerge: true,
   assigneesSampleSize: 2,
