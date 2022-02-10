@@ -1,6 +1,6 @@
 # renovate-gitlab-bot
 
-> Currently open MRs can be [found here](https://gitlab.com/dashboard/merge_requests?scope=all&utf8=%E2%9C%93&state=opened&author_username=gitlab-renovate-bot)
+> Currently open MRs can be [found here](https://gitlab.com/dashboard/merge_requests?scope=all&utf8=%E2%9C%93&state=opened&author_username=gitlab-dependency-update-bot)
 
 The bot uses [renovatebot](https://github.com/renovatebot/renovate) to
 automatically create MRs for updating dependencies.
