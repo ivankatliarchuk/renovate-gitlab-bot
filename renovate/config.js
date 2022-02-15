@@ -402,7 +402,7 @@ module.exports = {
       semanticCommits: "disabled",
       packageRules: [
         {
-          matchPackagePatterns: ["rollup", "bootstrap"],
+          matchPackagePatterns: ["bootstrap", "vue"],
           enabled: false,
         },
         {
