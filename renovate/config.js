@@ -4,7 +4,7 @@ const path = require("path");
 const baseConfig = {
   includeForks: true,
   automerge: false,
-  labels: ["frontend", "dependency update", "type::maintenance", "automation:bot-authored"],
+  labels: ["frontend", "maintenance::dependency", "type::maintenance", "automation:bot-authored"],
   lockFileMaintenance: { enabled: false, schedule: [] },
   enabledManagers: ["npm"],
   prConcurrentLimit: 20,
@@ -260,7 +260,7 @@ module.exports = {
     {
       repository: "gitlab-renovate-forks/gitlab",
       ...baseConfig,
-      labels: ["backend", "dependency update", "type::maintenance", "automation:bot-authored"],
+      labels: ["backend", "maintenance::dependency", "type::maintenance", "automation:bot-authored"],
       branchPrefix: "renovate-gems/",
       assignees: ["@rymai"],
       enabledManagers: ["bundler"],
@@ -291,7 +291,7 @@ module.exports = {
     {
       repository: "gitlab-renovate-forks/triage-ops",
       ...baseConfig,
-      labels: ["backend", "dependency update", "type::maintenance", "automation:bot-authored"],
+      labels: ["backend", "maintenance::dependency", "type::maintenance", "automation:bot-authored"],
       branchPrefix: "renovate-gems/",
       assignees: ["@rymai"],
       enabledManagers: ["bundler"],
@@ -448,7 +448,7 @@ module.exports = {
       repository: "gitlab-renovate-forks/gitlab-vscode-extension",
       ...baseConfig,
       labels: [
-        "dependency update",
+        "maintenance::dependency",
         "type::maintenance",
         "group::code review",
         "devops::create",
