@@ -60,8 +60,11 @@ const updateGitLabVisualReviewTools = {
 
 const ESLint = {
   ...updateGitLabScope,
-  matchPackageNames: ["@gitlab/eslint-plugin", "eslint"],
+  matchPackageNames: ["eslint"],
   matchPackagePatterns: ["eslint-.+"],
+  excludePackageNames: [
+    "@gitlab/eslint-plugin"
+  ],
   assignees: ["@markrian", "@vitallium"],
   groupName: "ESLint and related",
 };
@@ -80,7 +83,6 @@ const updateGitLabScopeDev = {
   excludePackageNames: [
     ...updateGitLabUIandSVG.matchPackageNames,
     ...updateGitLabVisualReviewTools.matchPackageNames,
-    ...ESLint.matchPackageNames,
     ...Stylelint.matchPackageNames,
   ],
   groupName: "GitLab Packages",
