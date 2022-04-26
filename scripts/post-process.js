@@ -4,7 +4,7 @@ const factory = require("gitlab-api-async-iterator");
 const { GitLabAPI, GitLabAPIIterator } = factory();
 
 const MATCHER = /```json\s*(?<json>.+?)\s*```/m;
-const RENOVATE_BOT_USER = "gitlab-renovate-bot";
+const RENOVATE_BOT_USER = "gitlab-dependency-update-bot";
 const SAMPLE_SIZE = 2;
 
 const DRY_RUN = (process.env.DRY_RUN ?? "true") === "true";
