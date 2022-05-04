@@ -397,14 +397,20 @@ module.exports = {
     {
       repository: "gitlab-renovate-forks/gitlab-docs",
       ...baseConfig,
-      assignees: ["@axil", "@eread", "@kpaizee", "@marcel.amirault"],
+      labels: [
+        "Technical Writing",
+        "Category:Docs Site",
+        "type::maintenance",
+        "automation:bot-authored",
+      ],
+      assignees: ["@axil", "@eread", "@kpaizee", "@marcel.amirault", "@sarahgerman"],
       assigneesSampleSize: 3,
       enabledManagers: ["npm", "bundler"],
       prConcurrentLimit: 4,
       semanticCommits: "disabled",
       packageRules: [
         {
-          matchPackagePatterns: ["bootstrap", "vue"],
+          matchPackagePatterns: ["bootstrap", "vue", "jest", "babel-jest", "@rollup/plugin-commonjs"],
           enabled: false,
         },
         {
