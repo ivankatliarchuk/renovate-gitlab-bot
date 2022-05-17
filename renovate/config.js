@@ -410,7 +410,7 @@ module.exports = {
       semanticCommits: "disabled",
       packageRules: [
         {
-          matchPackagePatterns: ["bootstrap", "vue", "jest", "babel-jest", "@rollup/plugin-commonjs"],
+          matchPackagePatterns: ["bootstrap", "vue", "jest", "babel-jest"],
           enabled: false,
         },
         {
