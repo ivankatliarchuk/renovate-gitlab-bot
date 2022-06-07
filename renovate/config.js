@@ -410,7 +410,7 @@ module.exports = {
       semanticCommits: "disabled",
       packageRules: [
         {
-          matchPackagePatterns: ["bootstrap", "vue", "jest", "babel-jest"],
+          matchPackagePatterns: ["bootstrap", "vue"],
           enabled: false,
         },
         {
