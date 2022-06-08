@@ -1,4 +1,4 @@
-FROM node:14.16.1-alpine3.12 AS builder
+FROM node:16-alpine3.15 AS builder
 
 ADD / /workdir
 WORKDIR /workdir
@@ -9,7 +9,7 @@ RUN apk add --update --no-cache python3 make g++ git
 
 RUN sh scripts/build.sh
 
-FROM ruby:2.7.2-alpine3.12
+FROM ruby:2.7.6-alpine3.15
 
 COPY --from=builder /workdir /workdir
 COPY --from=builder /usr/local/bin/node /usr/local/bin/node
