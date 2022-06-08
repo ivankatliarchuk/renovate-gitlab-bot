@@ -35,4 +35,4 @@ We have assembled some [FAQs] to help reviewers of these kind of merge requests.
 [message_source]: https://gitlab.com/gitlab-org/frontend/renovate-gitlab-bot/-/blob/main/renovate/comment_template.md
 [process]: https://gitlab.com/gitlab-org/frontend/renovate-gitlab-bot/-/blob/main/docs/process.md
 
-[FAQs]:
+[FAQs]: https://gitlab.com/gitlab-org/frontend/renovate-gitlab-bot/-/blob/main/docs/faq.md
