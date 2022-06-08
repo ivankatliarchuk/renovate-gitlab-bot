@@ -430,29 +430,6 @@ module.exports = {
       ],
     },
     {
-      repository: "gitlab-renovate-forks/teampage-map",
-      ...baseConfig,
-      labels: ["automation:bot-authored"],
-      assignees: ["@leipert"],
-      automerge: false,
-      rangeStrategy: "bump",
-      packageRules: [
-        {
-          extends: ["monorepo:jest", "packages:jsUnitTest"],
-          groupName: "testing",
-        },
-        {
-          extends: ["monorepo:vue"],
-          groupName: "vue monorepo",
-        },
-        {
-          extends: ["packages:linters"],
-          matchPackageNames: ["prettier", "pretty-quick", "husky"],
-          groupName: "linters and prettier",
-        },
-      ],
-    },
-    {
       repository: "gitlab-renovate-forks/gitlab-vscode-extension",
       ...baseConfig,
       labels: [
