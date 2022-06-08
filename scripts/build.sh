@@ -5,7 +5,7 @@ if ! [ -d renovate-fork ]; then
 fi
 
 cd renovate-fork || exit 1
-git checkout gitlab-main-v25
+git checkout gitlab-main-v26
 git pull
 yarn install
 yarn build

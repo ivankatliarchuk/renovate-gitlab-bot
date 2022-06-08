@@ -29,7 +29,7 @@ const baseConfig = {
   hostRules: process.env.GITHUB_TOKEN
     ? [
         {
-          domainName: "github.com",
+          matchHost: "github.com",
           token: process.env.GITHUB_TOKEN,
         },
       ]
