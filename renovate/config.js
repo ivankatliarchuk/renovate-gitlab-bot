@@ -386,7 +386,9 @@ module.exports = {
       enabledManagers: ["npm", "bundler"],
       packageRules: [
         {
-          extends: ["schedule:weekly"],
+          schedule: [
+            "before 05:00 on Monday"
+          ],
           matchPackagePatterns: [".+"],
           rangeStrategy: "bump",
           matchManagers: ["bundler"],
@@ -414,14 +416,18 @@ module.exports = {
           enabled: false,
         },
         {
-          extends: ["schedule:weekly"],
+          schedule: [
+            "before 05:00 on Monday"
+          ],
           matchPackagePatterns: [".+"],
           rangeStrategy: "bump",
           matchManagers: ["bundler"],
           groupName: "Ruby dependencies",
         },
         {
-          extends: ["schedule:weekly"],
+          schedule: [
+            "before 05:00 on Monday"
+          ],
           matchPackagePatterns: [".+"],
           rangeStrategy: "bump",
           matchManagers: ["npm"],
