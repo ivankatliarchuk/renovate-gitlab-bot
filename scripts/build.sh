@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-FORK_BRANCH=gitlab-main-v29
+FORK_BRANCH=gitlab-main-v31
 
 if ! [ -d renovate-fork ]; then
   git clone https://gitlab.com/gitlab-org/frontend/renovate-fork.git
@@ -24,5 +24,7 @@ if [ "$DOCKER_BUILD" = "true" ]; then
   rm -rf renovate-fork renovate*.tgz
 else
   yarn add "renovate@file:./renovate-fork-$FORK_BRANCH.tgz"
+  sed -r 's_(file:./renovate.+.tgz)#.+"_\1"_' yarn.lock > yarn.tmp
+  mv -f yarn.tmp yarn.lock
   yarn install --force
 fi
