@@ -6,7 +6,7 @@ fi
 
 cd renovate-fork || exit 1
 git fetch
-git checkout gitlab-main-v27
+git checkout gitlab-main-v28
 git pull
 yarn install
 yarn build
