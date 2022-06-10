@@ -271,12 +271,14 @@ module.exports = {
         updateNothing,
         {
           matchPackageNames: [
+            "better_errors",
+            "bootsnap",
             "brakeman",
             "danger",
             "lefthook",
             "letter_opener_web",
-            "better_errors",
-            "thin",
+            "parser",
+            "thin"
           ],
           enabled: true,
           rangeStrategy: "bump",
@@ -287,6 +289,41 @@ module.exports = {
           enabled: true,
           rangeStrategy: "bump",
           groupName: "GitLab Tooling Ruby dependencies",
+        },
+        {
+          matchPackageNames: [
+            "nokogiri",
+            "premailer",
+            "re2",
+            "rouge"
+          ],
+          enabled: true,
+          rangeStrategy: "bump",
+          groupName: "Ruby Markdown and HTML parsing dependencies",
+        },
+        {
+          matchPackageNames: [
+            "pg",
+            "pg_query",
+          ],
+          enabled: true,
+          rangeStrategy: "bump",
+          groupName: "Ruby database dependencies",
+        },
+        {
+          matchPackageNames: [
+            "rack",
+            "rack-accept",
+            "rack-attack",
+            "rack-cors",
+            "rack-oauth2",
+            "rack-proxy",
+            "rack-test",
+            "rack-timeout",
+          ],
+          enabled: true,
+          rangeStrategy: "bump",
+          groupName: "Ruby Rack-related dependencies",
         },
       ],
     },
