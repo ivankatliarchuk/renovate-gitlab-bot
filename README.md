@@ -14,6 +14,7 @@ The following repositories are currently being updated automatically.
 
 - [gitlab-renovate-forks/customers-gitlab-com](https://gitlab.com/gitlab-renovate-forks/customers-gitlab-com)
 - [gitlab-renovate-forks/design.gitlab.com](https://gitlab.com/gitlab-renovate-forks/design.gitlab.com)
+- [gitlab-renovate-forks/gitaly](https://gitlab.com/gitlab-renovate-forks/gitaly)
 - [gitlab-renovate-forks/gitlab-development-kit](https://gitlab.com/gitlab-renovate-forks/gitlab-development-kit)
 - [gitlab-renovate-forks/gitlab-docs](https://gitlab.com/gitlab-renovate-forks/gitlab-docs)
 - [gitlab-renovate-forks/gitlab-svgs](https://gitlab.com/gitlab-renovate-forks/gitlab-svgs)
@@ -21,7 +22,6 @@ The following repositories are currently being updated automatically.
 - [gitlab-renovate-forks/gitlab-vscode-extension](https://gitlab.com/gitlab-renovate-forks/gitlab-vscode-extension)
 - [gitlab-renovate-forks/gitlab](https://gitlab.com/gitlab-renovate-forks/gitlab)
 - [gitlab-renovate-forks/status-page](https://gitlab.com/gitlab-renovate-forks/status-page)
-- [gitlab-renovate-forks/teampage-map](https://gitlab.com/gitlab-renovate-forks/teampage-map)
 - [gitlab-renovate-forks/triage-ops](https://gitlab.com/gitlab-renovate-forks/triage-ops)
 
 <!-- rep -->
