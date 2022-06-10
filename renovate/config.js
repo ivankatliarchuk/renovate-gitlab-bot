@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 const baseConfig = {
+  dependencyDashboard: true,
   includeForks: true,
   automerge: false,
   labels: [
@@ -164,6 +165,7 @@ module.exports = {
     {
       repository: "gitlab-renovate-forks/gitlab",
       ...baseConfig,
+      dependencyDashboardTitle: "Dependency Dashboard (node)",
       packageRules: [
         updateNothing,
         updateGitLabUIandSVG,
@@ -270,6 +272,7 @@ module.exports = {
     },
     {
       repository: "gitlab-renovate-forks/gitlab",
+      dependencyDashboardTitle: "Dependency Dashboard (ruby)",
       ...baseConfig,
       labels: [
         "backend",
@@ -373,7 +376,6 @@ module.exports = {
     {
       repository: "gitlab-renovate-forks/gitlab-ui",
       ...baseConfig,
-      dependencyDashboard: true,
       packageRules: [
         updateNothing,
         updateGitLabUIandSVG,
