@@ -31,14 +31,20 @@ const baseConfig = {
   prBodyNotes: [
     `MR created with the help of [${process.env.CI_PROJECT_PATH}](${process.env.CI_PROJECT_URL})`,
   ],
-  hostRules: process.env.GITHUB_TOKEN
-    ? [
-        {
+  hostRules: [
+    process.env.GITHUB_TOKEN
+      ? {
           matchHost: "github.com",
           token: process.env.GITHUB_TOKEN,
-        },
-      ]
-    : [],
+        }
+      : [],
+    process.env.RENOVATE_TOKEN
+      ? {
+          matchHost: "gitlab.com",
+          token: process.env.RENOVATE_TOKEN,
+        }
+      : [],
+  ].flat(),
 };
 
 const updateNothing = {
@@ -286,7 +292,7 @@ module.exports = {
             "lefthook",
             "letter_opener_web",
             "parser",
-            "thin"
+            "thin",
           ],
           enabled: true,
           rangeStrategy: "bump",
@@ -299,21 +305,13 @@ module.exports = {
           groupName: "GitLab Tooling Ruby dependencies",
         },
         {
-          matchPackageNames: [
-            "nokogiri",
-            "premailer",
-            "re2",
-            "rouge"
-          ],
+          matchPackageNames: ["nokogiri", "premailer", "re2", "rouge"],
           enabled: true,
           rangeStrategy: "bump",
           groupName: "Ruby Markdown and HTML parsing dependencies",
         },
         {
-          matchPackageNames: [
-            "pg",
-            "pg_query",
-          ],
+          matchPackageNames: ["pg", "pg_query"],
           enabled: true,
           rangeStrategy: "bump",
           groupName: "Ruby database dependencies",
