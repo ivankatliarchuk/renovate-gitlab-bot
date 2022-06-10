@@ -4,7 +4,12 @@ const path = require("path");
 const baseConfig = {
   includeForks: true,
   automerge: false,
-  labels: ["frontend", "maintenance::dependency", "type::maintenance", "automation:bot-authored"],
+  labels: [
+    "frontend",
+    "maintenance::dependency",
+    "type::maintenance",
+    "automation:bot-authored",
+  ],
   lockFileMaintenance: { enabled: false, schedule: [] },
   enabledManagers: ["npm"],
   prConcurrentLimit: 20,
@@ -62,9 +67,7 @@ const ESLint = {
   ...updateGitLabScope,
   matchPackageNames: ["eslint"],
   matchPackagePatterns: ["eslint-.+"],
-  excludePackageNames: [
-    "@gitlab/eslint-plugin"
-  ],
+  excludePackageNames: ["@gitlab/eslint-plugin"],
   assignees: ["@markrian", "@vitallium"],
   groupName: "ESLint and related",
 };
@@ -262,7 +265,12 @@ module.exports = {
     {
       repository: "gitlab-renovate-forks/gitlab",
       ...baseConfig,
-      labels: ["backend", "maintenance::dependency", "type::maintenance", "automation:bot-authored"],
+      labels: [
+        "backend",
+        "maintenance::dependency",
+        "type::maintenance",
+        "automation:bot-authored",
+      ],
       branchPrefix: "renovate-gems/",
       assignees: ["@rymai"],
       enabledManagers: ["bundler"],
@@ -330,7 +338,12 @@ module.exports = {
     {
       repository: "gitlab-renovate-forks/triage-ops",
       ...baseConfig,
-      labels: ["backend", "maintenance::dependency", "type::maintenance", "automation:bot-authored"],
+      labels: [
+        "backend",
+        "maintenance::dependency",
+        "type::maintenance",
+        "automation:bot-authored",
+      ],
       branchPrefix: "renovate-gems/",
       assignees: ["@rymai"],
       enabledManagers: ["bundler"],
@@ -423,12 +436,26 @@ module.exports = {
       enabledManagers: ["npm", "bundler"],
       packageRules: [
         {
-          schedule: [
-            "before 05:00 on Monday"
-          ],
+          schedule: ["before 05:00 on Monday"],
           matchPackagePatterns: [".+"],
           rangeStrategy: "bump",
           matchManagers: ["bundler"],
+          groupName: "Ruby dependencies",
+        },
+      ],
+    },
+    {
+      repository: "gitlab-renovate-forks/gitaly",
+      ...baseConfig,
+      assignees: ["@stanhu"],
+      enabledManagers: ["bundler"],
+      includePaths: ["ruby/**"],
+      packageRules: [
+        updateNothing,
+        {
+          matchPackageNames: ["gitlab-labkit"],
+          enabled: true,
+          rangeStrategy: "bump",
           groupName: "Ruby dependencies",
         },
       ],
@@ -442,7 +469,13 @@ module.exports = {
         "type::maintenance",
         "automation:bot-authored",
       ],
-      assignees: ["@axil", "@eread", "@kpaizee", "@marcel.amirault", "@sarahgerman"],
+      assignees: [
+        "@axil",
+        "@eread",
+        "@kpaizee",
+        "@marcel.amirault",
+        "@sarahgerman",
+      ],
       assigneesSampleSize: 3,
       enabledManagers: ["npm", "bundler"],
       prConcurrentLimit: 4,
@@ -453,18 +486,14 @@ module.exports = {
           enabled: false,
         },
         {
-          schedule: [
-            "before 05:00 on Monday"
-          ],
+          schedule: ["before 05:00 on Monday"],
           matchPackagePatterns: [".+"],
           rangeStrategy: "bump",
           matchManagers: ["bundler"],
           groupName: "Ruby dependencies",
         },
         {
-          schedule: [
-            "before 05:00 on Monday"
-          ],
+          schedule: ["before 05:00 on Monday"],
           matchPackagePatterns: [".+"],
           rangeStrategy: "bump",
           matchManagers: ["npm"],
