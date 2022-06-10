@@ -69,3 +69,5 @@ OWNERS
 PULL_REQUEST_TEMPLATE
 yarn.lock
 *.bak
+
+!*openpgp.min.js
