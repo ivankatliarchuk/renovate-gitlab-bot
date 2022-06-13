@@ -447,7 +447,7 @@ module.exports = {
     {
       repository: "gitlab-renovate-forks/gitaly",
       ...baseConfig,
-      assignees: ["@stanhu"],
+      assignees: ["@pks-t", "@stanhu"],
       enabledManagers: ["bundler"],
       includePaths: ["ruby/**"],
       packageRules: [
