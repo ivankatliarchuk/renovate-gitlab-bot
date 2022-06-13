@@ -147,13 +147,13 @@ const enableWithBumpStrategy = {
 };
 
 module.exports = {
-  dryRun: (process.env.DRY_RUN ?? "true") === "true",
+  dryRun: (process.env.DRY_RUN ?? "true") === "true" ? "full" : null,
   autodiscover: false,
   logFile: path.join(__dirname, "..", "renovate-log.txt"),
   logFileLevel: "debug",
   platform: "gitlab",
   onboarding: false,
-  requireConfig: false,
+  requireConfig: "ignored",
   printConfig: false,
   renovateMetaCommentTemplate: fs.readFileSync(
     path.join(__dirname, "comment_template.md"),

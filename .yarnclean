@@ -71,3 +71,4 @@ yarn.lock
 *.bak
 
 !*openpgp.min.js
+!**/mi-cron/index.min.js
