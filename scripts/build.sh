@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-FORK_BRANCH=gitlab-main-v31
+FORK_BRANCH=gitlab-main-v32
 
 if ! [ -d renovate-fork ]; then
   git clone https://gitlab.com/gitlab-org/frontend/renovate-fork.git
