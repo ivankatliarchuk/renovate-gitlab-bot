@@ -448,6 +448,13 @@ module.exports = {
       repository: "gitlab-renovate-forks/gitaly",
       ...baseConfig,
       assignees: ["@pks-t", "@stanhu"],
+      labels: [
+        "group::gitaly",
+        "devops::create",
+        "section::dev",
+        "type::maintenance",
+        "maintenance::dependency",
+      ],
       enabledManagers: ["bundler", "gomod"],
       includePaths: [
         // Just look in the ruby sub directory
@@ -466,11 +473,33 @@ module.exports = {
           groupName: "Ruby dependencies",
         },
         {
-          matchPackageNames: ["github.com/olekukonko/tablewriter"],
+          matchPackagePrefixes: [
+              "github.com/olekukonko/tablewriter",
+              "golang.org/x/",
+          ],
           assignees: ["@pks-t"],
           enabled: true,
           rangeStrategy: "bump",
           matchManagers: ["gomod"],
+        },
+        {
+          matchPackagePrefixes: ["github.com/jackc/"],
+          assignees: ["@pks-t"],
+          enabled: true,
+          rangeStrategy: "bump",
+          matchManagers: ["gomod"],
+          groupName: "Go Postgres dependencies",
+        },
+        {
+          matchPackagePrefixes: [
+              "github.com/grpc-ecosystem/",
+              "google.golang.org/",
+          ],
+          assignees: ["@pks-t"],
+          enabled: true,
+          rangeStrategy: "bump",
+          matchManagers: ["gomod"],
+          groupName: "Go gRPC dependencies",
         },
       ],
     },
