@@ -448,6 +448,13 @@ module.exports = {
       repository: "gitlab-renovate-forks/gitaly",
       ...baseConfig,
       assignees: ["@pks-t", "@stanhu"],
+      labels: [
+        "group::gitaly",
+        "devops::create",
+        "section::dev",
+        "type::maintenance",
+        "maintenance::dependency",
+      ],
       enabledManagers: ["bundler", "gomod"],
       includePaths: [
         // Just look in the ruby sub directory
