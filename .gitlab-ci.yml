@@ -20,7 +20,6 @@ stages:
   image: docker:stable
   variables:
     DOCKER_HOST: tcp://docker:2375/
-    DOCKER_DRIVER: overlay2
     DOCKER_CLI_EXPERIMENTAL: enabled
   services:
     - docker:stable-dind
