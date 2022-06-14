@@ -448,15 +448,29 @@ module.exports = {
       repository: "gitlab-renovate-forks/gitaly",
       ...baseConfig,
       assignees: ["@pks-t", "@stanhu"],
-      enabledManagers: ["bundler"],
-      includePaths: ["ruby/**"],
+      enabledManagers: ["bundler", "gomod"],
+      includePaths: [
+        // Just look in the ruby sub directory
+        "ruby/**",
+        // and the root directory
+        "*",
+      ],
+      postUpdateOptions: ["gomodTidy"],
       packageRules: [
         updateNothing,
         {
           matchPackageNames: ["gitlab-labkit"],
           enabled: true,
           rangeStrategy: "bump",
+          matchManagers: ["bundler"],
           groupName: "Ruby dependencies",
+        },
+        {
+          matchPackageNames: ["github.com/olekukonko/tablewriter"],
+          assignees: ["@pks-t"],
+          enabled: true,
+          rangeStrategy: "bump",
+          matchManagers: ["gomod"],
         },
       ],
     },
