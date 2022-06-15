@@ -447,7 +447,6 @@ module.exports = {
     {
       repository: "gitlab-renovate-forks/gitaly",
       ...baseConfig,
-      assignees: ["@pks-t", "@stanhu"],
       labels: [
         "group::gitaly",
         "devops::create",
@@ -455,6 +454,8 @@ module.exports = {
         "type::maintenance",
         "maintenance::dependency",
       ],
+      rangeStrategy: "bump",
+      semanticCommits: "disabled",
       enabledManagers: ["bundler", "gomod"],
       includePaths: [
         // Just look in the ruby sub directory
@@ -466,39 +467,42 @@ module.exports = {
       packageRules: [
         updateNothing,
         {
+          matchManagers: ["gomod"],
+          assignees: ["@pks-t"],
+          commitMessagePrefix: "go:",
+        },
+        {
+          matchManagers: ["bundler"],
+          assignees: ["@pks-t", "@stanhu"],
+          commitMessagePrefix: "ruby:",
+        },
+        {
+          matchManagers: ["bundler"],
           matchPackageNames: ["gitlab-labkit"],
           enabled: true,
-          rangeStrategy: "bump",
-          matchManagers: ["bundler"],
           groupName: "Ruby dependencies",
         },
         {
+          matchManagers: ["gomod"],
           matchPackagePrefixes: [
               "github.com/olekukonko/tablewriter",
               "golang.org/x/",
           ],
-          assignees: ["@pks-t"],
           enabled: true,
-          rangeStrategy: "bump",
-          matchManagers: ["gomod"],
         },
         {
-          matchPackagePrefixes: ["github.com/jackc/"],
-          assignees: ["@pks-t"],
-          enabled: true,
-          rangeStrategy: "bump",
           matchManagers: ["gomod"],
+          matchPackagePrefixes: ["github.com/jackc/"],
+          enabled: true,
           groupName: "Go Postgres dependencies",
         },
         {
+          matchManagers: ["gomod"],
           matchPackagePrefixes: [
               "github.com/grpc-ecosystem/",
               "google.golang.org/",
           ],
-          assignees: ["@pks-t"],
           enabled: true,
-          rangeStrategy: "bump",
-          matchManagers: ["gomod"],
           groupName: "Go gRPC dependencies",
         },
       ],
