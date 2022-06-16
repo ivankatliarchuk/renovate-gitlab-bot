@@ -456,6 +456,8 @@ module.exports = {
       ],
       rangeStrategy: "bump",
       semanticCommits: "disabled",
+      stabilityDays: 7,
+      prCreation: "not-pending",
       enabledManagers: ["bundler", "gomod"],
       includePaths: [
         // Just look in the ruby sub directory
@@ -467,33 +469,51 @@ module.exports = {
       packageRules: [
         updateNothing,
         {
-          matchManagers: ["gomod"],
-          assignees: ["@pks-t"],
-          commitMessagePrefix: "go:",
-        },
-        {
-          matchManagers: ["bundler"],
-          assignees: ["@pks-t", "@stanhu"],
-          commitMessagePrefix: "ruby:",
-        },
-        {
           matchManagers: ["bundler"],
           matchPackageNames: ["gitlab-labkit"],
           enabled: true,
+          assignees: ["@pks-t", "@stanhu"],
+          commitMessagePrefix: "ruby:",
           groupName: "Ruby dependencies",
         },
         {
+          // This is our basic rule for Go packages.
+          matchManagers: ["gomod"],
+          enabled: true,
+          assignees: ["@pks-t"],
+          commitMessagePrefix: "go:",
+          excludePackageNames: [
+            // For now, we disable a bunch of Go packages which we know to be
+            // out-of-date to lessen the churn. These should be enabled at a
+            // later point.
+            "github.com/cloudflare/tableflip",
+            "github.com/containerd/cgroups",
+            "github.com/google/uuid",
+            "github.com/hashicorp/yamux",
+            "github.com/kelseyhightower/envconfig",
+            "github.com/pelletier/go-toml",
+            "github.com/prometheus/client_golang",
+            "github.com/rubenv/sql-migrate",
+            "github.com/uber/jaeger-client-go",
+            "gitlab.com/gitlab-org/gitlab-shell",
+            "gitlab.com/gitlab-org/labkit",
+            "gocloud.dev",
+          ],
+        },
+        {
+          // golang.org/x/ packages don't use releases, but instead use a
+          // master-based development workflow. We don't want to upgrade on
+          // every new commit though to avoid needless churn, so we just make
+          // sure to update once per month.
           matchManagers: ["gomod"],
           matchPackagePrefixes: [
-              "github.com/olekukonko/tablewriter",
               "golang.org/x/",
           ],
-          enabled: true,
+          schedule: ["on the first day of the month"],
         },
         {
           matchManagers: ["gomod"],
           matchPackagePrefixes: ["github.com/jackc/"],
-          enabled: true,
           groupName: "Go Postgres dependencies",
         },
         {
@@ -502,7 +522,6 @@ module.exports = {
               "github.com/grpc-ecosystem/",
               "google.golang.org/",
           ],
-          enabled: true,
           groupName: "Go gRPC dependencies",
         },
       ],
