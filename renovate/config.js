@@ -334,6 +334,15 @@ module.exports = {
           rangeStrategy: "bump",
           groupName: "Ruby Rack-related dependencies",
         },
+        {
+          matchPackageNames: [
+            "aws-sdk-core",
+            "aws-sdk-s3"
+          ],
+          enabled: true,
+          rangeStrategy: "bump",
+          groupName: "Ruby AWS-related dependencies",
+        },
       ],
     },
     {
