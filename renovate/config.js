@@ -480,7 +480,18 @@ module.exports = {
           // This is our basic rule for Go packages.
           matchManagers: ["gomod"],
           enabled: true,
-          assignees: ["@pks-t"],
+          assignees: [
+              "@jcai-gitlab",
+              "@pks-t",
+              "@proglottis",
+              "@samihiltunen",
+              "@toon",
+              "@wchandler",
+          ],
+          // By default, we only use a single assignee for dependencies. Some
+          // of the more critical ones follow Gitaly's normal review process
+          // and instead require two reviewers.
+          assigneesSampleSize: 1,
           commitMessagePrefix: "go:",
           excludePackageNames: [
             // For now, we disable a bunch of Go packages which we know to be
@@ -488,10 +499,7 @@ module.exports = {
             // later point.
             "github.com/cloudflare/tableflip",
             "github.com/containerd/cgroups",
-            "github.com/google/uuid",
             "github.com/hashicorp/yamux",
-            "github.com/kelseyhightower/envconfig",
-            "github.com/pelletier/go-toml",
             "github.com/prometheus/client_golang",
             "github.com/rubenv/sql-migrate",
             "github.com/uber/jaeger-client-go",
@@ -514,7 +522,8 @@ module.exports = {
         {
           matchManagers: ["gomod"],
           matchPackagePrefixes: ["github.com/jackc/"],
-          groupName: "Go Postgres dependencies",
+          assigneesSampleSize: 2,
+          groupName: "Postgres dependencies",
         },
         {
           matchManagers: ["gomod"],
@@ -522,7 +531,8 @@ module.exports = {
               "github.com/grpc-ecosystem/",
               "google.golang.org/",
           ],
-          groupName: "Go gRPC dependencies",
+          assigneesSampleSize: 2,
+          groupName: "gRPC dependencies",
         },
       ],
     },
