@@ -481,8 +481,7 @@ module.exports = {
       postUpgradeTasks: {
         // Regenerate files that may change due to the dependency updates.
         commands: ["make notice"],
-        fileFilters: ["NOTICE"],
-        executionMode: "branch",
+        fileFilters: ["NOTICE"]
       },
       packageRules: [
         updateNothing,
