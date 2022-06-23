@@ -161,6 +161,9 @@ module.exports = {
     "utf-8"
   ),
   gitAuthor: "GitLab Renovate Bot <gitlab-bot@gitlab.com>",
+  allowedPostUpgradeCommands: [
+    "^make notice$", // Allow Gitaly generating a new NOTICE file.
+  ],
   repositories: [
     {
       repository: "gitlab-renovate-forks/gitlab",
@@ -475,6 +478,11 @@ module.exports = {
         "*",
       ],
       postUpdateOptions: ["gomodTidy"],
+      postUpgradeTasks: {
+        // Regenerate files that may change due to the dependency updates.
+        commands: ["make notice"],
+        executionMode: "branch",
+      },
       packageRules: [
         updateNothing,
         {
@@ -490,7 +498,7 @@ module.exports = {
           matchManagers: ["gomod"],
           enabled: true,
           assignees: [
-              "@jcai-gitlab",
+              "@jcaigitlab",
               "@pks-t",
               "@proglottis",
               "@samihiltunen",
