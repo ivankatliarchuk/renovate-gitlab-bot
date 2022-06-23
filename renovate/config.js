@@ -498,7 +498,7 @@ module.exports = {
           matchManagers: ["gomod"],
           enabled: true,
           assignees: [
-              "@jcai-gitlab",
+              "@jcaigitlab",
               "@pks-t",
               "@proglottis",
               "@samihiltunen",
