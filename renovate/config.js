@@ -311,7 +311,7 @@ module.exports = {
           groupName: "GitLab Tooling Ruby dependencies",
         },
         {
-          matchPackageNames: ["nokogiri", "premailer", "re2", "rouge"],
+          matchPackageNames: ["nokogiri", "premailer", "re2", "rouge", "loofah", "rails-html-sanitizer"],
           enabled: true,
           rangeStrategy: "bump",
           groupName: "Ruby Markdown and HTML parsing dependencies",
