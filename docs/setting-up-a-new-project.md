@@ -13,6 +13,6 @@ You can only do steps 1-3 if you are maintainer of this project and you've got a
 
     ![](./mirror-setup.png)
 
-4.  Create an MR which adds your fork to [the config](../renovate/config.js).
+4.  Create an MR which adds your fork to [the config](../renovate/).
 
 [gitlab-renovate-forks]: https://gitlab.com/gitlab-renovate-forks

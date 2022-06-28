@@ -4,6 +4,8 @@ IFS=$'\n\t'
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
+CONFIG_FOLDER="$1"
+
 export NODE_OPTIONS="--max-old-space-size=4096"
 case "${CI_COMMIT_REF_SLUG:-not_main}" in
  main) export DRY_RUN="false" ;;
@@ -17,7 +19,7 @@ function fail {
 }
 
 function run_renovate {
-  export RENOVATE_CONFIG_FILE="$DIR/renovate/config.js"
+  export RENOVATE_CONFIG_FILE="$1"
   export RENOVATE_DISABLE_FILE_RECURSION=true
   export LOG_LEVEL=info
 
@@ -32,9 +34,15 @@ function run_postprocessing {
     node "$DIR/scripts/post-process.js" && return 0 || return 1
 }
 
-run_renovate || fail "Execution of renovate failed"
+FILES="$DIR/$CONFIG_FOLDER/*.config.js"
+for file in $FILES
+do
+  echo "Starting renovate for $file"
 
-run_postprocessing || fail "Execution of postprocessing failed"
+  run_renovate "$file" || fail "Execution of renovate for $file failed"
+
+  run_postprocessing || fail "Execution of postprocessing failed"
+done
 
 if [ "$FAIL" != "" ]; then
   echo -e "$FAIL"
