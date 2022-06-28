@@ -58,15 +58,18 @@ build-image:
 
 beep-boop:
   image: $DOCKER_IMAGE
+  parallel:
+    matrix:
+      - CONFIG_DIR: [gitlab, gitaly, gitlab-docs, projects]
   variables:
     GIT_STRATEGY: none
   stage: run
-  resource_group: $CI_COMMIT_REF_SLUG
+  resource_group: $CI_COMMIT_REF_SLUG-$CONFIG_DIR
   tags:
     - gitlab-org
   script:
     - cd /workdir/
-    - ./run-renovate.sh
+    - ./run-renovate.sh "renovate/$CONFIG_DIR"
     - cp -r /workdir/renovate-log.txt $CI_PROJECT_DIR/renovate-log.txt
   artifacts:
     paths:
