@@ -311,7 +311,14 @@ module.exports = {
           groupName: "GitLab Tooling Ruby dependencies",
         },
         {
-          matchPackageNames: ["nokogiri", "premailer", "re2", "rouge", "loofah", "rails-html-sanitizer"],
+          matchPackageNames: [
+            "nokogiri",
+            "premailer",
+            "re2",
+            "rouge",
+            "loofah",
+            "rails-html-sanitizer",
+          ],
           enabled: true,
           rangeStrategy: "bump",
           groupName: "Ruby Markdown and HTML parsing dependencies",
@@ -338,10 +345,7 @@ module.exports = {
           groupName: "Ruby Rack-related dependencies",
         },
         {
-          matchPackageNames: [
-            "aws-sdk-core",
-            "aws-sdk-s3"
-          ],
+          matchPackageNames: ["aws-sdk-core", "aws-sdk-s3"],
           enabled: true,
           rangeStrategy: "bump",
           groupName: "Ruby AWS-related dependencies",
@@ -395,14 +399,13 @@ module.exports = {
         "type::maintenance",
         "maintenance::dependency",
       ],
+      branchPrefix: "renovate-workhorse/",
       rangeStrategy: "bump",
       semanticCommits: "disabled",
       stabilityDays: 7,
       prCreation: "not-pending",
       enabledManagers: ["gomod"],
-      includePaths: [
-        "workhorse/*",
-      ],
+      includePaths: ["workhorse/*"],
       postUpdateOptions: ["gomodTidy"],
       packageRules: [
         updateNothing,
@@ -410,9 +413,7 @@ module.exports = {
           // This is our basic rule for Go packages.
           matchManagers: ["gomod"],
           enabled: true,
-          assignees: [
-              "@stanhu"
-          ],
+          assignees: ["@stanhu"],
           assigneesSampleSize: 1,
           commitMessagePrefix: "workhorse:",
         },
@@ -422,16 +423,14 @@ module.exports = {
           // every new commit though to avoid needless churn, so we just make
           // sure to update once per month.
           matchManagers: ["gomod"],
-          matchPackagePrefixes: [
-              "golang.org/x/",
-          ],
+          matchPackagePrefixes: ["golang.org/x/"],
           schedule: ["on the first day of the month"],
         },
         {
           matchManagers: ["gomod"],
           matchPackagePrefixes: [
-              "github.com/grpc-ecosystem/",
-              "google.golang.org/",
+            "github.com/grpc-ecosystem/",
+            "google.golang.org/",
           ],
           assigneesSampleSize: 2,
           groupName: "gRPC dependencies",
@@ -534,7 +533,7 @@ module.exports = {
       postUpgradeTasks: {
         // Regenerate files that may change due to the dependency updates.
         commands: ["make notice"],
-        fileFilters: ["NOTICE"]
+        fileFilters: ["NOTICE"],
       },
       packageRules: [
         updateNothing,
@@ -551,12 +550,12 @@ module.exports = {
           matchManagers: ["gomod"],
           enabled: true,
           assignees: [
-              "@jcaigitlab",
-              "@pks-t",
-              "@proglottis",
-              "@samihiltunen",
-              "@toon",
-              "@wchandler",
+            "@jcaigitlab",
+            "@pks-t",
+            "@proglottis",
+            "@samihiltunen",
+            "@toon",
+            "@wchandler",
           ],
           // By default, we only use a single assignee for dependencies. Some
           // of the more critical ones follow Gitaly's normal review process
@@ -584,9 +583,7 @@ module.exports = {
           // every new commit though to avoid needless churn, so we just make
           // sure to update once per month.
           matchManagers: ["gomod"],
-          matchPackagePrefixes: [
-              "golang.org/x/",
-          ],
+          matchPackagePrefixes: ["golang.org/x/"],
           schedule: ["on the first day of the month"],
         },
         {
@@ -598,8 +595,8 @@ module.exports = {
         {
           matchManagers: ["gomod"],
           matchPackagePrefixes: [
-              "github.com/grpc-ecosystem/",
-              "google.golang.org/",
+            "github.com/grpc-ecosystem/",
+            "google.golang.org/",
           ],
           assigneesSampleSize: 2,
           groupName: "gRPC dependencies",
