@@ -4,7 +4,11 @@ module.exports = createServerConfig([
   {
     repository: "gitlab-renovate-forks/customers-gitlab-com",
     ...updateOnlyGitLabScope,
-    assignees: ["@vitallium", "@aalakkad"],
+    reviewers: [
+      "vitallium",
+      "aalakkad",
+    ],
+    reviewersSampleSize: 1,
     semanticCommits: "disabled",
   },
 ]);

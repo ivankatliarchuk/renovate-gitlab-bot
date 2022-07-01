@@ -24,14 +24,16 @@ module.exports = createServerConfig([
       {
         matchPackagePatterns: ["bootstrap-vue"],
         separateMultipleMajor: true,
-        assignees: ["@pgascouvaillancourt"],
+        reviewers: ["pgascouvaillancourt"],
+        reviewersSampleSize: 1,
         rangeStrategy: "bump",
         enabled: true,
         groupName: "Bootstrap Vue",
       },
       {
         matchPackagePatterns: ["@storybook/.*"],
-        assignees: ["@pgascouvaillancourt"],
+        reviewers: ["pgascouvaillancourt"],
+        reviewersSampleSize: 1,
         rangeStrategy: "bump",
         enabled: true,
         groupName: "Storybook",

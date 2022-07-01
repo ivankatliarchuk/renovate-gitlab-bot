@@ -9,7 +9,12 @@ module.exports = createServerConfig([
     repository: "gitlab-renovate-forks/status-page",
     ...baseConfig,
     ...updateOnlyGitLabScope,
-    assignees: ["@ohoral", "@oregand", "@tristan.read"],
+    reviewers: [
+      "ohoral",
+      "oregand",
+      "tristan.read",
+    ],
+    reviewersSampleSize: 1,
     semanticCommits: "disabled",
   },
 ]);
