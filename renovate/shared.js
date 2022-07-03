@@ -14,33 +14,26 @@ const defaultLabels = [
 const epBaseConfig = {
   reviewers: ["godfat-gitlab", "ddieulivol", "ashmckenzie", "rymai"],
   reviewersSampleSize: 1,
-  labels: [
-    ...defaultLabels,
-    "backend",
-    "Engineering Productivity",
-  ],
+  labels: [...defaultLabels, "backend", "Engineering Productivity"],
 };
 
 const baseConfig = {
   dependencyDashboard: true,
   includeForks: true,
   automerge: false,
-  labels: [
-    "frontend",
-    ...defaultLabels,
-  ],
+  labels: ["frontend", ...defaultLabels],
   lockFileMaintenance: { enabled: false, schedule: [] },
   enabledManagers: ["npm"],
   prConcurrentLimit: 20,
   ...defaultAssignees,
   reviewers: [
-    "@dmishunov",
-    "@ealcantara",
-    "@pgascouvaillancourt",
-    "@mikegreiling",
-    "@ohoral",
-    "@markrian",
-    "@svedova",
+    "dmishunov",
+    "ealcantara",
+    "pgascouvaillancourt",
+    "mikegreiling",
+    "ohoral",
+    "markrian",
+    "svedova",
   ],
   assignAutomerge: true,
   reviewersSampleSize: 2,
@@ -88,7 +81,7 @@ const ESLint = {
   matchPackageNames: ["eslint"],
   matchPackagePatterns: ["eslint-.+"],
   excludePackageNames: ["@gitlab/eslint-plugin"],
-  assignees: ["@markrian", "@vitallium"],
+  reviewers: ["markrian", "vitallium"],
   groupName: "ESLint and related",
 };
 
@@ -96,7 +89,7 @@ const Stylelint = {
   ...updateGitLabScope,
   matchPackageNames: ["@gitlab/stylelint-config"],
   matchPackagePatterns: ["stylelint-.+"],
-  assignees: ["@vitallium", "@pgascouvaillancourt"],
+  reviewers: ["vitallium", "pgascouvaillancourt"],
   groupName: "Stylelint and related",
 };
 
@@ -128,7 +121,7 @@ const updateDOMPurify = {
   matchPackageNames: ["dompurify"],
   rangeStrategy: "bump",
   enabled: true,
-  assignees: ["@djadmin", "@markrian"],
+  reviewers: ["djadmin", "markrian"],
 };
 
 const semanticPrefixFixDepsChoreOthers = [
