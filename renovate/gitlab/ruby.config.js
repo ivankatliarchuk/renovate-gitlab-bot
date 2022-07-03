@@ -1,18 +1,12 @@
-const { createServerConfig, updateNothing, baseConfig } = require("../shared");
+const { createServerConfig, updateNothing, baseConfig, epBaseConfig } = require("../shared");
 
 module.exports = createServerConfig([
   {
     repository: "gitlab-renovate-forks/gitlab",
     dependencyDashboardTitle: "Dependency Dashboard (ruby)",
     ...baseConfig,
-    labels: [
-      "backend",
-      "maintenance::dependency",
-      "type::maintenance",
-      "automation:bot-authored",
-    ],
+    ...epBaseConfig,
     branchPrefix: "renovate-gems/",
-    assignees: ["@rymai"],
     enabledManagers: ["bundler"],
     semanticCommits: "disabled",
     packageRules: [

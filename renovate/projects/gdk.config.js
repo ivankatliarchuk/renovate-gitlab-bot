@@ -1,10 +1,19 @@
-const { createServerConfig, baseConfig } = require("../shared");
+const { createServerConfig, baseConfig, epBaseConfig } = require("../shared");
 
 module.exports = createServerConfig([
   {
     repository: "gitlab-renovate-forks/gitlab-development-kit",
     ...baseConfig,
-    assignees: ["@ashmckenzie", "@tigerwnz", "@toon"],
+    labels: [
+      ...epBaseConfig.labels,
+      "Category:GDK",
+    ],
+    reviewers: [
+      "ashmckenzie",
+      "tigerwnz",
+      "toon",
+    ],
+    reviewersSampleSize: 1,
     enabledManagers: ["npm", "bundler"],
     packageRules: [
       {

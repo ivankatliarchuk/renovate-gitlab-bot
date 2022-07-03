@@ -1,6 +1,7 @@
 const {
   createServerConfig,
   baseConfig,
+  defaultLabels,
   enableWithBumpStrategy,
 } = require("../shared");
 
@@ -9,13 +10,13 @@ module.exports = createServerConfig([
     repository: "gitlab-renovate-forks/gitlab-vscode-extension",
     ...baseConfig,
     labels: [
-      "maintenance::dependency",
-      "type::maintenance",
+      ...defaultLabels,
       "group::code review",
       "devops::create",
-      "automation:bot-authored",
+      "section::dev",
     ],
-    assignees: ["@viktomas"],
+    reviewers: ["viktomas"],
+    reviewersSampleSize: 1,
     packageRules: [
       {
         ...enableWithBumpStrategy,

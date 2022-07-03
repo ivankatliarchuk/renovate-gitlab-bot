@@ -1,17 +1,11 @@
-const { createServerConfig, baseConfig } = require("../shared");
+const { createServerConfig, baseConfig, epBaseConfig } = require("../shared");
 
 module.exports = createServerConfig([
   {
     repository: "gitlab-renovate-forks/triage-ops",
     ...baseConfig,
-    labels: [
-      "backend",
-      "maintenance::dependency",
-      "type::maintenance",
-      "automation:bot-authored",
-    ],
+    ...epBaseConfig,
     branchPrefix: "renovate-gems/",
-    assignees: ["@rymai"],
     enabledManagers: ["bundler"],
     semanticCommits: "disabled",
     packageRules: [

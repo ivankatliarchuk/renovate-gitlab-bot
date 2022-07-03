@@ -1,20 +1,39 @@
 const fs = require("fs");
 const path = require("path");
 
+const defaultAssignees = {
+  assignees: ["gitlab-dependency-update-bot"],
+};
+
+const defaultLabels = [
+  "maintenance::dependency",
+  "type::maintenance",
+  "automation:bot-authored",
+];
+
+const epBaseConfig = {
+  reviewers: ["godfat-gitlab", "ddieulivol", "ashmckenzie", "rymai"],
+  reviewersSampleSize: 1,
+  labels: [
+    ...defaultLabels,
+    "backend",
+    "Engineering Productivity",
+  ],
+};
+
 const baseConfig = {
   dependencyDashboard: true,
   includeForks: true,
   automerge: false,
   labels: [
     "frontend",
-    "maintenance::dependency",
-    "type::maintenance",
-    "automation:bot-authored",
+    ...defaultLabels,
   ],
   lockFileMaintenance: { enabled: false, schedule: [] },
   enabledManagers: ["npm"],
   prConcurrentLimit: 20,
-  assignees: [
+  ...defaultAssignees,
+  reviewers: [
     "@dmishunov",
     "@ealcantara",
     "@pgascouvaillancourt",
@@ -24,7 +43,7 @@ const baseConfig = {
     "@svedova",
   ],
   assignAutomerge: true,
-  assigneesSampleSize: 2,
+  reviewersSampleSize: 2,
   // Only include the first level of dependency files
   includePaths: ["*"],
   // Dedupe yarn dependencies
@@ -156,6 +175,9 @@ function createServerConfig(repositories, serverConfig = {}) {
 
 module.exports = {
   createServerConfig,
+  defaultAssignees,
+  defaultLabels,
+  epBaseConfig,
   baseConfig,
   updateNothing,
   updateGitLabUIandSVG,

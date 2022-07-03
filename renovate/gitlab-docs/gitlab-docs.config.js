@@ -1,23 +1,22 @@
-const { createServerConfig, baseConfig } = require("../shared");
+const { createServerConfig, baseConfig, defaultLabels } = require("../shared");
 
 module.exports = createServerConfig([
   {
     repository: "gitlab-renovate-forks/gitlab-docs",
     ...baseConfig,
     labels: [
+      ...defaultLabels,
       "Technical Writing",
       "Category:Docs Site",
-      "type::maintenance",
-      "automation:bot-authored",
     ],
-    assignees: [
-      "@axil",
-      "@eread",
-      "@kpaizee",
-      "@marcel.amirault",
-      "@sarahgerman",
+    reviewers: [
+      "axil",
+      "eread",
+      "kpaizee",
+      "marcel.amirault",
+      "sarahgerman",
     ],
-    assigneesSampleSize: 3,
+    reviewersSampleSize: 3,
     enabledManagers: ["npm", "bundler"],
     prConcurrentLimit: 4,
     semanticCommits: "disabled",

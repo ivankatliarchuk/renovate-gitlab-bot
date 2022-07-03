@@ -11,8 +11,15 @@ const {
 } = require("../shared");
 
 const foundationPackages = {
-  assignees: ["@leipert", "@mikegreiling"],
-  addLabels: ["group::foundations", "automation:bot-authored"],
+  reviewers: [
+    "leipert",
+    "mikegreiling",
+  ],
+  addLabels: [
+    "group::foundations",
+    "devops::ecosystem",
+    "section::dev",
+  ],
 };
 
 const updateGitLabVisualReviewTools = {
@@ -25,7 +32,7 @@ const updateFrontendObservability = {
   matchPackagePatterns: ["@sentry/browser"],
   rangeStrategy: "bump",
   enabled: true,
-  assignees: ["@jivanvl"],
+  reviewers: ["jivanvl"],
   groupName: "Frontend Observability Packages",
 };
 
@@ -89,7 +96,7 @@ module.exports = createServerConfig([
         rangeStrategy: "bump",
       },
       {
-        assignees: ["@samdbeckham"],
+        reviewers: ["samdbeckham"],
         matchPackageNames: [
           "vue",
           "vue-loader",
@@ -102,35 +109,41 @@ module.exports = createServerConfig([
         groupName: "Vue and related dependencies",
       },
       {
-        assignees: ["@samdbeckham"],
+        reviewers: ["samdbeckham"],
         matchPackageNames: ["vue-virtual-scroll-list"],
         enabled: true,
         rangeStrategy: "bump",
       },
       {
+        reviewers: ["pslaughter"],
         matchPackagePatterns: ["^@sourcegraph/*"],
-        assignees: ["@pslaughter"],
         enabled: true,
         rangeStrategy: "bump",
         groupName: "Sourcegraph",
       },
       {
+        reviewers: [
+          "himkp",
+          "dmishunov",
+        ],
         matchPackageNames: [
           "monaco-editor",
           "monaco-yaml",
           "monaco-editor-webpack-plugin",
         ],
-        assignees: ["@himkp", "@dmishunov"],
         enabled: true,
         rangeStrategy: "bump",
         groupName: "Monaco Editor and related packages",
       },
       {
+        reviewers: [
+          "himkp",
+          "ealcantara",
+        ],
         matchPackageNames: ["tiptap", "tiptap-extensions"],
         matchPackagePatterns: ["@tiptap/.*", "prosemirror-.*"],
         enabled: true,
         rangeStrategy: "bump",
-        assignees: ["@himkp", "@ealcantara"],
         groupName: "Content Editor Packages",
       },
       updateDOMPurify,

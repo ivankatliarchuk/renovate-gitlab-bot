@@ -1,4 +1,4 @@
-const { createServerConfig, updateNothing, baseConfig } = require("../shared");
+const { createServerConfig, updateNothing, baseConfig, defaultLabels } = require("../shared");
 
 module.exports = createServerConfig([
   {
@@ -6,10 +6,9 @@ module.exports = createServerConfig([
     ...baseConfig,
     dependencyDashboardTitle: "Dependency Dashboard (workhorse)",
     labels: [
+      ...defaultLabels,
       "workhorse",
       "section::dev",
-      "type::maintenance",
-      "maintenance::dependency",
     ],
     branchPrefix: "renovate-workhorse/",
     rangeStrategy: "bump",
@@ -25,8 +24,8 @@ module.exports = createServerConfig([
         // This is our basic rule for Go packages.
         matchManagers: ["gomod"],
         enabled: true,
-        assignees: ["@stanhu"],
-        assigneesSampleSize: 1,
+        reviewers: ["stanhu"],
+        reviewersSampleSize: 1,
         commitMessagePrefix: "workhorse:",
       },
       {
@@ -44,7 +43,7 @@ module.exports = createServerConfig([
           "github.com/grpc-ecosystem/",
           "google.golang.org/",
         ],
-        assigneesSampleSize: 2,
+        reviewersSampleSize: 2,
         groupName: "gRPC dependencies",
       },
     ],

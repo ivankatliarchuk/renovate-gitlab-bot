@@ -1,4 +1,4 @@
-const { createServerConfig, updateNothing, baseConfig } = require("../shared");
+const { createServerConfig, updateNothing, baseConfig, defaultLabels } = require("../shared");
 
 module.exports = createServerConfig(
   [
@@ -6,11 +6,10 @@ module.exports = createServerConfig(
       repository: "gitlab-renovate-forks/gitaly",
       ...baseConfig,
       labels: [
-        "group::projects",
-        "devops::create",
-        "section::dev",
-        "type::maintenance",
-        "maintenance::dependency",
+        ...defaultLabels,
+        "group::gitaly",
+        "devops::systems",
+        "section::enablement",
       ],
       rangeStrategy: "bump",
       semanticCommits: "disabled",
@@ -35,7 +34,10 @@ module.exports = createServerConfig(
           matchManagers: ["bundler"],
           matchPackageNames: ["gitlab-labkit"],
           enabled: true,
-          assignees: ["@pks-t", "@stanhu"],
+          reviewers: [
+            "pks-t",
+            "stanhu",
+          ],
           commitMessagePrefix: "ruby:",
           groupName: "Ruby dependencies",
         },
@@ -43,18 +45,18 @@ module.exports = createServerConfig(
           // This is our basic rule for Go packages.
           matchManagers: ["gomod"],
           enabled: true,
-          assignees: [
-            "@jcaigitlab",
-            "@pks-t",
-            "@proglottis",
-            "@samihiltunen",
-            "@toon",
-            "@wchandler",
+          reviewers: [
+            "jcaigitlab",
+            "pks-t",
+            "proglottis",
+            "samihiltunen",
+            "toon",
+            "wchandler",
           ],
           // By default, we only use a single assignee for dependencies. Some
           // of the more critical ones follow Gitaly's normal review process
           // and instead require two reviewers.
-          assigneesSampleSize: 1,
+          reviewersSampleSize: 1,
           commitMessagePrefix: "go:",
           excludePackageNames: [
             // For now, we disable a bunch of Go packages which we know to be
@@ -83,7 +85,7 @@ module.exports = createServerConfig(
         {
           matchManagers: ["gomod"],
           matchPackagePrefixes: ["github.com/jackc/"],
-          assigneesSampleSize: 2,
+          reviewersSampleSize: 2,
           groupName: "Postgres dependencies",
         },
         {
@@ -92,7 +94,7 @@ module.exports = createServerConfig(
             "github.com/grpc-ecosystem/",
             "google.golang.org/",
           ],
-          assigneesSampleSize: 2,
+          reviewersSampleSize: 2,
           groupName: "gRPC dependencies",
         },
       ],
