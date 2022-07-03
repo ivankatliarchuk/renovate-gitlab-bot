@@ -119,7 +119,7 @@ async function main() {
       if (DRY_RUN) {
         log("Not executing, DRY-RUN enabled");
       } else {
-        GitLabAPI.put(apiBase, payload);
+        await GitLabAPI.put(apiBase, payload);
       }
     } else {
       log("Nothing to do");
