@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const { sampleSize } = require("lodash");
 const factory = require("gitlab-api-async-iterator");
 
@@ -55,6 +57,10 @@ async function getUserId(usernameRaw) {
 }
 
 async function main() {
+  if (DRY_RUN) {
+    log("DRY RUN ENABLED");
+  }
+
   for await (const mr of MRIterator) {
     const {
       project_id,
@@ -82,7 +88,7 @@ async function main() {
       continue;
     }
 
-    const { assignees = [], labels = [] } = metadata;
+    const { labels = [], reviewers = [] } = metadata;
 
     const payload = {};
     let update = false;
@@ -94,12 +100,12 @@ async function main() {
       );
     }
 
-    if (!prevReviewers.length && assignees.length) {
+    if (!prevReviewers.length && reviewers.length) {
       update = true;
-      const newAssignees = sampleSize(assignees, SAMPLE_SIZE);
-      log(`No reviewers set, setting ${newAssignees.join(", ")}`);
+      const newReviewers = sampleSize(reviewers, SAMPLE_SIZE);
+      log(`No reviewers set, setting ${newReviewers.join(", ")}`);
 
-      payload.reviewer_ids = await Promise.all(newAssignees.map(getUserId));
+      payload.reviewer_ids = await Promise.all(newReviewers.map(getUserId));
     }
 
     if (!prevLabels.length && labels.length) {
@@ -111,7 +117,7 @@ async function main() {
     if (update) {
       log(`Updating MR ${iid} with ${JSON.stringify(payload)}`);
       if (DRY_RUN) {
-        log("Not executing, due to dry run is set");
+        log("Not executing, DRY-RUN enabled");
       } else {
         GitLabAPI.put(apiBase, payload);
       }
