@@ -1,4 +1,9 @@
-const { createServerConfig, updateNothing, baseConfig, defaultLabels } = require("../shared");
+const {
+  createServerConfig,
+  updateNothing,
+  baseConfig,
+  defaultLabels,
+} = require("../shared");
 
 module.exports = createServerConfig(
   [
@@ -10,6 +15,7 @@ module.exports = createServerConfig(
         "group::gitaly",
         "devops::systems",
         "section::enablement",
+        "Category:Gitaly",
       ],
       rangeStrategy: "bump",
       semanticCommits: "disabled",
@@ -34,10 +40,7 @@ module.exports = createServerConfig(
           matchManagers: ["bundler"],
           matchPackageNames: ["gitlab-labkit"],
           enabled: true,
-          reviewers: [
-            "pks-t",
-            "stanhu",
-          ],
+          reviewers: ["pks-t", "stanhu"],
           commitMessagePrefix: "ruby:",
           groupName: "Ruby dependencies",
         },
