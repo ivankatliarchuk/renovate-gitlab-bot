@@ -1,29 +1,19 @@
 #!/usr/bin/env node
 
 const { sampleSize } = require("lodash");
-const factory = require("gitlab-api-async-iterator");
+const { log, warn, setScope } = require("../lib/logger");
+const { RENOVATE_BOT_USER, DRY_RUN } = require("../lib/constants");
+const {
+  GitLabAPIIterator,
+  GitLabAPI,
+  createRenovateMRIterator,
+  getUserId,
+} = require("../lib/api");
 
-const { GitLabAPI, GitLabAPIIterator } = factory();
+setScope(`[Post-Processing]`);
 
 const MATCHER = /```json\s*(?<json>.+?)\s*```/m;
-const RENOVATE_BOT_USER = "gitlab-dependency-update-bot";
 const SAMPLE_SIZE = 2;
-
-const DRY_RUN = (process.env.DRY_RUN ?? "true") === "true";
-
-function log(msg1, ...msg) {
-  console.log(`[Post-Processing] ${msg1}`, ...msg);
-}
-
-function warn(msg1, ...msg) {
-  console.warn(`[Post-Processing] ${msg1}`, ...msg);
-}
-
-const MRIterator = new GitLabAPIIterator("/merge_requests", {
-  author_username: RENOVATE_BOT_USER,
-  state: "opened",
-  scope: "all",
-});
 
 async function findRenovateComment(mr) {
   const NotesIterator = new GitLabAPIIterator(mr);
@@ -33,33 +23,19 @@ async function findRenovateComment(mr) {
       return JSON.parse(match.json);
     }
   }
-  throw new Error("No Note Found");
+  throw new Error(`No Note from ${RENOVATE_BOT_USER} found`);
 }
 
 function cleanLabels(labels) {
   return labels.filter((l) => l !== "Community contribution");
 }
 
-const usermap = {};
-
-async function getUserId(usernameRaw) {
-  const username = usernameRaw.startsWith("@")
-    ? usernameRaw.substr(1)
-    : usernameRaw;
-
-  if (!usermap[username]) {
-    log(`Retrieving ID for ${username}`);
-    const { data } = await GitLabAPI.get(`/users?username=${username}`);
-    usermap[username] = data.find((u) => u.username === username).id;
-  }
-
-  return usermap[username];
-}
-
 async function main() {
   if (DRY_RUN) {
     log("DRY RUN ENABLED");
   }
+
+  const MRIterator = createRenovateMRIterator();
 
   for await (const mr of MRIterator) {
     const {

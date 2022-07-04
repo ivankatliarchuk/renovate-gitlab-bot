@@ -30,6 +30,10 @@ function run_renovate {
     node "$DIR/node_modules/renovate/dist/renovate.js" && return 0 || return 1
 }
 
+function run_preprocessing {
+    node "$DIR/scripts/pre-process.js" && return 0 || return 1
+}
+
 function run_postprocessing {
     node "$DIR/scripts/post-process.js" && return 0 || return 1
 }
@@ -38,6 +42,8 @@ FILES="$DIR/$CONFIG_FOLDER/*.config.js"
 for file in $FILES
 do
   echo "Starting renovate for $file"
+
+  run_preprocessing || fail "Execution of preprocessing failed"
 
   run_renovate "$file" || fail "Execution of renovate for $file failed"
 

@@ -1,25 +1,17 @@
 #!/usr/bin/env node
 
 const { DateTime } = require("luxon");
-const factory = require("gitlab-api-async-iterator");
+const { log, warn, setScope } = require("../lib/logger");
+const { RENOVATE_PROJECT_ID } = require("../lib/constants");
+const { GitLabAPIIterator, GitLabAPI } = require("../lib/api");
 
-const { GitLabAPI, GitLabAPIIterator } = factory();
+setScope(`[Deleting pipelines]`);
+
 const STOP_SCRIPT_AT = DateTime.now().plus({ minutes: 10 });
-
-const PROJECT_ID = "15445883";
-
-function log(msg1, ...msg) {
-  console.log(`[Delete Pipelines] ${msg1}`, ...msg);
-}
-
-function warn(msg1, ...msg) {
-  console.warn(`[Delete Pipelines] ${msg1}`, ...msg);
-}
-
 const FOUR_WEEKS_AGO = DateTime.now().minus({ days: 28 });
 
 const pipelinesIterator = new GitLabAPIIterator(
-  `/projects/${PROJECT_ID}/pipelines`,
+  `/projects/${RENOVATE_PROJECT_ID}/pipelines`,
   {
     per_page: 100,
     updated_before: FOUR_WEEKS_AGO.toISO({
@@ -44,7 +36,7 @@ async function main() {
 
     if (FOUR_WEEKS_AGO > DateTime.fromISO(created_at)) {
       log(`Pipeline ${web_url} is older than four weeks, deleting`);
-      stack.push(`/projects/${PROJECT_ID}/pipelines/${id}`);
+      stack.push(`/projects/${RENOVATE_PROJECT_ID}/pipelines/${id}`);
     }
 
     if (stack.length > 10) {

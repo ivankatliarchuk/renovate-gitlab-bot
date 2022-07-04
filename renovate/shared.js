@@ -1,8 +1,12 @@
 const fs = require("fs");
 const path = require("path");
+const {
+  RENOVATE_BOT_USER,
+  RENOVATE_STOP_UPDATING_LABEL,
+} = require("../lib/constants");
 
 const defaultAssignees = {
-  assignees: ["gitlab-dependency-update-bot"],
+  assignees: [RENOVATE_BOT_USER],
 };
 
 const defaultLabels = [
@@ -41,6 +45,7 @@ const baseConfig = {
   includePaths: ["*"],
   // Dedupe yarn dependencies
   postUpdateOptions: ["yarnDedupeFewer"],
+  stopUpdatingLabel: RENOVATE_STOP_UPDATING_LABEL,
   prBodyNotes: [
     `MR created with the help of [${process.env.CI_PROJECT_PATH}](${process.env.CI_PROJECT_URL})`,
   ],
