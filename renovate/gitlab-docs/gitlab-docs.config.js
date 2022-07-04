@@ -22,7 +22,7 @@ module.exports = createServerConfig([
     semanticCommits: "disabled",
     packageRules: [
       {
-        matchPackagePatterns: ["bootstrap", "vue"],
+        matchPackagePatterns: ["bootstrap", "vue", "gitlab_kramdown"],
         enabled: false,
       },
       {
