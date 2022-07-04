@@ -77,3 +77,18 @@ beep-boop:
     expire_in: 1 week
     public: false
     when: always
+
+delete-pipelines:
+  image: $DOCKER_IMAGE
+  variables:
+    GIT_STRATEGY: none
+  stage: run
+  resource_group: $CI_COMMIT_REF_SLUG-cleanup
+  tags:
+    - gitlab-org
+  script:
+    - cd /workdir/
+    - export "GITLAB_TOKEN=$DELETE_PIPELINES_TOKEN"
+    - node ./scripts/delete-pipelines.js
+  rules:
+    - if: $DELETE_PIPELINES
