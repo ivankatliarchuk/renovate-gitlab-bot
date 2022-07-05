@@ -68,12 +68,7 @@ module.exports = createServerConfig(
             "github.com/cloudflare/tableflip",
             "github.com/containerd/cgroups",
             "github.com/hashicorp/yamux",
-            "github.com/prometheus/client_golang",
             "github.com/rubenv/sql-migrate",
-            "github.com/uber/jaeger-client-go",
-            "gitlab.com/gitlab-org/gitlab-shell",
-            "gitlab.com/gitlab-org/labkit",
-            "gocloud.dev",
           ],
         },
         {
