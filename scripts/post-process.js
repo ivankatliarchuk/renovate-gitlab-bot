@@ -8,6 +8,7 @@ const {
   GitLabAPI,
   createRenovateMRIterator,
   getUserId,
+  forEachFork,
 } = require("../lib/api");
 
 setScope(`[Post-Processing]`);
@@ -30,12 +31,13 @@ function cleanLabels(labels) {
   return labels.filter((l) => l !== "Community contribution");
 }
 
-async function main() {
-  if (DRY_RUN) {
-    log("DRY RUN ENABLED");
-  }
+async function processMRs(project) {
+  const { web_url: projectUrl, forked_from_project: upstreamProject } = project;
+  const { web_url: upstreamProjectUrl, id: upstreamId } = upstreamProject;
 
-  const MRIterator = createRenovateMRIterator();
+  log(`Working on project: ${projectUrl}`);
+  log(`Upstream project seems to be: ${upstreamProjectUrl}`);
+  const MRIterator = createRenovateMRIterator(upstreamId);
 
   for await (const mr of MRIterator) {
     const {
@@ -103,6 +105,18 @@ async function main() {
   }
 }
 
+async function main() {
+  if (DRY_RUN) {
+    log("DRY RUN ENABLED");
+  }
+
+  const [project] = process.argv.slice(2);
+
+  const { repositories } = require(project);
+
+  await forEachFork(repositories, processMRs);
+}
+
 main()
   .then(() => {
     log("Done");
@@ -110,5 +124,6 @@ main()
   .catch((e) => {
     warn("An error happened");
     warn(e.message);
+    warn(e.stack);
     process.exit(1);
   });
