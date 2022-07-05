@@ -60,5 +60,6 @@ main()
   .catch((e) => {
     warn("An error happened");
     warn(e.message);
+    warn(e.stack);
     process.exit(1);
   });
