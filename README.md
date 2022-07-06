@@ -12,6 +12,7 @@ The following repositories are currently being updated automatically.
 
 <!-- rep -->
 
+- [gitlab-renovate-forks/cluster-integration/auto-build-image](https://gitlab.com/gitlab-renovate-forks/cluster-integration/auto-build-image)
 - [gitlab-renovate-forks/cluster-integration/helm-install-image](https://gitlab.com/gitlab-renovate-forks/cluster-integration/helm-install-image)
 - [gitlab-renovate-forks/customers-gitlab-com](https://gitlab.com/gitlab-renovate-forks/customers-gitlab-com)
 - [gitlab-renovate-forks/design.gitlab.com](https://gitlab.com/gitlab-renovate-forks/design.gitlab.com)
