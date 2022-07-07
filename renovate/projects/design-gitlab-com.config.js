@@ -6,8 +6,6 @@ const {
   ESLint,
   Stylelint,
   updateGitLabScopeDev,
-  noMajor,
-  updateNothing,
 } = require("../shared");
 
 module.exports = createServerConfig([
@@ -24,6 +22,8 @@ module.exports = createServerConfig([
     internalChecksFilter: "strict",
     separateMultipleMajor: true,
     stabilityDays: 3,
+    rangeStrategy: "bump",
+    semanticCommits: "enabled",
     packageRules: [
       ...semanticPrefixFixDepsChoreOthers,
       {
@@ -41,16 +41,18 @@ module.exports = createServerConfig([
         ],
         allowedVersions: "<3",
         enabled: true,
-        rangeStrategy: "bump",
         groupName: "Vue",
       },
       {
         matchPackagePatterns: ["@babel.+"],
         enabled: true,
-        rangeStrategy: "bump",
         groupName: "Babel",
       },
+      {
+        matchPackageNames: ["jest", "jest-environment-jsdom"],
+        enabled: true,
+        groupName: "Jest",
+      },
     ],
-    semanticCommits: "enabled",
   },
 ]);
