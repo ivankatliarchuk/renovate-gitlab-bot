@@ -25,7 +25,6 @@ module.exports = createServerConfig([
     separateMultipleMajor: true,
     stabilityDays: 3,
     packageRules: [
-      updateNothing,
       ...semanticPrefixFixDepsChoreOthers,
       {
         ...updateGitLabUIandSVG,
@@ -50,16 +49,6 @@ module.exports = createServerConfig([
         enabled: true,
         rangeStrategy: "bump",
         groupName: "Babel",
-      },
-      {
-        matchManagers: ["npm"],
-        enabled: true,
-        excludePackageNames: [
-          "@nuxt/content",
-          "@nuxtjs/sentry",
-          "@vue/test-utils",
-          "jest",
-        ],
       },
     ],
     semanticCommits: "enabled",
