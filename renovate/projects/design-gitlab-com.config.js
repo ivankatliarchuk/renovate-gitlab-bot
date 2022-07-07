@@ -22,6 +22,7 @@ module.exports = createServerConfig([
       "pgascouvaillancourt",
     ],
     internalChecksFilter: "strict",
+    separateMultipleMajor: true,
     stabilityDays: 3,
     packageRules: [
       updateNothing,
@@ -34,11 +35,31 @@ module.exports = createServerConfig([
       Stylelint,
       updateGitLabScopeDev,
       {
-        matchPackageNames: ["vue", "vue-template-compiler"],
+        matchPackageNames: [
+          "vue",
+          "vue-template-compiler",
+          "vue-server-renderer",
+        ],
         allowedVersions: "<3",
         enabled: true,
         rangeStrategy: "bump",
         groupName: "Vue",
+      },
+      {
+        matchPackagePatterns: ["@babel.+"],
+        enabled: true,
+        rangeStrategy: "bump",
+        groupName: "Babel",
+      },
+      {
+        matchManagers: ["npm"],
+        enabled: true,
+        excludePackageNames: [
+          "@nuxt/content",
+          "@nuxtjs/sentry",
+          "@vue/test-utils",
+          "jest",
+        ],
       },
     ],
     semanticCommits: "enabled",
