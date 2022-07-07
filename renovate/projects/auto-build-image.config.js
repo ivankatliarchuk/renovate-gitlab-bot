@@ -20,7 +20,7 @@ module.exports = createServerConfig([
         enabled: true,
         fileMatch: [".gitlab-ci.yml"],
         matchStrings: [
-          "PACK_VERSION: v(?<currentValue>.*)\n"
+          "PACK_VERSION: (?<currentValue>.*)\n"
         ],
         depNameTemplate: "pack",
         packageNameTemplate: "buildpacks/pack",
