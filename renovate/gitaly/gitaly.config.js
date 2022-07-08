@@ -61,15 +61,6 @@ module.exports = createServerConfig(
           // and instead require two reviewers.
           reviewersSampleSize: 1,
           commitMessagePrefix: "go:",
-          excludePackageNames: [
-            // For now, we disable a bunch of Go packages which we know to be
-            // out-of-date to lessen the churn. These should be enabled at a
-            // later point.
-            "github.com/cloudflare/tableflip",
-            "github.com/containerd/cgroups",
-            "github.com/hashicorp/yamux",
-            "github.com/rubenv/sql-migrate",
-          ],
         },
         {
           // golang.org/x/ packages don't use releases, but instead use a
