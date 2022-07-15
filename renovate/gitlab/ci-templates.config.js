@@ -31,6 +31,7 @@ module.exports = createServerConfig([
     reviewers: ["hfyngvason", "shinya.maeda", "marcel.amirault", "laurax"], // CI template maintainers
     labels: baseLabels,
     includePaths: ["lib/gitlab/ci/templates/**/*"],
+    commitBody: "Changelog: changed",
     packageRules: [
       {
         groupName: "auto-build-image labels and reviewers",
