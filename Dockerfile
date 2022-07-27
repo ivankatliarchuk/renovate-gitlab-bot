@@ -22,7 +22,7 @@ COPY --from=builder /opt/yarn-* /opt/yarn
 
 ENV PATH=/opt/yarn/bin:${PATH}
 
-RUN apk add --update --no-cache git bash make curl \
+RUN apk add --update --no-cache git bash make cmake curl \
   && node -v && cd /usr/local/bin/ \
   && ln -s ../lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm \
   && ln -s ../lib/node_modules/npm/bin/npx-cli.js /usr/local/bin/npx \
