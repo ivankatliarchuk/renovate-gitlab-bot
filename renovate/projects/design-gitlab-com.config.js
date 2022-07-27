@@ -7,6 +7,7 @@ const {
   Stylelint,
   updateGitLabScopeDev,
 } = require("../shared");
+const { prVueMajor2, prBabel, prJest } = require("../frontend");
 
 module.exports = createServerConfig([
   {
@@ -33,26 +34,9 @@ module.exports = createServerConfig([
       ESLint,
       Stylelint,
       updateGitLabScopeDev,
-      {
-        matchPackageNames: [
-          "vue",
-          "vue-template-compiler",
-          "vue-server-renderer",
-        ],
-        allowedVersions: "<3",
-        enabled: true,
-        groupName: "Vue",
-      },
-      {
-        matchPackagePatterns: ["@babel.+"],
-        enabled: true,
-        groupName: "Babel",
-      },
-      {
-        matchPackageNames: ["jest", "jest-environment-jsdom"],
-        enabled: true,
-        groupName: "Jest",
-      },
+      prVueMajor2,
+      prBabel,
+      prJest,
     ],
   },
 ]);
