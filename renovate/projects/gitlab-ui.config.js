@@ -9,12 +9,19 @@ const {
   updateDOMPurify,
   semanticPrefixFixDepsChoreOthers,
 } = require("../shared");
+const { prJest, prBabel, prVueMajor2 } = require("../frontend");
 
 module.exports = createServerConfig([
   {
     repository: "gitlab-renovate-forks/gitlab-ui",
     ...baseConfig,
+    internalChecksFilter: "strict",
+    separateMultipleMajor: true,
+    stabilityDays: 3,
+    rangeStrategy: "bump",
+    semanticCommits: "enabled",
     packageRules: [
+      ...semanticPrefixFixDepsChoreOthers,
       updateNothing,
       updateGitLabUIandSVG,
       ESLint,
@@ -38,8 +45,9 @@ module.exports = createServerConfig([
         enabled: true,
         groupName: "Storybook",
       },
-      ...semanticPrefixFixDepsChoreOthers,
+      prJest,
+      prBabel,
+      prVueMajor2,
     ],
-    semanticCommits: "enabled",
   },
 ]);
