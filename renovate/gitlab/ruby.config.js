@@ -1,4 +1,9 @@
-const { createServerConfig, updateNothing, baseConfig, epBaseConfig } = require("../shared");
+const {
+  createServerConfig,
+  updateNothing,
+  baseConfig,
+  epBaseConfig,
+} = require("../shared");
 
 module.exports = createServerConfig([
   {
@@ -9,6 +14,7 @@ module.exports = createServerConfig([
     branchPrefix: "renovate-gems/",
     enabledManagers: ["bundler"],
     semanticCommits: "disabled",
+    rangeStrategy: "bump",
     packageRules: [
       updateNothing,
       {
@@ -23,13 +29,11 @@ module.exports = createServerConfig([
           "thin",
         ],
         enabled: true,
-        rangeStrategy: "bump",
         groupName: "Ruby development dependencies",
       },
       {
         matchPackageNames: ["gitlab-styles", "gitlab-dangerfiles"],
         enabled: true,
-        rangeStrategy: "bump",
         groupName: "GitLab Tooling Ruby dependencies",
       },
       {
@@ -42,13 +46,11 @@ module.exports = createServerConfig([
           "rails-html-sanitizer",
         ],
         enabled: true,
-        rangeStrategy: "bump",
         groupName: "Ruby Markdown and HTML parsing dependencies",
       },
       {
         matchPackageNames: ["pg", "pg_query"],
         enabled: true,
-        rangeStrategy: "bump",
         groupName: "Ruby database dependencies",
       },
       {
@@ -63,14 +65,17 @@ module.exports = createServerConfig([
           "rack-timeout",
         ],
         enabled: true,
-        rangeStrategy: "bump",
         groupName: "Ruby Rack-related dependencies",
       },
       {
         matchPackageNames: ["aws-sdk-core", "aws-sdk-s3"],
         enabled: true,
-        rangeStrategy: "bump",
         groupName: "Ruby AWS-related dependencies",
+      },
+      {
+        matchPackageNames: ["lookbook", "view_component"],
+        enabled: true,
+        reviewers: ["thutterer"],
       },
     ],
   },
