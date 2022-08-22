@@ -47,7 +47,7 @@ module.exports = createServerConfig([
       },
       prJest,
       prBabel,
-      prVueMajor2,
+      { ...prVueMajor2, rangeStrategy: "auto" },
     ],
   },
 ]);
