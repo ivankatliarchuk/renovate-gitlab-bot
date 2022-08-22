@@ -35,6 +35,7 @@ module.exports = createServerConfig([
     repository: "gitlab-renovate-forks/gitlab",
     ...baseConfig,
     dependencyDashboardTitle: "Dependency Dashboard (node)",
+    rangeStrategy: "bump",
     packageRules: [
       updateNothing,
       updateGitLabUIandSVG,
