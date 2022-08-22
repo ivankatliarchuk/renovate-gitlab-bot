@@ -15,7 +15,7 @@ const prBabel = {
  */
 const prVueMajor2 = {
   matchPackageNames: ["vue", "vue-template-compiler", "vue-server-renderer"],
-  foo: "bar",
+  rangeStrategy: "auto",
   allowedVersions: "<3",
   enabled: true,
   groupName: "Vue",

@@ -9,17 +9,11 @@ const {
   updateDOMPurify,
   updateGitLabScope,
 } = require("../shared");
+const { prVueMajor2 } = require("../frontend");
 
 const foundationPackages = {
-  reviewers: [
-    "leipert",
-    "mikegreiling",
-  ],
-  addLabels: [
-    "group::foundations",
-    "devops::ecosystem",
-    "section::dev",
-  ],
+  reviewers: ["leipert", "mikegreiling"],
+  addLabels: ["group::foundations", "devops::ecosystem", "section::dev"],
 };
 
 const updateGitLabVisualReviewTools = {
@@ -96,17 +90,8 @@ module.exports = createServerConfig([
         rangeStrategy: "bump",
       },
       {
-        reviewers: ["samdbeckham"],
-        matchPackageNames: [
-          "vue",
-          "vue-loader",
-          "vue-router",
-          "vue-template-compiler",
-          "vuex",
-        ],
-        enabled: true,
-        rangeStrategy: "bump",
-        groupName: "Vue and related dependencies",
+        ...prVueMajor2,
+        reviewers: ["@leipert"],
       },
       {
         reviewers: ["samdbeckham"],
@@ -122,10 +107,7 @@ module.exports = createServerConfig([
         groupName: "Sourcegraph",
       },
       {
-        reviewers: [
-          "himkp",
-          "dmishunov",
-        ],
+        reviewers: ["himkp", "dmishunov"],
         matchPackageNames: [
           "monaco-editor",
           "monaco-yaml",
@@ -136,10 +118,7 @@ module.exports = createServerConfig([
         groupName: "Monaco Editor and related packages",
       },
       {
-        reviewers: [
-          "himkp",
-          "ealcantara",
-        ],
+        reviewers: ["himkp", "ealcantara"],
         matchPackageNames: ["tiptap", "tiptap-extensions"],
         matchPackagePatterns: ["@tiptap/.*", "prosemirror-.*"],
         enabled: true,
