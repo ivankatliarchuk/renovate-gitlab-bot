@@ -1,5 +1,6 @@
-.git
-node_modules
+.cache/
+.git/
+node_modules/
 
 .gitignore
 .gitlab-ci.yml
