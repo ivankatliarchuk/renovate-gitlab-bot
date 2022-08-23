@@ -24,8 +24,8 @@ cd .. || exit 1
 
 if [ "$DOCKER_BUILD" = "true" ]; then
   yarn install --production --frozen-lockfile --force
-  echo "Cleaning up the renovate-fork source files"
-  rm -rf renovate-fork renovate*.tgz
+  echo "Cleaning up the renovate-fork source files and yarn cache"
+  rm -rf renovate-fork renovate*.tgz .cache
 else
   yarn cache clean
   yarn add "renovate@file:./renovate-fork-$VERSION.tgz"
