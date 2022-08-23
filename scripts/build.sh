@@ -10,12 +10,16 @@ rm -f renovate*.tgz
 
 cd renovate-fork || exit 1
 git fetch
+git fetch --tags
 git checkout "$FORK_BRANCH"
-git pull
+git reset --hard "origin/$FORK_BRANCH"
+VERSION=$(git describe --tags)
+echo "Renovate Version $VERSION"
+yarn version --new-version "$VERSION" --no-git-tag-version
 yarn install
 yarn build
 yarn pack
-mv ./renovate*.tgz "../renovate-fork-$FORK_BRANCH.tgz"
+mv ./renovate*.tgz "../renovate-fork-$VERSION.tgz"
 cd .. || exit 1
 
 if [ "$DOCKER_BUILD" = "true" ]; then
@@ -23,7 +27,8 @@ if [ "$DOCKER_BUILD" = "true" ]; then
   echo "Cleaning up the renovate-fork source files"
   rm -rf renovate-fork renovate*.tgz
 else
-  yarn add "renovate@file:./renovate-fork-$FORK_BRANCH.tgz"
+  yarn cache clean
+  yarn add "renovate@file:./renovate-fork-$VERSION.tgz"
   sed -r 's_(file:./renovate.+.tgz)#.+"_\1"_' yarn.lock > yarn.tmp
   mv -f yarn.tmp yarn.lock
   yarn install --force
