@@ -45,6 +45,11 @@ module.exports = createServerConfig([
         enabled: true,
         groupName: "Storybook",
       },
+      {
+        matchPackageNames: ["cypress"],
+        rangeStrategy: "bump",
+        enabled: true,
+      },
       prJest,
       prBabel,
       { ...prVueMajor2, rangeStrategy: "auto" },
