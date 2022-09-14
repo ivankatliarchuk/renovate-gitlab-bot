@@ -21,7 +21,7 @@ module.exports = createServerConfig([
     semanticCommits: "disabled",
     packageRules: [
       {
-        matchPackagePatterns: ["bootstrap", "vue", "gitlab_kramdown"],
+        matchPackagePatterns: ["bootstrap", "vue", "gitlab_kramdown", "@rollup/plugin-node-resolve"],
         enabled: false,
       },
       {
