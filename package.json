@@ -10,7 +10,7 @@
     "gitlab-api-async-iterator": "^1.2.0",
     "lodash": "^4.17.21",
     "luxon": "^2.4.0",
-    "renovate": "file:./renovate-fork-32.172.2-7-g0e0b08c50.tgz",
+    "renovate": "file:./renovate-fork-32.208.2-5-g70fe345d0.tgz",
     "renovate-config-monorepo": "^0.43.0",
     "renovate-config-packages": "^0.7.0"
   },
