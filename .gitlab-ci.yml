@@ -17,12 +17,13 @@ stages:
   tags:
     - gitlab-org-docker
   resource_group: $CI_COMMIT_REF_SLUG
-  image: docker:stable
+  image: docker:20.10.18-git
   variables:
     DOCKER_HOST: tcp://docker:2375/
     DOCKER_CLI_EXPERIMENTAL: enabled
+    DOCKER_BUILDKIT: "1"
   services:
-    - docker:stable-dind
+    - docker:20.10.18-dind
   script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
     - |
