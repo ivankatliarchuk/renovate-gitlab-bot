@@ -1,9 +1,11 @@
 .cache/
 .git/
 node_modules/
+renovate-fork/
 
 .gitignore
 .gitlab-ci.yml
 Dockerfile
 README.md
 update-readme.js
+*.tgz
