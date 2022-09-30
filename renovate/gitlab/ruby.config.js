@@ -16,6 +16,7 @@ module.exports = createServerConfig(
       enabledManagers: ["bundler"],
       semanticCommits: "disabled",
       rangeStrategy: "bump",
+      postUpdateOptions: ["bundlerConservative"],
       postUpgradeTasks: {
         // Regenerate files that may change due to the dependency updates.
         commands: ["/workdir/renovate/gitlab/bundle-checksum.sh"],
