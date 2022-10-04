@@ -28,7 +28,7 @@ module.exports = createServerConfig(
         // and the root directory
         "*",
       ],
-      postUpdateOptions: ["gomodTidy"],
+      postUpdateOptions: ["gomodTidy", "bundlerConservative"],
       postUpgradeTasks: {
         // Regenerate files that may change due to the dependency updates.
         commands: ["make notice"],

@@ -7,6 +7,7 @@ module.exports = createServerConfig([
     ...epBaseConfig,
     branchPrefix: "renovate-gems/",
     enabledManagers: ["bundler"],
+    postUpdateOptions: ["bundlerConservative"],
     semanticCommits: "disabled",
     packageRules: [
       {
