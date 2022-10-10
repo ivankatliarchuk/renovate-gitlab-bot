@@ -16,7 +16,7 @@ const defaultLabels = [
 ];
 
 const epBaseConfig = {
-  reviewers: ["godfat-gitlab", "ddieulivol", "ashmckenzie", "rymai"],
+  reviewers: ["amihaila", "ashmckenzie", "ddieulivol", "godfat-gitlab", "jennli", "nao.hashizume", "rymai"],
   reviewersSampleSize: 1,
   labels: [...defaultLabels, "backend", "Engineering Productivity"],
 };
