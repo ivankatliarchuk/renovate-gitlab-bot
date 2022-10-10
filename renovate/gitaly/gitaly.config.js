@@ -49,9 +49,13 @@ module.exports = createServerConfig(
           matchManagers: ["gomod"],
           enabled: true,
           reviewers: [
+            "8bitlife",
             "jcaigitlab",
+            "justintobler",
+            "knayakgl",
             "pks-t",
             "proglottis",
+            "qmnguyen0711",
             "samihiltunen",
             "toon",
             "wchandler",
