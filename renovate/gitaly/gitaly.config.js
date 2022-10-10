@@ -60,10 +60,7 @@ module.exports = createServerConfig(
             "toon",
             "wchandler",
           ],
-          // By default, we only use a single assignee for dependencies. Some
-          // of the more critical ones follow Gitaly's normal review process
-          // and instead require two reviewers.
-          reviewersSampleSize: 1,
+          reviewersSampleSize: 2,
           commitMessagePrefix: "go:",
         },
         {
@@ -74,21 +71,6 @@ module.exports = createServerConfig(
           matchManagers: ["gomod"],
           matchPackagePrefixes: ["golang.org/x/"],
           schedule: ["on the first day of the month"],
-        },
-        {
-          matchManagers: ["gomod"],
-          matchPackagePrefixes: ["github.com/jackc/"],
-          reviewersSampleSize: 2,
-          groupName: "Postgres dependencies",
-        },
-        {
-          matchManagers: ["gomod"],
-          matchPackagePrefixes: [
-            "github.com/grpc-ecosystem/",
-            "google.golang.org/",
-          ],
-          reviewersSampleSize: 2,
-          groupName: "gRPC dependencies",
         },
       ],
     },
