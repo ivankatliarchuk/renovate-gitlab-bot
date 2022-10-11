@@ -88,6 +88,14 @@ module.exports = createServerConfig(
           branchPrefix: "renovate-tools/",
           additionalBranchPrefix: "{{parentDir}}/",
         },
+        {
+          // The Go version cannot easily be upgraded in an automated way as
+          // this needs to be coordinated globally across all GitLab
+          // components. We thus disable upgrades to the Go language version.
+          matchManagers: ["gomod"],
+          matchDepTypes: ["golang"],
+          enabled: false
+        },
       ],
     },
   ],
