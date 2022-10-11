@@ -13,7 +13,6 @@ module.exports = createServerConfig([
       {
         enabled: true,
         matchManagers: ["terraform"],
-        groupName: "Terraform dependencies",
       },
     ],
   },
