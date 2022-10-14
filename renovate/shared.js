@@ -21,6 +21,12 @@ const epBaseConfig = {
   labels: [...defaultLabels, "backend", "Engineering Productivity"],
 };
 
+const qaBaseConfig = {
+  reviewers: ["acunskis", "a_mcdonald", "chloeliu", "ddavison", "mlapierre", "sliaquat", "treagitlab"],
+  reviewersSampleSize: 1,
+  labels: [...defaultLabels, "Quality"]
+};
+
 const baseConfig = {
   dependencyDashboard: true,
   includeForks: true,
@@ -176,6 +182,7 @@ module.exports = {
   defaultAssignees,
   defaultLabels,
   epBaseConfig,
+  qaBaseConfig,
   baseConfig,
   updateNothing,
   updateGitLabUIandSVG,
