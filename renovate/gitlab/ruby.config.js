@@ -56,7 +56,7 @@ module.exports = createServerConfig(
           groupName: "Ruby Markdown and HTML parsing dependencies",
         },
         {
-          matchPackageNames: ["pg", "pg_query"],
+          matchPackageNames: ["pg", "pg_query", "marginalia"],
           enabled: true,
           groupName: "Ruby database dependencies",
         },
