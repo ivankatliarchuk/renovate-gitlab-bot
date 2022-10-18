@@ -41,7 +41,7 @@ module.exports = createServerConfig(
         updateNothing,
         {
           matchManagers: ["bundler"],
-          matchPackageNames: ["gitlab-labkit"],
+          matchPackageNames: ["gitlab-labkit", "google-protobuf"],
           enabled: true,
           reviewers: ["pks-t", "stanhu"],
           commitMessagePrefix: "ruby:",
