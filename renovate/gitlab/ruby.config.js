@@ -84,6 +84,11 @@ module.exports = createServerConfig(
           enabled: true,
           reviewers: ["thutterer"],
         },
+        {
+          matchPackageNames: ["google-protobuf"],
+          enabled: true,
+          groupName: "Google Protobuf",
+        },
       ],
     },
   ],
