@@ -11,14 +11,16 @@ please review this Merge Request with the same scrutiny as any community contrib
     - _Performance_: Dependencies do not bloat the application code or prolong CI times unnecessarily
     - _Stability_: Pipelines are passing
 
-2.  If tests are passing and you've reviewed the updated dependencies, execute pipelines in the [context of the main project][main_context]
+2.  If ruby gems or node packages are being upgraded, consider using https://my.diffend.io to compare two versions (e.g. [compare pg_query `2.1.0` and `2.1.4`](https://my.diffend.io/gems/pg_query/2.1.0/2.1.4))
+
+3.  If tests are passing and you've reviewed the updated dependencies, execute pipelines in the [context of the main project][main_context]
 
     This MR is created from a fork, therefore not _all_ jobs (e.g. Danger) might have been executed.
     Instead of hitting MWPS right away, you might want to wait until the pipeline you've just triggered finished.
 
     _Note_: This might not be available in projects, in that case merging right away is an option
 
-3.  Merge away!
+4.  Merge away!
 
 ## Troubleshooting
 
