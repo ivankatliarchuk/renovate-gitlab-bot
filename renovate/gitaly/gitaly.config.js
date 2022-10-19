@@ -31,7 +31,7 @@ module.exports = createServerConfig(
         // The directory containing build tools.
         "tools/**",
       ],
-      postUpdateOptions: ["gomodTidy", "bundlerConservative"],
+      postUpdateOptions: ["gomodTidy1.17", "bundlerConservative"],
       postUpgradeTasks: {
         // Regenerate files that may change due to the dependency updates.
         commands: ["make notice"],
