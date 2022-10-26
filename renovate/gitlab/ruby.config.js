@@ -89,6 +89,11 @@ module.exports = createServerConfig(
           enabled: true,
           groupName: "Google Protobuf",
         },
+        {
+          matchPackageNames: ["gitlab-labkit"],
+          enabled: true,
+          groupName: "GitLab LabKit",
+        },
       ],
     },
   ],
