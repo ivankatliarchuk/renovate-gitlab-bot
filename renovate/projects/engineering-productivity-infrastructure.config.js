@@ -1,3 +1,5 @@
+const fs   = require("fs");
+const path = require("path");
 const { createServerConfig, baseConfig, epBaseConfig } = require("../shared");
 
 module.exports = createServerConfig([
@@ -16,4 +18,8 @@ module.exports = createServerConfig([
       },
     ],
   },
-]);
+],
+{
+  renovateMetaCommentTemplate: fs.readFileSync(path.join(__dirname, "..", "comment_templates", "engineering_productivity_infra.md"), "utf-8"),
+}
+);

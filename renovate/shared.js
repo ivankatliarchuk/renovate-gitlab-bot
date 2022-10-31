@@ -168,7 +168,7 @@ function createServerConfig(repositories, serverConfig = {}) {
     requireConfig: "ignored",
     printConfig: false,
     renovateMetaCommentTemplate: fs.readFileSync(
-      path.join(__dirname, "comment_template.md"),
+      path.join(__dirname, "comment_templates", "default.md"),
       "utf-8"
     ),
     gitAuthor: "GitLab Renovate Bot <gitlab-bot@gitlab.com>",
