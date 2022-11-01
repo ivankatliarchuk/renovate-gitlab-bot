@@ -25,6 +25,7 @@ The following repositories are currently being updated automatically.
 - [gitlab-renovate-forks/gitlab-ui](https://gitlab.com/gitlab-renovate-forks/gitlab-ui)
 - [gitlab-renovate-forks/gitlab-vscode-extension](https://gitlab.com/gitlab-renovate-forks/gitlab-vscode-extension)
 - [gitlab-renovate-forks/gitlab](https://gitlab.com/gitlab-renovate-forks/gitlab)
+- [gitlab-renovate-forks/pajamas-adoption-scanner](https://gitlab.com/gitlab-renovate-forks/pajamas-adoption-scanner)
 - [gitlab-renovate-forks/status-page](https://gitlab.com/gitlab-renovate-forks/status-page)
 - [gitlab-renovate-forks/triage-ops](https://gitlab.com/gitlab-renovate-forks/triage-ops)
 
