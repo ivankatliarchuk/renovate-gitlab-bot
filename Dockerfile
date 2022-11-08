@@ -9,7 +9,7 @@ RUN apk add --update --no-cache python3 make g++ git
 
 RUN sh scripts/build.sh
 
-FROM golang:1.17-alpine3.15 as golang
+FROM golang:1.18-alpine3.15 as golang
 
 FROM ruby:2.7.6-alpine3.15
 
