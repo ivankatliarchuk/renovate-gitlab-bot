@@ -24,7 +24,12 @@ module.exports = createServerConfig([
         // This is our basic rule for Go packages.
         matchManagers: ["gomod"],
         enabled: true,
-        reviewers: ["stanhu"],
+        reviewers: [
+          "ashmckenzie",
+          "stanhu",
+          "steveazz",
+          "vyaklushin",
+        ],
         reviewersSampleSize: 1,
         commitMessagePrefix: "workhorse:",
       },
