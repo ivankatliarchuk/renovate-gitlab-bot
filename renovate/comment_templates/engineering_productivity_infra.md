@@ -7,6 +7,8 @@ please review this Merge Request with the same scrutiny as any community contrib
 
 1. Check out the Upgrade guides in the repo (e.g. [UPGRADE.review-apps.md](https://gitlab.com/gitlab-org/quality/engineering-productivity-infrastructure/-/blob/main/UPGRADE.review-apps.md)) on specific upgrade instructions.
 
+1. If you are reviewing a helm chart upgrade, [you can compare two versions of the same chart in artifacthub.io](https://blog.artifacthub.io/blog/helm-template-compare/). Please leave an observation in the MR diff with a link to the helm chart diff ([see an example](https://gitlab.com/gitlab-org/quality/engineering-productivity-infrastructure/-/merge_requests/208#note_1172391326)).
+
 1. Check the output of the `terraform plan` command in the MR
 
 1. If unsure, assign to another reviewer for confirmation before merging.
