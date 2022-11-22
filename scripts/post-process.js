@@ -7,8 +7,8 @@ const {
   GitLabAPIIterator,
   GitLabAPI,
   createRenovateMRIterator,
-  getUserId,
   forEachFork,
+  getUserIds,
 } = require("../lib/api");
 
 setScope(`[Post-Processing]`);
@@ -73,9 +73,7 @@ async function processMRs(project) {
 
     if (!prevAssignees.length) {
       update = true;
-      payload.assignee_ids = await Promise.all(
-        [RENOVATE_BOT_USER].map(getUserId)
-      );
+      payload.assignee_ids = await getUserIds(RENOVATE_BOT_USER);
     }
 
     if (!prevReviewers.length && reviewers.length) {
@@ -83,7 +81,7 @@ async function processMRs(project) {
       const newReviewers = sampleSize(reviewers, SAMPLE_SIZE);
       log(`No reviewers set, setting ${newReviewers.join(", ")}`);
 
-      payload.reviewer_ids = await Promise.all(newReviewers.map(getUserId));
+      payload.reviewer_ids = await getUserIds(newReviewers);
     }
 
     if (!prevLabels.length && labels.length) {
