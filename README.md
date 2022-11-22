@@ -27,6 +27,7 @@ The following repositories are currently being updated automatically.
 - [gitlab-renovate-forks/gitlab](https://gitlab.com/gitlab-renovate-forks/gitlab)
 - [gitlab-renovate-forks/pajamas-adoption-scanner](https://gitlab.com/gitlab-renovate-forks/pajamas-adoption-scanner)
 - [gitlab-renovate-forks/status-page](https://gitlab.com/gitlab-renovate-forks/status-page)
+- [gitlab-renovate-forks/terraform-provider-gitlab](https://gitlab.com/gitlab-renovate-forks/terraform-provider-gitlab)
 - [gitlab-renovate-forks/triage-ops](https://gitlab.com/gitlab-renovate-forks/triage-ops)
 
 <!-- rep -->
