@@ -10,7 +10,6 @@ module.exports = createServerConfig([
       "Category:Docs Site",
     ],
     reviewers: [
-      "axil",
       "eread",
       "marcel.amirault",
       "sarahgerman",
