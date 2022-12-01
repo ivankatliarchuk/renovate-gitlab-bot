@@ -10,7 +10,7 @@ This repo consists of three main components:
 
 The main workflow consists of two parts:
 
-1. An unprivileged account [@gitlab-renovate-bot](https://gitlab.com/gitlab-renovate-bot)
+1. An unprivileged account [@gitlab-dependency-update-bot](https://gitlab.com/gitlab-dependency-update-bot)
    runs renovate against a fork of the target project.
 
    We are using forks of projects in order to avoid security issues where a malicious dependency
