@@ -20,7 +20,12 @@ module.exports = createServerConfig(
       rangeStrategy: "bump",
       semanticCommits: "disabled",
       enabledManagers: ["gomod"],
-      postUpdateOptions: ["gomodTidy"],
+      postUpdateOptions: ["gomodTidy", "gomodUpdateImportPaths"],
+      postUpgradeTasks: {
+        // Regenerate files that may change due to the dependency updates.
+        commands: ["make reviewable"],
+        fileFilters: ["*"],
+      },
       packageRules: [
         updateNothing,
         {
@@ -59,4 +64,9 @@ module.exports = createServerConfig(
       ],
     },
   ],
+  {
+    allowedPostUpgradeCommands: [
+      "^make reviewable$",
+    ],
+  }
 );
