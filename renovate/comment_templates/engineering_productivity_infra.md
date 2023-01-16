@@ -9,7 +9,7 @@ please review this Merge Request with the same scrutiny as any community contrib
 
 1. If you are reviewing a helm chart upgrade, [you can compare two versions of the same chart in artifacthub.io](https://blog.artifacthub.io/blog/helm-template-compare/). Please leave an observation in the MR diff with a link to the helm chart diff ([see an example](https://gitlab.com/gitlab-org/quality/engineering-productivity-infrastructure/-/merge_requests/208#note_1172391326)).
 
-1. Check the output of the `terraform plan` command in the MR
+1. Check the output of the `terraform plan` command from the `build-review-apps` and/or the `build-qa-resources` CI jobs.
 
 1. If unsure, assign to another reviewer for confirmation before merging.
 
