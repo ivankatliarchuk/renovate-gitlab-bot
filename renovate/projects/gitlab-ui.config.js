@@ -9,7 +9,7 @@ const {
   updateDOMPurify,
   semanticPrefixFixDepsChoreOthers,
 } = require("../shared");
-const { prJest, prBabel, prVueMajor2 } = require("../frontend");
+const { prJest, prBabel, prVueMajor2, updateNodeJS } = require("../frontend");
 
 module.exports = createServerConfig([
   {
@@ -20,6 +20,7 @@ module.exports = createServerConfig([
     stabilityDays: 3,
     rangeStrategy: "bump",
     semanticCommits: "enabled",
+    enabledManagers: ["npm", "asdf", "regex", "nvm"],
     packageRules: [
       ...semanticPrefixFixDepsChoreOthers,
       updateNothing,
@@ -53,6 +54,13 @@ module.exports = createServerConfig([
       prJest,
       prBabel,
       { ...prVueMajor2, rangeStrategy: "auto" },
+      ...updateNodeJS.packageRules,
+    ],
+    regexManagers: [
+      ...updateNodeJS.regexManagers([
+        "^.gitlab-ci.yml",
+        "^Dockerfile.puppeteer",
+      ]),
     ],
   },
 ]);
