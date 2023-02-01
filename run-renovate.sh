@@ -23,10 +23,12 @@ function run_renovate {
   export RENOVATE_DISABLE_FILE_RECURSION=true
   export LOG_LEVEL=info
 
+  echo "Using binary source method $BINARY_SOURCE"
+
   # We do not want renovate to have access to our privileged GITLAB_TOKEN
   # Or a privileged NPM_TOKEN
   # For more info see the README
-  env -u GITLAB_TOKEN -u NPM_TOKEN \
+  env -u GITLAB_TOKEN -u NPM_TOKEN -u BINARY_SOURCE \
     node "$DIR/node_modules/renovate/dist/renovate.js" && return 0 || return 1
 }
 

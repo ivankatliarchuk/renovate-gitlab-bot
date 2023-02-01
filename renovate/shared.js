@@ -16,15 +16,31 @@ const defaultLabels = [
 ];
 
 const epBaseConfig = {
-  reviewers: ["amihaila", "ashmckenzie", "ddieulivol", "godfat-gitlab", "jennli", "nao.hashizume", "rymai"],
+  reviewers: [
+    "amihaila",
+    "ashmckenzie",
+    "ddieulivol",
+    "godfat-gitlab",
+    "jennli",
+    "nao.hashizume",
+    "rymai",
+  ],
   reviewersSampleSize: 1,
   labels: [...defaultLabels, "backend", "Engineering Productivity"],
 };
 
 const qaBaseConfig = {
-  reviewers: ["acunskis", "a_mcdonald", "chloeliu", "ddavison", "mlapierre", "sliaquat", "treagitlab"],
+  reviewers: [
+    "acunskis",
+    "a_mcdonald",
+    "chloeliu",
+    "ddavison",
+    "mlapierre",
+    "sliaquat",
+    "treagitlab",
+  ],
   reviewersSampleSize: 1,
-  labels: [...defaultLabels, "Quality"]
+  labels: [...defaultLabels, "Quality"],
 };
 
 const baseConfig = {
@@ -161,6 +177,7 @@ function createServerConfig(repositories, serverConfig = {}) {
   return {
     dryRun: (process.env.DRY_RUN ?? "true") === "true" ? "full" : null,
     autodiscover: false,
+    binarySource: process.env.BINARY_INSTALL ?? "global",
     logFile: path.join(__dirname, "..", "renovate-log.txt"),
     logFileLevel: "debug",
     platform: "gitlab",

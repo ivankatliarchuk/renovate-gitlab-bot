@@ -1,5 +1,6 @@
 variables:
-  DOCKER_IMAGE: $CI_REGISTRY_IMAGE/renovate:$CI_COMMIT_REF_SLUG
+  IMAGE: $CI_REGISTRY_IMAGE/renovate:$CI_COMMIT_REF_SLUG
+  NEW_IMAGE: $CI_REGISTRY_IMAGE/renovate-new:$CI_COMMIT_REF_SLUG
 
 workflow:
   rules:
@@ -14,9 +15,12 @@ stages:
   - run
 
 .build-image:
+  stage: build-image
+  rules:
+    - if: '$CI_PIPELINE_SOURCE != "schedule"'
   tags:
     - gitlab-org-docker
-  resource_group: $CI_COMMIT_REF_SLUG
+  resource_group: $CI_COMMIT_REF_SLUG-$DOCKER_IMAGE
   image: docker:20.10.18-git
   variables:
     DOCKER_HOST: tcp://docker:2375/
@@ -37,31 +41,24 @@ stages:
         fi
       fi
       echo "Building image"
-      docker build . --tag "$DOCKER_IMAGE" --label commitRef=$CI_COMMIT_SHORT_SHA
+      docker build . --file "$DOCKER_FILE" --tag "$DOCKER_IMAGE" --label commitRef=$CI_COMMIT_SHORT_SHA
       echo "Pushing image"
       docker push "$DOCKER_IMAGE"
 
-#include:
-#  - project: gitlab-org/frontend/untamper-my-lockfile
-#    file: .gitlab-ci-template.yml
-#
-#untamper-my-lockfile:
-#  rules:
-#    - if: '$CI_PIPELINE_SOURCE != "schedule"'
-#      changes:
-#        - yarn.lock
-
 build-image:
   extends: .build-image
-  stage: build-image
-  rules:
-    - if: '$CI_PIPELINE_SOURCE != "schedule"'
+  variables:
+    DOCKER_IMAGE: $IMAGE
+    DOCKER_FILE: "Dockerfile"
 
-beep-boop:
+build-image-new:
+  extends: .build-image
+  variables:
+    DOCKER_IMAGE: $NEW_IMAGE
+    DOCKER_FILE: "new.Dockerfile"
+
+.beep-boop:
   image: $DOCKER_IMAGE
-  parallel:
-    matrix:
-      - CONFIG_DIR: [gitlab, gitaly, gitlab-docs, projects]
   variables:
     GIT_STRATEGY: none
   stage: run
@@ -79,8 +76,26 @@ beep-boop:
     public: false
     when: always
 
+beep-boop:
+  extends: .beep-boop
+  variables:
+    DOCKER_IMAGE: $IMAGE
+    BINARY_SOURCE: global
+  parallel:
+    matrix:
+      - CONFIG_DIR: [gitlab, gitlab-docs, projects]
+
+beep-boop-new:
+  extends: .beep-boop
+  variables:
+    DOCKER_IMAGE: $NEW_IMAGE
+    BINARY_SOURCE: install
+  parallel:
+    matrix:
+      - CONFIG_DIR: [gitaly]
+
 delete-pipelines:
-  image: $DOCKER_IMAGE
+  image: $IMAGE
   variables:
     GIT_STRATEGY: none
   stage: run
