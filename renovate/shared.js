@@ -17,7 +17,7 @@ const defaultLabels = [
 
 const epBaseConfig = {
   reviewers: [
-    "amihaila",
+    "alinamihaila",
     "ashmckenzie",
     "ddieulivol",
     "godfat-gitlab",
