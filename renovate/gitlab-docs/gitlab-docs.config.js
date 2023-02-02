@@ -1,4 +1,5 @@
 const { createServerConfig, baseConfig, defaultLabels } = require("../shared");
+const { updateNodeJS } = require("../frontend");
 
 module.exports = createServerConfig([
   {
@@ -15,10 +16,11 @@ module.exports = createServerConfig([
       "sarahgerman",
     ],
     reviewersSampleSize: 3,
-    enabledManagers: ["npm", "bundler"],
+    enabledManagers: ["npm", "bundler", "asdf", "nvm"],
     prConcurrentLimit: 4,
     semanticCommits: "disabled",
     packageRules: [
+      ...updateNodeJS.packageRules,
       {
         matchPackagePatterns: ["bootstrap", "vue", "@rollup/plugin-node-resolve"],
         enabled: false,
