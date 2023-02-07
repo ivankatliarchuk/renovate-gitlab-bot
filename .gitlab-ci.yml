@@ -83,16 +83,16 @@ beep-boop:
     BINARY_SOURCE: global
   parallel:
     matrix:
-      - CONFIG_DIR: [gitlab, gitlab-docs, projects]
+      - CONFIG_DIR: [gitaly, gitlab, gitlab-docs, projects]
 
-beep-boop-new:
-  extends: .beep-boop
-  variables:
-    DOCKER_IMAGE: $NEW_IMAGE
-    BINARY_SOURCE: install
-  parallel:
-    matrix:
-      - CONFIG_DIR: [gitaly]
+# beep-boop-new:
+#   extends: .beep-boop
+#   variables:
+#     DOCKER_IMAGE: $NEW_IMAGE
+#     BINARY_SOURCE: install
+#   parallel:
+#     matrix:
+#       - CONFIG_DIR: []
 
 delete-pipelines:
   image: $IMAGE
