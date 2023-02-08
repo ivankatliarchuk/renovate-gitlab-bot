@@ -30,7 +30,7 @@ module.exports = createServerConfig([
       {
         enabled: true,
         fileMatch: ["GITLAB_KAS_VERSION"],
-        matchStrings: ["^(?<currentValue>.*)\n?"],
+        matchStrings: ["(?<currentValue>.*)\n"],
         datasource: "gitlab-releases", // although it is a docker image, use gitlab-releases so we get richer information in the MR
         registryUrl: "https://gitlab.com",
         packageNameTemplate: "gitlab-org/cluster-integration/gitlab-agent",
