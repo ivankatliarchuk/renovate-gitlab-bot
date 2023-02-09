@@ -1,13 +1,7 @@
-const { createServerConfig, baseConfig } = require("../shared");
-
-const baseLabels = [
-  "type::maintenance",
-  "maintenance::dependency",
-  "automation:bot-authored",
-];
+const { createServerConfig, defaultLabels, baseConfig } = require("../shared");
 
 const groupConfigureLabels = [
-  ...baseLabels,
+  ...defaultLabels,
   "group::configure",
   "devops::configure",
   "section::ops",
@@ -25,16 +19,15 @@ module.exports = createServerConfig([
     reviewers: ["ash2k"],
     labels: groupConfigureLabels,
     includePaths: ["GITLAB_KAS_VERSION"],
+    postUpdateOptions: [],
     regexManagers: [
       // GitLab KAS version
       {
-        enabled: true,
         fileMatch: ["GITLAB_KAS_VERSION"],
         matchStrings: ["(?<currentValue>.*)\n"],
-        datasource: "gitlab-releases", // although it is a docker image, use gitlab-releases so we get richer information in the MR
-        registryUrl: "https://gitlab.com",
-        packageNameTemplate: "gitlab-org/cluster-integration/gitlab-agent",
-        depNameTemplate: "gitlab-agent",
+        datasourceTemplate: "gitlab-releases", // although it is a docker image, use gitlab-releases so we get richer information in the MR
+        registryUrlTemplate: "https://gitlab.com",
+        depNameTemplate: "gitlab-org/cluster-integration/gitlab-agent",
       },
     ],
   },
