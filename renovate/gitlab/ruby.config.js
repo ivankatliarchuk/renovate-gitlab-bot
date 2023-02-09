@@ -27,7 +27,6 @@ module.exports = createServerConfig(
         {
           matchPackageNames: [
             "better_errors",
-            "bootsnap",
             "brakeman",
             "danger",
             "lefthook",
@@ -36,12 +35,12 @@ module.exports = createServerConfig(
             "thin",
           ],
           enabled: true,
-          groupName: "Ruby development dependencies",
+          groupName: "Development gems",
         },
         {
           matchPackageNames: ["gitlab-styles", "gitlab-dangerfiles"],
           enabled: true,
-          groupName: "GitLab Tooling Ruby dependencies",
+          groupName: "Tooling gems",
         },
         {
           matchPackageNames: [
@@ -53,12 +52,12 @@ module.exports = createServerConfig(
             "rails-html-sanitizer",
           ],
           enabled: true,
-          groupName: "Ruby Markdown and HTML parsing dependencies",
+          groupName: "Markdown and HTML parsing gems",
         },
         {
           matchPackageNames: ["pg", "pg_query", "marginalia"],
           enabled: true,
-          groupName: "Ruby database dependencies",
+          groupName: "Database gems",
         },
         {
           matchPackageNames: [
@@ -72,12 +71,19 @@ module.exports = createServerConfig(
             "rack-timeout",
           ],
           enabled: true,
-          groupName: "Ruby Rack-related dependencies",
+          groupName: "Rack gems",
         },
         {
           matchPackageNames: ["aws-sdk-core", "aws-sdk-s3"],
+          reviewers: ["stanhu"],
           enabled: true,
-          groupName: "Ruby AWS-related dependencies",
+          groupName: "AWS gems",
+        },
+        {
+          matchPackageNames: ["bootsnap"],
+          enabled: true,
+          reviewers: ["alipniagov", "stanhu"],
+          groupName: "Bootsnap",
         },
         {
           matchPackageNames: ["lookbook", "view_component"],
@@ -87,11 +93,13 @@ module.exports = createServerConfig(
         {
           matchPackageNames: ["google-protobuf"],
           enabled: true,
+          reviewers: ["stanhu"],
           groupName: "Google Protobuf",
         },
         {
           matchPackageNames: ["gitlab-labkit"],
           enabled: true,
+          reviewers: ["stanhu"],
           groupName: "GitLab LabKit",
         },
       ],
