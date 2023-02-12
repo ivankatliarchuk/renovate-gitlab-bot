@@ -27,7 +27,8 @@ module.exports = createServerConfig([
         matchStrings: ["(?<currentValue>.*)\n"],
         datasourceTemplate: "gitlab-releases", // although it is a docker image, use gitlab-releases so we get richer information in the MR
         registryUrlTemplate: "https://gitlab.com",
-        depNameTemplate: "gitlab-org/cluster-integration/gitlab-agent",
+        depNameTemplate: "kas", // Shorter commit message and MR title
+        packageNameTemplate: "gitlab-org/cluster-integration/gitlab-agent",
       },
     ],
   },
