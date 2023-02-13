@@ -33,7 +33,7 @@ We have assembled some [FAQs] to help reviewers of these kind of merge requests.
 </small>
 
 [renovate-gitlab-bot]: https://gitlab.com/gitlab-org/frontend/renovate-gitlab-bot
-[main_context]: https://docs.gitlab.com/ee/ci/merge_request_pipelines/#run-pipelines-in-the-parent-project-for-merge-requests-from-a-forked-project
+[main_context]: https://docs.gitlab.com/ee/ci/pipelines/merge_request_pipelines.html#run-pipelines-in-the-parent-project
 [message_source]: https://gitlab.com/gitlab-org/frontend/renovate-gitlab-bot/-/blob/main/renovate/comment_templates/default.md
 [process]: https://gitlab.com/gitlab-org/frontend/renovate-gitlab-bot/-/blob/main/docs/process.md
 
