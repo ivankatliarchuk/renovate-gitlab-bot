@@ -10,7 +10,7 @@
     "gitlab-api-async-iterator": "^1.2.0",
     "lodash": "^4.17.21",
     "luxon": "^2.4.0",
-    "renovate": "file:./renovate-fork-32.208.2-5-g70fe345d0.tgz",
+    "renovate": "file:./renovate-fork-34.0.0-6-gd362c0029.tgz",
     "renovate-config-monorepo": "^0.43.0",
     "renovate-config-packages": "^0.7.0"
   },
@@ -18,8 +18,8 @@
     "update-readme": "scripts/update-readme.js"
   },
   "devDependencies": {
-    "glob": "^8.0.3",
-    "prettier": "^2.2.1",
-    "pretty-quick": "^3.1.0"
+    "glob": "^8.1.0",
+    "prettier": "^2.8.4",
+    "pretty-quick": "^3.1.3"
   }
 }
