@@ -1,3 +1,5 @@
+const fs = require("fs");
+const path = require("path");
 const { createServerConfig, defaultLabels, baseConfig } = require("../shared");
 
 const groupConfigureLabels = [
@@ -15,11 +17,15 @@ module.exports = createServerConfig([
     branchPrefix: "renovate-vfiles/",
     enabledManagers: ["regex"],
     semanticCommits: "disabled",
-    // reviewers: ["ashmckenzie", "tkuah"],
-    reviewers: ["ash2k"],
+    reviewers: ["ashmckenzie", "tkuah"],
+    reviewersSampleSize: 1,
     labels: groupConfigureLabels,
     includePaths: ["GITLAB_KAS_VERSION"],
     postUpdateOptions: [],
+    renovateMetaCommentTemplate: fs.readFileSync(
+      path.join(__dirname, "..", "comment_templates", "kas.md"),
+      "utf-8"
+    ),
     regexManagers: [
       // GitLab KAS version
       {
