@@ -120,6 +120,13 @@ const Stylelint = {
   groupName: "Stylelint and related",
 };
 
+const IDE = {
+  ...updateGitLabScope,
+  matchPackageNames: ["@gitlab/web-ide"],
+  reviewers: ["ealcantara", "pslaughter"],
+  groupName: "GitLab Web IDE",
+};
+
 const updateGitLabScopeDev = {
   ...updateGitLabScope,
   matchPackagePatterns: ["@gitlab/.*"],
@@ -127,6 +134,7 @@ const updateGitLabScopeDev = {
     ...updateGitLabUIandSVG.matchPackageNames,
     "@gitlab/visual-review-tools",
     ...Stylelint.matchPackageNames,
+    ...IDE.matchPackageNames,
   ],
   groupName: "GitLab Packages",
 };
@@ -136,6 +144,7 @@ const updateOnlyGitLabScopePackageRules = [
   updateGitLabUIandSVG,
   ESLint,
   Stylelint,
+  IDE,
   updateGitLabScopeDev,
 ];
 
@@ -206,6 +215,7 @@ module.exports = {
   updateGitLabScope,
   ESLint,
   Stylelint,
+  IDE,
   updateGitLabScopeDev,
   updateDOMPurify,
   semanticPrefixFixDepsChoreOthers,
