@@ -1,4 +1,4 @@
-FROM node:16-alpine3.15 AS builder
+FROM node:16-alpine3.16 AS builder
 
 ADD / /workdir
 WORKDIR /workdir
@@ -9,9 +9,9 @@ RUN apk add --update --no-cache python3 make g++ git
 
 RUN sh scripts/build.sh
 
-FROM golang:1.18-alpine3.15 as golang
+FROM golang:1.18-alpine3.16 as golang
 
-FROM ruby:2.7.6-alpine3.15
+FROM ruby:3.0.5-alpine3.16
 
 # Install some build tools needed, e.g. for gitaly and sanity
 RUN apk add --update --no-cache \
