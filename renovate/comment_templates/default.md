@@ -13,14 +13,16 @@ please review this Merge Request with the same scrutiny as any community contrib
 
 2.  Review the changes introduced by the version upgrade. Consider using [https://my.diffend.io] to compare the two versions in case the updated dependency is either a Ruby Gem or a Node.js package, for example to [compare `pg_query` `2.1.0` and `2.1.4`](https://my.diffend.io/gems/pg_query/2.1.0/2.1.4).
 
-3.  If tests are passing and you've reviewed the updated dependencies, execute pipelines in the [context of the main project][main_context]
+3. Check if `bundle install` works locally, in the context of GDK.
+
+4.  If tests are passing and you've reviewed the updated dependencies, execute pipelines in the [context of the main project][main_context]
 
     This MR is created from a fork, therefore not _all_ jobs (e.g. Danger) might have been executed.
     Instead of hitting MWPS right away, you might want to wait until the pipeline you've just triggered finished.
 
     _Note_: This might not be available in projects, in that case merging right away is an option
 
-4.  Merge away!
+5.  Merge away!
 
 ## Troubleshooting
 
