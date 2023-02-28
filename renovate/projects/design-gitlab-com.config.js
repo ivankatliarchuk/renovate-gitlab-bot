@@ -13,13 +13,7 @@ module.exports = createServerConfig([
   {
     repository: "gitlab-renovate-forks/design.gitlab.com",
     ...baseConfig,
-    reviewers: [
-      "leipert",
-      "markrian",
-      "mikegreiling",
-      "ohoral",
-      "pgascouvaillancourt",
-    ],
+    reviewers: ["leipert", "markrian", "ohoral", "pgascouvaillancourt"],
     internalChecksFilter: "strict",
     separateMultipleMajor: true,
     stabilityDays: 3,

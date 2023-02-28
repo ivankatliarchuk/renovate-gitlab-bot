@@ -56,7 +56,6 @@ const baseConfig = {
     "dmishunov",
     "ealcantara",
     "pgascouvaillancourt",
-    "mikegreiling",
     "ohoral",
     "markrian",
     "svedova",
