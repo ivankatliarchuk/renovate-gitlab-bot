@@ -12,8 +12,8 @@ const {
 const { prVueMajor2 } = require("../frontend");
 
 const foundationPackages = {
-  reviewers: ["leipert", "mikegreiling"],
-  addLabels: ["group::foundations", "devops::ecosystem", "section::dev"],
+  reviewers: ["leipert"],
+  addLabels: ["group::foundations", "devops::manage", "section::dev"],
 };
 
 const updateGitLabVisualReviewTools = {
@@ -134,7 +134,12 @@ module.exports = createServerConfig([
       },
       {
         reviewers: ["himkp", "ealcantara"],
-        matchPackagePatterns: ["remark-?.*", "rehype-?.*", "unist-?.*", "unified"],
+        matchPackagePatterns: [
+          "remark-?.*",
+          "rehype-?.*",
+          "unist-?.*",
+          "unified",
+        ],
         enabled: true,
         rangeStrategy: "bump",
         groupName: "Content Editor Packages - remark",
