@@ -11,7 +11,7 @@ module.exports = createServerConfig([
     ...baseConfig,
     labels: [
       ...defaultLabels,
-      "group::code review",
+      "group::editor",
       "devops::create",
       "section::dev",
     ],
