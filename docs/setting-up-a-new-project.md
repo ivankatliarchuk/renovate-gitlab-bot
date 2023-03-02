@@ -1,22 +1,22 @@
 # Setting up a new project
 
-You can only do steps 1-3, if you've got access to the private 1Password Vault.
-Please contact a maintainer if you do not see the credentials in 1Password.
+Submit a Merge Request containing the following two changes:
 
-1.  Open a private tab or different browser and log in with the
-    [@gitlab-dependency-update-bot](https://gitlab.com/gitlab-dependency-update-bot) credentials from 1Password.
-2.  Locate the project you want to renovate and fork it into the [gitlab-renovate-forks]
-3.  Go into the project settings and set up mirroring (Settings -> Repository).
+1. Add your project to the [`projects/config.tfvars` file](projects/config.tfvars), e.g.:
 
-    1. You need to enter the upstream repo
-    2. Enable "overwrite diverged branches" (should never happen, but upstream should be the single source of truth)
-    3. Enable "only protected branches" which probably helps with performance
+    ```diff
+     projects = [
+       ...
+       "gitlab-org/terraform-provider-gitlab",
+    +  "<PATH WITH NAMESPACE TO YOUR NEW PROJECT>"
+     ]
+    ```
+2. Add a renovate [config for your project](../renovate/).
 
-    ![](img/mirror-setup.png)
+## Implementation Details
 
-4.  Create an MR which adds your fork to [the config](../renovate).
-
-[gitlab-renovate-forks]: https://gitlab.com/gitlab-renovate-forks
+The CI/CD pipeline in this project will import your project to the [gitlab-renovate-forks](https://gitlab.com/gitlab-renovate-forks) group 
+and setup a pull mirror to the upstream repository using the [GitLab Terraform Provider](https://gitlab.com/gitlab-org/terraform-provider-gitlab).
 
 ## Update the comment from renovate
 
