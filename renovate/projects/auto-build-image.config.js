@@ -2,7 +2,7 @@ const { createServerConfig, baseConfig } = require("../shared");
 
 module.exports = createServerConfig([
   {
-    repository: "gitlab-renovate-forks/cluster-integration/auto-build-image",
+    repository: "gitlab-renovate-forks/auto-build-image",
     ...baseConfig,
     semanticCommits: "enabled",
     semanticCommitType: "feat",
@@ -19,9 +19,7 @@ module.exports = createServerConfig([
       {
         enabled: true,
         fileMatch: [".gitlab-ci.yml"],
-        matchStrings: [
-          "PACK_VERSION: (?<currentValue>.*)\n"
-        ],
+        matchStrings: ["PACK_VERSION: (?<currentValue>.*)\n"],
         depNameTemplate: "pack",
         packageNameTemplate: "buildpacks/pack",
         datasourceTemplate: "github-tags",
@@ -29,22 +27,18 @@ module.exports = createServerConfig([
       {
         enabled: true,
         fileMatch: [".gitlab-ci.yml"],
-        matchStrings: [
-          "DOCKER_VERSION: (?<currentValue>.*)\n"
-        ],
+        matchStrings: ["DOCKER_VERSION: (?<currentValue>.*)\n"],
         depNameTemplate: "docker",
         datasourceTemplate: "docker",
       },
       {
         enabled: true,
         fileMatch: [".gitlab-ci.yml"],
-        matchStrings: [
-          "BUILDX_VERSION: (?<currentValue>.*)\n"
-        ],
+        matchStrings: ["BUILDX_VERSION: (?<currentValue>.*)\n"],
         depNameTemplate: "buildx",
         packageNameTemplate: "docker/buildx",
         datasourceTemplate: "github-tags",
-      }
+      },
     ],
-  }
+  },
 ]);

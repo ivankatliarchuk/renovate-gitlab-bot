@@ -12,9 +12,8 @@ The following repositories are currently being updated automatically.
 
 <!-- rep -->
 
-- [gitlab-renovate-forks/cluster-integration/auto-build-image](https://gitlab.com/gitlab-renovate-forks/cluster-integration/auto-build-image)
-- [gitlab-renovate-forks/cluster-integration/auto-deploy-image](https://gitlab.com/gitlab-renovate-forks/cluster-integration/auto-deploy-image)
-- [gitlab-renovate-forks/cluster-integration/helm-install-image](https://gitlab.com/gitlab-renovate-forks/cluster-integration/helm-install-image)
+- [gitlab-renovate-forks/auto-build-image](https://gitlab.com/gitlab-renovate-forks/auto-build-image)
+- [gitlab-renovate-forks/auto-deploy-image](https://gitlab.com/gitlab-renovate-forks/auto-deploy-image)
 - [gitlab-renovate-forks/customers-gitlab-com](https://gitlab.com/gitlab-renovate-forks/customers-gitlab-com)
 - [gitlab-renovate-forks/design.gitlab.com](https://gitlab.com/gitlab-renovate-forks/design.gitlab.com)
 - [gitlab-renovate-forks/engineering-productivity-infrastructure](https://gitlab.com/gitlab-renovate-forks/engineering-productivity-infrastructure)
@@ -25,6 +24,7 @@ The following repositories are currently being updated automatically.
 - [gitlab-renovate-forks/gitlab-ui](https://gitlab.com/gitlab-renovate-forks/gitlab-ui)
 - [gitlab-renovate-forks/gitlab-vscode-extension](https://gitlab.com/gitlab-renovate-forks/gitlab-vscode-extension)
 - [gitlab-renovate-forks/gitlab](https://gitlab.com/gitlab-renovate-forks/gitlab)
+- [gitlab-renovate-forks/helm-install-image](https://gitlab.com/gitlab-renovate-forks/helm-install-image)
 - [gitlab-renovate-forks/pajamas-adoption-scanner](https://gitlab.com/gitlab-renovate-forks/pajamas-adoption-scanner)
 - [gitlab-renovate-forks/status-page](https://gitlab.com/gitlab-renovate-forks/status-page)
 - [gitlab-renovate-forks/terraform-provider-gitlab](https://gitlab.com/gitlab-renovate-forks/terraform-provider-gitlab)
