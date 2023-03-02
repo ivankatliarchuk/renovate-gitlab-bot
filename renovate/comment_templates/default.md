@@ -11,7 +11,7 @@ please review this Merge Request with the same scrutiny as any community contrib
     - _Performance_: Dependencies do not bloat the application code or prolong CI times unnecessarily
     - _Stability_: Pipelines are passing
 
-2.  Review the changes introduced by the version upgrade. Consider using [https://my.diffend.io] to compare the two versions in case the updated dependency is either a Ruby Gem or a Node.js package, for example to [compare `pg_query` `2.1.0` and `2.1.4`](https://my.diffend.io/gems/pg_query/2.1.0/2.1.4).
+2.  Review the changes introduced by the version upgrade. Consider using https://my.diffend.io to compare the two versions in case the updated dependency is either a Ruby Gem or a Node.js package, for example to [compare `pg_query` `2.1.0` and `2.1.4`](https://my.diffend.io/gems/pg_query/2.1.0/2.1.4).
 
 3. Check if `bundle install` works locally, in the context of GDK.
 
