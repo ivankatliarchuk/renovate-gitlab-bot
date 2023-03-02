@@ -2,7 +2,7 @@ const { createServerConfig, baseConfig } = require("../shared");
 
 module.exports = createServerConfig([
   {
-    repository: "gitlab-renovate-forks/cluster-integration/auto-deploy-image",
+    repository: "gitlab-renovate-forks/auto-deploy-image",
     ...baseConfig,
     semanticCommits: "enabled",
     semanticCommitType: "feat",
@@ -19,14 +19,13 @@ module.exports = createServerConfig([
       {
         enabled: true,
         fileMatch: [".gitlab-ci.yml"],
-        matchStrings: [
-          "HELM_INSTALL_IMAGE_VERSION: (?<currentValue>.*)\n",
-        ],
+        matchStrings: ["HELM_INSTALL_IMAGE_VERSION: (?<currentValue>.*)\n"],
         depNameTemplate: "helm-install-image",
-        packageNameTemplate: "registry.gitlab.com/gitlab-org/cluster-integration/helm-install-image",
+        packageNameTemplate:
+          "registry.gitlab.com/gitlab-org/cluster-integration/helm-install-image",
         datasourceTemplate: "docker",
         versioningTemplate: "regex:^v(?<major>\\d+)\\.(?<minor>\\d+)",
       },
     ],
-  }
+  },
 ]);
