@@ -13,6 +13,7 @@ module.exports = createServerConfig([
     ],
     postUpdateOptions: [],
     enabledManagers: ["regex"],
+    includePaths: ["*", ".gitlab/*"],
     regexManagers: [
       {
         fileMatch: [".gitlab/.gitlab-ci.yml"],
