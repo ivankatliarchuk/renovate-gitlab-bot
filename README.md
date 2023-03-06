@@ -18,6 +18,7 @@ The following repositories are currently being updated automatically.
 - [gitlab-renovate-forks/design.gitlab.com](https://gitlab.com/gitlab-renovate-forks/design.gitlab.com)
 - [gitlab-renovate-forks/engineering-productivity-infrastructure](https://gitlab.com/gitlab-renovate-forks/engineering-productivity-infrastructure)
 - [gitlab-renovate-forks/gitaly](https://gitlab.com/gitlab-renovate-forks/gitaly)
+- [gitlab-renovate-forks/gitlab-agent](https://gitlab.com/gitlab-renovate-forks/gitlab-agent)
 - [gitlab-renovate-forks/gitlab-development-kit](https://gitlab.com/gitlab-renovate-forks/gitlab-development-kit)
 - [gitlab-renovate-forks/gitlab-docs](https://gitlab.com/gitlab-renovate-forks/gitlab-docs)
 - [gitlab-renovate-forks/gitlab-svgs](https://gitlab.com/gitlab-renovate-forks/gitlab-svgs)
