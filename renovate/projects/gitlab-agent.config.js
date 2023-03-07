@@ -14,6 +14,16 @@ module.exports = createServerConfig([
     postUpdateOptions: [],
     enabledManagers: ["regex"],
     includePaths: ["*", ".gitlab/*"],
+    packageRules: [
+      {
+        matchPackageNames: ["gitlab/gitlab-agent-ci-image"],
+        groupName: "gitlab-agent-ci-image"
+      },
+      {
+        matchDepNames: ["base container images"],
+        groupName: "gitlab-agent-base-container-images"
+      },
+    ],
     regexManagers: [
       {
         fileMatch: [".gitlab/.gitlab-ci.yml"],
@@ -45,12 +55,14 @@ module.exports = createServerConfig([
           "\n#\\s*(?<currentValue>\\S+)\\s+from.*?\n" +
             "\\s*container_pull\\(\n" +
             '\\s*name\\s*=\\s*"[^"]+",\n' +
+            '(:\\s*architecture\\s*=\\s*"[^"]+",\n)?' +
             '\\s*digest\\s*=\\s*"(?<currentDigest>sha256:[a-f0-9]+)",\n' +
             '\\s*registry\\s*=\\s*"(?<registry>[^"]+)",\n' +
             '\\s*repository\\s*=\\s*"(?<repository>[^"]+)",\n' +
             "\\s*\\)",
         ],
-        depNameTemplate: "{{{registry}}}/{{{repository}}}",
+        depNameTemplate: "base container images",
+        packageNameTemplate: "{{{registry}}}/{{{repository}}}",
         datasourceTemplate: "docker",
       },
     ],
