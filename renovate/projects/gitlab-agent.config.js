@@ -52,10 +52,10 @@ module.exports = createServerConfig([
       {
         fileMatch: ["WORKSPACE"],
         matchStrings: [
-          "\n#\\s*(?<currentValue>\\S+)\\s+from.*?\n" +
-            "\\s*container_pull\\(\n" +
+            '\n#\\s*(?<currentValue>\\S+)\\s+from.*?\n' +
+            '\\s*container_pull\\(\n' +
             '\\s*name\\s*=\\s*"[^"]+",\n' +
-            '(:\\s*architecture\\s*=\\s*"[^"]+",\n)?' +
+            '(?:\\s*architecture\\s*=\\s*"[^"]+",\n)?' +
             '\\s*digest\\s*=\\s*"(?<currentDigest>sha256:[a-f0-9]+)",\n' +
             '\\s*registry\\s*=\\s*"(?<registry>[^"]+)",\n' +
             '\\s*repository\\s*=\\s*"(?<repository>[^"]+)",\n' +
