@@ -47,6 +47,9 @@ resource "gitlab_project" "forks" {
   namespace_id     = data.gitlab_group.forks.id
   visibility_level = "public"
 
+  # Settings from the upstream project that matter for the fork
+  ci_config_path = each.value.ci_config_path
+
   # Pull Mirroring settings
   import_url                          = each.value.http_url_to_repo
   mirror                              = true
