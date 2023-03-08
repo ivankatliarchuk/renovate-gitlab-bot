@@ -45,7 +45,7 @@ module.exports = createServerConfig([
       },
       {
         fileMatch: [".gitlab/.gitlab-ci.yml"],
-        matchStrings: ['\n\\s*DOCKER_VERSION:\\s*"(?<currentValue>[^"]+)"\n'],
+        matchStrings: ['\n\\s*DOCKER_VERSION:\\s*"(?<currentValue>[^"]+)"'],
         depNameTemplate: "docker",
         datasourceTemplate: "docker",
       },
