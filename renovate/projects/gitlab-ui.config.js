@@ -28,7 +28,10 @@ module.exports = createServerConfig([
       ESLint,
       Stylelint,
       updateGitLabScopeDev,
-      updateDOMPurify,
+      {
+        ...updateDOMPurify,
+        rangeStrategy: "update-lockfile",
+      },
       {
         matchPackagePatterns: ["bootstrap-vue"],
         separateMultipleMajor: true,
