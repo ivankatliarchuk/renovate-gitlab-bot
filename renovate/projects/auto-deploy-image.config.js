@@ -6,7 +6,7 @@ module.exports = createServerConfig([
     ...baseConfig,
     semanticCommits: "enabled",
     semanticCommitType: "feat",
-    reviewers: ["Alexand", "hfyngvason", "tigerwnz", "shinya.maeda"],
+    reviewers: ["hfyngvason", "tigerwnz", "shinya.maeda"],
     labels: [
       "group::configure",
       "devops::configure",
