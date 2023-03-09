@@ -21,7 +21,8 @@ module.exports = createServerConfig([
       },
       {
         matchDepNames: ["base container images"],
-        groupName: "gitlab-agent-base-container-images"
+        groupName: "gitlab-agent-base-container-images",
+        extends: ["schedule:weekly"],
       },
     ],
     regexManagers: [
