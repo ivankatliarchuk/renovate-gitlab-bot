@@ -11,6 +11,7 @@ module.exports = createServerConfig([
     reviewers: [...epBaseConfig.reviewers, "acunskis"],
     includePaths: ["**/*"],
     enabledManagers: ["terraform"],
+    ignoreDeps: ["gitlab-runner"],
     packageRules: [
       {
         enabled: true,
@@ -39,10 +40,17 @@ module.exports = createServerConfig([
         matchPaths: ["qa-resources/**/*"],
         groupName: "Default QA Resources update",
       },
+      // Do not upgrade helm charts for patch versions.
       {
         enabled: true,
-        matchPaths: ["**/*"],
-        groupName: "Non-categorized Terraform files",
+        matchDepTypes: ["helm_release"],
+        matchUpdateTypes: ["major", "minor"]
+      },
+
+      // Any other dependencies. Do not specify a groupName, as we want to keep one dependency per MR.
+      {
+        enabled: true,
+        matchPaths: ["**/*"]
       },
     ],
   },
