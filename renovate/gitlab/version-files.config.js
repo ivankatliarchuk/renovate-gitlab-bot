@@ -26,6 +26,12 @@ module.exports = createServerConfig([
       path.join(__dirname, "..", "comment_templates", "kas.md"),
       "utf-8"
     ),
+    /* Allow prereleases for dependencies
+     * As we only update kas at the moment, this is fine,
+     * but we might want to move this to packageRules,
+     * if we renovate more things
+     */ 
+    ignoreUnstable: false,
     regexManagers: [
       // GitLab KAS version
       {
