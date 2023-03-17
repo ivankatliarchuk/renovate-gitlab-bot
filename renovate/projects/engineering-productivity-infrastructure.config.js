@@ -13,44 +13,28 @@ module.exports = createServerConfig([
     enabledManagers: ["terraform"],
     ignoreDeps: ["gitlab-runner"],
     packageRules: [
+      // Default rules that can be overridden by the next packageRules
+      // 
+      // See https://docs.renovatebot.com/configuration-options/#packagerules for more info
       {
         enabled: true,
-        matchPaths: ["qa-resources/modules/e2e-ci/**/*"],
-        groupName: "E2E CI Terraform module",
+        matchPaths: ["**/*"],
       },
       {
-        enabled: true,
-        matchPaths: ["qa-resources/modules/gitlab-runners/**/*"],
-        groupName: "GitLab Runners Terraform module",
-      },
-      {
-        enabled: true,
-        matchPaths: ["qa-resources/modules/test-metrics/**/*"],
-        reviewers: ["acunskis"],
-        groupName: "Test Metrics Terraform module",
-      },
-      {
-        enabled: true,
         matchPaths: ["qa-resources/modules/triage-reactive/**/*"],
         reviewers: epBaseConfig.reviewers,
-        groupName: "Triage Reactive Terraform module",
       },
       {
-        enabled: true,
-        matchPaths: ["qa-resources/**/*"],
-        groupName: "Default QA Resources update",
+        matchPaths: ["qa-resources/modules/e2e-ci/**/*"],
+        reviewers: ["acunskis"],
       },
-      // Do not upgrade helm charts for patch versions.
       {
-        enabled: true,
-        matchDepTypes: ["helm_release"],
-        matchUpdateTypes: ["major", "minor"]
+        matchPaths: ["qa-resources/modules/gitlab-runners/**/*"],
+        reviewers: ["acunskis"],
       },
-
-      // Any other dependencies. Do not specify a groupName, as we want to keep one dependency per MR.
       {
-        enabled: true,
-        matchPaths: ["**/*"]
+        matchPaths: ["qa-resources/modules/test-metrics/**/*"],
+        reviewers: ["acunskis"],
       },
     ],
   },
