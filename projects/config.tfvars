@@ -1,4 +1,5 @@
 projects = [
+  "gitlab-org/terraform-images",
   "gitlab-org/terraform-provider-gitlab",
   "gitlab-org/cluster-integration/auto-build-image",
   "gitlab-org/gitlab-ui",
