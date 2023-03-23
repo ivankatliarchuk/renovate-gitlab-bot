@@ -8,11 +8,7 @@
   "private": true,
   "dependencies": {
     "gitlab-api-async-iterator": "^1.2.0",
-    "lodash": "^4.17.21",
-    "luxon": "^2.4.0",
-    "renovate": "file:./renovate-fork-34.0.0-6-gd362c0029.tgz",
-    "renovate-config-monorepo": "^0.43.0",
-    "renovate-config-packages": "^0.7.0"
+    "luxon": "^2.4.0"
   },
   "scripts": {
     "update-readme": "scripts/update-readme.js"

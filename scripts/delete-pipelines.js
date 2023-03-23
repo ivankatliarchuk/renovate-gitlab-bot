@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
 const { DateTime } = require("luxon");
-const { log, warn, setScope } = require("../lib/logger");
-const { RENOVATE_PROJECT_ID } = require("../lib/constants");
-const { GitLabAPIIterator, GitLabAPI } = require("../lib/api");
+const { log, warn, setScope } = require("../bot_image/lib/logger");
+const { RENOVATE_PROJECT_ID } = require("../bot_image/lib/constants");
+const { GitLabAPIIterator, GitLabAPI } = require("../bot_image/lib/api");
 
 setScope(`[Deleting pipelines]`);
 

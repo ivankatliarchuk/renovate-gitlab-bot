@@ -10,7 +10,7 @@ RUN install-tool node 16.19.0
 RUN install-tool yarn 1.22.19
 RUN install-apt python3 make g++
 
-RUN sh scripts/build.sh
+RUN sh scripts/build_renovate.sh
 
 FROM ghcr.io/containerbase/buildpack
 

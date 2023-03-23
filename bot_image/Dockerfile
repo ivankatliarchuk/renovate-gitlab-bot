@@ -7,7 +7,7 @@ ENV DOCKER_BUILD=true
 
 RUN apk add --update --no-cache python3 make g++ git
 
-RUN sh scripts/build.sh
+RUN sh scripts/build_renovate.sh
 
 FROM golang:1.18-alpine3.16 as golang
 
