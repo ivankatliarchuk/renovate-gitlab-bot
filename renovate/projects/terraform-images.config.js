@@ -40,6 +40,7 @@ module.exports = createServerConfig([
         matchStrings: ['BUILDX_VERSION: "(?<currentValue>.*)"\\s'],
         depNameTemplate: "docker/buildx",
         datasourceTemplate: "github-releases",
+        extractVersionTemplate: "^v(?<version>.*)$",
       },
       {
         fileMatch: ["^.gitlab-ci.yml$"],
