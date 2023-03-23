@@ -1,5 +1,5 @@
 include:
-  - template: Terraform/Base.latest.gitlab-ci.yml
+  - local: .gitlab/ci/infra.renovate-forks.yml
 
 variables:
   IMAGE: $CI_REGISTRY_IMAGE/renovate:$CI_COMMIT_REF_SLUG
@@ -17,27 +17,9 @@ default:
     - gitlab-org
 
 stages:
-  - test
+  - terraform
   - build
-  - setup
   - run
-
-.terraform:config:
-  variables:
-    TF_ROOT: projects
-    TF_STATE_NAME: projects
-    TF_VAR_gitlab_renovate_bot_token: $TERRAFORM_TOKEN
-    TF_CLI_ARGS_plan: "-lock=false -var-file=../projects/config.tfvars"
-  environment:
-    name: $TF_STATE_NAME
-
-terraform:fmt:
-  extends: .terraform:fmt
-  stage: test
-
-terraform:validate:
-  extends: .terraform:validate
-  stage: test
 
 .build-image:
   stage: build
@@ -82,11 +64,6 @@ build-image-new:
   variables:
     DOCKER_IMAGE: $NEW_IMAGE
     DOCKER_FILE: "new.Dockerfile"
-
-terraform:plan:
-  extends: [.terraform:config, .terraform:build]
-  environment:
-    action: prepare
 
 .beep-boop:
   image: $DOCKER_IMAGE
@@ -142,13 +119,3 @@ delete-pipelines:
     - node ./scripts/delete-pipelines.js
   rules:
     - if: $DELETE_PIPELINES
-
-terraform:apply:
-  extends: [.terraform:config, .terraform:deploy]
-  stage: setup
-  needs: [terraform:plan]
-  environment:
-    action: start
-  rules:
-    - when: manual
-      allow_failure: true
