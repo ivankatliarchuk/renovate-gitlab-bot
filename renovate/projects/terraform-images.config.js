@@ -10,12 +10,14 @@ module.exports = createServerConfig([
     ...baseConfig,
     labels: [
       ...defaultLabels,
-      "group::configure",
-      "devops::configure",
-      "section::ops",
+      "group::environments",
       "Category:Infrastructure as Code",
     ],
     enabledManagers: ["regex"],
+    reviewers: [
+      "timofurrer",
+      "tigerwnz",
+    ],
     packageRules: [
       {
         matchPackageNames: "hashicorp/terraform",
