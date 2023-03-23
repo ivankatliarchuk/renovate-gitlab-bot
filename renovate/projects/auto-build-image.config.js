@@ -8,8 +8,8 @@ module.exports = createServerConfig([
     semanticCommitType: "feat",
     reviewers: ["Alexand", "hfyngvason", "tigerwnz"],
     labels: [
-      "group::configure",
-      "devops::configure",
+      "group::environments",
+      "devops::deploy",
       "section::ops",
       "type::maintenance",
       "maintenance::dependency",

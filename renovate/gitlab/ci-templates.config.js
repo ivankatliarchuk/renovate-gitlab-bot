@@ -6,17 +6,10 @@ const baseLabels = [
   "ci::templates"
 ];
 
-const groupConfigureLabels = [
+const groupEnvironmentsLabels = [
   ...baseLabels,
-  "group::configure",
-  "devops::configure",
-  "section::ops",
-];
-
-const groupReleaseLabels = [
-  ...baseLabels,
-  "group::release",
-  "devops::release",
+  "group::environments",
+  "devops::deploy",
   "section::ops",
 ];
 
@@ -37,13 +30,13 @@ module.exports = createServerConfig([
         groupName: "auto-build-image labels and reviewers",
         matchPackageNames: ["auto-build-image"],
         reviewers: ["Alexand", "hfyngvason", "tigerwnz"], // domain experts
-        labels: groupConfigureLabels, // group::configure owns auto-build-image
+        labels: groupEnvironmentsLabels,
       },
       {
         groupName: "auto-deploy-image labels and reviewers",
         matchPackageNames: ["auto-deploy-image"],
         reviewers: ["Alexand", "tigerwnz", "shinya.maeda", "hfyngvason"], // domain experts
-        labels: groupReleaseLabels, // group::release owns auto-deploy-image
+        labels: groupEnvironmentsLabels,
       },
       {
         groupName: "major version updates are breaking changes",

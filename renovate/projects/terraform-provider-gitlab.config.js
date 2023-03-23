@@ -12,8 +12,8 @@ module.exports = createServerConfig(
       ...baseConfig,
       labels: [
         ...defaultLabels,
-        "group::configure",
-        "devops::configure",
+        "group::environments",
+        "devops::deploy",
         "section::ops",
         "Category:Infrastructure as Code",
       ],

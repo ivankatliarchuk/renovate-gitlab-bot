@@ -2,10 +2,10 @@ const fs = require("fs");
 const path = require("path");
 const { createServerConfig, defaultLabels, baseConfig } = require("../shared");
 
-const groupConfigureLabels = [
+const groupEnvironmentsLabels = [
   ...defaultLabels,
-  "group::configure",
-  "devops::configure",
+  "group::environments",
+  "devops::deploy",
   "section::ops",
 ];
 
@@ -19,7 +19,7 @@ module.exports = createServerConfig([
     semanticCommits: "disabled",
     reviewers: ["ashmckenzie", "tkuah"],
     reviewersSampleSize: 1,
-    labels: groupConfigureLabels,
+    labels: groupEnvironmentsLabels,
     includePaths: ["GITLAB_KAS_VERSION"],
     postUpdateOptions: [],
     renovateMetaCommentTemplate: fs.readFileSync(
