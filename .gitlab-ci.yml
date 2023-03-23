@@ -66,6 +66,7 @@ terraform:validate:
           exit 0
         fi
       fi
+      cd bot_image
       echo "Building image"
       docker build . --file "$DOCKER_FILE" --tag "$DOCKER_IMAGE" --label commitRef=$CI_COMMIT_SHORT_SHA
       echo "Pushing image"
@@ -90,13 +91,12 @@ terraform:plan:
 
 .beep-boop:
   image: $DOCKER_IMAGE
-  variables:
-    GIT_STRATEGY: none
   stage: run
   resource_group: $CI_COMMIT_REF_SLUG-$CONFIG_DIR
   tags:
     - gitlab-org
   script:
+    - cp -r "renovate" "/workdir/renovate"
     - cd /workdir/
     - ./run-renovate.sh "renovate/$CONFIG_DIR"
     - cp -r /workdir/renovate-log.txt $CI_PROJECT_DIR/renovate-log.txt
@@ -130,14 +130,12 @@ beep-boop:
 
 delete-pipelines:
   image: $IMAGE
-  variables:
-    GIT_STRATEGY: none
   stage: run
   resource_group: $CI_COMMIT_REF_SLUG-cleanup
   tags:
     - gitlab-org
   script:
-    - cd /workdir/
+    - yarn install
     - export "GITLAB_TOKEN=$DELETE_PIPELINES_TOKEN"
     - node ./scripts/delete-pipelines.js
   rules:

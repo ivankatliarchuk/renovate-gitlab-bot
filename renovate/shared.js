@@ -1,9 +1,10 @@
 const fs = require("fs");
 const path = require("path");
-const {
-  RENOVATE_BOT_USER,
-  RENOVATE_STOP_UPDATING_LABEL,
-} = require("../lib/constants");
+// TODO: Dry this up later again
+const { RENOVATE_BOT_USER, RENOVATE_STOP_UPDATING_LABEL } = {
+  RENOVATE_BOT_USER: "gitlab-dependency-update-bot",
+  RENOVATE_STOP_UPDATING_LABEL: "automation:bot-no-updates",
+};
 
 const defaultAssignees = {
   assignees: [RENOVATE_BOT_USER],

@@ -1,0 +1,16 @@
+{
+  "name": "@gitlab/dependency-update-bot-image",
+  "version": "0.0.1",
+  "description": "All dependencies of our bot_image",
+  "main": "",
+  "author": "Lukas Eipert <leipert@gitlab.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "gitlab-api-async-iterator": "^1.2.0",
+    "lodash": "^4.17.21",
+    "renovate": "file:./renovate-fork-34.0.0-6-gd362c0029.tgz",
+    "renovate-config-monorepo": "^0.43.0",
+    "renovate-config-packages": "^0.7.0"
+  }
+}
