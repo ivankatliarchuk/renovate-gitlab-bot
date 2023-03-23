@@ -7,8 +7,8 @@ module.exports = createServerConfig([
     reviewers: ["tigerwnz", "ash2k", "timofurrer"],
     labels: [
       ...defaultLabels,
-      "group::configure",
-      "devops::configure",
+      "group::environments",
+      "devops::deploy",
       "section::ops",
     ],
     postUpdateOptions: [],
