@@ -13,7 +13,7 @@ module.exports = createServerConfig([
       "group::environments",
       "Category:Infrastructure as Code",
     ],
-    enabledManagers: ["regex"],
+    enabledManagers: ["gitlabci", "npm", "regex"],
     reviewers: [
       "timofurrer",
       "tigerwnz",
