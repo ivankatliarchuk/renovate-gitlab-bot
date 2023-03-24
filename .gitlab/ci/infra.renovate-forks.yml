@@ -1,12 +1,13 @@
+---
 include:
   - template: Terraform/Base.latest.gitlab-ci.yml
 
 .terraform:config:
   variables:
-    TF_ROOT: projects
-    TF_STATE_NAME: projects
+    TF_ROOT: forks
+    TF_STATE_NAME: forks
     TF_VAR_gitlab_renovate_bot_token: $TERRAFORM_TOKEN
-    TF_CLI_ARGS_plan: "-lock=false -var-file=../projects/config.tfvars"
+    TF_CLI_ARGS_plan: "-lock=false -var-file=../forks/config.tfvars"
   environment:
     name: $TF_STATE_NAME
 
