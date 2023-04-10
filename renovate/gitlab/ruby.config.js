@@ -38,6 +38,21 @@ module.exports = createServerConfig(
           groupName: "Development gems",
         },
         {
+          matchPackageNames: [
+            "capybara",
+            "capybara-screenshot",
+            'rspec-retry',
+            'rspec_profiling',
+            'rspec-benchmark',
+            'rspec-parameterized',
+            'selenium-webdriver',
+            'test-prof',
+            'webmock'
+          ],
+          enabled: true,
+          groupName: "Testing gems",
+        },
+        {
           matchPackageNames: ["gitlab-styles", "gitlab-dangerfiles"],
           enabled: true,
           groupName: "Tooling gems",
