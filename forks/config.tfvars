@@ -16,5 +16,6 @@ projects = [
   "gitlab-org/cluster-integration/helm-install-image",
   "gitlab-org/cluster-integration/auto-deploy-image",
   "gitlab-org/cluster-integration/gitlab-agent",
-  "gitlab-org/security-products/package-hunter-cli"
+  "gitlab-org/security-products/package-hunter-cli",
+  "gitlab-org/security-products/analyzers/gemnasium"
 ]
