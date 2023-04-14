@@ -23,8 +23,6 @@ module.exports = createServerConfig(
       prCreation: "not-pending",
       enabledManagers: ["bundler", "gomod"],
       includePaths: [
-        // The Ruby sidecar.
-        "ruby/**",
         // The main Gitaly module that tracks versions for all of our installed
         // binaries.
         "*",
@@ -39,14 +37,6 @@ module.exports = createServerConfig(
       },
       packageRules: [
         updateNothing,
-        {
-          matchManagers: ["bundler"],
-          matchPackageNames: ["gitlab-labkit", "google-protobuf"],
-          enabled: true,
-          reviewers: ["pks-gitlab", "stanhu"],
-          commitMessagePrefix: "ruby:",
-          groupName: "Ruby dependencies",
-        },
         {
           // This is our basic rule for Go packages.
           matchManagers: ["gomod"],
