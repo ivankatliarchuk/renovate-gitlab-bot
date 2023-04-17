@@ -47,7 +47,7 @@ module.exports = createServerConfig([
       {
         fileMatch: ["^.gitlab-ci.yml$"],
         matchStrings: [
-          'DOCKER_DIND_IMAGE: "(?<depName>.*):(?<currentValue>.*)"\\s',
+          'DOCKER_DIND_IMAGE: "(?<depName>.*):(?<currentValue>.*)-dind"\\s',
         ],
         datasourceTemplate: "docker",
       },
