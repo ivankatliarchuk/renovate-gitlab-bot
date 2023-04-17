@@ -20,12 +20,12 @@ module.exports = createServerConfig([
     ],
     packageRules: [
       {
-        matchPackageNames: "hashicorp/terraform",
+        matchPackageNames: ["hashicorp/terraform"],
         matchManagers: ["regex"],
         separateMinorPatch: true,
       },
       {
-        matchPackageNames: "hashicorp/terraform",
+        matchPackageNames: ["hashicorp/terraform"],
         matchManagers: ["regex"],
         matchUpdateTypes: ["major", "minor"],
         enabled: false,
