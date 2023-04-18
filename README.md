@@ -12,6 +12,7 @@ The following repositories are currently being updated automatically.
 
 
 
+
 <!-- rep -->
 
 - [gitlab-renovate-forks/auto-build-image](https://gitlab.com/gitlab-renovate-forks/auto-build-image)
@@ -29,6 +30,7 @@ The following repositories are currently being updated automatically.
 - [gitlab-renovate-forks/gitlab-vscode-extension](https://gitlab.com/gitlab-renovate-forks/gitlab-vscode-extension)
 - [gitlab-renovate-forks/gitlab](https://gitlab.com/gitlab-renovate-forks/gitlab)
 - [gitlab-renovate-forks/helm-install-image](https://gitlab.com/gitlab-renovate-forks/helm-install-image)
+- [gitlab-renovate-forks/package-hunter-cli](https://gitlab.com/gitlab-renovate-forks/package-hunter-cli)
 - [gitlab-renovate-forks/pajamas-adoption-scanner](https://gitlab.com/gitlab-renovate-forks/pajamas-adoption-scanner)
 - [gitlab-renovate-forks/status-page](https://gitlab.com/gitlab-renovate-forks/status-page)
 - [gitlab-renovate-forks/terraform-images](https://gitlab.com/gitlab-renovate-forks/terraform-images)
@@ -36,6 +38,7 @@ The following repositories are currently being updated automatically.
 - [gitlab-renovate-forks/triage-ops](https://gitlab.com/gitlab-renovate-forks/triage-ops)
 
 <!-- rep -->
+
 
 
 
