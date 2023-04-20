@@ -1,6 +1,5 @@
 const {
   createServerConfig,
-  updateNothing,
   baseConfig,
   defaultLabels,
 } = require("../shared");
@@ -19,23 +18,15 @@ module.exports = createServerConfig(
       ],
       rangeStrategy: "bump",
       semanticCommits: "disabled",
-      enabledManagers: ["gomod"],
-      postUpdateOptions: ["gomodTidy", "gomodUpdateImportPaths"],
-      postUpgradeTasks: {
-        // Regenerate files that may change due to the dependency updates.
-        commands: ["make reviewable"],
-        fileFilters: ["*"],
-      },
+      enabledManagers: ["gitlabci", "gomod"],
+      reviewers: [
+        "patrickrice",
+        "timofurrer",
+      ],
       packageRules: [
-        updateNothing,
         {
           // This is our basic rule for Go packages.
           matchManagers: ["gomod"],
-          enabled: true,
-          reviewers: [
-            "timofurrer",
-            "patrickrice",
-          ],
           reviewersSampleSize: 2,
           commitMessagePrefix: "go:",
         },
@@ -61,6 +52,17 @@ module.exports = createServerConfig(
           branchPrefix: "renovate-tools/",
           additionalBranchPrefix: "{{parentDir}}/",
         },
+        {
+          // These roles are moved inside the gomod manager only.  Initially
+          // they were defined globally.
+          matchManagers: ["gomod"],
+          postUpdateOptions: ["gomodTidy", "gomodUpdateImportPaths"],
+          postUpgradeTasks: {
+            // Regenerate files that may change due to the dependency updates.
+            commands: ["make reviewable"],
+            fileFilters: ["*"],
+          },
+        }
       ],
     },
   ],
