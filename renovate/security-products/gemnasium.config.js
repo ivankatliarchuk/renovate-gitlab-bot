@@ -1,8 +1,9 @@
 const { defaultLabels } = require("../shared");
-
-const { createServerConfig } = require("../shared");
+const { baseConfig, createServerConfig } = require("../shared");
 
 const repository = "gitlab-renovate-forks/gemnasium";
+
+const hostRules = [{ host: "gitlab.com", token: process.env.RENOVATE_TOKEN }];
 
 const labels = defaultLabels.concat(
   "devops::secure",
@@ -11,15 +12,34 @@ const labels = defaultLabels.concat(
   "Category: Dependency Scanning"
 );
 
-const enabledManagers = ["docker", "golang"];
-
 const includePaths = ["go.mod", "build/**/Dockerfile"];
 
 // Ignore all fixtures and expectations.
 const ignorePaths = ["qa/**"];
 
-// Group dependency updates by analyzer and add labels to
-// scope pipelines.
+const lockFileMaintenance = baseConfig.lockFileMaintenance;
+
+const stopUpdatingLabel = baseConfig.stopUpdatingLabel;
+
+// If team changes or a username changes this must be updated.
+const reviewers = [
+  "adamcohen",
+  "atiwari71",
+  "brytannia",
+  "fcatteau",
+  "gonzoyumo",
+  "hacks4oats",
+  "ifrenkel",
+  "nilieskou",
+  "philipcunningham",
+  "smtan",
+];
+
+// Managers that are enabled for this repo.
+// See https://docs.renovatebot.com/modules/manager/ for more info.
+const enabledManagers = ["dockerfile", "gomod"];
+
+// Group dependency updates by analyzer and add labels to scope pipelines.
 const docker = {
   packageRules: [
     {
@@ -74,19 +94,22 @@ const config = createServerConfig([
   {
     // Core config
     repository,
-    labels,
+    automerge: false,
+    dependencyDashboard: false,
+    includeForks: true,
     enabledManagers,
     includePaths,
     ignorePaths,
+    labels,
+    hostRules,
+    lockFileMaintenance,
+    reviewers,
+    reviewersSampleSize: 2,
+    stopUpdatingLabel,
 
     // Language config
     docker,
     golang,
-    // java,
-    // js,
-    // php,
-    // python,
-    // ruby,
   },
 ]);
 
