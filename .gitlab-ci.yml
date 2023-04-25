@@ -94,7 +94,7 @@ beep-boop:
     BINARY_SOURCE: global
   parallel:
     matrix:
-      - CONFIG_DIR: [gitaly, gitlab, gitlab-docs, projects]
+      - CONFIG_DIR: [gitaly, gitlab, gitlab-docs, projects, security-products]
 
 # beep-boop-new:
 #   extends: .beep-boop

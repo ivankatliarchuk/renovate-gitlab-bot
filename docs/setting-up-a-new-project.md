@@ -2,7 +2,7 @@
 
 Submit a Merge Request containing the following two changes:
 
-1. Add your project to the [`projects/config.tfvars` file](projects/config.tfvars), e.g.:
+1. Add your project to [`forks/config.tfvars`](forks/config.tfvars), e.g.:
 
     ```diff
      projects = [
