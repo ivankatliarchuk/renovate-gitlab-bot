@@ -13,19 +13,19 @@ module.exports = createServerConfig([
       "group::environments",
       "Category:Infrastructure as Code",
     ],
-    enabledManagers: ["regex"],
+    enabledManagers: ["gitlabci", "npm", "regex"],
     reviewers: [
       "timofurrer",
       "tigerwnz",
     ],
     packageRules: [
       {
-        matchPackageNames: "hashicorp/terraform",
+        matchPackageNames: ["hashicorp/terraform"],
         matchManagers: ["regex"],
         separateMinorPatch: true,
       },
       {
-        matchPackageNames: "hashicorp/terraform",
+        matchPackageNames: ["hashicorp/terraform"],
         matchManagers: ["regex"],
         matchUpdateTypes: ["major", "minor"],
         enabled: false,
@@ -47,7 +47,7 @@ module.exports = createServerConfig([
       {
         fileMatch: ["^.gitlab-ci.yml$"],
         matchStrings: [
-          'DOCKER_DIND_IMAGE: "(?<depName>.*):(?<currentValue>.*)"\\s',
+          'DOCKER_DIND_IMAGE: "(?<depName>.*):(?<currentValue>.*)-dind"\\s',
         ],
         datasourceTemplate: "docker",
       },
