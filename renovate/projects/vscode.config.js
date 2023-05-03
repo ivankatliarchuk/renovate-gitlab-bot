@@ -30,6 +30,7 @@ module.exports = createServerConfig([
           "sinon",
           "mocha",
           "mocha-junit-reporter",
+          "msw",
         ],
         groupName: "Integration testing",
       },
