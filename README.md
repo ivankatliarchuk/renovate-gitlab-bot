@@ -10,10 +10,6 @@ https://gitlab.com/gitlab-org/frontend/renovate-fork
 
 The following repositories are currently being updated automatically.
 
-
-
-
-
 <!-- rep -->
 
 - [gitlab-renovate-forks/auto-build-image](https://gitlab.com/gitlab-renovate-forks/auto-build-image)
@@ -26,6 +22,7 @@ The following repositories are currently being updated automatically.
 - [gitlab-renovate-forks/gitlab-agent](https://gitlab.com/gitlab-renovate-forks/gitlab-agent)
 - [gitlab-renovate-forks/gitlab-development-kit](https://gitlab.com/gitlab-renovate-forks/gitlab-development-kit)
 - [gitlab-renovate-forks/gitlab-docs](https://gitlab.com/gitlab-renovate-forks/gitlab-docs)
+- [gitlab-renovate-forks/gitlab-styles](https://gitlab.com/gitlab-renovate-forks/gitlab-styles)
 - [gitlab-renovate-forks/gitlab-svgs](https://gitlab.com/gitlab-renovate-forks/gitlab-svgs)
 - [gitlab-renovate-forks/gitlab-ui](https://gitlab.com/gitlab-renovate-forks/gitlab-ui)
 - [gitlab-renovate-forks/gitlab-vscode-extension](https://gitlab.com/gitlab-renovate-forks/gitlab-vscode-extension)
@@ -39,10 +36,6 @@ The following repositories are currently being updated automatically.
 - [gitlab-renovate-forks/triage-ops](https://gitlab.com/gitlab-renovate-forks/triage-ops)
 
 <!-- rep -->
-
-
-
-
 
 For more details, refer to our documentation:
 

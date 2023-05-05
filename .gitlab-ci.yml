@@ -1,10 +1,6 @@
 include:
   - local: .gitlab/ci/infra.renovate-forks.yml
 
-variables:
-  IMAGE: $CI_REGISTRY_IMAGE/renovate:$CI_COMMIT_REF_SLUG
-  NEW_IMAGE: $CI_REGISTRY_IMAGE/renovate-new:$CI_COMMIT_REF_SLUG
-
 workflow:
   rules:
     # For merge requests, create a pipeline.
@@ -18,95 +14,37 @@ default:
 
 stages:
   - terraform
-  - build
   - run
 
-.build-image:
-  stage: build
-  needs: []
-  rules:
-    - if: '$CI_PIPELINE_SOURCE != "schedule"'
-  tags:
-    - gitlab-org-docker
-  resource_group: $CI_COMMIT_REF_SLUG-$DOCKER_IMAGE
-  image: docker:20.10.18-git
-  variables:
-    DOCKER_HOST: tcp://docker:2375/
-    DOCKER_CLI_EXPERIMENTAL: enabled
-    DOCKER_BUILDKIT: "1"
-  services:
-    - docker:20.10.18-dind
-  script:
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-    - |
-      if docker manifest inspect $DOCKER_IMAGE >/dev/null; then
-        echo "Image already exists"
-        docker pull $DOCKER_IMAGE
-        label=$(docker inspect --format='{{.Config.Labels.commitRef}}' $DOCKER_IMAGE)
-        if [ "$label" == "$CI_COMMIT_SHORT_SHA" ]; then
-          echo "Image has correct ref, so we skip building"
-          exit 0
-        fi
-      fi
-      cd bot_image
-      echo "Building image"
-      docker build . --file "$DOCKER_FILE" --tag "$DOCKER_IMAGE" --label commitRef=$CI_COMMIT_SHORT_SHA
-      echo "Pushing image"
-      docker push "$DOCKER_IMAGE"
-
-build-image:
-  extends: .build-image
-  variables:
-    DOCKER_IMAGE: $IMAGE
-    DOCKER_FILE: "Dockerfile"
-
-build-image-new:
-  extends: .build-image
-  variables:
-    DOCKER_IMAGE: $NEW_IMAGE
-    DOCKER_FILE: "new.Dockerfile"
-
-.beep-boop:
-  image: $DOCKER_IMAGE
+execution-plan:
+  image: node:18
   stage: run
-  resource_group: $CI_COMMIT_REF_SLUG-$CONFIG_DIR
-  tags:
-    - gitlab-org
+  needs: []
+  variables:
+    BASE_IMAGE: $CI_REGISTRY_IMAGE/renovate:$CI_COMMIT_REF_SLUG
   script:
-    - cp -r "renovate" "/workdir/renovate"
-    - cd /workdir/
-    - ./run-renovate.sh "renovate/$CONFIG_DIR"
-    - cp -r /workdir/renovate-log.txt $CI_PROJECT_DIR/renovate-log.txt
+    - yarn install
+    - node scripts/orchestrate-child-pipeline.mjs --ci-file .gitlab/child-pipeline/generated.yml --docker-files bot_image/docker_files/
   artifacts:
     paths:
-      - renovate-log.txt
-    expire_in: 1 week
-    public: false
-    when: always
+      - bot_image/docker_files/
+      - .gitlab/child-pipeline/generated.yml
 
-beep-boop:
-  extends: .beep-boop
+execute:
+  stage: run
   needs:
-    - job: build-image
-      optional: true
+    - execution-plan
   variables:
-    DOCKER_IMAGE: $IMAGE
-    BINARY_SOURCE: global
-  parallel:
-    matrix:
-      - CONFIG_DIR: [gitaly, gitlab, gitlab-docs, projects, security-products]
-
-# beep-boop-new:
-#   extends: .beep-boop
-#   variables:
-#     DOCKER_IMAGE: $NEW_IMAGE
-#     BINARY_SOURCE: install
-#   parallel:
-#     matrix:
-#       - CONFIG_DIR: []
+    PARENT_PIPELINE_ID: $CI_PIPELINE_ID
+  trigger:
+    strategy: depend
+    include:
+      - local: .gitlab/child-pipeline/entrypoint.yml
+      - artifact: .gitlab/child-pipeline/generated.yml
+        job: execution-plan
 
 delete-pipelines:
-  image: $IMAGE
+  image: node:18
   stage: run
   resource_group: $CI_COMMIT_REF_SLUG-cleanup
   tags:

@@ -3,5 +3,5 @@ renovate-fork/
 renovate-fork*.tgz
 
 .cache/
-# Temporary
-yarn.lock
+.gitlab/child-pipeline/generated.yml
+bot_image/docker_files/

@@ -7,14 +7,17 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
+    "axios": "^1.4.0",
+    "commander": "^10.0.1",
     "gitlab-api-async-iterator": "^1.2.0",
-    "luxon": "^2.4.0"
+    "glob": "^8.1.0",
+    "luxon": "^2.4.0",
+    "semver": "^7.3.8"
   },
   "scripts": {
     "update-readme": "scripts/update-readme.js"
   },
   "devDependencies": {
-    "glob": "^8.1.0",
     "prettier": "^2.8.4",
     "pretty-quick": "^3.1.3"
   }

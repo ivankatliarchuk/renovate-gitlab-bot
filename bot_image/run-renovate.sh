@@ -4,7 +4,7 @@ IFS=$'\n\t'
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 
-CONFIG_FOLDER="$1"
+CONFIG_FILE="$1"
 
 export NODE_OPTIONS="--max-old-space-size=4096"
 case "${CI_COMMIT_REF_SLUG:-not_main}" in
@@ -40,17 +40,13 @@ function run_postprocessing {
     node "$DIR/scripts/post-process.js" "$@" && return 0 || return 1
 }
 
-FILES="$DIR/$CONFIG_FOLDER/*.config.js"
-for file in $FILES
-do
-  echo "Starting renovate for $file"
+echo "Starting renovate for $DIR/$CONFIG_FILE"
 
-  run_preprocessing "$file" || fail "Execution of preprocessing failed"
+run_preprocessing "$DIR/$CONFIG_FILE" || fail "Execution of preprocessing failed"
 
-  run_renovate "$file" || fail "Execution of renovate for $file failed"
+run_renovate "$DIR/$CONFIG_FILE" || fail "Execution of renovate for $file failed"
 
-  run_postprocessing "$file" || fail "Execution of postprocessing failed"
-done
+run_postprocessing "$DIR/$CONFIG_FILE" || fail "Execution of postprocessing failed"
 
 if [ "$FAIL" != "" ]; then
   echo -e "$FAIL"
