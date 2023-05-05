@@ -15,7 +15,7 @@ module.exports = createServerConfig([
     semanticCommits: "disabled",
     stabilityDays: 7,
     prCreation: "not-pending",
-    enabledManagers: ["gomod"],
+    enabledManagers: ["asdf", "gomod"],
     includePaths: ["workhorse/*"],
     postUpdateOptions: ["gomodTidy"],
     packageRules: [
