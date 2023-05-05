@@ -1,0 +1,66 @@
+workflow:
+  rules:
+    # Allow for creation of child pipelines
+    - if: '$CI_PIPELINE_SOURCE == "parent_pipeline"'
+
+default:
+  tags:
+    - gitlab-org
+
+stages:
+  - build
+  - beep-boop
+
+.build-image:
+  stage: build
+  needs:
+    - pipeline: $PARENT_PIPELINE_ID
+      job: execution-plan
+      artifacts: true
+  tags:
+    - gitlab-org-docker
+  resource_group: $CI_COMMIT_REF_SLUG-$DOCKER_IMAGE
+  image: docker:20.10.18-git
+  variables:
+    DOCKER_HOST: tcp://docker:2375/
+    DOCKER_CLI_EXPERIMENTAL: enabled
+    DOCKER_BUILDKIT: "1"
+  services:
+    - docker:20.10.18-dind
+  script:
+    - ls ./bot_image/docker_files
+    - echo "$DOCKER_FILE"
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - |
+      if docker manifest inspect $DOCKER_IMAGE >/dev/null; then
+        echo "Image already exists"
+        docker pull $DOCKER_IMAGE
+        label=$(docker inspect --format='{{.Config.Labels.commitRef}}' $DOCKER_IMAGE)
+        if [ "$label" == "$CI_COMMIT_SHORT_SHA" ]; then
+          echo "Image has correct ref, so we skip building"
+          exit 0
+        fi
+      fi
+      cd bot_image
+      echo "Building image, commit ref $CI_COMMIT_SHORT_SHA"
+      docker build . --file "$DOCKER_FILE" --tag "$DOCKER_IMAGE" --label commitRef=$CI_COMMIT_SHORT_SHA
+      echo "Pushing image"
+      docker push "$DOCKER_IMAGE"
+
+.beep-boop:
+  variables:
+    BINARY_SOURCE: global
+  image: alpine:latest
+  stage: beep-boop
+  resource_group: $CI_COMMIT_REF_SLUG-$CONFIG_FILE
+  script:
+    - cp -r "renovate" "/workdir/renovate"
+    - cd /workdir/
+    - ./run-renovate.sh "renovate/$CONFIG_FILE"
+    - cp -r /workdir/renovate-log.txt $CI_PROJECT_DIR/renovate-log.txt
+  artifacts:
+    paths:
+      - renovate-log.txt
+    expire_in: 1 week
+    public: false
+    when: always
