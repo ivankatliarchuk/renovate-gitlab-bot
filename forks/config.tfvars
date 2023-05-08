@@ -9,6 +9,7 @@ projects = [
   "gitlab-org/gitlab",
   "gitlab-org/gitlab-development-kit",
   "gitlab-org/gitlab-docs",
+  "gitlab-org/gitlab-pages",
   "gitlab-org/gitlab-services/design.gitlab.com",
   "gitlab-org/gitlab-shell",
   "gitlab-org/gitlab-svgs",
