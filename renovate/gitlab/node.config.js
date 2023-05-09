@@ -110,17 +110,6 @@ module.exports = createServerConfig([
         groupName: "Sourcegraph",
       },
       {
-        reviewers: ["himkp", "dmishunov"],
-        matchPackageNames: [
-          "monaco-editor",
-          "monaco-yaml",
-          "monaco-editor-webpack-plugin",
-        ],
-        enabled: true,
-        rangeStrategy: "bump",
-        groupName: "Monaco Editor and related packages",
-      },
-      {
         reviewers: ["himkp", "ealcantara"],
         matchPackagePatterns: ["@tiptap/.*"],
         enabled: true,
