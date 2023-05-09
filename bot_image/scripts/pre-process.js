@@ -2,12 +2,11 @@
 
 const { log, warn, setScope } = require("../lib/logger");
 const { DRY_RUN, RENOVATE_STOP_UPDATING_LABEL } = require("../lib/constants");
+const { GitLabAPIIterator, GitLabAPI } = require("../lib/api");
 const {
-  GitLabAPIIterator,
-  GitLabAPI,
-  createRenovateMRIterator,
-  forEachFork,
-} = require("../lib/api");
+  cleanLabels,
+  runProcessingOnConfig,
+} = require("../lib/processing-helpers");
 
 setScope(`[Pre-Processing]`);
 
@@ -35,100 +34,63 @@ async function writeComment(mr, note) {
   });
 }
 
-function cleanLabels(labels) {
-  return labels.filter((l) => l !== "Community contribution");
-}
+async function preProcessMR(mr) {
+  const {
+    project_id,
+    iid,
+    labels: prevLabelsRaw,
+    merge_when_pipeline_succeeds: mwpsSet,
+  } = mr;
+  const apiBase = `/projects/${project_id}/merge_requests/${iid}`;
 
-async function processMRs(project, repositoryConfig) {
-  const { web_url: projectUrl, forked_from_project: upstreamProject } = project;
-  const { web_url: upstreamProjectUrl, id: upstreamId } = upstreamProject;
-  const { branchPrefix = "renovate/" } = repositoryConfig;
+  const prevLabels = cleanLabels(prevLabelsRaw);
 
-  log(`Working on project: ${projectUrl}`);
-  log(`Upstream project seems to be: ${upstreamProjectUrl}`);
-  const MRIterator = createRenovateMRIterator(upstreamId);
+  if (prevLabels.includes(RENOVATE_STOP_UPDATING_LABEL)) {
+    log("stopUpdatingLabel already set");
+    return;
+  }
 
-  for await (const mr of MRIterator) {
-    const {
-      project_id,
-      iid,
-      web_url,
-      labels: prevLabelsRaw,
-      merge_when_pipeline_succeeds: mwpsSet,
-      source_branch: sourceBranch,
-    } = mr;
-    log(`Checking ${web_url}`);
+  let setLabel = false;
 
-    if (!sourceBranch.startsWith(branchPrefix)) {
+  if (mwpsSet) {
+    log("MWPS already set, we should ask renovate to stop MRs");
+    setLabel = `Merge request already has "MWPS" set.`;
+  } else {
+    log("Checking approvals");
+    const { data: approvals } = await GitLabAPI.get(`${apiBase}/approvals`);
+    const { approved_by: approvedBy } = approvals;
+    if (approvedBy.length > 0) {
+      log(`Already approved by ${approvedBy.map((x) => x?.user?.username)}`);
+      setLabel = `Merge request already approved.`;
+    }
+  }
+
+  const payload = {};
+
+  if (setLabel) {
+    const renovateNote = await findRenovateComment(apiBase);
+
+    if (renovateNote) {
       log(
-        `Source Branch '${sourceBranch}' does not start with '${branchPrefix}'. Skipping`
+        `Looks like someone removed the ${RENOVATE_STOP_UPDATING_LABEL} label, we are not going to set it again.`
       );
-      continue;
+      return;
     }
 
-    const apiBase = `/projects/${project_id}/merge_requests/${iid}`;
-
-    const prevLabels = cleanLabels(prevLabelsRaw);
-
-    if (prevLabels.includes(RENOVATE_STOP_UPDATING_LABEL)) {
-      log("stopUpdatingLabel already set");
-      continue;
-    }
-
-    let setLabel = false;
-
-    if (mwpsSet) {
-      log("MWPS already set, we should ask renovate to stop MRs");
-      setLabel = `Merge request already has "MWPS" set.`;
+    payload.labels = [...prevLabels, RENOVATE_STOP_UPDATING_LABEL];
+    log(`Updating MR ${iid} with ${JSON.stringify(payload)}`);
+    if (DRY_RUN) {
+      log("Not executing, DRY-RUN enabled");
     } else {
-      log("Checking approvals");
-      const { data: approvals } = await GitLabAPI.get(`${apiBase}/approvals`);
-      const { approved_by: approvedBy } = approvals;
-      if (approvedBy.length > 0) {
-        log(`Already approved by ${approvedBy.map((x) => x?.user?.username)}`);
-        setLabel = `Merge request already approved.`;
-      }
+      await writeComment(apiBase, setLabel);
+      await GitLabAPI.put(apiBase, payload);
     }
-
-    const payload = {};
-
-    if (setLabel) {
-      const renovateNote = await findRenovateComment(apiBase);
-
-      if (renovateNote) {
-        log(
-          `Looks like someone removed the ${RENOVATE_STOP_UPDATING_LABEL} label, we are not going to set it again.`
-        );
-        continue;
-      }
-
-      payload.labels = [...prevLabels, RENOVATE_STOP_UPDATING_LABEL];
-      log(`Updating MR ${iid} with ${JSON.stringify(payload)}`);
-      if (DRY_RUN) {
-        log("Not executing, DRY-RUN enabled");
-      } else {
-        await writeComment(apiBase, setLabel);
-        await GitLabAPI.put(apiBase, payload);
-      }
-    } else {
-      log("Nothing to do");
-    }
+  } else {
+    log("Nothing to do");
   }
 }
 
-async function main() {
-  if (DRY_RUN) {
-    log("DRY RUN ENABLED");
-  }
-
-  const [config] = process.argv.slice(2);
-
-  const { repositories } = require(config);
-
-  await forEachFork(repositories, processMRs);
-}
-
-main()
+runProcessingOnConfig(preProcessMR)
   .then(() => {
     log("Done");
   })
