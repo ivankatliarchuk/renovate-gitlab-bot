@@ -14,6 +14,7 @@ import {
   serializeExecutionJob,
 } from "./lib/generate-ci-yaml.mjs";
 import { serializeDockerFile } from "./lib/generate-docker-files.mjs";
+import axios from "axios";
 
 const ROOT_DIR = path.join(fileURLToPath(import.meta.url), "..", "..");
 const CONFIG_DIR = path.join(ROOT_DIR, "renovate");
@@ -28,17 +29,32 @@ function resolvePath(p, ...rest) {
 }
 
 async function main() {
-  program.option("--ci-file <path>").option("--docker-files <path>");
+  program
+    .option("--ci-file <path>")
+    .option("--docker-files <path>")
+    .option("--roulette-file <path>");
 
   program.parse();
 
   const options = program.opts();
+
+  const rouletteFile = resolvePath(options.rouletteFile);
+  if (rouletteFile) {
+    await mkdir(path.dirname(rouletteFile), { recursive: true });
+    const { data } = await axios.get(
+      "https://gitlab-org.gitlab.io/gitlab-roulette/roulette.json"
+    );
+    await writeFile(rouletteFile, JSON.stringify(data, null, 2), "utf-8");
+    console.log("Downloaded roulette json");
+  }
+
   const ciFile = resolvePath(options.ciFile);
 
   const configFiles = glob
     .sync(path.join(CONFIG_DIR, "**", "*.config.js"))
     .sort();
 
+  process.env.STABLE_REVIEWERS = "true";
   const configs = await Promise.all(configFiles.map(loadRenovateConfig));
 
   const jobs = {};
@@ -84,6 +100,7 @@ async function main() {
     await mkdir(resolvePath(options.dockerFiles), { recursive: true });
     await Promise.all(Object.values(dockerFiles).map(serializeDockerFile));
   }
+
   console.warn("Docker Files", dockerFiles);
 }
 

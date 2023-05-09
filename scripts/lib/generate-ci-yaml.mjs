@@ -10,6 +10,11 @@ export function serializeExecutionJob(file, baseName, imageName) {
     },
     needs: [
       {
+        pipeline: "$PARENT_PIPELINE_ID",
+        job: "execution-plan",
+        artifacts: true,
+      },
+      {
         job: baseName,
         optional: true,
       },

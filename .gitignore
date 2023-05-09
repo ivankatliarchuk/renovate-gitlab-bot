@@ -5,3 +5,4 @@ renovate-fork*.tgz
 .cache/
 .gitlab/child-pipeline/generated.yml
 bot_image/docker_files/
+renovate/roulette.json

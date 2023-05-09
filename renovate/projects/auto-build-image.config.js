@@ -1,4 +1,8 @@
-const { createServerConfig, baseConfig } = require("../shared");
+const {
+  createServerConfig,
+  baseConfig,
+  availableRouletteReviewerByRole,
+} = require("../shared");
 
 module.exports = createServerConfig([
   {
@@ -6,7 +10,7 @@ module.exports = createServerConfig([
     ...baseConfig,
     semanticCommits: "enabled",
     semanticCommitType: "feat",
-    reviewers: ["Alexand", "hfyngvason", "tigerwnz"],
+    reviewers: availableRouletteReviewerByRole("auto-build-image"),
     labels: [
       "group::environments",
       "devops::deploy",

@@ -3,6 +3,7 @@ const {
   baseConfig,
   defaultLabels,
   enableWithBumpStrategy,
+  availableRouletteReviewerByRole,
 } = require("../shared");
 
 module.exports = createServerConfig([
@@ -15,7 +16,7 @@ module.exports = createServerConfig([
       "devops::create",
       "section::dev",
     ],
-    reviewers: ["viktomas"],
+    reviewers: availableRouletteReviewerByRole("gitlab-vscode-extension"),
     reviewersSampleSize: 1,
     packageRules: [
       {

@@ -1,10 +1,18 @@
-const { createServerConfig, defaultLabels, baseConfig } = require("../shared");
+const {
+  createServerConfig,
+  defaultLabels,
+  baseConfig,
+  availableRouletteReviewerByRole,
+} = require("../shared");
 
 module.exports = createServerConfig([
   {
     repository: "gitlab-renovate-forks/gitlab-agent",
     ...baseConfig,
-    reviewers: ["tigerwnz", "ash2k", "timofurrer"],
+    reviewers: availableRouletteReviewerByRole("gitlab-agent", [
+      "maintainer",
+      "trainee_maintainer",
+    ]),
     labels: [
       ...defaultLabels,
       "group::environments",
@@ -17,7 +25,7 @@ module.exports = createServerConfig([
     packageRules: [
       {
         matchPackageNames: ["gitlab/gitlab-agent-ci-image"],
-        groupName: "gitlab-agent-ci-image"
+        groupName: "gitlab-agent-ci-image",
       },
       {
         matchDepNames: ["base container images"],
@@ -53,8 +61,8 @@ module.exports = createServerConfig([
       {
         fileMatch: ["WORKSPACE"],
         matchStrings: [
-            '\n#\\s*(?<currentValue>\\S+)\\s+from.*?\n' +
-            '\\s*container_pull\\(\n' +
+          "\n#\\s*(?<currentValue>\\S+)\\s+from.*?\n" +
+            "\\s*container_pull\\(\n" +
             '\\s*name\\s*=\\s*"[^"]+",\n' +
             '(?:\\s*architecture\\s*=\\s*"[^"]+",\n)?' +
             '\\s*digest\\s*=\\s*"(?<currentDigest>sha256:[a-f0-9]+)",\n' +

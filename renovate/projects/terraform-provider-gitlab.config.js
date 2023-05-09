@@ -2,6 +2,7 @@ const {
   createServerConfig,
   baseConfig,
   defaultLabels,
+  availableRouletteReviewerByRole,
 } = require("../shared");
 
 module.exports = createServerConfig(
@@ -19,10 +20,7 @@ module.exports = createServerConfig(
       rangeStrategy: "bump",
       semanticCommits: "disabled",
       enabledManagers: ["gitlabci", "gomod"],
-      reviewers: [
-        "patrickrice",
-        "timofurrer",
-      ],
+      reviewers: availableRouletteReviewerByRole("terraform-provider-gitlab"),
       packageRules: [
         {
           // This is our basic rule for Go packages.
@@ -62,13 +60,11 @@ module.exports = createServerConfig(
             commands: ["make reviewable"],
             fileFilters: ["*"],
           },
-        }
+        },
       ],
     },
   ],
   {
-    allowedPostUpgradeCommands: [
-      "^make reviewable$",
-    ],
+    allowedPostUpgradeCommands: ["^make reviewable$"],
   }
 );
