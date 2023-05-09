@@ -24,9 +24,10 @@ execution-plan:
     BASE_IMAGE: $CI_REGISTRY_IMAGE/renovate:$CI_COMMIT_REF_SLUG
   script:
     - yarn install
-    - node scripts/orchestrate-child-pipeline.mjs --ci-file .gitlab/child-pipeline/generated.yml --docker-files bot_image/docker_files/
+    - node scripts/orchestrate-child-pipeline.mjs --ci-file .gitlab/child-pipeline/generated.yml --docker-files bot_image/docker_files/ --roulette-file renovate/roulette.json
   artifacts:
     paths:
+      - renovate/roulette.json
       - bot_image/docker_files/
       - .gitlab/child-pipeline/generated.yml
 

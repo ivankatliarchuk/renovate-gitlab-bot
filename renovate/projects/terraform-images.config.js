@@ -2,6 +2,7 @@ const {
   createServerConfig,
   baseConfig,
   defaultLabels,
+  availableRouletteReviewerByRole,
 } = require("../shared");
 
 module.exports = createServerConfig([
@@ -14,10 +15,7 @@ module.exports = createServerConfig([
       "Category:Infrastructure as Code",
     ],
     enabledManagers: ["gitlabci", "npm", "regex"],
-    reviewers: [
-      "timofurrer",
-      "tigerwnz",
-    ],
+    reviewers: availableRouletteReviewerByRole("terraform-images"),
     packageRules: [
       {
         matchPackageNames: ["hashicorp/terraform"],

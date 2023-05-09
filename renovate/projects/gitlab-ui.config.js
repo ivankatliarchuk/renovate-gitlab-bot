@@ -8,6 +8,7 @@ const {
   baseConfig,
   updateDOMPurify,
   semanticPrefixFixDepsChoreOthers,
+  availableRouletteReviewerByRole,
 } = require("../shared");
 const { prJest, prBabel, prVueMajor2, updateNodeJS } = require("../frontend");
 
@@ -15,6 +16,10 @@ module.exports = createServerConfig([
   {
     repository: "gitlab-renovate-forks/gitlab-ui",
     ...baseConfig,
+    reviewers: availableRouletteReviewerByRole(
+      "gitlab-ui",
+      "maintainer frontend"
+    ),
     internalChecksFilter: "strict",
     separateMultipleMajor: true,
     stabilityDays: 3,

@@ -1,26 +1,16 @@
-const { createServerConfig, baseConfig, epBaseConfig } = require("../shared");
+const {
+  createServerConfig,
+  baseConfig,
+  epBaseConfig,
+  availableRouletteReviewerByRole,
+} = require("../shared");
 
 module.exports = createServerConfig([
   {
     repository: "gitlab-renovate-forks/gitlab-styles",
     ...baseConfig,
-    labels: [
-      ...epBaseConfig.labels,
-      "Engineering Productivity",
-    ],
-    reviewers: [
-      // Reviewers as per https://about.gitlab.com/handbook/engineering/projects/#gitlab-styles
-      "alberts-gitlab",
-      "ali-gitlab",
-      "alinamihaila",
-      "ashmckenzie",
-      "eugielimpin",
-      "jennli",
-      "kassio",
-      "morefice",
-      "nao.hashizume",
-      "sashi_kumar",
-    ],
+    labels: [...epBaseConfig.labels, "Engineering Productivity"],
+    reviewers: availableRouletteReviewerByRole("gitlab-styles", "reviewer"),
     reviewersSampleSize: 1,
     enabledManagers: ["bundler"],
     packageRules: [

@@ -4,6 +4,7 @@ const {
   defaultLabels,
   updateGitLabUIandSVG,
   updateNothing,
+  availableRouletteReviewerByRole,
 } = require("../shared");
 const { prVueMajor2, prBabel, prJest } = require("../frontend");
 

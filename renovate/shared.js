@@ -5,6 +5,7 @@ const { RENOVATE_BOT_USER, RENOVATE_STOP_UPDATING_LABEL } = {
   RENOVATE_BOT_USER: "gitlab-dependency-update-bot",
   RENOVATE_STOP_UPDATING_LABEL: "automation:bot-no-updates",
 };
+const team = require("./roulette.json");
 
 const defaultAssignees = {
   assignees: [RENOVATE_BOT_USER],
@@ -203,6 +204,33 @@ function createServerConfig(repositories, serverConfig = {}) {
   };
 }
 
+function availableRouletteReviewerByRole(project, role = "maintainer") {
+  const roles = [role].flat();
+  const candidates = team.filter((person) =>
+    roles.some((r) => [person?.projects?.[project]].flat().includes(r))
+  );
+
+  if (candidates.length === 0) {
+    throw new Error(
+      `Found no candidates for project: ${project} with role: ${role}`
+    );
+  }
+
+  if (process.env.STABLE_REVIEWERS) {
+    return [project, roles];
+  }
+
+  let available = candidates.filter((person) => person.available);
+
+  if (available.length === 0) {
+    console.warn(
+      `${project}, no ${role} available. Falling back to _all_ ${role}.`
+    );
+    available = candidates;
+  }
+  return available.map((person) => person.username);
+}
+
 module.exports = {
   createServerConfig,
   defaultAssignees,
@@ -222,4 +250,5 @@ module.exports = {
   updateOnlyGitLabScope,
   updateOnlyGitLabScopePackageRules,
   enableWithBumpStrategy,
+  availableRouletteReviewerByRole,
 };

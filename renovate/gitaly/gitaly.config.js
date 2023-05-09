@@ -3,6 +3,7 @@ const {
   updateNothing,
   baseConfig,
   defaultLabels,
+  availableRouletteReviewerByRole,
 } = require("../shared");
 
 module.exports = createServerConfig(
@@ -29,7 +30,11 @@ module.exports = createServerConfig(
         // The directory containing build tools.
         "tools/**",
       ],
-      postUpdateOptions: ["gomodTidy", "gomodUpdateImportPaths", "bundlerConservative"],
+      postUpdateOptions: [
+        "gomodTidy",
+        "gomodUpdateImportPaths",
+        "bundlerConservative",
+      ],
       postUpgradeTasks: {
         // Regenerate files that may change due to the dependency updates.
         commands: ["make notice"],
@@ -41,18 +46,7 @@ module.exports = createServerConfig(
           // This is our basic rule for Go packages.
           matchManagers: ["gomod"],
           enabled: true,
-          reviewers: [
-            "8bitlife",
-            "jcaigitlab",
-            "justintobler",
-            "knayakgl",
-            "pks-gitlab",
-            "proglottis",
-            "qmnguyen0711",
-            "samihiltunen",
-            "toon",
-            "wchandler",
-          ],
+          reviewers: availableRouletteReviewerByRole("gitaly"),
           reviewersSampleSize: 2,
           commitMessagePrefix: "go:",
         },
@@ -75,7 +69,7 @@ module.exports = createServerConfig(
           // components. We thus disable upgrades to the Go language version.
           matchManagers: ["gomod"],
           matchDepTypes: ["golang"],
-          enabled: false
+          enabled: false,
         },
       ],
     },

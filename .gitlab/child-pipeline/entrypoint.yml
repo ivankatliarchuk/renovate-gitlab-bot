@@ -57,7 +57,7 @@ stages:
     - cp -r "renovate" "/workdir/renovate"
     - cd /workdir/
     - ./run-renovate.sh "renovate/$CONFIG_FILE"
-    - cp -r /workdir/renovate-log.txt $CI_PROJECT_DIR/renovate-log.txt
+    - cp -r /workdir/renovate-log.txt "$CI_PROJECT_DIR/renovate-log.txt"
   artifacts:
     paths:
       - renovate-log.txt
