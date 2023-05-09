@@ -45,10 +45,30 @@ async function getProjectFromSlug(projectSlug) {
   return project;
 }
 
-async function forEachFork(repositories, fn) {
-  for await (const repo of repositories) {
-    const project = await getProjectFromSlug(repo.repository);
-    await fn(project);
+async function forEachMR(repositories, fn) {
+  for await (const repositoryConfig of repositories) {
+    const project = await getProjectFromSlug(repositoryConfig.repository);
+    const { web_url: projectUrl, forked_from_project: upstreamProject } =
+      project;
+    const { web_url: upstreamProjectUrl, id: upstreamId } = upstreamProject;
+    const { branchPrefix = "renovate/" } = repositoryConfig;
+
+    log(`Working on project: ${projectUrl}`);
+    log(`Upstream project seems to be: ${upstreamProjectUrl}`);
+    const MRIterator = createRenovateMRIterator(upstreamId);
+    for await (const mr of MRIterator) {
+      const { web_url, source_branch: sourceBranch } = mr;
+      log(`Checking ${web_url}`);
+
+      if (!sourceBranch.startsWith(branchPrefix)) {
+        log(
+          `Source Branch '${sourceBranch}' does not start with '${branchPrefix}'. Skipping`
+        );
+        continue;
+      }
+
+      await fn(mr);
+    }
   }
 }
 
@@ -58,5 +78,5 @@ module.exports = {
   createRenovateMRIterator,
   getUserId,
   getUserIds,
-  forEachFork,
+  forEachMR,
 };

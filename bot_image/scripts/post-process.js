@@ -3,13 +3,11 @@
 const { sampleSize } = require("lodash");
 const { log, warn, setScope } = require("../lib/logger");
 const { RENOVATE_BOT_USER, DRY_RUN } = require("../lib/constants");
+const { GitLabAPIIterator, GitLabAPI, getUserIds } = require("../lib/api");
 const {
-  GitLabAPIIterator,
-  GitLabAPI,
-  createRenovateMRIterator,
-  forEachFork,
-  getUserIds,
-} = require("../lib/api");
+  cleanLabels,
+  runProcessingOnConfig,
+} = require("../lib/processing-helpers");
 
 setScope(`[Post-Processing]`);
 
@@ -27,95 +25,68 @@ async function findRenovateComment(mr) {
   throw new Error(`No Note from ${RENOVATE_BOT_USER} found`);
 }
 
-function cleanLabels(labels) {
-  return labels.filter((l) => l !== "Community contribution");
-}
+async function postProcessMR(mr) {
+  const {
+    project_id,
+    iid,
+    assignees: prevAssignees,
+    labels: prevLabelsRaw,
+    reviewers: prevReviewers,
+  } = mr;
 
-async function processMRs(project) {
-  const { web_url: projectUrl, forked_from_project: upstreamProject } = project;
-  const { web_url: upstreamProjectUrl, id: upstreamId } = upstreamProject;
+  const prevLabels = cleanLabels(prevLabelsRaw);
 
-  log(`Working on project: ${projectUrl}`);
-  log(`Upstream project seems to be: ${upstreamProjectUrl}`);
-  const MRIterator = createRenovateMRIterator(upstreamId);
+  if (prevReviewers.length && prevLabels.length) {
+    log("MR has reviewers and labels set, nothing to do");
+    return;
+  }
 
-  for await (const mr of MRIterator) {
-    const {
-      project_id,
-      iid,
-      web_url,
-      assignees: prevAssignees,
-      labels: prevLabelsRaw,
-      reviewers: prevReviewers,
-    } = mr;
-    log(`Checking ${web_url}`);
+  const apiBase = `/projects/${project_id}/merge_requests/${iid}`;
+  let metadata;
+  try {
+    metadata = await findRenovateComment(`${apiBase}/notes`);
+  } catch (e) {
+    log(e.message);
+    return;
+  }
 
-    const prevLabels = cleanLabels(prevLabelsRaw);
+  const { labels = [], reviewers = [] } = metadata;
 
-    if (prevReviewers.length && prevLabels.length) {
-      log("Already has reviewers and labels set, nothing to do");
-      continue;
-    }
+  const payload = {};
+  let update = false;
 
-    const apiBase = `/projects/${project_id}/merge_requests/${iid}`;
-    let metadata;
-    try {
-      metadata = await findRenovateComment(`${apiBase}/notes`);
-    } catch (e) {
-      log(e.message);
-      continue;
-    }
+  if (!prevAssignees.length) {
+    update = true;
+    payload.assignee_ids = await getUserIds(RENOVATE_BOT_USER);
+  }
 
-    const { labels = [], reviewers = [] } = metadata;
+  if (!prevReviewers.length && reviewers.length) {
+    update = true;
+    const newReviewers = sampleSize(reviewers, SAMPLE_SIZE);
+    log(`No reviewers set, setting ${newReviewers.join(", ")}`);
 
-    const payload = {};
-    let update = false;
+    payload.reviewer_ids = await getUserIds(newReviewers);
+  }
 
-    if (!prevAssignees.length) {
-      update = true;
-      payload.assignee_ids = await getUserIds(RENOVATE_BOT_USER);
-    }
+  if (!prevLabels.length && labels.length) {
+    update = true;
+    log(`No labels set, setting ${labels.join(", ")}`);
+    payload.labels = labels;
+  }
 
-    if (!prevReviewers.length && reviewers.length) {
-      update = true;
-      const newReviewers = sampleSize(reviewers, SAMPLE_SIZE);
-      log(`No reviewers set, setting ${newReviewers.join(", ")}`);
-
-      payload.reviewer_ids = await getUserIds(newReviewers);
-    }
-
-    if (!prevLabels.length && labels.length) {
-      update = true;
-      log(`No labels set, setting ${labels.join(", ")}`);
-      payload.labels = labels;
-    }
-
-    if (update) {
-      log(`Updating MR ${iid} with ${JSON.stringify(payload)}`);
-      if (DRY_RUN) {
-        log("Not executing, DRY-RUN enabled");
-      } else {
-        await GitLabAPI.put(apiBase, payload);
-      }
+  if (update) {
+    log(`Updating MR ${iid} with ${JSON.stringify(payload)}`);
+    if (DRY_RUN) {
+      log("Not executing, DRY-RUN enabled");
     } else {
-      log("Nothing to do");
+      await GitLabAPI.put(apiBase, payload);
     }
+  } else {
+    log("Nothing to do");
   }
 }
 
-async function main() {
-  if (DRY_RUN) {
-    log("DRY RUN ENABLED");
-  }
-
-  const [project] = process.argv.slice(2);
-
-  const { repositories } = require(project);
-
-  await forEachFork(repositories, processMRs);
-}
-
-main()
+runProcessingOnConfig(postProcessMR)
   .then(() => {
     log("Done");
   })
