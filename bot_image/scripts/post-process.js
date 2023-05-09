@@ -31,9 +31,10 @@ function cleanLabels(labels) {
   return labels.filter((l) => l !== "Community contribution");
 }
 
-async function processMRs(project) {
+async function processMRs(project, repositoryConfig) {
   const { web_url: projectUrl, forked_from_project: upstreamProject } = project;
   const { web_url: upstreamProjectUrl, id: upstreamId } = upstreamProject;
+  const { branchPrefix = "renovate/" } = repositoryConfig;
 
   log(`Working on project: ${projectUrl}`);
   log(`Upstream project seems to be: ${upstreamProjectUrl}`);
@@ -47,8 +48,16 @@ async function processMRs(project) {
       assignees: prevAssignees,
       labels: prevLabelsRaw,
       reviewers: prevReviewers,
+      source_branch: sourceBranch,
     } = mr;
     log(`Checking ${web_url}`);
+
+    if (!sourceBranch.startsWith(branchPrefix)) {
+      log(
+        `Source Branch '${sourceBranch}' does not start with '${branchPrefix}'. Skipping`
+      );
+      continue;
+    }
 
     const prevLabels = cleanLabels(prevLabelsRaw);
 
@@ -108,9 +117,9 @@ async function main() {
     log("DRY RUN ENABLED");
   }
 
-  const [project] = process.argv.slice(2);
+  const [config] = process.argv.slice(2);
 
-  const { repositories } = require(project);
+  const { repositories } = require(config);
 
   await forEachFork(repositories, processMRs);
 }

@@ -46,9 +46,9 @@ async function getProjectFromSlug(projectSlug) {
 }
 
 async function forEachFork(repositories, fn) {
-  for await (const repo of repositories) {
-    const project = await getProjectFromSlug(repo.repository);
-    await fn(project);
+  for await (const repositoryConfig of repositories) {
+    const project = await getProjectFromSlug(repositoryConfig.repository);
+    await fn(project, repositoryConfig);
   }
 }
 
