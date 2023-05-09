@@ -22,7 +22,7 @@ module.exports = createServerConfig([
     packageRules: [
       ...updateNodeJS.packageRules,
       {
-        matchPackagePatterns: ["bootstrap", "vue", "@rollup/plugin-node-resolve", "mermaid"],
+        matchPackagePatterns: ["bootstrap", "vue", "mermaid"],
         enabled: false,
       },
       {
