@@ -4,13 +4,14 @@ const {
   baseConfig,
   defaultLabels,
   availableRouletteReviewerByRole,
-} = require("../shared");
+} = require("../lib/shared");
 
 module.exports = createServerConfig(
   [
     {
       repository: "gitlab-renovate-forks/gitaly",
       ...baseConfig,
+      reviewers: availableRouletteReviewerByRole("gitaly"),
       labels: [
         ...defaultLabels,
         "group::gitaly",
@@ -46,7 +47,6 @@ module.exports = createServerConfig(
           // This is our basic rule for Go packages.
           matchManagers: ["gomod"],
           enabled: true,
-          reviewers: availableRouletteReviewerByRole("gitaly"),
           reviewersSampleSize: 2,
           commitMessagePrefix: "go:",
         },

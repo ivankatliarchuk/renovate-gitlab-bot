@@ -1,20 +1,16 @@
-const { createServerConfig, baseConfig, defaultLabels } = require("../shared");
-const { updateNodeJS } = require("../frontend");
+const {
+  createServerConfig,
+  baseConfig,
+  defaultLabels,
+} = require("../lib/shared");
+const { updateNodeJS } = require("../lib/languages");
 
 module.exports = createServerConfig([
   {
     repository: "gitlab-renovate-forks/gitlab-docs",
     ...baseConfig,
-    labels: [
-      ...defaultLabels,
-      "Technical Writing",
-      "Category:Docs Site",
-    ],
-    reviewers: [
-      "eread",
-      "marcel.amirault",
-      "sarahgerman",
-    ],
+    labels: [...defaultLabels, "Technical Writing", "Category:Docs Site"],
+    reviewers: ["eread", "marcel.amirault", "sarahgerman"],
     reviewersSampleSize: 3,
     enabledManagers: ["npm", "bundler", "asdf", "nvm"],
     prConcurrentLimit: 4,

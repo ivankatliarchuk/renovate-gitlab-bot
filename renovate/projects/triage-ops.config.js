@@ -1,4 +1,8 @@
-const { createServerConfig, baseConfig, epBaseConfig } = require("../shared");
+const {
+  createServerConfig,
+  baseConfig,
+  epBaseConfig,
+} = require("../lib/shared");
 
 module.exports = createServerConfig([
   {

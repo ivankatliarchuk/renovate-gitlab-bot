@@ -1,9 +1,9 @@
-const { createServerConfig, updateNothing, baseConfig } = require("../shared");
+const { createServerConfig, baseConfig } = require("../lib/shared");
 
 const baseLabels = [
   "type::maintenance",
   "maintenance::dependency",
-  "ci::templates"
+  "ci::templates",
 ];
 
 const groupEnvironmentsLabels = [
@@ -41,11 +41,8 @@ module.exports = createServerConfig([
       {
         groupName: "major version updates are breaking changes",
         matchUpdateTypes: ["major"],
-        addLabels: [
-          "breaking change",
-        ],
+        addLabels: ["breaking change"],
       },
-
     ],
     regexManagers: [
       // auto-build-image
@@ -55,9 +52,7 @@ module.exports = createServerConfig([
           "lib/gitlab/ci/templates/Jobs/Build.gitlab-ci.yml",
           "lib/gitlab/ci/templates/Jobs/Build.latest.gitlab-ci.yml",
         ],
-        matchStrings: [
-          "AUTO_BUILD_IMAGE_VERSION: '(?<currentValue>.*)'\n",
-        ],
+        matchStrings: ["AUTO_BUILD_IMAGE_VERSION: '(?<currentValue>.*)'\n"],
         datasourceTemplate: "gitlab-releases", // although it is a docker image, use gitlab-releases so we get richer information in the MR
         registryUrlTemplate: "https://gitlab.com",
         packageNameTemplate: "gitlab-org/cluster-integration/auto-build-image",
@@ -79,6 +74,6 @@ module.exports = createServerConfig([
         packageNameTemplate: "gitlab-org/cluster-integration/auto-deploy-image",
         depNameTemplate: "auto-deploy-image",
       },
-    ]
+    ],
   },
 ]);

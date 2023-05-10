@@ -3,7 +3,7 @@ const {
   updateNothing,
   baseConfig,
   epBaseConfig,
-} = require("../shared");
+} = require("../lib/shared");
 
 module.exports = createServerConfig(
   [
@@ -41,13 +41,13 @@ module.exports = createServerConfig(
           matchPackageNames: [
             "capybara",
             "capybara-screenshot",
-            'rspec-retry',
-            'rspec_profiling',
-            'rspec-benchmark',
-            'rspec-parameterized',
-            'selenium-webdriver',
-            'test-prof',
-            'webmock'
+            "rspec-retry",
+            "rspec_profiling",
+            "rspec-benchmark",
+            "rspec-parameterized",
+            "selenium-webdriver",
+            "test-prof",
+            "webmock",
           ],
           enabled: true,
           groupName: "Testing gems",

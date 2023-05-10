@@ -1,50 +1,46 @@
 const {
   createServerConfig,
   updateNothing,
-  updateGitLabUIandSVG,
-  ESLint,
-  WebIDE,
-  Stylelint,
-  updateGitLabScopeDev,
   baseConfig,
+  availableRouletteReviewerByRole,
+  foundationLabels,
+  defaultLabels,
+} = require("../lib/shared");
+const {
+  prVueMajor2,
   updateDOMPurify,
-  updateGitLabScope,
-} = require("../shared");
-const { prVueMajor2 } = require("../frontend");
+  prGitLabScopeAndLinters,
+} = require("../lib/npm");
 
 const foundationPackages = {
   reviewers: ["leipert"],
-  addLabels: ["group::foundations", "devops::manage", "section::dev"],
-};
-
-const updateGitLabVisualReviewTools = {
-  ...updateGitLabScope,
-  matchPackageNames: ["@gitlab/visual-review-tools"],
-  groupName: "GitLab Visual Review Tools",
-};
-
-const updateFrontendObservability = {
-  matchPackagePatterns: ["@sentry/browser"],
-  rangeStrategy: "bump",
-  enabled: true,
-  reviewers: ["jivanvl"],
-  groupName: "Frontend Observability Packages",
+  addLabels: [...foundationLabels],
 };
 
 module.exports = createServerConfig([
   {
     repository: "gitlab-renovate-forks/gitlab",
     ...baseConfig,
+    reviewers: availableRouletteReviewerByRole("gitlab", "maintainer frontend"),
+    labels: [...defaultLabels, "frontend"],
     dependencyDashboardTitle: "Dependency Dashboard (node)",
-    rangeStrategy: "bump",
+    rangeStrategy: "auto",
+    enabledManagers: ["npm"],
     packageRules: [
       updateNothing,
-      updateGitLabUIandSVG,
-      updateGitLabVisualReviewTools,
-      WebIDE,
-      ESLint,
-      Stylelint,
-      updateGitLabScopeDev,
+      ...prGitLabScopeAndLinters,
+      updateDOMPurify,
+      {
+        enabled: true,
+        matchPackageNames: ["@gitlab/visual-review-tools"],
+        groupName: "GitLab Visual Review Tools",
+      },
+      {
+        enabled: true,
+        matchPackageNames: ["@gitlab/web-ide"],
+        reviewers: ["ealcantara", "pslaughter"],
+        groupName: "GitLab Web IDE",
+      },
       {
         ...foundationPackages,
         matchPackagePatterns: [
@@ -65,32 +61,27 @@ module.exports = createServerConfig([
           groupName: "Webpack related packages",
         },
         enabled: true,
-        rangeStrategy: "bump",
       },
       {
         ...foundationPackages,
         matchPackageNames: ["webpack", "webpack-cli", "webpack-dev-server"],
         enabled: true,
-        rangeStrategy: "bump",
         groupName: "Webpack core packages",
       },
       {
         ...foundationPackages,
         matchPackageNames: ["core-js"],
         enabled: true,
-        rangeStrategy: "bump",
       },
       {
         ...foundationPackages,
         matchPackageNames: ["commander"],
         enabled: true,
-        rangeStrategy: "bump",
       },
       {
         ...foundationPackages,
         matchPackageNames: ["yarn-deduplicate"],
         enabled: true,
-        rangeStrategy: "bump",
       },
       {
         ...prVueMajor2,
@@ -100,27 +91,23 @@ module.exports = createServerConfig([
         reviewers: ["samdbeckham"],
         matchPackageNames: ["vue-virtual-scroll-list"],
         enabled: true,
-        rangeStrategy: "bump",
       },
       {
         reviewers: ["pslaughter"],
         matchPackagePatterns: ["^@sourcegraph/*"],
         enabled: true,
-        rangeStrategy: "bump",
         groupName: "Sourcegraph",
       },
       {
         reviewers: ["himkp", "ealcantara"],
         matchPackagePatterns: ["@tiptap/.*"],
         enabled: true,
-        rangeStrategy: "bump",
         groupName: "Content Editor Packages — tiptap",
       },
       {
         reviewers: ["himkp", "ealcantara"],
         matchPackagePatterns: ["prosemirror-.*"],
         enabled: true,
-        rangeStrategy: "bump",
         groupName: "Content Editor Packages - prosemirror",
       },
       {
@@ -132,14 +119,12 @@ module.exports = createServerConfig([
           "unified",
         ],
         enabled: true,
-        rangeStrategy: "bump",
         groupName: "Content Editor Packages - remark",
       },
       {
         reviewers: ["rob.hunt", "jiaan", "elwyn-gitlab"],
         matchPackagePatterns: ["@cubejs-client/.*"],
         enabled: true,
-        rangeStrategy: "bump",
         groupName: "Analytics dashboards - cubejs",
         addLabels: [
           "group::product analytics",
@@ -152,7 +137,6 @@ module.exports = createServerConfig([
         reviewers: ["rob.hunt", "jiaan", "elwyn-gitlab"],
         matchPackagePatterns: ["gridstack"],
         enabled: true,
-        rangeStrategy: "bump",
         groupName: "Customizable dashboards packages",
         addLabels: [
           "group::product analytics",
@@ -161,8 +145,12 @@ module.exports = createServerConfig([
           "frontend",
         ],
       },
-      updateDOMPurify,
-      updateFrontendObservability,
+      {
+        enabled: true,
+        matchPackagePatterns: ["@sentry/browser"],
+        reviewers: ["jivanvl"],
+        groupName: "Frontend Observability Packages",
+      },
     ],
     semanticCommits: "disabled",
   },

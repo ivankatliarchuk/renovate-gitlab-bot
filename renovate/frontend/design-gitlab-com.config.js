@@ -2,18 +2,22 @@ const {
   createServerConfig,
   baseConfig,
   semanticPrefixFixDepsChoreOthers,
-  updateGitLabUIandSVG,
-  ESLint,
-  Stylelint,
-  updateGitLabScopeDev,
   availableRouletteReviewerByRole,
-} = require("../shared");
-const { prVueMajor2, prBabel, prJest } = require("../frontend");
+  foundationLabels,
+} = require("../lib/shared");
+const {
+  prVueMajor2,
+  prBabel,
+  prJest,
+  prGitLabUISVG,
+  prGitLabScopeAndLinters,
+} = require("../lib/npm");
 
 module.exports = createServerConfig([
   {
     repository: "gitlab-renovate-forks/design.gitlab.com",
     ...baseConfig,
+    labels: foundationLabels,
     reviewers: availableRouletteReviewerByRole(
       "design.gitlab.com",
       "maintainer frontend"
@@ -21,17 +25,16 @@ module.exports = createServerConfig([
     internalChecksFilter: "strict",
     separateMultipleMajor: true,
     stabilityDays: 3,
-    rangeStrategy: "bump",
+    rangeStrategy: "auto",
     semanticCommits: "enabled",
+    enabledManagers: ["npm"],
     packageRules: [
       ...semanticPrefixFixDepsChoreOthers,
+      ...prGitLabScopeAndLinters,
       {
-        ...updateGitLabUIandSVG,
+        ...prGitLabUISVG,
         schedule: ["before 05:00 on Monday"],
       },
-      ESLint,
-      Stylelint,
-      updateGitLabScopeDev,
       prVueMajor2,
       prBabel,
       prJest,

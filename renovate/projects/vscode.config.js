@@ -2,9 +2,13 @@ const {
   createServerConfig,
   baseConfig,
   defaultLabels,
-  enableWithBumpStrategy,
   availableRouletteReviewerByRole,
-} = require("../shared");
+} = require("../lib/shared");
+
+const enableWithBumpStrategy = {
+  rangeStrategy: "bump",
+  enabled: true,
+};
 
 module.exports = createServerConfig([
   {
@@ -18,6 +22,7 @@ module.exports = createServerConfig([
     ],
     reviewers: availableRouletteReviewerByRole("gitlab-vscode-extension"),
     reviewersSampleSize: 1,
+    enabledManagers: ["npm"],
     packageRules: [
       {
         ...enableWithBumpStrategy,

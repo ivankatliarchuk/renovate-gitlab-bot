@@ -1,15 +1,15 @@
-const { createServerConfig, baseConfig, defaultLabels } = require("../shared");
+const {
+  createServerConfig,
+  baseConfig,
+  defaultLabels,
+} = require("../lib/shared");
 
 module.exports = createServerConfig([
   {
     repository: "gitlab-renovate-forks/gitlab-shell",
     ...baseConfig,
-    labels: [
-      ...defaultLabels,
-    ],
-    reviewers: [
-      "ashmckenzie",
-    ],
+    labels: [...defaultLabels],
+    reviewers: ["ashmckenzie"],
     reviewersSampleSize: 1,
     enabledManagers: ["asdf", "bundler", "gomod"],
     prConcurrentLimit: 4,
