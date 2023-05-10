@@ -26,11 +26,6 @@ async function getToolsForRepositories(repositories) {
   for (const repo of repositories) {
     const { repository, enabledManagers } = repo;
     const toolVersions = await getToolVersionsFromRepository(repository);
-    // This hack forces the install of a node version which is needed
-    // to run renovate itself.
-    if (!enabledManagers.includes("npm")) {
-      enabledManagers.push("npm");
-    }
     for (const manager of enabledManagers) {
       if (LANGUAGE_INDEPENDENT_MANAGERS.includes(manager)) {
         continue;
@@ -50,13 +45,16 @@ async function getToolsForRepositories(repositories) {
         throw new Error(`Unknown manager ${manager}`);
       }
 
-      const consolidated = await consolidateVersion(toolVersions, tool);
-
-      if (consolidated) {
-        enabledTools.push(consolidated);
-      }
+      enabledTools.push(await consolidateVersion(toolVersions, tool));
     }
   }
+
+  // Ensure that node is added, as we need it for renovate itself
+  const nodeVersion = enabledTools.find((x) => x.startsWith("node"));
+  if (!nodeVersion) {
+    enabledTools.push(await consolidateVersion({}, "nodejs"));
+  }
+
   return enabledTools;
 }
 
