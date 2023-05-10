@@ -1,16 +1,19 @@
 const {
   createServerConfig,
   updateNothing,
-  updateGitLabUIandSVG,
-  ESLint,
-  Stylelint,
-  updateGitLabScopeDev,
   baseConfig,
-  updateDOMPurify,
   semanticPrefixFixDepsChoreOthers,
   availableRouletteReviewerByRole,
-} = require("../shared");
-const { prJest, prBabel, prVueMajor2, updateNodeJS } = require("../frontend");
+  defaultLabels,
+} = require("../lib/shared");
+const {
+  prJest,
+  prBabel,
+  prVueMajor2,
+  updateDOMPurify,
+  prGitLabScopeAndLinters,
+} = require("../lib/npm");
+const { updateNodeJS } = require("../lib/languages");
 
 module.exports = createServerConfig([
   {
@@ -20,19 +23,17 @@ module.exports = createServerConfig([
       "gitlab-ui",
       "maintainer frontend"
     ),
+    labels: [...defaultLabels, "frontend"],
     internalChecksFilter: "strict",
     separateMultipleMajor: true,
     stabilityDays: 3,
-    rangeStrategy: "bump",
+    rangeStrategy: "auto",
     semanticCommits: "enabled",
     enabledManagers: ["npm", "asdf", "regex", "nvm"],
     packageRules: [
       ...semanticPrefixFixDepsChoreOthers,
       updateNothing,
-      updateGitLabUIandSVG,
-      ESLint,
-      Stylelint,
-      updateGitLabScopeDev,
+      ...prGitLabScopeAndLinters,
       {
         ...updateDOMPurify,
         rangeStrategy: "update-lockfile",
@@ -41,27 +42,22 @@ module.exports = createServerConfig([
         matchPackagePatterns: ["bootstrap-vue"],
         separateMultipleMajor: true,
         reviewers: ["pgascouvaillancourt"],
-        reviewersSampleSize: 1,
-        rangeStrategy: "bump",
         enabled: true,
         groupName: "Bootstrap Vue",
       },
       {
         matchPackagePatterns: ["@storybook/.*"],
         reviewers: ["pgascouvaillancourt"],
-        reviewersSampleSize: 1,
-        rangeStrategy: "bump",
         enabled: true,
         groupName: "Storybook",
       },
       {
         matchPackageNames: ["cypress"],
-        rangeStrategy: "bump",
         enabled: true,
       },
       prJest,
       prBabel,
-      { ...prVueMajor2, rangeStrategy: "auto" },
+      prVueMajor2,
       ...updateNodeJS.packageRules,
     ],
     regexManagers: [

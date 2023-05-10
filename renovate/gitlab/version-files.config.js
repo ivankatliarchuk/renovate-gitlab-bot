@@ -1,6 +1,10 @@
 const fs = require("fs");
 const path = require("path");
-const { createServerConfig, defaultLabels, baseConfig } = require("../shared");
+const {
+  createServerConfig,
+  defaultLabels,
+  baseConfig,
+} = require("../lib/shared");
 
 const groupEnvironmentsLabels = [
   ...defaultLabels,
@@ -30,7 +34,7 @@ module.exports = createServerConfig([
      * As we only update kas at the moment, this is fine,
      * but we might want to move this to packageRules,
      * if we renovate more things
-     */ 
+     */
     ignoreUnstable: false,
     regexManagers: [
       // GitLab KAS version

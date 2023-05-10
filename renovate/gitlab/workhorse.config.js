@@ -1,15 +1,17 @@
-const { createServerConfig, updateNothing, baseConfig, defaultLabels } = require("../shared");
+const {
+  createServerConfig,
+  updateNothing,
+  baseConfig,
+  defaultLabels,
+} = require("../lib/shared");
 
 module.exports = createServerConfig([
   {
     repository: "gitlab-renovate-forks/gitlab",
     ...baseConfig,
+    reviewers: ["ashmckenzie", "stanhu", "steveazz", "vyaklushin"],
     dependencyDashboardTitle: "Dependency Dashboard (workhorse)",
-    labels: [
-      ...defaultLabels,
-      "workhorse",
-      "section::dev",
-    ],
+    labels: [...defaultLabels, "workhorse", "section::dev"],
     branchPrefix: "renovate-workhorse/",
     rangeStrategy: "bump",
     semanticCommits: "disabled",
@@ -24,12 +26,6 @@ module.exports = createServerConfig([
         // This is our basic rule for Go packages.
         matchManagers: ["gomod"],
         enabled: true,
-        reviewers: [
-          "ashmckenzie",
-          "stanhu",
-          "steveazz",
-          "vyaklushin",
-        ],
         reviewersSampleSize: 1,
         commitMessagePrefix: "workhorse:",
       },

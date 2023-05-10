@@ -1,9 +1,7 @@
-const { defaultLabels } = require("../shared");
-const { baseConfig, createServerConfig } = require("../shared");
+const { defaultLabels } = require("../lib/shared");
+const { baseConfig, createServerConfig } = require("../lib/shared");
 
 const repository = "gitlab-renovate-forks/gemnasium";
-
-const hostRules = [{ host: "gitlab.com", token: process.env.RENOVATE_TOKEN }];
 
 const labels = defaultLabels.concat(
   "devops::secure",
@@ -18,8 +16,6 @@ const includePaths = ["go.mod", "build/**/Dockerfile"];
 const ignorePaths = ["qa/**"];
 
 const lockFileMaintenance = baseConfig.lockFileMaintenance;
-
-const stopUpdatingLabel = baseConfig.stopUpdatingLabel;
 
 // If team changes or a username changes this must be updated.
 const reviewers = [
@@ -94,18 +90,14 @@ const config = createServerConfig([
   {
     // Core config
     repository,
-    automerge: false,
     dependencyDashboard: false,
-    includeForks: true,
     enabledManagers,
     includePaths,
     ignorePaths,
     labels,
-    hostRules,
     lockFileMaintenance,
     reviewers,
     reviewersSampleSize: 2,
-    stopUpdatingLabel,
 
     // Language config
     docker,

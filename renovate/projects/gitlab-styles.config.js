@@ -3,7 +3,7 @@ const {
   baseConfig,
   epBaseConfig,
   availableRouletteReviewerByRole,
-} = require("../shared");
+} = require("../lib/shared");
 
 module.exports = createServerConfig([
   {

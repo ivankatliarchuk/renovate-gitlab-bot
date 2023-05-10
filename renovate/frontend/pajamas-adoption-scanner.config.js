@@ -1,18 +1,16 @@
 const {
   createServerConfig,
   baseConfig,
-  defaultLabels,
-  updateGitLabUIandSVG,
+  foundationLabels,
   updateNothing,
-  availableRouletteReviewerByRole,
-} = require("../shared");
-const { prVueMajor2, prBabel, prJest } = require("../frontend");
+} = require("../lib/shared");
+const { prVueMajor2, prBabel, prJest, prGitLabUISVG } = require("../lib/npm");
 
 module.exports = createServerConfig([
   {
     repository: "gitlab-renovate-forks/pajamas-adoption-scanner",
     ...baseConfig,
-    labels: [...defaultLabels, "group::foundations"],
+    labels: foundationLabels,
     includePaths: [
       // The top-level package
       "*",
@@ -20,13 +18,9 @@ module.exports = createServerConfig([
       "dashboard/**",
     ],
     reviewers: ["markrian"],
-    packageRules: [
-      updateNothing,
-      updateGitLabUIandSVG,
-      prVueMajor2,
-      prBabel,
-      prJest,
-    ],
+    rangeStrategy: "auto",
+    enabledManagers: ["npm"],
+    packageRules: [updateNothing, prGitLabUISVG, prVueMajor2, prBabel, prJest],
     updateInternalDeps: true,
   },
 ]);
