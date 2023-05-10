@@ -17,6 +17,12 @@ module.exports = createServerConfig(
         "section::ops",
         "Category:Infrastructure as Code",
       ],
+      includePaths: [
+        // The main module
+        "*",
+        // The directory containing build tools.
+        "tools/**",
+      ],
       rangeStrategy: "bump",
       semanticCommits: "disabled",
       enabledManagers: ["gitlabci", "gomod"],
@@ -38,11 +44,10 @@ module.exports = createServerConfig(
           schedule: ["on the first day of the month"],
         },
         {
-          // Gitaly's build tooling follows the same review process as normal
-          // dependency updates, but we want to change the prefix to make these
-          // stand out.
+          // build tooling follows the same review process as normal dependency
+          // updates, but we want to change the prefix to make these stand out.
           matchManagers: ["gomod"],
-          matchPaths: ["tools/"],
+          matchPaths: ["tools/**"],
           commitMessagePrefix: "tools/{{parentDir}}:",
           // In order to not have conflicting branches in case the same
           // dependency gets updated in multiple modules we use a branch-prefix
