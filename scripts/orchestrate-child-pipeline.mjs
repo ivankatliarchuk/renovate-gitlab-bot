@@ -58,7 +58,7 @@ async function main() {
   const configs = await Promise.all(configFiles.map(loadRenovateConfig));
 
   const jobs = {};
-  const dockerFiles = [];
+  const dockerFiles = {};
 
   for (const { file, needToBeInstalled } of configs) {
     const baseName = jobNameFromTools(needToBeInstalled);

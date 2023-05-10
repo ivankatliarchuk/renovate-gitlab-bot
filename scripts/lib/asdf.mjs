@@ -1,7 +1,19 @@
+import { readFile } from "node:fs/promises";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { GitLabAPI } from "../../bot_image/lib/api.js";
 import semver from "semver";
 
+const TOOL_VERSION = path.join(
+  fileURLToPath(import.meta.url),
+  "..",
+  "..",
+  "..",
+  ".tool-versions"
+);
+
 const versionRegistry = {};
+
 function parseToolVersion(data) {
   return data
     .trim()
@@ -14,6 +26,16 @@ function parseToolVersion(data) {
 
       return acc;
     }, {});
+}
+
+async function getRenovateNodeVersion() {
+  if (getRenovateNodeVersion.value) {
+    return getRenovateNodeVersion.value;
+  }
+  const toolVersions = parseToolVersion(await readFile(TOOL_VERSION, "utf-8"));
+  return (getRenovateNodeVersion.value = semver.coerce(
+    toolVersions["nodejs"][0]
+  ));
 }
 
 export async function getToolVersionsFromRepository(repository) {
@@ -42,6 +64,7 @@ async function getToolVersionsFallback() {
   if (getToolVersionsFallback.value) {
     return getToolVersionsFallback.value;
   }
+
   return (getToolVersionsFallback.value = getToolVersionsFromRepository(
     "gitlab-org/gitlab-development-kit"
   ));
@@ -68,7 +91,11 @@ export async function consolidateVersion(toolVersions, tool) {
       retVersion = semver.major(version) + "." + semver.minor(version);
       break;
     case "nodejs":
+      const renNodeVersion = await getRenovateNodeVersion();
       version = semver.coerce(version);
+      if (semver.lt(version, renNodeVersion)) {
+        version = renNodeVersion;
+      }
       retVersion = semver.major(version).toString();
       break;
   }
