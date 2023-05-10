@@ -3,7 +3,7 @@ import { consolidateVersion, getToolVersionsFromRepository } from "./asdf.mjs";
 /**
  * These managers do not need any language installed
  */
-const LANGUAGE_INDEPENDENT_MANAGERS = [
+const TOOL_INDEPENDENT_MANAGERS = [
   "asdf",
   "dockerfile",
   "gitlabci",
@@ -11,6 +11,12 @@ const LANGUAGE_INDEPENDENT_MANAGERS = [
   "regex",
   "terraform",
 ];
+
+const MANAGER_TO_ASDF_TOOL_MAP = {
+  gomod: "golang",
+  bundler: "ruby",
+  npm: "nodejs",
+};
 
 /**
  * This parses a list of renovate repository configurations and returns
@@ -27,22 +33,14 @@ async function getToolsForRepositories(repositories) {
     const { repository, enabledManagers } = repo;
     const toolVersions = await getToolVersionsFromRepository(repository);
     for (const manager of enabledManagers) {
-      if (LANGUAGE_INDEPENDENT_MANAGERS.includes(manager)) {
+      if (TOOL_INDEPENDENT_MANAGERS.includes(manager)) {
         continue;
       }
 
-      let tool = "";
-
-      if (manager === "gomod") {
-        tool = "golang";
-      } else if (manager === "bundler") {
-        tool = "ruby";
-      } else if (manager === "npm") {
-        tool = "nodejs";
-      }
+      const tool = MANAGER_TO_ASDF_TOOL_MAP[manager];
 
       if (!tool) {
-        throw new Error(`Unknown manager ${manager}`);
+        throw new Error(`Unknown tool for ${manager}`);
       }
 
       enabledTools.push(await consolidateVersion(toolVersions, tool));

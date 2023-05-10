@@ -33,5 +33,5 @@ sequenceDiagram
 
 The plan is to make this orchestration a little smarter, by:
 
-1. Only adding creating build jobs if necessary (e.g. image doesn't exist yet)
+1. Only creating build jobs if necessary (e.g. image doesn't exist yet)
 2. In MRs: Only create renovate jobs if config of said jobs has been touched
