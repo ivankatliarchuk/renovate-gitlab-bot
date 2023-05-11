@@ -27,11 +27,11 @@ module.exports = createServerConfig(
       semanticCommits: "disabled",
       enabledManagers: ["gitlabci", "gomod"],
       reviewers: availableRouletteReviewerByRole("terraform-provider-gitlab"),
+      reviewersSampleSize: 2,
       packageRules: [
         {
           // This is our basic rule for Go packages.
           matchManagers: ["gomod"],
-          reviewersSampleSize: 2,
           commitMessagePrefix: "go:",
         },
         {

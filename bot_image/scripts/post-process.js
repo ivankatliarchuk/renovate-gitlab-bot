@@ -12,7 +12,7 @@ const {
 setScope(`[Post-Processing]`);
 
 const MATCHER = /```json\s*(?<json>.+?)\s*```/m;
-const SAMPLE_SIZE = 2;
+const SAMPLE_SIZE_FALLBACK = 2;
 
 async function findRenovateComment(mr) {
   const NotesIterator = new GitLabAPIIterator(mr);
@@ -25,7 +25,7 @@ async function findRenovateComment(mr) {
   throw new Error(`No Note from ${RENOVATE_BOT_USER} found`);
 }
 
-async function postProcessMR(mr) {
+async function postProcessMR(mr, repositoryConfig) {
   const {
     project_id,
     iid,
@@ -62,8 +62,14 @@ async function postProcessMR(mr) {
 
   if (!prevReviewers.length && reviewers.length) {
     update = true;
-    const newReviewers = sampleSize(reviewers, SAMPLE_SIZE);
-    log(`No reviewers set, setting ${newReviewers.join(", ")}`);
+    const reviewerSampleSize =
+      repositoryConfig?.reviewersSampleSize ?? SAMPLE_SIZE_FALLBACK;
+    const newReviewers = sampleSize(reviewers, reviewerSampleSize);
+    log(
+      `No reviewers set, setting ${newReviewers.join(
+        ", "
+      )} (sample size=${reviewerSampleSize})`
+    );
 
     payload.reviewer_ids = await getUserIds(newReviewers);
   }

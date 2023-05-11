@@ -67,7 +67,7 @@ async function forEachMR(repositories, fn) {
         continue;
       }
 
-      await fn(mr);
+      await fn(mr, repositoryConfig);
     }
   }
 }
