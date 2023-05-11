@@ -1,6 +1,5 @@
 const {
   createServerConfig,
-  updateNothing,
   baseConfig,
   defaultLabels,
   availableRouletteReviewerByRole,
@@ -12,6 +11,7 @@ module.exports = createServerConfig(
       repository: "gitlab-renovate-forks/gitaly",
       ...baseConfig,
       reviewers: availableRouletteReviewerByRole("gitaly"),
+      reviewersSampleSize: 2,
       labels: [
         ...defaultLabels,
         "group::gitaly",
@@ -23,7 +23,7 @@ module.exports = createServerConfig(
       semanticCommits: "disabled",
       stabilityDays: 7,
       prCreation: "not-pending",
-      enabledManagers: ["bundler", "gomod"],
+      enabledManagers: ["gomod"],
       includePaths: [
         // The main Gitaly module that tracks versions for all of our installed
         // binaries.
@@ -31,23 +31,17 @@ module.exports = createServerConfig(
         // The directory containing build tools.
         "tools/**",
       ],
-      postUpdateOptions: [
-        "gomodTidy",
-        "gomodUpdateImportPaths",
-        "bundlerConservative",
-      ],
+      postUpdateOptions: ["gomodTidy", "gomodUpdateImportPaths"],
       postUpgradeTasks: {
         // Regenerate files that may change due to the dependency updates.
         commands: ["make notice"],
         fileFilters: ["NOTICE"],
       },
       packageRules: [
-        updateNothing,
         {
           // This is our basic rule for Go packages.
           matchManagers: ["gomod"],
           enabled: true,
-          reviewersSampleSize: 2,
           commitMessagePrefix: "go:",
         },
         {
@@ -55,7 +49,7 @@ module.exports = createServerConfig(
           // dependency updates, but we want to change the prefix to make these
           // stand out.
           matchManagers: ["gomod"],
-          matchPaths: ["tools/"],
+          matchPaths: ["tools/**"],
           commitMessagePrefix: "tools/{{parentDir}}:",
           // In order to not have conflicting branches in case the same
           // dependency gets updated in multiple modules we use a branch-prefix
@@ -69,6 +63,13 @@ module.exports = createServerConfig(
           // components. We thus disable upgrades to the Go language version.
           matchManagers: ["gomod"],
           matchDepTypes: ["golang"],
+          enabled: false,
+        },
+        {
+          // At the moment we have too many indirect dependencies which would
+          // need updating, therefore we disable them (for now)
+          matchManagers: ["gomod"],
+          matchDepTypes: ["indirect"],
           enabled: false,
         },
       ],

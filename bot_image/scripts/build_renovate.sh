@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-FORK_BRANCH=gitlab-main-v33
+FORK_BRANCH=gitlab-main-v34-160
 
 if ! [ -d renovate-fork ]; then
   git clone https://gitlab.com/gitlab-org/frontend/renovate-fork.git
@@ -16,7 +16,7 @@ git reset --hard "origin/$FORK_BRANCH"
 VERSION=$(git describe --tags)
 echo "Renovate Version $VERSION"
 yarn version --new-version "$VERSION" --no-git-tag-version
-yarn install
+yarn install --ignore-engines
 yarn build
 yarn pack
 mv ./renovate*.tgz "../renovate-fork-$VERSION.tgz"

@@ -1,6 +1,5 @@
 const {
   createServerConfig,
-  updateNothing,
   baseConfig,
   defaultLabels,
 } = require("../lib/shared");
@@ -21,7 +20,6 @@ module.exports = createServerConfig([
     includePaths: ["workhorse/*"],
     postUpdateOptions: ["gomodTidy"],
     packageRules: [
-      updateNothing,
       {
         // This is our basic rule for Go packages.
         matchManagers: ["gomod"],
@@ -46,6 +44,13 @@ module.exports = createServerConfig([
         ],
         reviewersSampleSize: 2,
         groupName: "gRPC dependencies",
+      },
+      {
+        // At the moment we have too many indirect dependencies which would
+        // need updating, therefore we disable them (for now)
+        matchManagers: ["gomod"],
+        matchDepTypes: ["indirect"],
+        enabled: false,
       },
     ],
   },
