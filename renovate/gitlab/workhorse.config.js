@@ -11,7 +11,7 @@ module.exports = createServerConfig([
     ...baseConfig,
     reviewers: availableRouletteReviewerByRole(
       "gitlab",
-      "maintainer workhorse"
+      ["maintainer workhorse", "trainee_maintainer workhorse"]
     ),
     reviewersSampleSize: 1,
     dependencyDashboardTitle: "Dependency Dashboard (workhorse)",
