@@ -51,7 +51,13 @@ async function forEachMR(repositories, fn) {
     const { web_url: projectUrl, forked_from_project: upstreamProject } =
       project;
     const { web_url: upstreamProjectUrl, id: upstreamId } = upstreamProject;
-    const { branchPrefix = "renovate/" } = repositoryConfig;
+    const { branchPrefix = "renovate/", packageRules = [] } = repositoryConfig;
+    // Package rules could overwrite branch prefixes, so we need to get the union of those
+    const branchPrefixes = [branchPrefix].concat(
+      packageRules.flatMap((rule) =>
+        rule.branchPrefix ? rule.branchPrefix : []
+      )
+    );
 
     log(`Working on project: ${projectUrl}`);
     log(`Upstream project seems to be: ${upstreamProjectUrl}`);
@@ -60,9 +66,11 @@ async function forEachMR(repositories, fn) {
       const { web_url, source_branch: sourceBranch } = mr;
       log(`Checking ${web_url}`);
 
-      if (!sourceBranch.startsWith(branchPrefix)) {
+      if (!branchPrefixes.some((prefix) => sourceBranch.startsWith(prefix))) {
         log(
-          `Source Branch '${sourceBranch}' does not start with '${branchPrefix}'. Skipping`
+          `Source Branch '${sourceBranch}' does not start with any of '${branchPrefixes.join(
+            "', '"
+          )}'. Skipping`
         );
         continue;
       }
