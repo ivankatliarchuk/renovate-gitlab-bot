@@ -1,4 +1,7 @@
-const { defaultLabels } = require("../lib/shared");
+const {
+  defaultLabels,
+  availableRouletteReviewerByRole,
+} = require("../lib/shared");
 const { baseConfig, createServerConfig } = require("../lib/shared");
 
 const repository = "gitlab-renovate-forks/gemnasium";
@@ -17,19 +20,11 @@ const ignorePaths = ["qa/**"];
 
 const lockFileMaintenance = baseConfig.lockFileMaintenance;
 
-// If team changes or a username changes this must be updated.
-const reviewers = [
-  "adamcohen",
-  "atiwari71",
-  "brytannia",
-  "fcatteau",
-  "gonzoyumo",
-  "hacks4oats",
-  "ifrenkel",
-  "nilieskou",
-  "philipcunningham",
-  "smtan",
-];
+// Data from the team.yml.
+const reviewers = availableRouletteReviewerByRole("secure-DS-gemnasium", [
+  "maintainer",
+  "maintainer backend",
+]);
 
 // Managers that are enabled for this repo.
 // See https://docs.renovatebot.com/modules/manager/ for more info.
