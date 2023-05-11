@@ -1,4 +1,4 @@
-import { consolidateVersion, getToolVersionsFromRepository } from "./asdf.mjs";
+import { consolidateVersion } from "./asdf.mjs";
 
 /**
  * These managers do not need any language installed
@@ -29,9 +29,8 @@ const MANAGER_TO_ASDF_TOOL_MAP = {
  */
 async function getToolsForRepositories(repositories) {
   const enabledTools = [];
-  for (const repo of repositories) {
-    const { repository, enabledManagers } = repo;
-    const toolVersions = await getToolVersionsFromRepository(repository);
+  for (const repositoryConfig of repositories) {
+    const { enabledManagers } = repositoryConfig;
     for (const manager of enabledManagers) {
       if (TOOL_INDEPENDENT_MANAGERS.includes(manager)) {
         continue;
@@ -43,7 +42,7 @@ async function getToolsForRepositories(repositories) {
         throw new Error(`Unknown tool for ${manager}`);
       }
 
-      enabledTools.push(await consolidateVersion(toolVersions, tool));
+      enabledTools.push(await consolidateVersion(repositoryConfig, tool));
     }
   }
 
