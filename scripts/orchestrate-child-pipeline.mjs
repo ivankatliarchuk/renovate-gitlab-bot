@@ -69,15 +69,11 @@ async function main() {
     );
     jobs[baseName] ||= serializeBuildImageJob(baseName, imageName);
 
-    const job = serializeExecutionJob(
+    const { jobName, jobDefinition } = serializeExecutionJob(
       path.relative(CONFIG_DIR, file),
       baseName,
       imageName
     );
-    const jobName = path
-      .relative(CONFIG_DIR, file)
-      .replace(/\W/g, "-")
-      .replace(/-+/g, "-");
 
     dockerFiles[baseName] ||= {
       path: resolvePath(options.dockerFiles, `./${baseName}.Dockerfile`),
@@ -85,11 +81,15 @@ async function main() {
       jobs: [],
     };
     dockerFiles[baseName].jobs.push(jobName);
-    jobs[jobName] = job;
+    jobs[jobName] = jobDefinition;
   }
 
   if (ciFile) {
-    await writeFile(ciFile, JSON.stringify(jobs, null, 2), "utf-8");
+    const ciFileDefinition = {
+      stages: [...new Set(Object.values(jobs).map((j) => j.stage))],
+      ...jobs,
+    };
+    await writeFile(ciFile, JSON.stringify(ciFileDefinition, null, 2), "utf-8");
   } else {
     console.log(JSON.stringify(jobs, null, 2));
   }

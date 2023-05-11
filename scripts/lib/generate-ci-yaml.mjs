@@ -1,24 +1,34 @@
+import { basename, dirname } from "node:path";
+
 /**
  * Serializes the actual job executing renovate
  */
 export function serializeExecutionJob(file, baseName, imageName) {
+  const jobName = basename(file, ".config.js")
+    .replace(/\W/g, "-")
+    .replace(/-+/g, "-");
+
   return {
-    extends: [".beep-boop"],
-    image: imageName,
-    variables: {
-      CONFIG_FILE: file,
+    jobName,
+    jobDefinition: {
+      extends: [".beep-boop"],
+      image: imageName,
+      stage: basename(dirname(file)),
+      variables: {
+        CONFIG_FILE: file,
+      },
+      needs: [
+        {
+          pipeline: "$PARENT_PIPELINE_ID",
+          job: "execution-plan",
+          artifacts: true,
+        },
+        {
+          job: baseName,
+          optional: true,
+        },
+      ],
     },
-    needs: [
-      {
-        pipeline: "$PARENT_PIPELINE_ID",
-        job: "execution-plan",
-        artifacts: true,
-      },
-      {
-        job: baseName,
-        optional: true,
-      },
-    ],
   };
 }
 
@@ -28,6 +38,7 @@ export function serializeExecutionJob(file, baseName, imageName) {
 export function serializeBuildImageJob(baseName, image) {
   return {
     extends: [".build-image"],
+    stage: "build",
     variables: {
       DOCKER_FILE: `docker_files/${baseName}.Dockerfile`,
       DOCKER_IMAGE: image,
