@@ -4,6 +4,8 @@ const {
   defaultLabels,
   availableRouletteReviewerByRole,
 } = require("../lib/shared");
+const fs = require("fs");
+const path = require("path");
 
 module.exports = createServerConfig(
   [
@@ -71,5 +73,10 @@ module.exports = createServerConfig(
   ],
   {
     allowedPostUpgradeCommands: ["^make reviewable$"],
+    renovateMetaCommentTemplate:
+      fs.readFileSync(
+        path.join(__dirname, "..", "comment_templates", "default.md"),
+        "utf-8"
+      ) + "\n\n/cc @PatrickRice",
   }
 );
