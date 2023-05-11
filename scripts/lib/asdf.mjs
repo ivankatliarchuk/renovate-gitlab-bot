@@ -1,10 +1,10 @@
 import { readFile } from "node:fs/promises";
-import path from "node:path";
+import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { GitLabAPI } from "../../bot_image/lib/api.js";
 import semver from "semver";
 
-const TOOL_VERSION = path.join(
+const TOOL_VERSION = join(
   fileURLToPath(import.meta.url),
   "..",
   "..",
@@ -38,22 +38,34 @@ async function getRenovateNodeVersion() {
   ));
 }
 
-export async function getToolVersionsFromRepository(repository) {
+function pathToFile(path, file) {
+  return encodeURIComponent(path.replace("*", file));
+}
+
+const toolVersionsCache = {};
+
+async function getToolVersionsFromRepository(repository, path = "*") {
+  const key = `${repository}|${path}`;
+  if (toolVersionsCache[key]) {
+    return toolVersionsCache[key];
+  }
+
   try {
     const { data } = await GitLabAPI.get(
       `/projects/${encodeURIComponent(
         repository
-      )}/repository/files/.tool-versions/raw`,
+      )}/repository/files/${pathToFile(path, ".tool-versions")}/raw`,
       {
         params: {
           ref: "HEAD",
         },
       }
     );
-    return parseToolVersion(data);
+    toolVersionsCache[key] = parseToolVersion(data);
   } catch (e) {
-    return {};
+    toolVersionsCache[key] = {};
   }
+  return toolVersionsCache[key];
 }
 
 /**
@@ -61,13 +73,54 @@ export async function getToolVersionsFromRepository(repository) {
  * we just get the versions defined in the GDK
  */
 async function getToolVersionsFallback() {
-  if (getToolVersionsFallback.value) {
-    return getToolVersionsFallback.value;
+  return getToolVersionsFromRepository("gitlab-org/gitlab-development-kit");
+}
+
+async function getGolangFromGoMod(repository, path = "*") {
+  try {
+    const { data } = await GitLabAPI.get(
+      `/projects/${encodeURIComponent(
+        repository
+      )}/repository/files/${pathToFile(path, "go.mod")}/raw`,
+      {
+        params: {
+          ref: "HEAD",
+        },
+      }
+    );
+    return data
+      .split(/[\r\n]+/)
+      .find((line) => line.match(/^go\s+(\d+\.\d+)$/))
+      ?.split(/\s+/)?.[1];
+  } catch (e) {
+    return false;
+  }
+}
+
+async function getToolVersionWithFallBack(repositoryConfig, tool) {
+  const { repository, includePaths = ["*"] } = repositoryConfig;
+
+  if (repository) {
+    for (let path of includePaths) {
+      if (path.includes("**")) {
+        path = "*";
+      }
+      const toolVersion = (
+        await getToolVersionsFromRepository(repository, path)
+      )[tool]?.[0];
+      if (toolVersion) {
+        return toolVersion;
+      }
+      if (tool === "golang") {
+        const golangVersion = await getGolangFromGoMod(repository, path);
+        if (golangVersion) {
+          return golangVersion;
+        }
+      }
+    }
   }
 
-  return (getToolVersionsFallback.value = getToolVersionsFromRepository(
-    "gitlab-org/gitlab-development-kit"
-  ));
+  return (await getToolVersionsFallback())[tool]?.[0];
 }
 
 /**
@@ -81,9 +134,8 @@ async function getToolVersionsFallback() {
  * - node@16.5.0, node@16.12, node@16.0 => node-16
  * - golang@1.18.0, golang@1.18.5, golang@1.18.2 => golang-1.18
  */
-export async function consolidateVersion(toolVersions, tool) {
-  let version =
-    toolVersions[tool]?.[0] ?? (await getToolVersionsFallback())[tool]?.[0];
+export async function consolidateVersion(repositoryConfig, tool) {
+  let version = await getToolVersionWithFallBack(repositoryConfig, tool);
   let retVersion = version;
   switch (tool) {
     case "golang":
