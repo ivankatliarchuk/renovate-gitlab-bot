@@ -7,12 +7,7 @@ default:
   tags:
     - gitlab-org
 
-stages:
-  - build
-  - beep-boop
-
 .build-image:
-  stage: build
   needs:
     - pipeline: $PARENT_PIPELINE_ID
       job: execution-plan
@@ -51,7 +46,6 @@ stages:
   variables:
     BINARY_SOURCE: global
   image: alpine:latest
-  stage: beep-boop
   resource_group: $CI_COMMIT_REF_SLUG-$CONFIG_FILE
   script:
     - cp -r "renovate" "/workdir/renovate"
