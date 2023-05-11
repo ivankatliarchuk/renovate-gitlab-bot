@@ -21,7 +21,7 @@ module.exports = createServerConfig([
     branchPrefix: "renovate-vfiles/",
     enabledManagers: ["regex"],
     semanticCommits: "disabled",
-    reviewers: ["ashmckenzie", "tkuah"],
+    reviewers: ["shinya.maeda"],
     reviewersSampleSize: 1,
     labels: groupEnvironmentsLabels,
     includePaths: ["GITLAB_KAS_VERSION"],
