@@ -107,6 +107,17 @@ const semanticPrefixFixDepsChoreOthers = [
   },
 ];
 
+function validatePackageRules(packageRules = []) {
+  for (const rule of packageRules) {
+    if (rule.reviewersSampleSize) {
+      throw new Error(`
+      Our renovate bot only supports setting \`reviewersSampleSize\` on the repository config level.
+      Please fix ${JSON.stringify(rule, null, 2)}.
+      `);
+    }
+  }
+}
+
 function normalizeRepoConfig(repos) {
   const result = [];
 
@@ -126,6 +137,8 @@ function normalizeRepoConfig(repos) {
         );
       }
     }
+
+    validatePackageRules(repository.packageRules);
 
     if (repository?.enabledManagers?.includes("npm")) {
       repository.postUpdateOptions ||= [];

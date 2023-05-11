@@ -2,13 +2,18 @@ const {
   createServerConfig,
   baseConfig,
   defaultLabels,
+  availableRouletteReviewerByRole,
 } = require("../lib/shared");
 
 module.exports = createServerConfig([
   {
     repository: "gitlab-renovate-forks/gitlab",
     ...baseConfig,
-    reviewers: ["ashmckenzie", "stanhu", "steveazz", "vyaklushin"],
+    reviewers: availableRouletteReviewerByRole(
+      "gitlab",
+      ["maintainer workhorse", "trainee_maintainer workhorse"]
+    ),
+    reviewersSampleSize: 1,
     dependencyDashboardTitle: "Dependency Dashboard (workhorse)",
     labels: [...defaultLabels, "workhorse", "section::dev"],
     branchPrefix: "renovate-workhorse/",
@@ -24,7 +29,6 @@ module.exports = createServerConfig([
         // This is our basic rule for Go packages.
         matchManagers: ["gomod"],
         enabled: true,
-        reviewersSampleSize: 1,
         commitMessagePrefix: "workhorse:",
       },
       {
@@ -42,7 +46,6 @@ module.exports = createServerConfig([
           "github.com/grpc-ecosystem/",
           "google.golang.org/",
         ],
-        reviewersSampleSize: 2,
         groupName: "gRPC dependencies",
       },
       {
