@@ -2,13 +2,17 @@ const {
   createServerConfig,
   baseConfig,
   defaultLabels,
+  availableRouletteReviewerByRole,
 } = require("../lib/shared");
 
 module.exports = createServerConfig([
   {
     repository: "gitlab-renovate-forks/gitlab",
     ...baseConfig,
-    reviewers: ["ashmckenzie", "stanhu", "steveazz", "vyaklushin"],
+    reviewers: availableRouletteReviewerByRole(
+      "gitlab",
+      "maintainer workhorse"
+    ),
     reviewersSampleSize: 1,
     dependencyDashboardTitle: "Dependency Dashboard (workhorse)",
     labels: [...defaultLabels, "workhorse", "section::dev"],
