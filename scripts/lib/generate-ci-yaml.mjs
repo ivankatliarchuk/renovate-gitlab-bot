@@ -1,5 +1,7 @@
 import { basename, dirname } from "node:path";
 
+const BASE_IMAGE_NAME = process.env.BASE_IMAGE ?? "renovate:latest";
+
 /**
  * Serializes the actual job executing renovate
  */
@@ -32,23 +34,32 @@ export function serializeExecutionJob(file, baseName, imageName) {
   };
 }
 
-/**
- * Serialize the job building the renovate image
- */
-export function serializeBuildImageJob(baseName, image) {
-  return {
-    extends: [".build-image"],
-    stage: "build",
-    variables: {
-      DOCKER_FILE: `docker_files/${baseName}.Dockerfile`,
-      DOCKER_IMAGE: image,
-    },
-  };
-}
-
-export function jobNameFromTools(tools) {
+function jobNameFromTools(tools) {
   return []
     .concat(tools.filter((x) => x.startsWith("nodejs")))
     .concat(tools.filter((x) => !x.startsWith("nodejs")).sort())
     .join("-");
+}
+
+/**
+ * Serialize the job building the renovate image
+ */
+export function serializeBuildImageJob(needToBeInstalled) {
+  const jobName = jobNameFromTools(needToBeInstalled);
+  const imageName = BASE_IMAGE_NAME.replace(
+    "renovate:",
+    `renovate-${jobName}:`
+  );
+  return {
+    jobName,
+    imageName,
+    jobDefinition: {
+      extends: [".build-image"],
+      stage: "build",
+      variables: {
+        DOCKER_FILE: `docker_files/${jobName}.Dockerfile`,
+        DOCKER_IMAGE: imageName,
+      },
+    },
+  };
 }

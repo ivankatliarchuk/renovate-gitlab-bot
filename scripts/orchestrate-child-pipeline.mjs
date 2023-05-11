@@ -9,7 +9,6 @@ import { program } from "commander";
 import { getVersionRegistry } from "./lib/asdf.mjs";
 import { loadRenovateConfig } from "./lib/renovate.mjs";
 import {
-  jobNameFromTools,
   serializeBuildImageJob,
   serializeExecutionJob,
 } from "./lib/generate-ci-yaml.mjs";
@@ -18,8 +17,6 @@ import axios from "axios";
 
 const ROOT_DIR = path.join(fileURLToPath(import.meta.url), "..", "..");
 const CONFIG_DIR = path.join(ROOT_DIR, "renovate");
-
-const BASE_IMAGE_NAME = process.env.BASE_IMAGE ?? "renovate:latest";
 
 function resolvePath(p, ...rest) {
   if (!p) {
@@ -61,26 +58,29 @@ async function main() {
   const dockerFiles = {};
 
   for (const { file, needToBeInstalled } of configs) {
-    const baseName = jobNameFromTools(needToBeInstalled);
+    const {
+      jobName: buildImageJobName,
+      jobDefinition: buildImageJobDefinition,
+      imageName,
+    } = serializeBuildImageJob(needToBeInstalled);
 
-    const imageName = BASE_IMAGE_NAME.replace(
-      "renovate:",
-      `renovate-${baseName}:`
-    );
-    jobs[baseName] ||= serializeBuildImageJob(baseName, imageName);
+    jobs[buildImageJobName] ||= buildImageJobDefinition;
 
     const { jobName, jobDefinition } = serializeExecutionJob(
       path.relative(CONFIG_DIR, file),
-      baseName,
+      buildImageJobName,
       imageName
     );
 
-    dockerFiles[baseName] ||= {
-      path: resolvePath(options.dockerFiles, `./${baseName}.Dockerfile`),
+    dockerFiles[buildImageJobName] ||= {
+      path: resolvePath(
+        options.dockerFiles,
+        `./${buildImageJobName}.Dockerfile`
+      ),
       tools: needToBeInstalled,
       jobs: [],
     };
-    dockerFiles[baseName].jobs.push(jobName);
+    dockerFiles[buildImageJobName].jobs.push(jobName);
     jobs[jobName] = jobDefinition;
   }
 
