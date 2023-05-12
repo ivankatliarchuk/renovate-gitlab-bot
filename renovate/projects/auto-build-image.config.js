@@ -1,6 +1,7 @@
 const {
   createServerConfig,
   baseConfig,
+  defaultLabels,
   availableRouletteReviewerByRole,
 } = require("../lib/shared");
 
@@ -12,13 +13,10 @@ module.exports = createServerConfig([
     semanticCommitType: "feat",
     reviewers: availableRouletteReviewerByRole("auto-build-image"),
     labels: [
+      ...defaultLabels,
       "group::environments",
-      "devops::deploy",
-      "section::ops",
-      "type::maintenance",
-      "maintenance::dependency",
     ],
-    enabledManagers: ["regex"],
+    enabledManagers: ["regex", "npm"],
     regexManagers: [
       {
         enabled: true,
