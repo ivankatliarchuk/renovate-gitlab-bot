@@ -16,5 +16,6 @@ module.exports = createServerConfig([
     prConcurrentLimit: 4,
     semanticCommits: "disabled",
     packageRules: [],
+    postUpdateOptions: ["gomodTidy", "gomodUpdateImportPaths"],
   },
 ]);
