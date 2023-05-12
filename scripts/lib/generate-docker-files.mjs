@@ -84,7 +84,7 @@ FROM ${targetImage}
 
 # Install some build tools needed, e.g. for gitaly and sanity
 RUN apk add --update --no-cache \\
-  git bash make cmake g++ curl
+  git bash make cmake g++ curl pkgconf
 `,
     images.ruby ? UPDATE_GEM_INSTRUCTIONS : false,
     COPY_GO_INSTRUCTIONS,
