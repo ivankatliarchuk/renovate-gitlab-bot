@@ -9,7 +9,15 @@ module.exports = createServerConfig([
   {
     repository: "gitlab-renovate-forks/gitlab-pages",
     ...baseConfig,
-    labels: [...defaultLabels],
+    labels: [
+      ...defaultLabels, 
+      "section::dev", 
+      "devops::plan", 
+      "group::knowledge", 
+      "Category:Pages", 
+      "backend",
+      "golang"
+    ],
     reviewers: availableRouletteReviewerByRole("gitlab-pages"),
     reviewersSampleSize: 1,
     enabledManagers: ["asdf", "gomod"],
