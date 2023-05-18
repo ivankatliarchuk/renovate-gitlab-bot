@@ -46,7 +46,7 @@ module.exports = createServerConfig([
         groupName: "Bootstrap Vue",
       },
       {
-        matchPackagePatterns: ["@storybook/.*"],
+        matchPackagePatterns: ["@storybook/.*", "storybook"],
         reviewers: ["pgascouvaillancourt"],
         enabled: true,
         groupName: "Storybook",
