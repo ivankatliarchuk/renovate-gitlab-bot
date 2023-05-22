@@ -141,11 +141,15 @@ function normalizeRepoConfig(repos) {
       }
     }
 
-    // Blobless checkouts time out for the GitLab repo.
-    // We are forcing a full clone, until we have maybe a better strategy
-    // https://gitlab.com/gitlab-org/frontend/renovate-gitlab-bot/-/issues/42
     if (repository.repository === GITLAB_REPO) {
+      // Blobless checkouts time out for the GitLab repo.
+      // We are forcing a full clone, until we have maybe a better strategy
+      // https://gitlab.com/gitlab-org/frontend/renovate-gitlab-bot/-/issues/42
       extraServerConfig.fullClone = true;
+      // Our Renovate fork triggers a mirror attempt if the projects diverged
+      // Given the high frequency of merges _and_ the long pipeline duration
+      // of the GitLab project, we are okay if the last push happened 30 min ago
+      repository.mirrorMaxAge = 30;
     }
 
     validatePackageRules(repository.packageRules);

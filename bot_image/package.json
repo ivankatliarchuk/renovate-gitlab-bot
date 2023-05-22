@@ -9,7 +9,7 @@
   "dependencies": {
     "gitlab-api-async-iterator": "^1.2.0",
     "lodash": "^4.17.21",
-    "renovate": "file:./renovate-fork-34.160.0-6-gdbe205221.tgz",
+    "renovate": "file:./renovate-fork-34.160.0-7-g88490d720.tgz",
     "renovate-config-monorepo": "^0.43.0",
     "renovate-config-packages": "^0.7.0"
   }
