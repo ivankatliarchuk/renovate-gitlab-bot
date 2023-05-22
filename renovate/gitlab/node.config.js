@@ -5,6 +5,7 @@ const {
   availableRouletteReviewerByRole,
   foundationLabels,
   defaultLabels,
+  GITLAB_REPO,
 } = require("../lib/shared");
 const {
   prVueMajor2,
@@ -19,7 +20,7 @@ const foundationPackages = {
 
 module.exports = createServerConfig([
   {
-    repository: "gitlab-renovate-forks/gitlab",
+    repository: GITLAB_REPO,
     ...baseConfig,
     reviewers: availableRouletteReviewerByRole("gitlab", "maintainer frontend"),
     labels: [...defaultLabels, "frontend"],

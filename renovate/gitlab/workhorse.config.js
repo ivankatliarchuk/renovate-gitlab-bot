@@ -3,16 +3,17 @@ const {
   baseConfig,
   defaultLabels,
   availableRouletteReviewerByRole,
+  GITLAB_REPO,
 } = require("../lib/shared");
 
 module.exports = createServerConfig([
   {
-    repository: "gitlab-renovate-forks/gitlab",
+    repository: GITLAB_REPO,
     ...baseConfig,
-    reviewers: availableRouletteReviewerByRole(
-      "gitlab",
-      ["maintainer workhorse", "trainee_maintainer workhorse"]
-    ),
+    reviewers: availableRouletteReviewerByRole("gitlab", [
+      "maintainer workhorse",
+      "trainee_maintainer workhorse",
+    ]),
     reviewersSampleSize: 1,
     dependencyDashboardTitle: "Dependency Dashboard (workhorse)",
     labels: [...defaultLabels, "workhorse", "section::dev"],

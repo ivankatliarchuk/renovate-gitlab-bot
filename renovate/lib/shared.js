@@ -6,6 +6,8 @@ const { RENOVATE_BOT_USER, RENOVATE_STOP_UPDATING_LABEL } = {
   RENOVATE_STOP_UPDATING_LABEL: "automation:bot-no-updates",
 };
 
+const GITLAB_REPO = "gitlab-renovate-forks/gitlab";
+
 const CONFIG_DIR = path.join(__dirname, "..");
 
 const team = require("../roulette.json");
@@ -120,6 +122,7 @@ function validatePackageRules(packageRules = []) {
 
 function normalizeRepoConfig(repos) {
   const result = [];
+  const extraServerConfig = {};
 
   for (const repository of repos) {
     for (const field of ["labels", "reviewers", "enabledManagers"]) {
@@ -138,6 +141,13 @@ function normalizeRepoConfig(repos) {
       }
     }
 
+    // Blobless checkouts time out for the GitLab repo.
+    // We are forcing a full clone, until we have maybe a better strategy
+    // https://gitlab.com/gitlab-org/frontend/renovate-gitlab-bot/-/issues/42
+    if (repository.repository === GITLAB_REPO) {
+      extraServerConfig.fullClone = true;
+    }
+
     validatePackageRules(repository.packageRules);
 
     if (repository?.enabledManagers?.includes("npm")) {
@@ -153,7 +163,7 @@ function normalizeRepoConfig(repos) {
     });
   }
 
-  return [result];
+  return [result, extraServerConfig];
 }
 
 /**
@@ -163,7 +173,7 @@ function normalizeRepoConfig(repos) {
  * @returns Renovate Config
  */
 function createServerConfig(repos, serverConfig = {}) {
-  const [repositories] = normalizeRepoConfig(repos);
+  const [repositories, extraServerConfig] = normalizeRepoConfig(repos);
 
   return {
     dryRun: (process.env.DRY_RUN ?? "true") === "true" ? "full" : null,
@@ -180,6 +190,7 @@ function createServerConfig(repos, serverConfig = {}) {
       "utf-8"
     ),
     gitAuthor: "GitLab Renovate Bot <gitlab-bot@gitlab.com>",
+    ...extraServerConfig,
     ...serverConfig,
     repositories,
   };
@@ -213,6 +224,7 @@ function availableRouletteReviewerByRole(project, role = "maintainer") {
 }
 
 module.exports = {
+  GITLAB_REPO,
   createServerConfig,
   defaultLabels,
   foundationLabels,
