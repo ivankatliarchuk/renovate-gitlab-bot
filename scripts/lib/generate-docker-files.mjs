@@ -83,8 +83,12 @@ export async function serializeDockerFile(config) {
 FROM ${targetImage}
 
 # Install some build tools needed, e.g. for gitaly and sanity
+# And the newest git version available.
 RUN apk add --update --no-cache \\
-  git bash make cmake g++ curl pkgconf
+  bash make cmake g++ curl pkgconf \\
+  && apk add --update --no-cache \\
+  --repository=https://dl-cdn.alpinelinux.org/alpine/edge/main \\
+  git
 `,
     images.ruby ? UPDATE_GEM_INSTRUCTIONS : false,
     COPY_GO_INSTRUCTIONS,
