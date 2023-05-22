@@ -7,9 +7,10 @@ const TOOL_INDEPENDENT_MANAGERS = [
   "asdf",
   "dockerfile",
   "gitlabci",
+  "gitlabci-include",
   "nvm",
   "regex",
-  "terraform",
+  "terraform"
 ];
 
 const MANAGER_TO_ASDF_TOOL_MAP = {

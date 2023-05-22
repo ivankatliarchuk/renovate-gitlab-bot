@@ -40,15 +40,7 @@ const epBaseConfig = {
 };
 
 const qaBaseConfig = {
-  reviewers: [
-    "acunskis",
-    "a_mcdonald",
-    "chloeliu",
-    "ddavison",
-    "mlapierre",
-    "sliaquat",
-    "treagitlab",
-  ],
+  reviewers: availableRouletteReviewerByRole('gitlab', 'maintainer qa'),
   reviewersSampleSize: 1,
   labels: [...defaultLabels, "Quality"],
 };
