@@ -4587,9 +4587,9 @@ renovate-config-packages@^0.7.0:
   resolved "https://registry.yarnpkg.com/renovate-config-packages/-/renovate-config-packages-0.7.0.tgz#06807b8355b781fa3351a30db48870ebc46ab01e"
   integrity sha512-Soi9+YVL52kd4Qj0iGcs7i8Vf4wKHCGuWp1VoobL2fq5Wy+GENMpJF5uKKHPbNyNHnzIqKCRpnqI9CFwnHrD9w==
 
-"renovate@file:./renovate-fork-34.160.0-6-gdbe205221.tgz":
-  version "34.160.0-6-gdbe205221"
-  resolved "file:./renovate-fork-34.160.0-6-gdbe205221.tgz"
+"renovate@file:./renovate-fork-34.160.0-7-g88490d720.tgz":
+  version "34.160.0-7-g88490d720"
+  resolved "file:./renovate-fork-34.160.0-7-g88490d720.tgz"
   dependencies:
     "@aws-sdk/client-codecommit" "3.282.0"
     "@aws-sdk/client-ec2" "3.282.0"

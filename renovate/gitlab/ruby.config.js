@@ -3,12 +3,13 @@ const {
   updateNothing,
   baseConfig,
   epBaseConfig,
+  GITLAB_REPO,
 } = require("../lib/shared");
 
 module.exports = createServerConfig(
   [
     {
-      repository: "gitlab-renovate-forks/gitlab",
+      repository: GITLAB_REPO,
       dependencyDashboardTitle: "Dependency Dashboard (ruby)",
       ...baseConfig,
       ...epBaseConfig,

@@ -1,4 +1,8 @@
-const { createServerConfig, baseConfig } = require("../lib/shared");
+const {
+  createServerConfig,
+  baseConfig,
+  GITLAB_REPO,
+} = require("../lib/shared");
 
 const baseLabels = [
   "type::maintenance",
@@ -15,7 +19,7 @@ const groupEnvironmentsLabels = [
 
 module.exports = createServerConfig([
   {
-    repository: "gitlab-renovate-forks/gitlab",
+    repository: GITLAB_REPO,
     dependencyDashboardTitle: "Dependency Dashboard (CI templates)",
     ...baseConfig,
     branchPrefix: "renovate-ci-templates/",

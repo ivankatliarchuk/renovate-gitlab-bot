@@ -4,6 +4,7 @@ const {
   createServerConfig,
   defaultLabels,
   baseConfig,
+  GITLAB_REPO,
 } = require("../lib/shared");
 
 const groupEnvironmentsLabels = [
@@ -15,7 +16,7 @@ const groupEnvironmentsLabels = [
 
 module.exports = createServerConfig([
   {
-    repository: "gitlab-renovate-forks/gitlab",
+    repository: GITLAB_REPO,
     dependencyDashboardTitle: "Dependency Dashboard (Version Files)",
     ...baseConfig,
     branchPrefix: "renovate-vfiles/",
