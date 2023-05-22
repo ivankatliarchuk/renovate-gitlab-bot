@@ -24,7 +24,7 @@ module.exports = createServerConfig([
     includePaths: ["*", ".gitlab/*"],
     packageRules: [
       {
-        matchPackageNames: ["gitlab/gitlab-agent-ci-image"],
+        matchDepNames: ["gitlab-agent-ci-image"],
         groupName: "gitlab-agent-ci-image",
       },
       {
