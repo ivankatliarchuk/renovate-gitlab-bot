@@ -8,14 +8,14 @@ const {
 module.exports = createServerConfig([
   {
     repository: GITLAB_REPO,
-    dependencyDashboardTitle: "Dependency Dashboard (ruby-qa)",
+    dependencyDashboardTitle: "Dependency Dashboard (qa)",
     ...baseConfig,
     ...qaBaseConfig,
     rangeStrategy: "bump",
-    branchPrefix: "renovate-qa-gems/",
-    enabledManagers: ["bundler"],
+    branchPrefix: "renovate-qa/",
+    enabledManagers: ["bundler", "gitlabci-include"],
     postUpdateOptions: ["bundlerConservative"],
-    includePaths: ["qa/*"],
+    includePaths: ["qa/*", ".gitlab/ci/qa-common/*"],
     packageRules: [
       {
         enabled: true,
