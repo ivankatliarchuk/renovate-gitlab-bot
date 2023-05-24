@@ -16,8 +16,8 @@ if [ ! -f "Gemfile.checksum" ]; then
   exit 0
 fi
 
-echo_err "Running bundler to make sure lock file is up to date"
-bundle install
+echo_err "Running bundle lock to make sure lock file is up to date"
+bundle lock
 
 VENDOR_DIR="./vendor/gems/bundler-checksum"
 
