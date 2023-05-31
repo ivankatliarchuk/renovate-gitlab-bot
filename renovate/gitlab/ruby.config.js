@@ -118,6 +118,13 @@ module.exports = createServerConfig(
           reviewers: ["stanhu"],
           groupName: "GitLab LabKit",
         },
+        {
+          matchPackageNames: [
+            "puma",
+          ],
+          enabled: true,
+          groupName: "Puma"
+        },
       ],
     },
   ],
