@@ -1,5 +1,3 @@
-This Merge Request has been created with the help of [renovate-gitlab-bot] project.
-
 ## What are the next steps?
 
 If you have been assigned as a reviewer to this Merge Request,
