@@ -2,6 +2,7 @@ const {
   createServerConfig,
   baseConfig,
   defaultLabels,
+  availableRouletteReviewerByRole,
 } = require("../lib/shared");
 
 module.exports = createServerConfig([
@@ -9,7 +10,7 @@ module.exports = createServerConfig([
     repository: "gitlab-renovate-forks/gitlab-shell",
     ...baseConfig,
     labels: [...defaultLabels],
-    reviewers: ["ashmckenzie"],
+    reviewers: availableRouletteReviewerByRole("gitlab-shell", "maintainer"),
     reviewersSampleSize: 1,
     enabledManagers: ["asdf", "bundler", "gomod"],
     prConcurrentLimit: 4,
