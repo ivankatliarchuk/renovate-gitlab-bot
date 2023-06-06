@@ -1,3 +1,6 @@
+const GITLAB_UI_PACKAGE = "@gitlab/ui";
+const GITLAB_SVGS_PACKAGE = "@gitlab/svgs";
+
 /**
  * Group updates of jest into one MR
  */
@@ -32,8 +35,27 @@ const prVueMajor2 = {
  */
 const prGitLabUISVG = {
   enabled: true,
-  matchPackageNames: ["@gitlab/ui", "@gitlab/svgs"],
+  matchPackageNames: [GITLAB_UI_PACKAGE, GITLAB_SVGS_PACKAGE],
   groupName: "GitLab UI/SVG",
+};
+
+/**
+ * Update GitLab UI
+ */
+const prGitLabUI = {
+  enabled: true,
+  matchPackageNames: [GITLAB_UI_PACKAGE],
+  // Legacy name, not changed yet in order not to cause any disruptions
+  // with pending MRs
+  groupName: "GitLab UI/SVG",
+};
+
+/**
+ * Update GitLab SVGs
+ */
+const prGitLabSVG = {
+  enabled: true,
+  matchPackageNames: [GITLAB_SVGS_PACKAGE],
 };
 
 /**
@@ -66,7 +88,8 @@ const prGitLabCatchall = {
   enabled: true,
   matchPackagePatterns: ["@gitlab/.*"],
   excludePackageNames: [
-    ...prGitLabUISVG.matchPackageNames,
+    GITLAB_UI_PACKAGE,
+    GITLAB_SVGS_PACKAGE,
     ...prStylelint.matchPackageNames,
   ],
   groupName: "GitLab Packages",
@@ -97,8 +120,13 @@ const updateDOMPurify = {
 
 module.exports = {
   prBabel,
+  prEslint,
   prJest,
+  prStylelint,
   prVueMajor2,
+  prGitLabCatchall,
+  prGitLabSVG,
+  prGitLabUI,
   prGitLabUISVG,
   updateDOMPurify,
   prGitLabScopeAndLinters,

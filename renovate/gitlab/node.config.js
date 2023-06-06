@@ -10,7 +10,11 @@ const {
 const {
   prVueMajor2,
   updateDOMPurify,
-  prGitLabScopeAndLinters,
+  prGitLabUI,
+  prGitLabSVG,
+  prGitLabCatchall,
+  prEslint,
+  prStylelint,
 } = require("../lib/npm");
 
 const foundationPackages = {
@@ -29,7 +33,11 @@ module.exports = createServerConfig([
     enabledManagers: ["npm"],
     packageRules: [
       updateNothing,
-      ...prGitLabScopeAndLinters,
+      prGitLabCatchall,
+      prEslint,
+      prStylelint,
+      prGitLabUI,
+      prGitLabSVG,
       updateDOMPurify,
       {
         enabled: true,
