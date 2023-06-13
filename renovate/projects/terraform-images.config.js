@@ -18,6 +18,12 @@ module.exports = createServerConfig([
     reviewers: availableRouletteReviewerByRole("terraform-images"),
     packageRules: [
       {
+        matchPackageNames: ["docker"],
+        matchDatasources: ["docker"],
+        matchManagers: ["regex"],
+        customChangelogUrl: "https://github.com/moby/moby"
+      },
+      {
         matchPackageNames: ["hashicorp/terraform"],
         matchManagers: ["regex"],
         separateMinorPatch: true,
