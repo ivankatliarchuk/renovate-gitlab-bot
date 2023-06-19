@@ -125,6 +125,12 @@ module.exports = createServerConfig(
           enabled: true,
           groupName: "Puma"
         },
+        {
+          matchPackageNames: ["prometheus-client-mmap"],
+          enabled: true,
+          reviewers: ["stanhu", "wchandler"],
+          groupName: "prometheus-client-mmap"
+        },
       ],
     },
   ],
