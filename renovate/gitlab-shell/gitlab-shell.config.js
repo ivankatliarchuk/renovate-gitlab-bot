@@ -15,6 +15,7 @@ module.exports = createServerConfig([
     enabledManagers: ["asdf", "bundler", "gomod"],
     prConcurrentLimit: 4,
     semanticCommits: "disabled",
+    postUpdateOptions: ["gomodTidy", "gomodUpdateImportPaths"],
     packageRules: [
       {
         schedule: ["before 05:00 on Monday"],
