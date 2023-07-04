@@ -42,6 +42,7 @@ module.exports = createServerConfig(
           matchPackageNames: [
             "capybara",
             "capybara-screenshot",
+            "gitlab_quality-test_tooling",
             "rspec-retry",
             "rspec_profiling",
             "rspec-benchmark",
