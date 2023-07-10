@@ -11,7 +11,7 @@ const groupEnvironmentsLabels = [
   ...defaultLabels,
   "group::environments",
   "devops::deploy",
-  "section::ops",
+  "section::cd",
 ];
 
 module.exports = createServerConfig([

@@ -17,7 +17,7 @@ module.exports = createServerConfig([
       ...defaultLabels,
       "group::environments",
       "devops::deploy",
-      "section::ops",
+      "section::cd",
     ],
     postUpdateOptions: [],
     enabledManagers: ["regex"],
