@@ -10,7 +10,7 @@ module.exports = createServerConfig(
       labels: [
         "group::environments",
         "devops::deploy",
-        "section::ops",
+        "section::cd",
         "type::maintenance",
         "maintenance::dependency",
       ],
