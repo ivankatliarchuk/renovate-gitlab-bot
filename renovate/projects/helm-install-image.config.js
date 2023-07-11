@@ -1,4 +1,8 @@
-const { createServerConfig, baseConfig } = require("../lib/shared");
+const {
+  createServerConfig,
+  baseConfig,
+  availableRouletteReviewerByRole,
+} = require("../lib/shared");
 
 module.exports = createServerConfig(
   [
@@ -6,7 +10,7 @@ module.exports = createServerConfig(
       repository: "gitlab-renovate-forks/helm-install-image",
       ...baseConfig,
       semanticCommits: "disabled",
-      reviewers: ["Alexand", "hfyngvason", "tigerwnz"],
+      reviewers: availableRouletteReviewerByRole("helm-install-image"),
       labels: [
         "group::environments",
         "devops::deploy",
