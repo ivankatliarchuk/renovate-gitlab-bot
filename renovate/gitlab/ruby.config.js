@@ -54,7 +54,7 @@ module.exports = createServerConfig(
           groupName: "Testing gems",
         },
         {
-          matchPackageNames: ["gitlab-styles", "gitlab-dangerfiles"],
+          matchPackageNames: ["gitlab-dangerfiles"],
           enabled: true,
           groupName: "Tooling gems",
         },
