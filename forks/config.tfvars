@@ -3,6 +3,7 @@ projects = [
   "gitlab-org/cluster-integration/auto-build-image",
   "gitlab-org/cluster-integration/auto-deploy-image",
   "gitlab-org/cluster-integration/gitlab-agent",
+  "gitlab-org/cluster-integration/gitlab-agent-ci-image",
   "gitlab-org/cluster-integration/helm-install-image",
   "gitlab-org/frontend/pajamas-adoption-scanner",
   "gitlab-org/gitaly",
