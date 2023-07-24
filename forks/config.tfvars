@@ -10,6 +10,7 @@ projects = [
   "gitlab-org/gitlab-development-kit",
   "gitlab-org/gitlab-docs",
   "gitlab-org/gitlab-elasticsearch-indexer",
+  "gitlab-org/gitlab-zoekt-indexer",
   "gitlab-org/gitlab-pages",
   "gitlab-org/gitlab-services/design.gitlab.com",
   "gitlab-org/gitlab-shell",

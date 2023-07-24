@@ -23,6 +23,7 @@ The following repositories are currently being updated automatically.
 - [gitlab-renovate-forks/gitlab-development-kit](https://gitlab.com/gitlab-renovate-forks/gitlab-development-kit)
 - [gitlab-renovate-forks/gitlab-docs](https://gitlab.com/gitlab-renovate-forks/gitlab-docs)
 - [gitlab-renovate-forks/gitlab-elasticsearch-indexer](https://gitlab.com/gitlab-org/gitlab-elasticsearch-indexer)
+- [gitlab-renovate-forks/gitlab-zoekt-indexer](https://gitlab.com/gitlab-org/gitlab-zoekt-indexer)
 - [gitlab-renovate-forks/gitlab-pages](https://gitlab.com/gitlab-renovate-forks/gitlab-pages)
 - [gitlab-renovate-forks/gitlab-shell](https://gitlab.com/gitlab-renovate-forks/gitlab-shell)
 - [gitlab-renovate-forks/gitlab-styles](https://gitlab.com/gitlab-renovate-forks/gitlab-styles)
