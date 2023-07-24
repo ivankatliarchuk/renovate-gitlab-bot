@@ -25,4 +25,5 @@ projects = [
   "gitlab-org/status-page",
   "gitlab-org/terraform-images",
   "gitlab-org/terraform-provider-gitlab",
+  "gitlab-org/container-registry",
 ]
