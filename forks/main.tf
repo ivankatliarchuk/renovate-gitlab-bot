@@ -56,6 +56,10 @@ resource "gitlab_project" "forks" {
   mirror_trigger_builds               = false
   mirror_overwrites_diverged_branches = true
   only_mirror_protected_branches      = true
+
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 output "renovate_forks" {
