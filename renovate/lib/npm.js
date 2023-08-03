@@ -66,7 +66,6 @@ const prEslint = {
   matchPackageNames: ["eslint"],
   matchPackagePatterns: ["eslint-.+"],
   excludePackageNames: ["@gitlab/eslint-plugin"],
-  reviewers: ["markrian", "vitallium"],
   groupName: "ESLint and related",
 };
 
