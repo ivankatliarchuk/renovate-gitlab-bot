@@ -114,7 +114,6 @@ const updateDOMPurify = {
   matchPackageNames: ["dompurify"],
   rangeStrategy: "bump",
   enabled: true,
-  reviewers: ["djadmin", "markrian"],
 };
 
 module.exports = {
