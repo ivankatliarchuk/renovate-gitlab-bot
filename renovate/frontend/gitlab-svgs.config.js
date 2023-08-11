@@ -26,5 +26,11 @@ module.exports = createServerConfig([
     ],
     regexManagers: [...updateNodeJS.regexManagers()],
     semanticCommits: "disabled",
+    packageRules: [
+      {
+        matchPackageNames: ["node"],
+        minimumReleaseAge: "3 weeks"
+      }
+    ]
   },
 ]);
