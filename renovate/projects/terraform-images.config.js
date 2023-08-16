@@ -55,13 +55,6 @@ module.exports = createServerConfig([
         ],
         datasourceTemplate: "docker",
       },
-      {
-        fileMatch: ["^.gitlab-ci.yml$"],
-        matchStrings: ['TERRAFORM_BINARY_VERSION: "(?<currentValue>.*)"\\s'],
-        depNameTemplate: "hashicorp/terraform",
-        datasourceTemplate: "github-releases",
-        extractVersionTemplate: "^v(?<version>.*)$",
-      },
     ],
   },
 ]);
