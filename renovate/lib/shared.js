@@ -28,7 +28,6 @@ const foundationLabels = [
 const epBaseConfig = {
   reviewers: [
     "alinamihaila",
-    "ashmckenzie",
     "ddieulivol",
     "godfat-gitlab",
     "jennli",
