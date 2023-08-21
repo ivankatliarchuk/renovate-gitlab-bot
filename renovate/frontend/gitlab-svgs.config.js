@@ -22,15 +22,12 @@ module.exports = createServerConfig([
     packageRules: [
       updateNothing,
       ...prGitLabScopeAndLinters,
-      ...updateNodeJS.packageRules,
+      {
+        ...updateNodeJS.packageRules[0],
+        minimumReleaseAge: "3 weeks"
+      },
     ],
     regexManagers: [...updateNodeJS.regexManagers()],
     semanticCommits: "disabled",
-    packageRules: [
-      {
-        matchPackageNames: ["node"],
-        minimumReleaseAge: "3 weeks"
-      }
-    ]
   },
 ]);
