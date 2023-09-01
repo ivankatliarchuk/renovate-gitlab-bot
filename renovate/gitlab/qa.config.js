@@ -13,12 +13,27 @@ module.exports = createServerConfig([
     ...qaBaseConfig,
     rangeStrategy: "bump",
     branchPrefix: "renovate-qa/",
-    enabledManagers: ["bundler", "gitlabci-include"],
+    enabledManagers: ["bundler", "gitlabci-include", "dockerfile", "regex"],
     postUpdateOptions: ["bundlerConservative"],
-    includePaths: ["qa/*", ".gitlab/ci/qa-common/*"],
+    includePaths: ["qa/*", "qa/gdk/*", ".gitlab/ci/qa-common/*"],
+    regexManagers: [
+      {
+        fileMatch: ["scripts/build_gdk_image"],
+        matchStrings: ["ARG GDK_SHA=(?<currentDigest>.*?)\\n"],
+        currentValueTemplate: "main",
+        depNameTemplate: "gdk",
+        packageNameTemplate: "https://gitlab.com/gitlab-org/gitlab-development-kit",
+        dataSourceTemplate: "git-refs"
+      }
+    ],
     packageRules: [
       {
         enabled: true,
+      },
+      {
+        description: "GDK version update",
+        groupName: "gdk-qa",
+        matchFiles: ["Dockerfile.gdk"]
       },
       {
         // activesupport needs to be in sync with gitlab
