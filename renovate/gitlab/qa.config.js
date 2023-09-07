@@ -18,7 +18,7 @@ module.exports = createServerConfig([
     includePaths: ["qa/*", "qa/gdk/*", ".gitlab/ci/qa-common/*"],
     regexManagers: [
       {
-        fileMatch: ["scripts/build_gdk_image"],
+        fileMatch: ["qa/gdk/Dockerfile.gdk"],
         matchStrings: ["ARG GDK_SHA=(?<currentDigest>.*?)\\n"],
         currentValueTemplate: "main",
         depNameTemplate: "gdk",
@@ -33,7 +33,7 @@ module.exports = createServerConfig([
       {
         description: "GDK version update",
         groupName: "gdk-qa",
-        matchFiles: ["Dockerfile.gdk"]
+        matchFiles: ["qa/gdk/Dockerfile.gdk"]
       },
       {
         // activesupport needs to be in sync with gitlab
