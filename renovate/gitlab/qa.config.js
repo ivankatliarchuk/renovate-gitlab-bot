@@ -18,6 +18,7 @@ module.exports = createServerConfig([
     includePaths: ["qa/*", "qa/gdk/*", ".gitlab/ci/qa-common/*"],
     regexManagers: [
       {
+        customType: "regex",
         fileMatch: ["qa/gdk/Dockerfile.gdk"],
         matchStrings: ["GDK_SHA=(?<currentDigest>.*?)\\n"],
         currentValueTemplate: "main",
