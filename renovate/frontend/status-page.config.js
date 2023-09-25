@@ -20,6 +20,7 @@ module.exports = createServerConfig([
     semanticCommits: "disabled",
     rangeStrategy: "auto",
     enabledManagers: ["npm"],
+    schedule: ["on the first day of the month"],
     packageRules: [updateNothing, ...prGitLabScopeAndLinters],
   },
 ]);
