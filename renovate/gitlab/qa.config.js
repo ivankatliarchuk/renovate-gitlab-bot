@@ -18,11 +18,12 @@ module.exports = createServerConfig([
     includePaths: ["qa/*", "qa/gdk/*", ".gitlab/ci/qa-common/*"],
     regexManagers: [
       {
+        customType: "regex",
         fileMatch: ["qa/gdk/Dockerfile.gdk"],
-        matchStrings: ["ARG GDK_SHA=(?<currentDigest>.*?)\\n"],
+        matchStrings: ["GDK_SHA=(?<currentDigest>.*?)\\n"],
         currentValueTemplate: "main",
-        depNameTemplate: "gdk",
-        packageNameTemplate: "https://gitlab.com/gitlab-org/gitlab-development-kit",
+        depNameTemplate: "gitlab-development-kit",
+        packageNameTemplate: "https://gitlab.com/gitlab-org/gitlab-development-kit.git",
         dataSourceTemplate: "git-refs"
       }
     ],
