@@ -16,7 +16,7 @@ module.exports = createServerConfig([
     enabledManagers: ["bundler", "gitlabci-include", "dockerfile", "regex"],
     postUpdateOptions: ["bundlerConservative"],
     includePaths: ["qa/*", "qa/gdk/*", ".gitlab/ci/qa-common/*"],
-    regexManagers: [
+    customManagers: [
       {
         customType: "regex",
         fileMatch: ["qa/gdk/Dockerfile.gdk"],
@@ -24,7 +24,7 @@ module.exports = createServerConfig([
         currentValueTemplate: "main",
         depNameTemplate: "gitlab-development-kit",
         packageNameTemplate: "https://gitlab.com/gitlab-org/gitlab-development-kit.git",
-        dataSourceTemplate: "git-refs"
+        datasourceTemplate: "git-refs"
       }
     ],
     packageRules: [
