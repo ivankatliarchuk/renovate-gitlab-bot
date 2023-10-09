@@ -24,7 +24,7 @@ module.exports = createServerConfig([
         currentValueTemplate: "main",
         depNameTemplate: "gitlab-development-kit",
         packageNameTemplate: "https://gitlab.com/gitlab-org/gitlab-development-kit.git",
-        dataSourceTemplate: "git-refs"
+        datasourceTemplate: "git-refs"
       }
     ],
     packageRules: [
