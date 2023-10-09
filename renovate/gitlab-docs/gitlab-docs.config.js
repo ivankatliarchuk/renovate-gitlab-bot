@@ -18,7 +18,7 @@ module.exports = createServerConfig([
     packageRules: [
       ...updateNodeJS.packageRules,
       {
-        matchPackagePatterns: ["bootstrap", "vue"],
+        matchPackagePatterns: ["bootstrap", "glob", "vue"],
         enabled: false,
       },
       {
