@@ -21,7 +21,7 @@ module.exports = createServerConfig(
       ],
       rangeStrategy: "bump",
       semanticCommits: "disabled",
-      stabilityDays: 7,
+      minimumReleaseAge: "7 days",
       prCreation: "not-pending",
       enabledManagers: ["gomod"],
       includePaths: [
