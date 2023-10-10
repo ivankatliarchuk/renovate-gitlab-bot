@@ -24,7 +24,7 @@ module.exports = createServerConfig([
     ),
     internalChecksFilter: "strict",
     separateMultipleMajor: true,
-    stabilityDays: 3,
+    minimumReleaseAge: "3 days",
     rangeStrategy: "auto",
     semanticCommits: "enabled",
     enabledManagers: ["npm"],

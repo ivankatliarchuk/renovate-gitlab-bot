@@ -46,7 +46,7 @@ const qaBaseConfig = {
 
 const mandatoryRepositoryConfig = {
   // Needed to work properly, because of the forked workflow
-  includeForks: true,
+  forkProcessing: "enabled",
   // Due to our review requirements we cannot automerge MRs
   automerge: false,
   // Once an MR is approved, this label will be set, stopping renovate from messing with the MR
