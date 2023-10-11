@@ -137,8 +137,6 @@ module.exports = createServerConfig([
         groupName: "Analytics dashboards - cubejs",
         addLabels: [
           "group::product analytics",
-          "devops::analytics",
-          "section::analytics",
           "frontend",
         ],
       },
@@ -149,8 +147,6 @@ module.exports = createServerConfig([
         groupName: "Customizable dashboards packages",
         addLabels: [
           "group::product analytics",
-          "devops::analytics",
-          "section::analytics",
           "frontend",
         ],
       },
