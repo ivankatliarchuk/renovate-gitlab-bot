@@ -14,7 +14,7 @@ module.exports = createServerConfig([
     reviewersSampleSize: 1,
     enabledManagers: ["asdf", "gomod"],
     prConcurrentLimit: 4,
-    semanticCommits: "disabled",
+    semanticCommits: "true",
     packageRules: [],
     postUpdateOptions: ["gomodTidy", "gomodUpdateImportPaths"],
   },
