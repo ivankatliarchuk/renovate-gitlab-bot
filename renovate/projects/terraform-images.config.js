@@ -9,6 +9,7 @@ module.exports = createServerConfig([
   {
     repository: "gitlab-renovate-forks/terraform-images",
     ...baseConfig,
+    extends: ["group:commitlintMonorepo"],
     labels: [
       ...defaultLabels,
       "group::environments",
