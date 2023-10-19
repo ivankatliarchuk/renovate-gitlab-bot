@@ -9,6 +9,7 @@ module.exports = createServerConfig([
   {
     repository: "gitlab-renovate-forks/auto-build-image",
     ...baseConfig,
+    extends: ["group:commitlintMonorepo"],
     semanticCommits: "enabled",
     semanticCommitType: "feat",
     reviewers: availableRouletteReviewerByRole("auto-build-image"),
