@@ -152,7 +152,7 @@ module.exports = createServerConfig([
       },
       {
         enabled: true,
-        matchPackagePatterns: ["@sentry/browser", "sentrybrowser"],
+        matchPackageNames: ["@sentry/browser", "sentrybrowser"],
         reviewers: ["samdbeckham", "mrincon", "sheldonled"],
         groupName: "Frontend Observability Packages",
       },
