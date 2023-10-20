@@ -10,17 +10,26 @@ module.exports = createServerConfig([
     repository: "gitlab-renovate-forks/auto-build-image",
     ...baseConfig,
     extends: ["group:commitlintMonorepo"],
-    semanticCommits: "enabled",
-    semanticCommitType: "feat",
     reviewers: availableRouletteReviewerByRole("auto-build-image"),
     labels: [
       ...defaultLabels,
       "group::environments",
     ],
-    enabledManagers: ["regex", "npm"],
+    enabledManagers: ["npm", "regex"],
+    packageRules: [
+      {
+        matchManagers: ["regex"],
+        semanticCommitType: "feat",
+      },
+      {
+        matchPackageNames: ["docker"],
+        matchDatasources: ["docker"],
+        matchManagers: ["regex"],
+        customChangelogUrl: "https://github.com/moby/moby",
+      },
+    ],
     regexManagers: [
       {
-        enabled: true,
         fileMatch: [".gitlab-ci.yml"],
         matchStrings: ["PACK_VERSION: (?<currentValue>.*)\n"],
         depNameTemplate: "pack",
@@ -28,14 +37,12 @@ module.exports = createServerConfig([
         datasourceTemplate: "github-tags",
       },
       {
-        enabled: true,
         fileMatch: [".gitlab-ci.yml"],
         matchStrings: ["DOCKER_VERSION: (?<currentValue>.*)\n"],
         depNameTemplate: "docker",
         datasourceTemplate: "docker",
       },
       {
-        enabled: true,
         fileMatch: [".gitlab-ci.yml"],
         matchStrings: ["BUILDX_VERSION: (?<currentValue>.*)\n"],
         depNameTemplate: "buildx",
