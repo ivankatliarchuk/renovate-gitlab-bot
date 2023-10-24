@@ -120,17 +120,6 @@ module.exports = createServerConfig([
         groupName: "Content Editor Packages - prosemirror",
       },
       {
-        reviewers: ["himkp", "ealcantara"],
-        matchPackagePatterns: [
-          "remark-?.*",
-          "rehype-?.*",
-          "unist-?.*",
-          "unified",
-        ],
-        enabled: true,
-        groupName: "Content Editor Packages - remark",
-      },
-      {
         reviewers: ["rob.hunt", "jiaan", "elwyn-gitlab"],
         matchPackagePatterns: ["@cubejs-client/.*"],
         enabled: true,
