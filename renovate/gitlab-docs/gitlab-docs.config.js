@@ -3,7 +3,6 @@ const {
   baseConfig,
   defaultLabels,
 } = require("../lib/shared");
-const { updateNodeJS } = require("../lib/languages");
 
 module.exports = createServerConfig([
   {
@@ -12,11 +11,10 @@ module.exports = createServerConfig([
     labels: [...defaultLabels, "Technical Writing", "Category:Docs Site"],
     reviewers: ["eread", "marcel.amirault", "sarahgerman"],
     reviewersSampleSize: 3,
-    enabledManagers: ["npm", "bundler", "asdf", "nvm"],
+    enabledManagers: ["npm", "bundler"],
     prConcurrentLimit: 4,
     semanticCommits: "disabled",
     packageRules: [
-      ...updateNodeJS.packageRules,
       {
         matchPackagePatterns: ["bootstrap", "glob", "vue"],
         enabled: false,
