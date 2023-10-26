@@ -1,4 +1,5 @@
 import { consolidateVersion } from "./asdf.mjs";
+import { loadRawRenovateConfig } from "../../bot_image/lib/load-raw-renovate-config.mjs";
 
 /**
  * These managers do not need any language installed
@@ -10,7 +11,7 @@ const TOOL_INDEPENDENT_MANAGERS = [
   "gitlabci-include",
   "nvm",
   "regex",
-  "terraform"
+  "terraform",
 ];
 
 const MANAGER_TO_ASDF_TOOL_MAP = {
@@ -57,7 +58,7 @@ async function getToolsForRepositories(repositories) {
 }
 
 export async function loadRenovateConfig(file) {
-  const { default: config } = await import(file);
+  const config = await loadRawRenovateConfig(file);
 
   const extraTools = await getToolsForRepositories(config.repositories);
 
