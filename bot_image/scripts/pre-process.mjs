@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
-const { log, warn, setScope } = require("../lib/logger");
-const { DRY_RUN, RENOVATE_STOP_UPDATING_LABEL } = require("../lib/constants");
-const { GitLabAPIIterator, GitLabAPI } = require("../lib/api");
-const {
+import { log, setScope, warn } from "../lib/logger.mjs";
+import { DRY_RUN, RENOVATE_STOP_UPDATING_LABEL } from "../lib/constants.mjs";
+import { GitLabAPI, GitLabAPIIterator } from "../lib/api.mjs";
+import {
   cleanLabels,
   runProcessingOnConfig,
-} = require("../lib/processing-helpers");
+} from "../lib/processing-helpers.mjs";
 
 setScope(`[Pre-Processing]`);
 
@@ -98,5 +98,5 @@ runProcessingOnConfig(preProcessMR)
     warn("An error happened");
     warn(e.message);
     warn(e.stack);
-    process.exit(1);
+    process.exitCode = 1;
   });

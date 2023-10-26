@@ -1,14 +1,19 @@
 #!/usr/bin/env node
 
-const fs = require("fs");
-const path = require("path");
-const glob = require("glob");
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+import glob from "glob";
+
+const ROOT_DIR = path.join(fileURLToPath(import.meta.url), "..", "..");
 
 const configFiles = glob.sync(
-  path.join(__dirname, "..", "renovate", "**", "*.config.js")
+  path.join(ROOT_DIR, "renovate", "**", "*.config.js")
 );
 
-const repositories = configFiles.map(require).flatMap((x) => x.repositories);
+const configs = await Promise.all(configFiles.map((file) => import(file)));
+const repositories = configs.flatMap((config) => config.default.repositories);
 
 console.log(repositories);
 

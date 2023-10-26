@@ -53,6 +53,6 @@ delete-pipelines:
   script:
     - yarn install
     - export "GITLAB_TOKEN=$DELETE_PIPELINES_TOKEN"
-    - node ./scripts/delete-pipelines.js
+    - node ./scripts/delete-pipelines.mjs
   rules:
     - if: $DELETE_PIPELINES

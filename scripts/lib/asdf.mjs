@@ -1,7 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { GitLabAPI } from "../../bot_image/lib/api.js";
+import { GitLabAPI } from "../../bot_image/lib/api.mjs";
 import semver from "semver";
 
 const TOOL_VERSION = join(

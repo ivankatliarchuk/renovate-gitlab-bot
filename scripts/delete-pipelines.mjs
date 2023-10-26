@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
-const { DateTime } = require("luxon");
-const { log, warn, setScope } = require("../bot_image/lib/logger");
-const { RENOVATE_PROJECT_ID } = require("../bot_image/lib/constants");
-const { GitLabAPIIterator, GitLabAPI } = require("../bot_image/lib/api");
+import { DateTime } from "luxon";
+
+import { log, setScope, warn } from "../bot_image/lib/logger.mjs";
+import { RENOVATE_PROJECT_ID } from "../bot_image/lib/constants.mjs";
+import { GitLabAPI, GitLabAPIIterator } from "../bot_image/lib/api.mjs";
 
 setScope(`[Deleting pipelines]`);
 
@@ -61,5 +62,5 @@ main()
     warn("An error happened");
     warn(e.message);
     warn(e.stack);
-    process.exit(1);
+    process.exitCode = 1;
   });

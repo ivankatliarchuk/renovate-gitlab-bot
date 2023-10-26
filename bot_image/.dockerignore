@@ -6,5 +6,5 @@ renovate-fork/
 .gitignore
 .gitlab-ci.yml
 Dockerfile
-update-readme.js
+update-readme.mjs
 *.tgz

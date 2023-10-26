@@ -15,7 +15,7 @@
     "semver": "^7.3.8"
   },
   "scripts": {
-    "update-readme": "scripts/update-readme.js"
+    "update-readme": "scripts/update-readme.mjs"
   },
   "devDependencies": {
     "prettier": "^2.8.4",
