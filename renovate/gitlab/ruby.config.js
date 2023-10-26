@@ -5,6 +5,7 @@ const {
   epBaseConfig,
   GITLAB_REPO,
 } = require("../lib/shared");
+const { getGemReviewers } = require("../lib/reviewers");
 
 const gemConfig = createServerConfig(
   [
@@ -146,5 +147,13 @@ const gemConfig = createServerConfig(
 );
 
 module.exports = async function () {
+  const reviewers = await getGemReviewers(
+    "https://gitlab.com/gitlab-org/gitlab/-/raw/master/Gemfile",
+    "gitlab"
+  );
+
+  console.warn("Uh lalala, we have reviewers");
+  console.warn(JSON.stringify(reviewers, null, 2));
+
   return gemConfig;
 };

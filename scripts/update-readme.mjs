@@ -13,6 +13,8 @@ const configFiles = glob.sync(
   path.join(ROOT_DIR, "renovate", "**", "*.config.js")
 );
 
+// We do not really care about reviewers at this stage
+process.env.STABLE_REVIEWERS = "true";
 const configs = await Promise.all(configFiles.map(loadRawRenovateConfig));
 const repositories = configs.flatMap((config) => config.repositories);
 
