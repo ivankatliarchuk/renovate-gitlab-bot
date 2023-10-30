@@ -1,9 +1,11 @@
-const factory = require("gitlab-api-async-iterator");
-const { RENOVATE_BOT_USER } = require("./constants");
-const { log } = require("./logger");
+import factory from "gitlab-api-async-iterator";
+
+import { log } from "./logger.mjs";
+import { RENOVATE_BOT_USER } from "./constants.mjs";
+
 const { GitLabAPI, GitLabAPIIterator } = factory();
 
-const createRenovateMRIterator = (projectId = null) => {
+export const createRenovateMRIterator = (projectId = null) => {
   const url = projectId
     ? `/projects/${projectId}/merge_requests`
     : "/merge_requests";
@@ -15,25 +17,25 @@ const createRenovateMRIterator = (projectId = null) => {
   });
 };
 
-const usermap = {};
+const userMap = {};
 
 async function getUserId(usernameRaw) {
   const username = usernameRaw.startsWith("@")
     ? usernameRaw.substring(1)
     : usernameRaw;
 
-  if (!usermap[username]) {
+  if (!userMap[username]) {
     const lcUsername = username.toLowerCase();
     log(`Retrieving ID for ${username} (searching with ${lcUsername}`);
     const { data } = await GitLabAPI.get(`/users?username=${lcUsername}`);
-    usermap[username] =
+    userMap[username] =
       data.find((u) => u.username.toLowerCase() === lcUsername)?.id || null;
   }
 
-  return usermap[username];
+  return userMap[username];
 }
 
-async function getUserIds(usernames) {
+export async function getUserIds(usernames) {
   const all = await Promise.all([usernames].flat().map(getUserId));
   return all.filter(Boolean);
 }
@@ -45,7 +47,7 @@ async function getProjectFromSlug(projectSlug) {
   return project;
 }
 
-async function forEachMR(repositories, fn) {
+export async function forEachMR(repositories, fn) {
   for await (const repositoryConfig of repositories) {
     const project = await getProjectFromSlug(repositoryConfig.repository);
     const { web_url: projectUrl, forked_from_project: upstreamProject } =
@@ -80,11 +82,4 @@ async function forEachMR(repositories, fn) {
   }
 }
 
-module.exports = {
-  GitLabAPI,
-  GitLabAPIIterator,
-  createRenovateMRIterator,
-  getUserId,
-  getUserIds,
-  forEachMR,
-};
+export { GitLabAPI, GitLabAPIIterator };

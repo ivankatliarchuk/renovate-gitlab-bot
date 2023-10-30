@@ -33,11 +33,11 @@ function run_renovate {
 }
 
 function run_preprocessing {
-    node "$DIR/scripts/pre-process.js" "$@" && return 0 || return 1
+    node "$DIR/scripts/pre-process.mjs" "$@" && return 0 || return 1
 }
 
 function run_postprocessing {
-    node "$DIR/scripts/post-process.js" "$@" && return 0 || return 1
+    node "$DIR/scripts/post-process.mjs" "$@" && return 0 || return 1
 }
 
 echo "Starting renovate for $DIR/$CONFIG_FILE"

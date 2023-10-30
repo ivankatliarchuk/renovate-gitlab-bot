@@ -6,7 +6,7 @@ const {
   GITLAB_REPO,
 } = require("../lib/shared");
 
-module.exports = createServerConfig(
+const gemConfig = createServerConfig(
   [
     {
       repository: GITLAB_REPO,
@@ -120,17 +120,15 @@ module.exports = createServerConfig(
           groupName: "GitLab LabKit",
         },
         {
-          matchPackageNames: [
-            "puma",
-          ],
+          matchPackageNames: ["puma"],
           enabled: true,
-          groupName: "Puma"
+          groupName: "Puma",
         },
         {
           matchPackageNames: ["prometheus-client-mmap"],
           enabled: true,
           reviewers: ["stanhu", "wchandler"],
-          groupName: "prometheus-client-mmap"
+          groupName: "prometheus-client-mmap",
         },
       ],
     },
@@ -141,3 +139,7 @@ module.exports = createServerConfig(
     ],
   }
 );
+
+module.exports = async function () {
+  return gemConfig;
+};

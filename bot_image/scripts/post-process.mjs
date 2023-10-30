@@ -1,13 +1,14 @@
 #!/usr/bin/env node
 
-const { sampleSize } = require("lodash");
-const { log, warn, setScope } = require("../lib/logger");
-const { RENOVATE_BOT_USER, DRY_RUN } = require("../lib/constants");
-const { GitLabAPIIterator, GitLabAPI, getUserIds } = require("../lib/api");
-const {
+import sampleSize from "lodash/sampleSize.js";
+
+import { DRY_RUN, RENOVATE_BOT_USER } from "../lib/constants.mjs";
+import { log, setScope, warn } from "../lib/logger.mjs";
+import { getUserIds, GitLabAPI, GitLabAPIIterator } from "../lib/api.mjs";
+import {
   cleanLabels,
   runProcessingOnConfig,
-} = require("../lib/processing-helpers");
+} from "../lib/processing-helpers.mjs";
 
 setScope(`[Post-Processing]`);
 
@@ -100,5 +101,5 @@ runProcessingOnConfig(postProcessMR)
     warn("An error happened");
     warn(e.message);
     warn(e.stack);
-    process.exit(1);
+    process.exitCode = 1;
   });
