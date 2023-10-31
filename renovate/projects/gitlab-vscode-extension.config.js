@@ -69,6 +69,12 @@ module.exports = createServerConfig([
         groupName: "Linting",
       },
       {
+        ...enableWithBumpStrategy,
+        matchPackageNames: ["@gitlab-org/gitlab-lsp"],
+        groupName: "GitLab Language Server",
+        reviewers: ["tristan.read", "ohoral", "erran", "viktomas"],
+      },
+      {
         matchPackageNames: ["@types/node", "@types/vscode"],
         enabled: false,
       },
