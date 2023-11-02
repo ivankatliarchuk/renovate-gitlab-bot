@@ -28,6 +28,12 @@ module.exports = createServerConfig(
       prConcurrentLimit: 4,
       enabledManagers: ["gomod"],
       postUpdateOptions: ["gomodTidy", "gomodUpdateImportPaths"],
+      packageRules: [
+        {
+          "matchPackageNames": ["github.com/aws/aws-sdk-go"],
+          "schedule": ["before 4am on the first day of the month"],
+        },
+      ],
     }
   ]
 );
