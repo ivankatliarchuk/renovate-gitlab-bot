@@ -25,7 +25,7 @@ module.exports = createServerConfig([
     branchPrefix: "renovate-ci-templates/",
     enabledManagers: ["regex"],
     semanticCommits: "disabled",
-    reviewers: ["hfyngvason", "shinya.maeda", "marcel.amirault", "laurax"], // CI template maintainers
+    reviewers: ["hfyngvason", "marcel.amirault", "laurax"], // CI template maintainers
     labels: baseLabels,
     includePaths: ["lib/gitlab/ci/templates/**/*"],
     commitBody: "Changelog: changed",
@@ -39,7 +39,7 @@ module.exports = createServerConfig([
       {
         groupName: "auto-deploy-image labels and reviewers",
         matchPackageNames: ["auto-deploy-image"],
-        reviewers: ["Alexand", "tigerwnz", "shinya.maeda", "hfyngvason"], // domain experts
+        reviewers: ["Alexand", "tigerwnz", "hfyngvason"], // domain experts
         labels: groupEnvironmentsLabels,
       },
       {
