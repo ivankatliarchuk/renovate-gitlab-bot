@@ -22,5 +22,6 @@ module.exports = createServerConfig([
     enabledManagers: ["npm"],
     packageRules: [updateNothing, prGitLabUISVG, prVueMajor2, prBabel, prJest],
     updateInternalDeps: true,
+    schedule: ["on the first day of the month"],
   },
 ]);
