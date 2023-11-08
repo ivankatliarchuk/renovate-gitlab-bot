@@ -1,6 +1,7 @@
 const {
   createServerConfig,
   baseConfig,
+  availableRouletteReviewerByRole,
   GITLAB_REPO,
 } = require("../lib/shared");
 
@@ -17,6 +18,22 @@ const groupEnvironmentsLabels = [
   "section::cd",
 ];
 
+// Data from the team.yml.
+const ciTemplateMaintainers = availableRouletteReviewerByRole("gitlab", [
+  "maintainer ci_template",
+]);
+
+const autoBuildImageReviewers = availableRouletteReviewerByRole("auto-build-image", [
+  "reviewer",
+  "maintainer",
+]);
+
+const autoDeployImageReviewers = availableRouletteReviewerByRole("auto-deploy-image", [
+  "reviewer",
+  "maintainer",
+]);
+
+
 module.exports = createServerConfig([
   {
     repository: GITLAB_REPO,
@@ -25,7 +42,7 @@ module.exports = createServerConfig([
     branchPrefix: "renovate-ci-templates/",
     enabledManagers: ["regex"],
     semanticCommits: "disabled",
-    reviewers: ["hfyngvason", "marcel.amirault", "laurax"], // CI template maintainers
+    reviewers: ciTemplateMaintainers,
     labels: baseLabels,
     includePaths: ["lib/gitlab/ci/templates/**/*"],
     commitBody: "Changelog: changed",
@@ -33,13 +50,13 @@ module.exports = createServerConfig([
       {
         groupName: "auto-build-image labels and reviewers",
         matchPackageNames: ["auto-build-image"],
-        reviewers: ["Alexand", "hfyngvason", "tigerwnz"], // domain experts
+        reviewers: autoBuildImageReviewers,
         labels: groupEnvironmentsLabels,
       },
       {
         groupName: "auto-deploy-image labels and reviewers",
         matchPackageNames: ["auto-deploy-image"],
-        reviewers: ["Alexand", "tigerwnz", "hfyngvason"], // domain experts
+        reviewers: autoDeployImageReviewers,
         labels: groupEnvironmentsLabels,
       },
       {
