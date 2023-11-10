@@ -7,6 +7,7 @@ import { loadRawRenovateConfig } from "../../bot_image/lib/load-raw-renovate-con
 const TOOL_INDEPENDENT_MANAGERS = [
   "asdf",
   "dockerfile",
+  "docker-compose",
   "gitlabci",
   "gitlabci-include",
   "nvm",
