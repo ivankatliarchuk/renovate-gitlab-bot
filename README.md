@@ -12,6 +12,7 @@ The following repositories are currently being updated automatically.
 
 <!-- rep -->
 
+- [gitlab-renovate-forks/analytics-section/product-analytics/devkit](https://gitlab.com/gitlab-renovate-forks/analytics-section/product-analytics/devkit)
 - [gitlab-renovate-forks/auto-build-image](https://gitlab.com/gitlab-renovate-forks/auto-build-image)
 - [gitlab-renovate-forks/auto-deploy-image](https://gitlab.com/gitlab-renovate-forks/auto-deploy-image)
 - [gitlab-renovate-forks/container-registry](https://gitlab.com/gitlab-renovate-forks/container-registry)
