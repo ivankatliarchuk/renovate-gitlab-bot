@@ -13,7 +13,7 @@ module.exports = createServerConfig([
     ...qaBaseConfig,
     rangeStrategy: "bump",
     branchPrefix: "renovate-qa/",
-    enabledManagers: ["bundler", "gitlabci-include", "dockerfile", "regex", "gitlab-tags"],
+    enabledManagers: ["bundler", "gitlabci-include", "dockerfile", "regex"],
     postUpdateOptions: ["bundlerConservative"],
     includePaths: ["qa/*", "qa/gdk/*", ".gitlab/ci/qa-common/*"],
     regexManagers: [
@@ -31,8 +31,8 @@ module.exports = createServerConfig([
         fileMatch: [".gitlab/ci/qa-common/main.gitlab-ci.yml"],
         matchStrings: ["allure-report@(?<currentValue>.*?)\"\\n"],
         depNameTemplate: "allure-report-publisher",
-        packageNameTemplate: "gitlab-org/quality/pipeline-common",
-        datasourceTemplate: "gitlab-tags"
+        packageNameTemplate: "https://gitlab.com/gitlab-org/quality/pipeline-common.git",
+        datasourceTemplate: "git-tags"
       }
     ],
     packageRules: [
