@@ -45,8 +45,8 @@ module.exports = createServerConfig([
         matchFiles: ["qa/gdk/Dockerfile.gdk"]
       },
       {
-        description: "CI component updates",
-        groupName: "qa-ci",
+        description: "QA CI component updates",
+        groupName: "ci-qa",
         matchFiles: [".gitlab/ci/qa-common/*"]
       },
       {
