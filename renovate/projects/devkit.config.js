@@ -1,3 +1,6 @@
+const { readFileSync } = require('fs');
+const { join } = require('path');
+
 const {
   createServerConfig,
   baseConfig,
@@ -30,4 +33,15 @@ module.exports = createServerConfig([
       },
     ],
   },
-]);
+],
+{
+  renovateMetaCommentTemplate: readFileSync(
+    join(
+      __dirname,
+      "..",
+      "comment_templates",
+      "product_analytics_devkit.md"
+    ),
+    "utf-8"
+  ),
+});
