@@ -13,7 +13,7 @@ module.exports = createServerConfig([
     ...qaBaseConfig,
     rangeStrategy: "bump",
     branchPrefix: "renovate-qa/",
-    enabledManagers: ["bundler", "gitlabci-include", "dockerfile", "regex"],
+    enabledManagers: ["bundler", "gitlabci-include", "dockerfile", "regex", "gitlab-tags"],
     postUpdateOptions: ["bundlerConservative"],
     includePaths: ["qa/*", "qa/gdk/*", ".gitlab/ci/qa-common/*"],
     regexManagers: [
@@ -25,6 +25,14 @@ module.exports = createServerConfig([
         depNameTemplate: "gitlab-development-kit",
         packageNameTemplate: "https://gitlab.com/gitlab-org/gitlab-development-kit.git",
         datasourceTemplate: "git-refs"
+      },
+      {
+        customType: "regex",
+        fileMatch: [".gitlab/ci/qa-common/main.gitlab-ci.yml"],
+        matchStrings: ["allure-report@(?<currentValue>.*?)\"\\n"],
+        depNameTemplate: "allure-report-publisher",
+        packageNameTemplate: "gitlab-org/quality/pipeline-common",
+        datasourceTemplate: "gitlab-tags"
       }
     ],
     packageRules: [
@@ -35,6 +43,11 @@ module.exports = createServerConfig([
         description: "GDK version update",
         groupName: "gdk-qa",
         matchFiles: ["qa/gdk/Dockerfile.gdk"]
+      },
+      {
+        description: "CI component updates",
+        groupName: "qa-ci",
+        matchFiles: [".gitlab/ci/qa-common/*"]
       },
       {
         // activesupport needs to be in sync with gitlab
