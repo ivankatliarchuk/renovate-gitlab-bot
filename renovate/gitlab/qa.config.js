@@ -25,6 +25,14 @@ module.exports = createServerConfig([
         depNameTemplate: "gitlab-development-kit",
         packageNameTemplate: "https://gitlab.com/gitlab-org/gitlab-development-kit.git",
         datasourceTemplate: "git-refs"
+      },
+      {
+        customType: "regex",
+        fileMatch: [".gitlab/ci/qa-common/main.gitlab-ci.yml"],
+        matchStrings: ["allure-report@(?<currentValue>.*?)\"\\n"],
+        depNameTemplate: "allure-report-publisher",
+        packageNameTemplate: "https://gitlab.com/gitlab-org/quality/pipeline-common.git",
+        datasourceTemplate: "git-tags"
       }
     ],
     packageRules: [
@@ -35,6 +43,11 @@ module.exports = createServerConfig([
         description: "GDK version update",
         groupName: "gdk-qa",
         matchFiles: ["qa/gdk/Dockerfile.gdk"]
+      },
+      {
+        description: "QA CI component updates",
+        groupName: "ci-qa",
+        matchFiles: [".gitlab/ci/qa-common/*"]
       },
       {
         // activesupport needs to be in sync with gitlab
