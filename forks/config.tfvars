@@ -7,6 +7,7 @@ projects = [
   "gitlab-org/cluster-integration/gitlab-agent-ci-image",
   "gitlab-org/cluster-integration/helm-install-image",
   "gitlab-org/container-registry",
+  "gitlab-org/editor-extensions/gitlab.vim",
   "gitlab-org/frontend/pajamas-adoption-scanner",
   "gitlab-org/gitaly",
   "gitlab-org/gitlab",
