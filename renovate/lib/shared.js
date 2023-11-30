@@ -27,12 +27,12 @@ const foundationLabels = [
 
 const epBaseConfig = {
   reviewers: [
-    "alinamihaila",
     "ddieulivol",
     "godfat-gitlab",
     "jennli",
     "nao.hashizume",
     "rymai",
+    "splattael",
   ],
   reviewersSampleSize: 1,
   labels: [...defaultLabels, "backend", "Engineering Productivity"],
