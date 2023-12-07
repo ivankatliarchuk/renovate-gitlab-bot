@@ -16,6 +16,7 @@ projects = [
   "gitlab-org/gitlab-elasticsearch-indexer",
   "gitlab-org/gitlab-pages",
   "gitlab-org/gitlab-services/design.gitlab.com",
+  "gitlab-org/gitlab-services/version.gitlab.com",
   "gitlab-org/gitlab-shell",
   "gitlab-org/gitlab-svgs",
   "gitlab-org/gitlab-ui",

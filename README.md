@@ -42,6 +42,7 @@ The following repositories are currently being updated automatically.
 - [gitlab-renovate-forks/terraform-images](https://gitlab.com/gitlab-renovate-forks/terraform-images)
 - [gitlab-renovate-forks/terraform-provider-gitlab](https://gitlab.com/gitlab-renovate-forks/terraform-provider-gitlab)
 - [gitlab-renovate-forks/triage-ops](https://gitlab.com/gitlab-renovate-forks/triage-ops)
+- [gitlab-renovate-forks/version.gitlab.com](https://gitlab.com/gitlab-renovate-forks/version.gitlab.com)
 
 <!-- rep -->
 
