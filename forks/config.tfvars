@@ -1,5 +1,6 @@
 // List of project sorted alphabetically.
 projects = [
+  "gitlab-org/frontend/playground/accessibility-scanner",
   "gitlab-org/analytics-section/product-analytics/devkit",
   "gitlab-org/cluster-integration/auto-build-image",
   "gitlab-org/cluster-integration/auto-deploy-image",
