@@ -27,6 +27,7 @@ module.exports = createServerConfig([
       {
         matchPackageNames: ["hashicorp/terraform"],
         matchManagers: ["regex"],
+        allowedVersions: "<=1.5",
         separateMinorPatch: true,
       },
       {
@@ -34,6 +35,15 @@ module.exports = createServerConfig([
         matchManagers: ["regex"],
         matchUpdateTypes: ["major", "minor"],
         enabled: false,
+      },
+      {
+        matchPackageNames: "alpine_edge/opentofu",
+        prBodyDefinitions: {
+          Package: "[{{{depName}}}](https://github.com/opentofu/opentofu)",
+        },
+        prBodyNotes:
+          ":information_source: [OpenTofu Changelog](https://github.com/opentofu/opentofu/blob/main/CHANGELOG.md)",
+        customChangelogUrl: "https://github.com/opentofu/opentofu",
       },
     ],
     regexManagers: [
@@ -48,6 +58,20 @@ module.exports = createServerConfig([
           'DOCKER_DIND_IMAGE: "(?<depName>.*):(?<currentValue>.*)-dind"\\s',
         ],
         datasourceTemplate: "docker",
+      },
+      {
+        fileMatch: ["^.gitlab-ci.yml$"],
+        matchStrings: ['TERRAFORM_BINARY_VERSION: "(?<currentValue>.*)"\\s'],
+        depNameTemplate: "hashicorp/terraform",
+        datasourceTemplate: "github-releases",
+        extractVersionTemplate: "^v(?<version>.*)$",
+      },
+      {
+        fileMatch: ["^.gitlab-ci.yml$"],
+        matchStrings: ['TOFU_BINARY_VERSION: "(?<currentValue>.*)"\\s'],
+        depNameTemplate: "alpine_edge/opentofu",
+        datasourceTemplate: "repology",
+        versioningTemplate: "loose",
       },
     ],
   },
