@@ -30,6 +30,7 @@ const gemConfig = createServerConfig(
             "better_errors",
             "brakeman",
             "danger",
+            "haml_lint",
             "lefthook",
             "letter_opener_web",
             "parser",
