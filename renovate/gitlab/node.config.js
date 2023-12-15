@@ -144,6 +144,7 @@ module.exports = createServerConfig([
         matchPackageNames: ["@sentry/browser", "sentrybrowser"],
         reviewers: ["samdbeckham", "mrincon", "sheldonled"],
         groupName: "Frontend Observability Packages",
+        schedule: ["before 05:00 on Monday"],
       },
     ],
     semanticCommits: "disabled",
