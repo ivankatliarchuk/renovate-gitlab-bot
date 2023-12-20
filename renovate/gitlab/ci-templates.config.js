@@ -25,11 +25,13 @@ const ciTemplateMaintainers = availableRouletteReviewerByRole("gitlab", [
 
 const autoBuildImageReviewers = availableRouletteReviewerByRole("auto-build-image", [
   "reviewer",
+  "trainee_maintainer",
   "maintainer",
 ]);
 
 const autoDeployImageReviewers = availableRouletteReviewerByRole("auto-deploy-image", [
   "reviewer",
+  "trainee_maintainer",
   "maintainer",
 ]);
 
