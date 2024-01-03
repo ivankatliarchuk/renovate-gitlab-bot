@@ -8,7 +8,7 @@ const { prVueMajor2, prBabel, prJest, prGitLabUISVG } = require("../lib/npm");
 
 module.exports = createServerConfig([
   {
-    repository: "gitlab-renovate-forks/pajamas-adoption-scanner",
+    repository: "gitlab-renovate-forks/accessibility-scanner",
     ...baseConfig,
     labels: [...defaultLabels, "WG::product accessibility"],
     includePaths: [
