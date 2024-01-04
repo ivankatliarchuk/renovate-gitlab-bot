@@ -16,7 +16,7 @@ module.exports = createServerConfig([
     ...baseConfig,
     labels: [
       ...defaultLabels,
-      "group::editor",
+      "group::editor extensions",
       "devops::create",
       "section::dev",
     ],
@@ -75,7 +75,7 @@ module.exports = createServerConfig([
         reviewers: ["tristan.read", "ohoral", "erran", "viktomas"],
       },
       {
-        matchPackageNames: ["@types/node", "@types/vscode"],
+        matchPackageNames: ["@types/node", "@types/vscode", "vscode"],
         enabled: false,
       },
     ],
