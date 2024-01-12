@@ -124,20 +124,14 @@ module.exports = createServerConfig([
         matchPackagePatterns: ["@cubejs-client/.*"],
         enabled: true,
         groupName: "Analytics dashboards - cubejs",
-        addLabels: [
-          "group::product analytics",
-          "frontend",
-        ],
+        addLabels: ["group::product analytics", "frontend"],
       },
       {
         reviewers: ["rob.hunt", "jiaan", "elwyn-gitlab"],
         matchPackagePatterns: ["gridstack"],
         enabled: true,
         groupName: "Customizable dashboards packages",
-        addLabels: [
-          "group::product analytics",
-          "frontend",
-        ],
+        addLabels: ["group::product analytics", "frontend"],
       },
       {
         enabled: true,
@@ -145,6 +139,19 @@ module.exports = createServerConfig([
         reviewers: ["samdbeckham", "mrincon", "sheldonled"],
         groupName: "Frontend Observability Packages",
         schedule: ["before 05:00 on Monday"],
+      },
+      {
+        reviewers: ["slashmanov", "leipert"],
+        matchPackageNames: [
+          "@rollup/plugin-graphql",
+          "@vitejs/plugin-vue2",
+          "@originjs/vite-plugin-commonjs",
+          "vite",
+          "vite-plugin-ruby",
+        ],
+        enabled: true,
+        groupName: "Vite and related",
+        addLabels: ["frontend"],
       },
     ],
     semanticCommits: "disabled",
