@@ -13,12 +13,12 @@ The following repositories are currently being updated automatically.
 <!-- rep -->
 
 - [gitlab-renovate-forks/accessibility-scanner](https://gitlab.com/gitlab-renovate-forks/accessibility-scanner)
-- [gitlab-renovate-forks/analytics-section/product-analytics/devkit](https://gitlab.com/gitlab-renovate-forks/analytics-section/product-analytics/devkit)
 - [gitlab-renovate-forks/auto-build-image](https://gitlab.com/gitlab-renovate-forks/auto-build-image)
 - [gitlab-renovate-forks/auto-deploy-image](https://gitlab.com/gitlab-renovate-forks/auto-deploy-image)
 - [gitlab-renovate-forks/container-registry](https://gitlab.com/gitlab-renovate-forks/container-registry)
 - [gitlab-renovate-forks/customers-gitlab-com](https://gitlab.com/gitlab-renovate-forks/customers-gitlab-com)
 - [gitlab-renovate-forks/design.gitlab.com](https://gitlab.com/gitlab-renovate-forks/design.gitlab.com)
+- [gitlab-renovate-forks/devkit](https://gitlab.com/gitlab-renovate-forks/devkit)
 - [gitlab-renovate-forks/engineering-productivity-infrastructure](https://gitlab.com/gitlab-renovate-forks/engineering-productivity-infrastructure)
 - [gitlab-renovate-forks/gemnasium](https://gitlab.com/gitlab-renovate-forks/gemnasium)
 - [gitlab-renovate-forks/gitaly](https://gitlab.com/gitlab-renovate-forks/gitaly)
