@@ -65,6 +65,7 @@ const gemConfig = createServerConfig(
         },
         {
           matchPackageNames: [
+            "gitlab-glfm-markdown",
             "nokogiri",
             "premailer",
             "re2",
