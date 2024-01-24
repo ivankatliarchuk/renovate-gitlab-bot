@@ -13,6 +13,12 @@ Submit a Merge Request containing the following two changes:
     ```
 2. Add a renovate [config for your project](../renovate/).
 
+3. Once your MR pipeline runs, review the Terraform Plan job and ensure the changes are expected.
+
+4. Run the manual Terraform Apply job - this will fork your repo. You may need to re-run subsequent pipeline jobs which probably failed due to the fork not existing when they originally ran.
+
+5. In the **execute -> Projects -> Your project** job, you can download and check the `renovate-log.txt` job artifact to see that Renovate did what you expected.
+
 ## Implementation Details
 
 The CI/CD pipeline in this project will import your project to the [gitlab-renovate-forks](https://gitlab.com/gitlab-renovate-forks) group 
