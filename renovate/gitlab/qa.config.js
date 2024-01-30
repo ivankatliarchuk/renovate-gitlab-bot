@@ -13,7 +13,7 @@ module.exports = createServerConfig([
     ...qaBaseConfig,
     rangeStrategy: "bump",
     branchPrefix: "renovate-qa/",
-    enabledManagers: ["bundler", "gitlabci-include", "dockerfile", "regex"],
+    enabledManagers: ["bundler", "gitlabci-include", "regex"],
     postUpdateOptions: ["bundlerConservative"],
     includePaths: ["qa/*", "qa/gdk/*", ".gitlab/ci/qa-common/*"],
     regexManagers: [
@@ -38,11 +38,6 @@ module.exports = createServerConfig([
     packageRules: [
       {
         enabled: true,
-      },
-      {
-        description: "GDK version update",
-        groupName: "gdk-qa",
-        matchFiles: ["qa/gdk/Dockerfile.gdk"]
       },
       {
         description: "QA CI component updates",
