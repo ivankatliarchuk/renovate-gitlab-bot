@@ -24,13 +24,9 @@ module.exports = async function () {
         "brakeman",
         "danger",
         "haml_lint",
-        "lefthook",
         "letter_opener_web",
         "parser",
         "thin",
-        "ruby-lsp",
-        "ruby-lsp-rails",
-        "ruby-lsp-rspec",
       ],
       enabled: true,
       groupName: "Development gems",
@@ -39,11 +35,6 @@ module.exports = async function () {
       matchPackageNames: [
         "capybara",
         "capybara-screenshot",
-        "gitlab_quality-test_tooling",
-        "rspec-retry",
-        "rspec_profiling",
-        "rspec-benchmark",
-        "rspec-parameterized",
         "selenium-webdriver",
         "test-prof",
         "webmock",
@@ -52,13 +43,7 @@ module.exports = async function () {
       groupName: "Testing gems",
     },
     {
-      matchPackageNames: ["gitlab-dangerfiles"],
-      enabled: true,
-      groupName: "Tooling gems",
-    },
-    {
       matchPackageNames: [
-        "gitlab-glfm-markdown",
         "nokogiri",
         "premailer",
         "re2",
@@ -70,7 +55,7 @@ module.exports = async function () {
       groupName: "Markdown and HTML parsing gems",
     },
     {
-      matchPackageNames: ["pg", "pg_query", "marginalia"],
+      matchPackageNames: ["pg", "marginalia"],
       enabled: true,
       groupName: "Database gems",
     },
@@ -116,11 +101,6 @@ module.exports = async function () {
       enabled: true,
       reviewers: ["stanhu"],
       groupName: "GitLab LabKit",
-    },
-    {
-      matchPackageNames: ["puma"],
-      enabled: true,
-      groupName: "Puma",
     },
     {
       matchPackageNames: ["prometheus-client-mmap"],
