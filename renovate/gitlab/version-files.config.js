@@ -12,6 +12,7 @@ const groupEnvironmentsLabels = [
   "group::environments",
   "devops::deploy",
   "section::cd",
+  "KAS",
 ];
 
 module.exports = createServerConfig([
@@ -23,7 +24,7 @@ module.exports = createServerConfig([
     enabledManagers: ["regex"],
     semanticCommits: "disabled",
     reviewers: ["ash2k", "timofurrer"],
-    reviewersSampleSize: 1,
+    reviewersSampleSize: 2,
     labels: groupEnvironmentsLabels,
     includePaths: ["GITLAB_KAS_VERSION"],
     postUpdateOptions: [],
