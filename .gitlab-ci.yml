@@ -13,7 +13,7 @@ default:
     - gitlab-org
 
 stages:
-  - terraform
+  - forks
   - run
 
 execution-plan:
