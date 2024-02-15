@@ -1,41 +1,28 @@
 ---
 include:
-  - template: Terraform/Base.latest.gitlab-ci.yml
+  - component: gitlab.com/components/opentofu/validate-plan-apply@0.16.0
+    inputs:
+      version: 0.16.0
+      opentofu_version: 1.6.1
+      # Location of our IaC project related to the forks
+      root_dir: forks
+      # We only want a single stage for all infra jobs related to the forks
+      state_name: forks
+      stage_validate: forks
+      stage_build: forks
+      stage_deploy: forks
 
-.terraform:config:
-  variables:
-    TF_ROOT: forks
-    TF_STATE_NAME: forks
-    TF_VAR_gitlab_renovate_bot_token: $TERRAFORM_TOKEN
-    TF_CLI_ARGS_plan: "-lock=false -var-file=../forks/config.tfvars"
-  environment:
-    name: $TF_STATE_NAME
+variables:
+  TF_VAR_gitlab_renovate_bot_token: $TERRAFORM_TOKEN
+  TF_CLI_ARGS_plan: "-lock=false -var-file=../forks/config.tfvars"
 
-terraform:fmt:
-  extends: .terraform:fmt
-  stage: terraform
-  needs: []
-
-terraform:validate:
-  extends: .terraform:validate
-  stage: terraform
-  needs: []
-
-terraform:plan:
-  extends: [.terraform:config, .terraform:build]
-  stage: terraform
+plan:
   needs:
-    - terraform:fmt
-    - terraform:validate
-  environment:
-    action: prepare
+    - fmt
+    - validate
 
-terraform:apply:
-  extends: [.terraform:config, .terraform:deploy]
-  stage: terraform
-  needs: [terraform:plan]
-  environment:
-    action: start
+apply:
+  needs: [plan]
   rules:
     - when: manual
       allow_failure: true
