@@ -14,6 +14,8 @@ export async function runProcessingOnConfig(fn) {
 
   const [file] = process.argv.slice(2);
 
+  // We do not really care about reviewers at this stage
+  process.env.STABLE_REVIEWERS = "true";
   const { repositories } = await loadRawRenovateConfig(file);
 
   await forEachMR(repositories, fn);
