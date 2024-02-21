@@ -122,8 +122,6 @@ module.exports = async function () {
   console.warn("Uh lalala, we have newPackageRules");
   console.warn(JSON.stringify(newPackageRules, null, 2));
 
-  packageRules.concat(newPackageRules);
-
   gemConfig = createServerConfig(
     [
       {
@@ -141,7 +139,7 @@ module.exports = async function () {
           commands: ["/workdir/renovate/gitlab/bundle-checksum.sh"],
           fileFilters: ["Gemfile.checksum"],
         },
-        packageRules: packageRules,
+        packageRules: packageRules.concat(newPackageRules),
       },
     ],
     {
