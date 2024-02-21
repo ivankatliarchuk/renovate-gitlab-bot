@@ -112,7 +112,7 @@ module.exports = async function () {
 
   const newPackageRules = Object.entries(gems).map(([name, def]) => {
     return {
-      matchPacakgeNames: [name],
+      matchPackageNames: [name],
       enabled: true,
       reviewers: def.owners.length > 0 ? def.owners : undefined,
       groupName: name
