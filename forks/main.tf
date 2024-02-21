@@ -21,7 +21,10 @@ variable "gitlab_renovate_bot_token" {
 
 variable "projects" {
   description = "A list of projects to manage with renovate. The projects must be specified with their path with namespace, e.g. `gitlab-org/gitlab`."
-  type        = list(string)
+  type = list(object({
+    path      = string
+    fork_name = optional(string)
+  }))
 }
 
 data "gitlab_group" "forks" {
@@ -29,29 +32,29 @@ data "gitlab_group" "forks" {
 }
 
 data "gitlab_project" "upstream" {
-  for_each = toset(var.projects)
+  for_each = { for project in var.projects : project.path => project }
 
   path_with_namespace = each.key
 }
 
 resource "gitlab_project" "forks" {
   # Create a forked project for every project configuration
-  for_each = data.gitlab_project.upstream
+  for_each = { for project in var.projects : project.path => project }
 
   # Fork from upstream project
-  forked_from_project_id = each.value.id
+  forked_from_project_id = data.gitlab_project.upstream[each.key].id
 
   # Specify some project name and parent group
-  name             = each.value.name
-  description      = each.value.description
+  name             = coalesce(each.value.fork_name, data.gitlab_project.upstream[each.key].name)
+  description      = data.gitlab_project.upstream[each.key].description
   namespace_id     = data.gitlab_group.forks.id
   visibility_level = "public"
 
   # Settings from the upstream project that matter for the fork
-  ci_config_path = each.value.ci_config_path
+  ci_config_path = data.gitlab_project.upstream[each.key].ci_config_path
 
   # Pull Mirroring settings
-  import_url                          = each.value.http_url_to_repo
+  import_url                          = data.gitlab_project.upstream[each.key].http_url_to_repo
   mirror                              = true
   mirror_trigger_builds               = false
   mirror_overwrites_diverged_branches = true

@@ -1,13 +1,10 @@
-# This file is maintained automatically by "terraform init".
+# This file is maintained automatically by "tofu init".
 # Manual edits may be lost in future updates.
 
-provider "registry.terraform.io/gitlabhq/gitlab" {
+provider "registry.opentofu.org/gitlabhq/gitlab" {
   version     = "15.9.0"
   constraints = "15.9.0"
   hashes = [
-    "h1:JDAmWWMNt1+2dT64ZaXGcS4nzOMEr9OJCtX+FCEjg2M=",
-    "h1:X/GJHYNCUGhievByQM0PQMWAhhurdgdssifOruANFUM=",
-    "h1:ce3cuvCy24GdXv2/F9YKCWr6y1XS5KHC5DwPXXKdZ/w=",
     "h1:h1achDxKJ+WOSGHC8AMYh2jv4/WIYcweJEY6QZYRFUs=",
     "zh:33b61f7ed1748e88e79bc6f4e5e5c97f78f238c61f26c60218d8e0bbd490d99f",
     "zh:5505ff8f77f50a018faf33d319d43914111d46901389b959fd3a8987800bc21d",
