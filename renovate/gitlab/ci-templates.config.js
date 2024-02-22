@@ -45,6 +45,7 @@ module.exports = createServerConfig([
     enabledManagers: ["regex"],
     semanticCommits: "disabled",
     reviewers: ciTemplateMaintainers,
+    reviewersSampleSize: 1,
     labels: baseLabels,
     includePaths: ["lib/gitlab/ci/templates/**/*"],
     commitBody: "Changelog: changed",
