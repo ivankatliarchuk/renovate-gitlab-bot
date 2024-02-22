@@ -23,7 +23,7 @@ variable "projects" {
   description = "A list of projects to manage with renovate. The projects must be specified with their path with namespace, e.g. `gitlab-org/gitlab`."
   type = list(object({
     path      = string
-    fork_name = optional(string)
+    fork_path = optional(string)
   }))
 }
 
@@ -45,7 +45,8 @@ resource "gitlab_project" "forks" {
   forked_from_project_id = data.gitlab_project.upstream[each.key].id
 
   # Specify some project name and parent group
-  name             = coalesce(each.value.fork_name, data.gitlab_project.upstream[each.key].name)
+  name             = data.gitlab_project.upstream[each.key].name
+  path             = coalesce(each.value.fork_path, data.gitlab_project.upstream[each.key].path)
   description      = data.gitlab_project.upstream[each.key].description
   namespace_id     = data.gitlab_group.forks.id
   visibility_level = "public"
