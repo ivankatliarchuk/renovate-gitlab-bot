@@ -5,7 +5,7 @@ This Merge Request has been created with the help of [renovate-gitlab-bot] proje
 This MR is part of GitLab Agent for Kubernetes [release process](https://gitlab.com/gitlab-org/cluster-integration/gitlab-agent/-/blob/master/doc/releases.md).
 It updates the version of the server component of the agent - kas.
 
-FYI @partiaga, @tigerwnz, @ash2k, @timofurrer, @hustewart.
+FYI @partiaga, @tigerwnz, @ash2k, @timofurrer, @hustewart, @takax.
 
 ## Troubleshooting
 
