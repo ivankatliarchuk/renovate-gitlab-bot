@@ -32,7 +32,7 @@ const {
             ],
             depNameTemplate: "kubectl",
             packageNameTemplate: "kubernetes/kubernetes",
-            datasourceTemplate: "github-tags",
+            datasourceTemplate: "github-releases",
             extractVersionTemplate: "^v(?<version>.+)$",
             versioningTemplate: "regex:^1\\.(?<major>\\d+)\\.(?<minor>\\d+)$", // kubernetes does not follow semver
           },
