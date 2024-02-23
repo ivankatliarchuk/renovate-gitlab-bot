@@ -2,6 +2,7 @@
 projects = [
   { path = "gitlab-org/frontend/playground/accessibility-scanner" },
   { path = "gitlab-org/analytics-section/product-analytics/devkit" },
+  { path = "gitlab-org/build/CNG" },
   { path = "gitlab-org/charts/gitlab-agent", fork_path = "charts-gitlab-agent" },
   { path = "gitlab-org/cluster-integration/auto-build-image" },
   { path = "gitlab-org/cluster-integration/auto-deploy-image" },
