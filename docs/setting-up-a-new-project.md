@@ -15,7 +15,7 @@ Submit a Merge Request containing the following two changes:
 
 3. Once your MR pipeline runs, review the Terraform Plan job and ensure the changes are expected.
 
-4. Run the manual Terraform Apply job - this will fork your repo. You may need to re-run subsequent pipeline jobs which probably failed due to the fork not existing when they originally ran.
+4. Run the manual Terraform Apply job - this will fork your repo. You may need to re-run subsequent pipeline jobs which probably failed due to the fork not existing when they originally ran. This job will fail with permission restrictions if triggered roles less than maintainer. So [ask a maintainer](https://gitlab.com/gitlab-org/frontend/renovate-gitlab-bot/-/project_members?with_inherited_permissions=exclude) to run it for you in case you are not one.
 
 5. In the **execute -> Projects -> Your project** job, you can download and check the `renovate-log.txt` job artifact to see that Renovate did what you expected.
 
