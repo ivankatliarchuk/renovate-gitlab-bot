@@ -15,7 +15,7 @@ module.exports = createServerConfig(
         "trainee_maintainer",
         "maintainer",
       ]),
-      reviewersSampleSize: 2,
+      reviewersSampleSize: 1,
       labels: [
         "group::distribution",
         "devops::systems",
