@@ -54,7 +54,11 @@ module.exports = createServerConfig(
             "kubectl/Dockerfile.build.ubi8",
             "ci_files/variables.yml",
           ],
-          matchStrings: ["KUBECTL_VERSION(=|: ?)\"?(?<currentValue>.*)\"?"],
+          matchStrings: [
+            "KUBECTL_VERSION=\"(?<currentValue>.*)\"",
+            "KUBECTL_VERSION=(?<currentValue>.*)",
+            "KUBECTL_VERSION: \"(?<currentValue>.*)\"",
+          ],
           depNameTemplate: "kubectl",
           packageNameTemplate: "kubernetes/kubernetes",
           datasourceTemplate: "github-tags",
