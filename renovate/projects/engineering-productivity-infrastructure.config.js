@@ -18,6 +18,11 @@ module.exports = createServerConfig(
       includePaths: ["**/*"],
       enabledManagers: ["terraform"],
       ignoreDeps: ["gitlab-runner"],
+      postUpgradeTasks: {
+        // Regenerate files that may change due to the dependency updates.
+        commands: ["terraform providers lock -platform=darwin_arm64 -platform=linux_amd64"],
+        fileFilters: ["*/.terraform.lock.hcl"],
+      },
       packageRules: [
         // Default rules that can be overridden by the next packageRules
         //
@@ -46,6 +51,7 @@ module.exports = createServerConfig(
     },
   ],
   {
+    allowedPostUpgradeCommands: ["^terraform providers lock -platform=darwin_arm64 -platform=linux_amd64$"],
     renovateMetaCommentTemplate: fs.readFileSync(
       path.join(
         __dirname,
