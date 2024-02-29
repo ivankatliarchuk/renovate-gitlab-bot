@@ -71,6 +71,15 @@ module.exports = createServerConfig([
         packageNameTemplate: "{{{image}}}",
         datasourceTemplate: "docker",
       },
+      {
+        includePaths: ["internal/module/starboard_vulnerability/agent/*"],
+        fileMatch: ["internal/module/starboard_vulnerability/agent/scanner.go"],
+        matchStrings: ['\n\\s*trivyK8sWrapper\\s*=\\s*"registry.gitlab.com/security-products/trivy-k8s-wrapper:(?<currentValue>.*)"\n'],
+        datasourceTemplate: "gitlab-releases", // although it is a docker image, use gitlab-releases so we get richer information in the MR
+        registryUrlTemplate: "https://gitlab.com",
+        depNameTemplate: "trivy-k8s-wrapper",
+        packageNameTemplate: "gitlab-org/security-products/analyzers/trivy-k8s-wrapper",
+      },
     ],
   },
 ]);
