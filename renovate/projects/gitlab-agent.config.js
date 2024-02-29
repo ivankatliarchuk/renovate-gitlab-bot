@@ -72,6 +72,7 @@ module.exports = createServerConfig([
         datasourceTemplate: "docker",
       },
       {
+        reviewers: ["nilieskou"],
         includePaths: ["internal/module/starboard_vulnerability/agent/*"],
         fileMatch: ["internal/module/starboard_vulnerability/agent/scanner.go"],
         matchStrings: ['\n\\s*trivyK8sWrapper\\s*=\\s*"registry.gitlab.com/security-products/trivy-k8s-wrapper:(?<currentValue>.*)"\n'],
