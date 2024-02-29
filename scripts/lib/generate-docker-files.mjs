@@ -78,6 +78,8 @@ export async function serializeDockerFile(config) {
     targetImage
   );
 
+  const TERRAFORM_VERSION='1.7.4';
+
   const dockerFile = [
     buildRenovateInstructions(images.nodejs),
     GO_SRC_INSTRUCTIONS,
@@ -93,7 +95,6 @@ RUN apk add --update --no-cache \\
   git
 
 # Install Terraform
-ENV TERRAFORM_VERSION=1.7.4
 RUN cd /tmp && \
       wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip \\
       && wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_SHA256SUMS \\
