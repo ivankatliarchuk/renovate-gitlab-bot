@@ -1,6 +1,5 @@
 // List of project sorted alphabetically.
 projects = [
-  { path = "gitlab-org/frontend/playground/accessibility-scanner" },
   { path = "gitlab-org/analytics-section/product-analytics/devkit" },
   { path = "gitlab-org/build/CNG" },
   { path = "gitlab-org/charts/gitlab-agent", fork_path = "charts-gitlab-agent" },
@@ -12,6 +11,7 @@ projects = [
   { path = "gitlab-org/container-registry" },
   { path = "gitlab-org/editor-extensions/gitlab.vim" },
   { path = "gitlab-org/frontend/pajamas-adoption-scanner" },
+  { path = "gitlab-org/frontend/playground/accessibility-scanner" },
   { path = "gitlab-org/gitaly" },
   { path = "gitlab-org/gitlab" },
   { path = "gitlab-org/gitlab-development-kit" },

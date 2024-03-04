@@ -36,6 +36,7 @@ The following repositories are currently being updated automatically.
 - [gitlab-renovate-forks/gitlab-zoekt-indexer](https://gitlab.com/gitlab-renovate-forks/gitlab-zoekt-indexer)
 - [gitlab-renovate-forks/gitlab.vim](https://gitlab.com/gitlab-renovate-forks/gitlab.vim)
 - [gitlab-renovate-forks/gitlab](https://gitlab.com/gitlab-renovate-forks/gitlab)
+- [gitlab-renovate-forks/glgo](https://gitlab.com/gitlab-renovate-forks/glgo)
 - [gitlab-renovate-forks/helm-install-image](https://gitlab.com/gitlab-renovate-forks/helm-install-image)
 - [gitlab-renovate-forks/package-hunter-cli](https://gitlab.com/gitlab-renovate-forks/package-hunter-cli)
 - [gitlab-renovate-forks/pajamas-adoption-scanner](https://gitlab.com/gitlab-renovate-forks/pajamas-adoption-scanner)
