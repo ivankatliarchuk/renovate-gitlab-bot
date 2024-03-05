@@ -73,6 +73,20 @@ module.exports = createServerConfig(
           matchDepTypes: ["indirect"],
           enabled: false,
         },
+        {
+          // Git version is specified in the Makefile
+          matchPackageNames: ["git/git"],
+          matchManagers: ["regex"],
+          matchUpdateTypes: ["major", "minor"],
+        },
+      ],
+      regexManagers: [
+        {
+          fileMatch: ["^Makefile$"],
+          matchStrings: ['GIT_VERSION_\d+_\d+ \?= (?<currentValue>.*)'],
+          datasourceTemplate: "github-tags",
+          packageNameTemplate: "git/git",
+        },
       ],
     },
   ],
