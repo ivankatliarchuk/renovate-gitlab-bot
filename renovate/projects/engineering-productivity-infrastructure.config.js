@@ -20,7 +20,9 @@ module.exports = createServerConfig(
       ignoreDeps: ["gitlab-runner"],
       postUpgradeTasks: {
         // Regenerate files that may change due to the dependency updates.
-        commands: ["terraform providers lock -platform=darwin_arm64 -platform=linux_amd64"],
+        commands: [
+          "for filepath in */.terraform.lock.hcl; do terraform -chdir=$(dirname $filepath) providers lock -platform=darwin_arm64 -platform=linux_amd64; done"
+        ],
         fileFilters: ["*/.terraform.lock.hcl"],
       },
       packageRules: [
@@ -51,7 +53,7 @@ module.exports = createServerConfig(
     },
   ],
   {
-    allowedPostUpgradeCommands: ["^terraform providers lock -platform=darwin_arm64 -platform=linux_amd64$"],
+    allowedPostUpgradeCommands: ["providers lock -platform=darwin_arm64 -platform=linux_amd64"],
     renovateMetaCommentTemplate: fs.readFileSync(
       path.join(
         __dirname,
