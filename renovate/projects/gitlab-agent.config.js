@@ -32,6 +32,10 @@ module.exports = createServerConfig([
         groupName: "gitlab-agent-base-container-images",
         extends: ["schedule:weekly"],
       },
+      {
+        matchPaths: ["gitlab-agent/internal/module/starboard_vulnerability/*"],
+        reviewers: ["nilieskou"],
+      },
     ],
     regexManagers: [
       {
@@ -72,7 +76,6 @@ module.exports = createServerConfig([
         datasourceTemplate: "docker",
       },
       {
-        reviewers: ["nilieskou"],
         includePaths: ["internal/module/starboard_vulnerability/agent/*"],
         fileMatch: ["internal/module/starboard_vulnerability/agent/scanner.go"],
         matchStrings: ['\n\\s*trivyK8sWrapper\\s*=\\s*"registry.gitlab.com/security-products/trivy-k8s-wrapper:(?<currentValue>.*)"\n'],
@@ -80,6 +83,7 @@ module.exports = createServerConfig([
         registryUrlTemplate: "https://gitlab.com",
         depNameTemplate: "trivy-k8s-wrapper",
         packageNameTemplate: "gitlab-org/security-products/analyzers/trivy-k8s-wrapper",
+        extractVersionTemplate: "^v(?<version>.*)$",
       },
     ],
   },
