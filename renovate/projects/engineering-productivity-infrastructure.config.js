@@ -21,7 +21,7 @@ module.exports = createServerConfig(
       postUpgradeTasks: {
         // Regenerate files that may change due to the dependency updates.
         commands: [
-          "for filepath in */.terraform.lock.hcl; do terraform -chdir=$(dirname $filepath) providers lock -platform=darwin_arm64 -platform=linux_amd64; done"
+          "for filepath in */.terraform.lock.hcl; do terraform -chdir=$(dirname $filepath) init; terraform -chdir=$(dirname $filepath) providers lock -platform=darwin_arm64 -platform=linux_amd64; done"
         ],
         fileFilters: ["*/.terraform.lock.hcl"],
       },
