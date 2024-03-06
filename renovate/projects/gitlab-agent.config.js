@@ -33,7 +33,7 @@ module.exports = createServerConfig([
         extends: ["schedule:weekly"],
       },
       {
-        matchPaths: ["gitlab-agent/internal/module/starboard_vulnerability/*"],
+        matchPaths: ["gitlab-agent/internal/module/starboard_vulnerability/**/*"],
         reviewers: ["nilieskou"],
       },
     ],
