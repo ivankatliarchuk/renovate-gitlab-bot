@@ -20,9 +20,10 @@ module.exports = createServerConfig(
         "Category:Gitaly",
       ],
       rangeStrategy: "bump",
+      internalChecksFilter: "strict",
       semanticCommits: "disabled",
       minimumReleaseAge: "7 days",
-      prCreation: "not-pending",
+      prCreation: "immediate",
       enabledManagers: ["gomod"],
       includePaths: [
         // The main Gitaly module that tracks versions for all of our installed
