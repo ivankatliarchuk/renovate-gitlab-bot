@@ -78,8 +78,6 @@ export async function serializeDockerFile(config) {
     targetImage
   );
 
-  const TERRAFORM_VERSION='1.7.4';
-
   const dockerFile = [
     buildRenovateInstructions(images.nodejs),
     GO_SRC_INSTRUCTIONS,
@@ -89,22 +87,10 @@ FROM ${targetImage}
 # Install some build tools needed, e.g. for gitaly and sanity
 # And the newest git version available.
 RUN apk add --update --no-cache \\
-  bash gnupg make cmake g++ curl pkgconf \\
+  bash make cmake g++ curl pkgconf \\
   && apk add --update --no-cache \\
   --repository=https://dl-cdn.alpinelinux.org/alpine/edge/main \\
   git
-
-# Install Terraform
-RUN cd /tmp && \
-      wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip \\
-      && wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_SHA256SUMS \\
-      && wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_SHA256SUMS.sig \\
-      && wget -qO- https://www.hashicorp.com/.well-known/pgp-key.txt | gpg --import \\
-      && gpg --verify terraform_${TERRAFORM_VERSION}_SHA256SUMS.sig terraform_${TERRAFORM_VERSION}_SHA256SUMS \\
-      && grep terraform_${TERRAFORM_VERSION}_linux_amd64.zip terraform_${TERRAFORM_VERSION}_SHA256SUMS | sha256sum -c \\
-      && unzip /tmp/terraform_${TERRAFORM_VERSION}_linux_amd64.zip -d /tmp \\
-      && mv /tmp/terraform /usr/local/bin/terraform \\
-      && rm -f /tmp/terraform_${TERRAFORM_VERSION}_linux_amd64.zip terraform_${TERRAFORM_VERSION}_SHA256SUMS ${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_SHA256SUMS.sig
 `,
     images.ruby ? UPDATE_GEM_INSTRUCTIONS : false,
     COPY_GO_INSTRUCTIONS,
