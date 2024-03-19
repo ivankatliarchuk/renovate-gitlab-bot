@@ -30,7 +30,7 @@ projects = [
   { path = "gitlab-org/security-products/analyzers/gemnasium" },
   { path = "gitlab-org/security-products/package-hunter-cli" },
   { path = "gitlab-org/status-page" },
-  { path = "gitlab-org/terraform-images" },
+  { path = "gitlab-org/terraform-images" }, // Deprecated
   { path = "gitlab-org/terraform-provider-gitlab" },
   { path = "components/opentofu" },
 ]

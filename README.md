@@ -41,7 +41,6 @@ The following repositories are currently being updated automatically.
 - [gitlab-renovate-forks/package-hunter-cli](https://gitlab.com/gitlab-renovate-forks/package-hunter-cli)
 - [gitlab-renovate-forks/pajamas-adoption-scanner](https://gitlab.com/gitlab-renovate-forks/pajamas-adoption-scanner)
 - [gitlab-renovate-forks/status-page](https://gitlab.com/gitlab-renovate-forks/status-page)
-- [gitlab-renovate-forks/terraform-images](https://gitlab.com/gitlab-renovate-forks/terraform-images)
 - [gitlab-renovate-forks/terraform-provider-gitlab](https://gitlab.com/gitlab-renovate-forks/terraform-provider-gitlab)
 - [gitlab-renovate-forks/triage-ops](https://gitlab.com/gitlab-renovate-forks/triage-ops)
 - [gitlab-renovate-forks/version.gitlab.com](https://gitlab.com/gitlab-renovate-forks/version.gitlab.com)
