@@ -23,7 +23,6 @@ module.exports = async function () {
         "better_errors",
         "brakeman",
         "danger",
-        "haml_lint",
         "letter_opener_web",
         "parser",
         "thin",
