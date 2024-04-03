@@ -71,7 +71,14 @@ export async function serializeDockerFile(config) {
 
   console.log(tools, images);
 
-  const targetImage = images.ruby ?? images.golang ?? images.alpine;
+  const targetImage =
+    images.ruby ?? images.rust ?? images.golang ?? images.alpine;
+
+  if (images.rust && images.ruby) {
+    throw new Error(
+      "We do not support images that have both ruby and rust installed, yet."
+    );
+  }
 
   const [GO_SRC_INSTRUCTIONS, COPY_GO_INSTRUCTIONS] = buildGoLangInstructions(
     images.golang,

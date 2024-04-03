@@ -72,8 +72,16 @@ async function getToolVersionsFromRepository(repository, path = "*") {
  * Some projects do not define tool versions. In this case,
  * we just get the versions defined in the GDK
  */
-async function getToolVersionsFallback() {
+async function getToolVersionsFallbackGDK() {
   return getToolVersionsFromRepository("gitlab-org/gitlab-development-kit");
+}
+
+/**
+ * Some projects do not define tool versions and are not present
+ * in the GDK .tools-version file. Fallback to the GitLab project.
+ */
+async function getToolVersionsFallbackGitlab() {
+  return getToolVersionsFromRepository("gitlab-org/gitlab");
 }
 
 async function getGolangFromGoMod(repository, path = "*") {
@@ -120,7 +128,14 @@ async function getToolVersionWithFallBack(repositoryConfig, tool) {
     }
   }
 
-  return (await getToolVersionsFallback())[tool]?.[0];
+  // Fallback to GDK version if present
+  const gdkVersion = (await getToolVersionsFallbackGDK())[tool]?.[0];
+  if (gdkVersion) {
+      return gdkVersion
+  }
+
+  // If not defined in repo or GDK, try GitLab
+  return (await getToolVersionsFallbackGitlab())[tool]?.[0];
 }
 
 /**

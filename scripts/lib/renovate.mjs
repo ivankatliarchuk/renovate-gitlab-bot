@@ -19,6 +19,7 @@ const MANAGER_TO_ASDF_TOOL_MAP = {
   gomod: "golang",
   bundler: "ruby",
   npm: "nodejs",
+  cargo: "rust",
 };
 
 /**
