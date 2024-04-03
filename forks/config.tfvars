@@ -27,6 +27,7 @@ projects = [
   { path = "gitlab-org/gitlab-zoekt-indexer" },
   { path = "gitlab-org/quality/triage-ops" },
   { path = "gitlab-org/ruby/gems/gitlab-styles" },
+  { path = "gitlab-org/ruby/gems/prometheus-client-mmap" },
   { path = "gitlab-org/security-products/analyzers/gemnasium" },
   { path = "gitlab-org/security-products/package-hunter-cli" },
   { path = "gitlab-org/status-page" },

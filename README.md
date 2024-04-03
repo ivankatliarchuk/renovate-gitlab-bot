@@ -12,9 +12,11 @@ The following repositories are currently being updated automatically.
 
 <!-- rep -->
 
+- [gitlab-renovate-forks/CNG](https://gitlab.com/gitlab-renovate-forks/CNG)
 - [gitlab-renovate-forks/accessibility-scanner](https://gitlab.com/gitlab-renovate-forks/accessibility-scanner)
 - [gitlab-renovate-forks/auto-build-image](https://gitlab.com/gitlab-renovate-forks/auto-build-image)
 - [gitlab-renovate-forks/auto-deploy-image](https://gitlab.com/gitlab-renovate-forks/auto-deploy-image)
+- [gitlab-renovate-forks/charts-gitlab-agent](https://gitlab.com/gitlab-renovate-forks/charts-gitlab-agent)
 - [gitlab-renovate-forks/container-registry](https://gitlab.com/gitlab-renovate-forks/container-registry)
 - [gitlab-renovate-forks/customers-gitlab-com](https://gitlab.com/gitlab-renovate-forks/customers-gitlab-com)
 - [gitlab-renovate-forks/design.gitlab.com](https://gitlab.com/gitlab-renovate-forks/design.gitlab.com)
@@ -38,8 +40,10 @@ The following repositories are currently being updated automatically.
 - [gitlab-renovate-forks/gitlab](https://gitlab.com/gitlab-renovate-forks/gitlab)
 - [gitlab-renovate-forks/glgo](https://gitlab.com/gitlab-renovate-forks/glgo)
 - [gitlab-renovate-forks/helm-install-image](https://gitlab.com/gitlab-renovate-forks/helm-install-image)
+- [gitlab-renovate-forks/opentofu](https://gitlab.com/gitlab-renovate-forks/opentofu)
 - [gitlab-renovate-forks/package-hunter-cli](https://gitlab.com/gitlab-renovate-forks/package-hunter-cli)
 - [gitlab-renovate-forks/pajamas-adoption-scanner](https://gitlab.com/gitlab-renovate-forks/pajamas-adoption-scanner)
+- [gitlab-renovate-forks/prometheus-client-mmap](https://gitlab.com/gitlab-renovate-forks/prometheus-client-mmap)
 - [gitlab-renovate-forks/status-page](https://gitlab.com/gitlab-renovate-forks/status-page)
 - [gitlab-renovate-forks/terraform-provider-gitlab](https://gitlab.com/gitlab-renovate-forks/terraform-provider-gitlab)
 - [gitlab-renovate-forks/triage-ops](https://gitlab.com/gitlab-renovate-forks/triage-ops)
