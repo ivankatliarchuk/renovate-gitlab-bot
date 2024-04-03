@@ -10,6 +10,7 @@ projects = [
   { path = "gitlab-org/cluster-integration/helm-install-image" },
   { path = "gitlab-org/container-registry" },
   { path = "gitlab-org/editor-extensions/gitlab.vim" },
+  { path = "gitlab-org/editor-extensions/gitlab-lsp" },
   { path = "gitlab-org/frontend/pajamas-adoption-scanner" },
   { path = "gitlab-org/frontend/playground/accessibility-scanner" },
   { path = "gitlab-org/gitaly" },
