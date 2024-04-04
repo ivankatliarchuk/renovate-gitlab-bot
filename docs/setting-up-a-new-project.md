@@ -33,5 +33,9 @@ By default, renovate uses [this default template for the comment](../renovate/co
 You have the possibility to use your own comment for your project with renovate.
 As an example, see [the `renovateMetaCommentTemplate` usage in this project config](../renovate/projects/engineering-productivity-infrastructure.config.js).
 
+## CI protected variables (secrets) and renovate forks
+
+The Renovate bot runs a pipeline every time a dependency is updated (see the [renovate process docs](https://gitlab.com/gitlab-org/frontend/renovate-gitlab-bot/-/blob/main/docs/process.md)). If the new dependency version contains a vulnerability, the pipeline could be compromised and leak the secrets. For this reason, don't add secrets to your renovate fork CI variables unless they are OK to be leaked. Your project should rely on [GitLab Merge Trains](https://docs.gitlab.com/ee/ci/pipelines/merge_trains.html) to prevent merging MRs with failing E2E tests.
+
 [example mr]: https://gitlab.com/gitlab-org/quality/engineering-productivity-infrastructure/-/merge_requests/185
 [example comment]: https://gitlab.com/gitlab-org/quality/engineering-productivity-infrastructure/-/merge_requests/185#note_1154622709
