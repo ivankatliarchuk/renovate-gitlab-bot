@@ -35,23 +35,17 @@ module.exports = createServerConfig([
       },
       {
         ...enableWithBumpStrategy,
-        matchPackageNames: ["jest", "jest-junit", "@types/jeset"],
+        matchPackageNames: ["jest", "jest-junit", "@types/jest"],
         groupName: "Testing",
       },
       {
         ...enableWithBumpStrategy,
         matchPackageNames: [
           "cross-fetch",
-          "graphql-request",
-          "graphql",
-          "https-proxy-agent",
+          "get-proxy-settings",
+          "proxy-agent",
         ],
         groupName: "Fetch frameworks",
-      },
-      {
-        ...enableWithBumpStrategy,
-        matchPackageNames: ["request", "request-promise"],
-        groupName: "Legacy fetch frameworks",
       },
       {
         ...enableWithBumpStrategy,
