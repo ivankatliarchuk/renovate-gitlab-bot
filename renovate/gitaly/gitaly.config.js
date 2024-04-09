@@ -91,7 +91,6 @@ module.exports = createServerConfig(
         {
           fileMatch: ["^Makefile$"],
           matchStrings: ["GIT_VERSION_\\d+_\\d+ \\?= (?<currentValue>.*)"],
-          extractVersionTemplate: "^v?(?<version>.+)$",
           datasourceTemplate: "github-tags",
           depNameTemplate: "git",
           packageNameTemplate: "git/git",
