@@ -73,9 +73,14 @@ module.exports = createServerConfig(
           matchDepTypes: ["indirect"],
           enabled: false,
         },
+        // Git version is specified in the Makefile and we only want to
+        // update patch releases
         {
-          // Git version is specified in the Makefile and we only want to
-          // update patch releases
+          matchManagers: ["regex"],
+          matchPackageNames: ["git/git"],
+          separateMinorPatch: true,
+        },
+        {
           matchManagers: ["regex"],
           matchPackageNames: ["git/git"],
           matchUpdateTypes: ["major", "minor"],
