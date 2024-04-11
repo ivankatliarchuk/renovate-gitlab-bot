@@ -1,6 +1,8 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
 
-FORK_BRANCH=gitlab-main-v36-1
+FORK_BRANCH=gitlab-main-v36-32
 
 if ! [ -d renovate-fork ]; then
   git clone https://gitlab.com/gitlab-org/frontend/renovate-fork.git
@@ -15,10 +17,12 @@ git checkout "$FORK_BRANCH"
 git reset --hard "origin/$FORK_BRANCH"
 VERSION=$(git describe --tags)
 echo "Renovate Version $VERSION"
-yarn version --new-version "$VERSION" --no-git-tag-version
-yarn install
-yarn build
-yarn pack
+corepack enable
+rm -rf node_modules
+pnpm version --new-version "$VERSION" --no-git-tag-version
+pnpm install
+pnpm build
+pnpm pack
 mv ./renovate*.tgz "../renovate-fork-$VERSION.tgz"
 cd .. || exit 1
 
@@ -33,3 +37,4 @@ else
   mv -f yarn.tmp yarn.lock
   yarn install --force
 fi
+corepack disable
