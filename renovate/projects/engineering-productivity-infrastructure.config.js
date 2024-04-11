@@ -24,22 +24,22 @@ module.exports = createServerConfig(
         // See https://docs.renovatebot.com/configuration-options/#packagerules for more info
         {
           enabled: true,
-          matchPaths: ["**/*"],
+          matchFileNames: ["**/*"],
         },
         {
-          matchPaths: ["qa-resources/modules/triage-reactive/**/*"],
+          matchFileNames: ["qa-resources/modules/triage-reactive/**/*"],
           reviewers: epBaseConfig.reviewers,
         },
         {
-          matchPaths: ["qa-resources/modules/e2e-ci/**/*"],
+          matchFileNames: ["qa-resources/modules/e2e-ci/**/*"],
           reviewers: ["acunskis"],
         },
         {
-          matchPaths: ["qa-resources/modules/gitlab-runners/**/*"],
+          matchFileNames: ["qa-resources/modules/gitlab-runners/**/*"],
           reviewers: ["acunskis"],
         },
         {
-          matchPaths: ["qa-resources/modules/test-metrics/**/*"],
+          matchFileNames: ["qa-resources/modules/test-metrics/**/*"],
           reviewers: ["acunskis"],
         },
       ],
