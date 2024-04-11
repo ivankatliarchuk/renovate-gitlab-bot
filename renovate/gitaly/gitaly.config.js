@@ -50,7 +50,7 @@ module.exports = createServerConfig(
           // dependency updates, but we want to change the prefix to make these
           // stand out.
           matchManagers: ["gomod"],
-          matchPaths: ["tools/**"],
+          matchFileNames: ["tools/**"],
           commitMessagePrefix: "tools/{{parentDir}}:",
           // In order to not have conflicting branches in case the same
           // dependency gets updated in multiple modules we use a branch-prefix
