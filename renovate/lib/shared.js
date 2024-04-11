@@ -39,7 +39,7 @@ const epBaseConfig = {
 };
 
 const qaBaseConfig = {
-  reviewers: availableRouletteReviewerByRole('gitlab', 'maintainer qa'),
+  reviewers: availableRouletteReviewerByRole("gitlab", "maintainer qa"),
   reviewersSampleSize: 1,
   labels: [...defaultLabels, "Quality"],
 };
@@ -173,6 +173,7 @@ function createServerConfig(repos, serverConfig = {}) {
   return {
     dryRun: (process.env.DRY_RUN ?? "true") === "true" ? "full" : null,
     autodiscover: false,
+    includeMirrors: true,
     binarySource: "global",
     logFile: path.join(CONFIG_DIR, "..", "renovate-log.txt"),
     logFileLevel: "debug",

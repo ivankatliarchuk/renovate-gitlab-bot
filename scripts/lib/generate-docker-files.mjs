@@ -9,9 +9,9 @@ WORKDIR /workdir
 
 ENV DOCKER_BUILD=true
 
-RUN apk add --update --no-cache python3 make g++ git
+RUN apk add --update --no-cache python3 make g++ git bash
 
-RUN sh scripts/build_renovate.sh`;
+RUN bash scripts/build_renovate.sh`;
 const COPY_RENOVATE_INSTRUCTIONS = `
 # Copy node and renovate from builder image
 COPY --from=builder /workdir /workdir
