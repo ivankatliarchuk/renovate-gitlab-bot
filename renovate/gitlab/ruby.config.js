@@ -6,15 +6,13 @@ const {
   GITLAB_REPO,
 } = require("../lib/shared");
 const { getGemReviewers } = require("../lib/reviewers");
+const { concatUnique } = require("../lib/utils");
 
 module.exports = async function () {
   const gems = await getGemReviewers(
     "https://gitlab.com/gitlab-org/gitlab/-/raw/master/Gemfile",
     "gitlab"
   );
-
-  console.warn("Uh lalala, we have reviewers");
-  console.warn(JSON.stringify(gems, null, 2));
 
   const packageRules = [
     updateNothing,
@@ -107,19 +105,49 @@ module.exports = async function () {
       reviewers: ["stanhu", "wchandler"],
       groupName: "prometheus-client-mmap",
     },
+    {
+      matchPackageNames: ["sentry-ruby", "sentry-rails", "sentry-sidekiq"],
+      enabled: true,
+      reviewers: ["mbobin"],
+      groupName: "Sentry Gems",
+      separateMultipleMinor: true,
+    },
+    {
+      matchPackageNames: ["redis", "redis-clustering"],
+      enabled: true,
+      groupName: "Redis Gems",
+    },
   ];
 
-  const newPackageRules = Object.entries(gems).map(([name, def]) => {
+  const newPackageRules = Object.entries(gems).flatMap(([name, def]) => {
+    const existingPackageRule = packageRules.findIndex((rule) => {
+      return rule?.matchPackageNames?.includes?.(name);
+    });
+
+    if (existingPackageRule >= 0) {
+      if (def.owners.length) {
+        console.warn(
+          `gem: ${name} already has a rule, adding ${def.owners.join(
+            ", "
+          )} as reviewers.`
+        );
+        packageRules[existingPackageRule].reviewers = concatUnique(
+          packageRules[existingPackageRule].reviewers ?? [],
+          def.owners
+        );
+      } else {
+        console.warn(`gem: ${name} already has a rule. skipping.`);
+      }
+      return [];
+    }
+
     return {
       matchPackageNames: [name],
       enabled: true,
       reviewers: def.owners.length > 0 ? def.owners : undefined,
-      groupName: name
-    }
+      groupName: name,
+    };
   });
-
-  console.warn("Uh lalala, we have newPackageRules");
-  console.warn(JSON.stringify(newPackageRules, null, 2));
 
   gemConfig = createServerConfig(
     [
