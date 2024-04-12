@@ -39,7 +39,7 @@ module.exports = createServerConfig([
     dependencyDashboardTitle: "Dependency Dashboard (CI templates)",
     ...baseConfig,
     branchPrefix: "renovate-ci-templates/",
-    enabledManagers: ["regex"],
+    enabledManagers: ["custom.regex"],
     semanticCommits: "disabled",
     reviewers: ciTemplateMaintainers,
     reviewersSampleSize: 1,

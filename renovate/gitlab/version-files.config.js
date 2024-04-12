@@ -21,7 +21,7 @@ module.exports = createServerConfig([
     dependencyDashboardTitle: "Dependency Dashboard (Version Files)",
     ...baseConfig,
     branchPrefix: "renovate-vfiles/",
-    enabledManagers: ["regex"],
+    enabledManagers: ["custom.regex"],
     semanticCommits: "disabled",
     reviewers: ["ash2k", "timofurrer"],
     reviewersSampleSize: 2,

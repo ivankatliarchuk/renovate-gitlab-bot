@@ -18,7 +18,7 @@ module.exports = createServerConfig(
         "type::maintenance",
         "maintenance::dependency",
       ],
-      enabledManagers: ["regex"],
+      enabledManagers: ["custom.regex"],
       separateMinorPatch: true,
       separateMultipleMajor: true, // so that we get an MR for each minor of kubectl
       commitMessageExtra: "to v{{{newVersion}}}", // renovate's default template is wonky with kubectl major version override

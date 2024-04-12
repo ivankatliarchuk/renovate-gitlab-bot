@@ -12,16 +12,16 @@ module.exports = createServerConfig([
     extends: ["group:commitlintMonorepo"],
     reviewers: availableRouletteReviewerByRole("auto-build-image"),
     labels: [...defaultLabels, "group::environments"],
-    enabledManagers: ["npm", "regex"],
+    enabledManagers: ["npm", "custom.regex"],
     packageRules: [
       {
-        matchManagers: ["regex"],
+        matchManagers: ["custom.regex"],
         semanticCommitType: "feat",
       },
       {
         matchPackageNames: ["docker"],
         matchDatasources: ["docker"],
-        matchManagers: ["regex"],
+        matchManagers: ["custom.regex"],
         customChangelogUrl: "https://github.com/moby/moby",
       },
     ],

@@ -24,7 +24,7 @@ module.exports = createServerConfig(
       semanticCommits: "disabled",
       minimumReleaseAge: "7 days",
       prCreation: "immediate",
-      enabledManagers: ["gomod", "regex"],
+      enabledManagers: ["gomod", "custom.regex"],
       includePaths: [
         // The main Gitaly module that tracks versions for all of our installed
         // binaries.
@@ -76,12 +76,12 @@ module.exports = createServerConfig(
         // Git version is specified in the Makefile and we only want to
         // update patch releases
         {
-          matchManagers: ["regex"],
+          matchManagers: ["custom.regex"],
           matchPackageNames: ["git/git"],
           separateMinorPatch: true,
         },
         {
-          matchManagers: ["regex"],
+          matchManagers: ["custom.regex"],
           matchPackageNames: ["git/git"],
           matchUpdateTypes: ["major", "minor"],
           enabled: false,

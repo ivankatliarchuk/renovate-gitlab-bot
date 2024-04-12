@@ -4,7 +4,7 @@ const updateNodeJS = {
       enabled: true,
       rangeStrategy: "pin",
       matchPackageNames: ["node"],
-      matchManagers: ["asdf", "regex", "nvm"],
+      matchManagers: ["asdf", "custom.regex", "nvm"],
       groupName: "NodeJS Version",
     },
   ],

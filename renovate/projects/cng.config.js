@@ -23,7 +23,7 @@ module.exports = createServerConfig([
       "maintenance::dependency",
       "workflow::ready for review",
     ],
-    enabledManagers: ["regex"],
+    enabledManagers: ["custom.regex"],
     separateMinorPatch: true,
     separateMultipleMajor: true, // so that we get an MR for each minor of kubectl
     commitMessageExtra: "to v{{{newVersion}}}", // renovate's default template is wonky with kubectl major version override
@@ -31,7 +31,7 @@ module.exports = createServerConfig([
       {
         matchPackageNames: ["docker"],
         matchDatasources: ["docker"],
-        matchManagers: ["regex"],
+        matchManagers: ["custom.regex"],
         customChangelogUrl: "https://github.com/moby/moby",
       },
     ],
