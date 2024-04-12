@@ -39,8 +39,9 @@ module.exports = createServerConfig([
         reviewers: ["nilieskou"],
       },
     ],
-    regexManagers: [
+    customManagers: [
       {
+        customType: "regex",
         fileMatch: [".gitlab/.gitlab-ci.yml"],
         matchStrings: [
           '\n\\s*BUILD_IMAGE_SHA:\\s*"(?<currentValue>[^@]+)@(?<currentDigest>sha256:[a-f0-9]+)"\n',
@@ -50,6 +51,7 @@ module.exports = createServerConfig([
         datasourceTemplate: "docker",
       },
       {
+        customType: "regex",
         fileMatch: [".gitlab/.gitlab-ci.yml"],
         matchStrings: [
           '\n\\s*FIPS_BUILD_IMAGE_SHA:\\s*"(?<currentValue>[^@]+)@(?<currentDigest>sha256:[a-f0-9]+)"\n',
@@ -59,12 +61,14 @@ module.exports = createServerConfig([
         datasourceTemplate: "docker",
       },
       {
+        customType: "regex",
         fileMatch: [".gitlab/.gitlab-ci.yml"],
         matchStrings: ['\n\\s*DOCKER_VERSION:\\s*"(?<currentValue>[^"]+)"'],
         depNameTemplate: "docker",
         datasourceTemplate: "docker",
       },
       {
+        customType: "regex",
         fileMatch: ["WORKSPACE"],
         matchStrings: [
           "\n#\\s*(?<currentValue>\\S+)\\s+from.*?\n" +
@@ -78,6 +82,7 @@ module.exports = createServerConfig([
         datasourceTemplate: "docker",
       },
       {
+        customType: "regex",
         includePaths: ["internal/module/starboard_vulnerability/agent/*"],
         fileMatch: ["internal/module/starboard_vulnerability/agent/scanner.go"],
         matchStrings: [

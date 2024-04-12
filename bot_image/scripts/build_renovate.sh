@@ -2,7 +2,7 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-FORK_BRANCH=gitlab-main-v36-32
+FORK_BRANCH=gitlab-main-v37-1
 
 if ! [ -d renovate-fork ]; then
   git clone https://gitlab.com/gitlab-org/frontend/renovate-fork.git
@@ -26,7 +26,7 @@ pnpm pack
 mv ./renovate*.tgz "../renovate-fork-$VERSION.tgz"
 cd .. || exit 1
 
-if [ "$DOCKER_BUILD" = "true" ]; then
+if [ "${DOCKER_BUILD:-false}" = "true" ]; then
   yarn install --production --frozen-lockfile --force
   echo "Cleaning up the renovate-fork source files and yarn cache"
   rm -rf renovate-fork renovate*.tgz .cache

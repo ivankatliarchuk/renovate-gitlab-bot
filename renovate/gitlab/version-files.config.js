@@ -38,9 +38,10 @@ module.exports = createServerConfig([
      * if we renovate more things
      */
     ignoreUnstable: false,
-    regexManagers: [
+    customManagers: [
       // GitLab KAS version
       {
+        customType: "regex",
         fileMatch: ["GITLAB_KAS_VERSION"],
         matchStrings: ["(?<currentValue>.*)\n"],
         datasourceTemplate: "gitlab-releases", // although it is a docker image, use gitlab-releases so we get richer information in the MR

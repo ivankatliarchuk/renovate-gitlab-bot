@@ -20,8 +20,9 @@ module.exports = createServerConfig([
     reviewers: ["timofurrer", "ash2k", "takax"],
     reviewersSampleSize: 2,
     labels: groupEnvironmentsLabels,
-    regexManagers: [
+    customManagers: [
       {
+        customType: "regex",
         fileMatch: ["Chart.yaml"],
         matchStrings: ["appVersion: (?<currentValue>.*)\n"],
         datasourceTemplate: "gitlab-releases",

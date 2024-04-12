@@ -24,10 +24,10 @@ module.exports = createServerConfig([
       ...prGitLabScopeAndLinters,
       {
         ...updateNodeJS.packageRules[0],
-        minimumReleaseAge: "3 weeks"
+        minimumReleaseAge: "3 weeks",
       },
     ],
-    regexManagers: [...updateNodeJS.regexManagers()],
+    customManagers: [...updateNodeJS.customManagers()],
     semanticCommits: "disabled",
   },
 ]);

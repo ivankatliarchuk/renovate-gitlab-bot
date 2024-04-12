@@ -1,5 +1,6 @@
-const fs = require("fs");
-const path = require("path");
+const fs = require("node:fs");
+const path = require("node:path");
+const process = require("node:process");
 // TODO: Dry this up later again
 const { RENOVATE_BOT_USER, RENOVATE_STOP_UPDATING_LABEL } = {
   RENOVATE_BOT_USER: "gitlab-dependency-update-bot",
@@ -51,18 +52,35 @@ const mandatoryRepositoryConfig = {
   automerge: false,
   // Once an MR is approved, this label will be set, stopping renovate from messing with the MR
   stopUpdatingLabel: RENOVATE_STOP_UPDATING_LABEL,
-  // These host rules are needed due to API limits
   hostRules: [
+    // These host rules are needed due to API limits
     process.env.GITHUB_TOKEN
       ? {
           matchHost: "github.com",
           token: process.env.GITHUB_TOKEN,
         }
       : [],
+    // These host rules are needed due to API limits
     process.env.RENOVATE_TOKEN
+      ? [
+          {
+            matchHost: "gitlab.com",
+            token: process.env.RENOVATE_TOKEN,
+          },
+          {
+            matchHost: "registry.gitlab.com",
+            username: RENOVATE_BOT_USER,
+            password: process.env.RENOVATE_TOKEN,
+            hostType: "docker",
+          },
+        ]
+      : [],
+    // These host rules are needed to access google's container registry at all
+    process.env.GCP_TOKEN
       ? {
-          matchHost: "gitlab.com",
-          token: process.env.RENOVATE_TOKEN,
+          matchHost: "gcr.io",
+          authType: "Basic",
+          token: process.env.GCP_TOKEN,
         }
       : [],
   ].flat(),

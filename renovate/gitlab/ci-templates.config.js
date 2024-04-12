@@ -23,18 +23,15 @@ const ciTemplateMaintainers = availableRouletteReviewerByRole("gitlab", [
   "maintainer ci_template",
 ]);
 
-const autoBuildImageReviewers = availableRouletteReviewerByRole("auto-build-image", [
-  "reviewer",
-  "trainee_maintainer",
-  "maintainer",
-]);
+const autoBuildImageReviewers = availableRouletteReviewerByRole(
+  "auto-build-image",
+  ["reviewer", "trainee_maintainer", "maintainer"]
+);
 
-const autoDeployImageReviewers = availableRouletteReviewerByRole("auto-deploy-image", [
-  "reviewer",
-  "trainee_maintainer",
-  "maintainer",
-]);
-
+const autoDeployImageReviewers = availableRouletteReviewerByRole(
+  "auto-deploy-image",
+  ["reviewer", "trainee_maintainer", "maintainer"]
+);
 
 module.exports = createServerConfig([
   {
@@ -68,10 +65,11 @@ module.exports = createServerConfig([
         addLabels: ["breaking change"],
       },
     ],
-    regexManagers: [
+    customManagers: [
       // auto-build-image
       {
         enabled: true,
+        customType: "regex",
         fileMatch: [
           "lib/gitlab/ci/templates/Jobs/Build.gitlab-ci.yml",
           "lib/gitlab/ci/templates/Jobs/Build.latest.gitlab-ci.yml",
@@ -85,6 +83,7 @@ module.exports = createServerConfig([
       // auto-deploy-image
       {
         enabled: true,
+        customType: "regex",
         fileMatch: [
           "lib/gitlab/ci/templates/Jobs/Deploy.gitlab-ci.yml",
           "lib/gitlab/ci/templates/Jobs/Deploy.latest.gitlab-ci.yml",

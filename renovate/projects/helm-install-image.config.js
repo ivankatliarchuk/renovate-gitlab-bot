@@ -22,8 +22,9 @@ module.exports = createServerConfig(
       separateMinorPatch: true,
       separateMultipleMajor: true, // so that we get an MR for each minor of kubectl
       commitMessageExtra: "to v{{{newVersion}}}", // renovate's default template is wonky with kubectl major version override
-      regexManagers: [
+      customManagers: [
         {
+          customType: "regex",
           enabled: true,
           fileMatch: [".gitlab-ci.yml", "README.md"],
           matchStrings: [
@@ -37,6 +38,7 @@ module.exports = createServerConfig(
           versioningTemplate: "regex:^1\\.(?<major>\\d+)\\.(?<minor>\\d+)$", // kubernetes does not follow semver
         },
         {
+          customType: "regex",
           enabled: true,
           fileMatch: [".gitlab-ci.yml", "README.md"],
           matchStrings: [
@@ -49,6 +51,7 @@ module.exports = createServerConfig(
           extractVersionTemplate: "^v(?<version>.+?)$",
         },
         {
+          customType: "regex",
           enabled: true,
           fileMatch: [".gitlab-ci.yml", "README.md"],
           matchStrings: [

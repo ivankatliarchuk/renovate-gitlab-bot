@@ -24,21 +24,24 @@ module.exports = createServerConfig([
         matchPackageNames: ["docker"],
         matchDatasources: ["docker"],
         matchManagers: ["regex"],
-        customChangelogUrl: "https://github.com/moby/moby"
+        customChangelogUrl: "https://github.com/moby/moby",
       },
     ],
-    regexManagers: [
+    customManagers: [
       {
+        customType: "regex",
         fileMatch: ["^.gitlab-ci.yml$"],
         matchStrings: ['\n\\s*DOCKER_VERSION:\\s*"(?<currentValue>[^"]+)"'],
         datasourceTemplate: "docker",
       },
       {
+        customType: "regex",
         fileMatch: ["Dockerfile$"],
         matchStrings: ["ARG GO_VERSION=(?<currentValue>.*?)\\n"],
         datasourceTemplate: "golang-version",
       },
       {
+        customType: "regex",
         fileMatch: ["Dockerfile$"],
         matchStrings: ["ARG BAZELISK_VERSION=(?<currentValue>.*?)\\n"],
         depNameTemplate: "bazelbuild/bazelisk",

@@ -11,10 +11,7 @@ module.exports = createServerConfig([
     ...baseConfig,
     extends: ["group:commitlintMonorepo"],
     reviewers: availableRouletteReviewerByRole("auto-build-image"),
-    labels: [
-      ...defaultLabels,
-      "group::environments",
-    ],
+    labels: [...defaultLabels, "group::environments"],
     enabledManagers: ["npm", "regex"],
     packageRules: [
       {
@@ -28,8 +25,9 @@ module.exports = createServerConfig([
         customChangelogUrl: "https://github.com/moby/moby",
       },
     ],
-    regexManagers: [
+    customManagers: [
       {
+        customType: "regex",
         fileMatch: [".gitlab-ci.yml"],
         matchStrings: ["PACK_VERSION: (?<currentValue>.*)\n"],
         depNameTemplate: "pack",
@@ -37,12 +35,14 @@ module.exports = createServerConfig([
         datasourceTemplate: "github-tags",
       },
       {
+        customType: "regex",
         fileMatch: [".gitlab-ci.yml"],
         matchStrings: ["DOCKER_VERSION: (?<currentValue>.*)\n"],
         depNameTemplate: "docker",
         datasourceTemplate: "docker",
       },
       {
+        customType: "regex",
         fileMatch: [".gitlab-ci.yml"],
         matchStrings: ["BUILDX_VERSION: (?<currentValue>.*)\n"],
         depNameTemplate: "buildx",

@@ -60,8 +60,8 @@ module.exports = createServerConfig([
       prVueMajor2,
       ...updateNodeJS.packageRules,
     ],
-    regexManagers: [
-      ...updateNodeJS.regexManagers([
+    customManagers: [
+      ...updateNodeJS.customManagers([
         "^.gitlab-ci.yml",
         "^Dockerfile.puppeteer",
       ]),
