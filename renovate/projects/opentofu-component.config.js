@@ -25,13 +25,15 @@ module.exports = createServerConfig([
         customChangelogUrl: "https://github.com/moby/moby",
       },
     ],
-    regexManagers: [
+    customManagers: [
       {
+        customType: "regex",
         fileMatch: ["^.gitlab-ci.yml$"],
         matchStrings: ['BASE_IMAGE: "(?<depName>.*):(?<currentValue>.*)"\\s'],
         datasourceTemplate: "docker",
       },
       {
+        customType: "regex",
         fileMatch: ["^.gitlab-ci.yml$"],
         matchStrings: [
           'DOCKER_DIND_IMAGE: "(?<depName>.*):(?<currentValue>.*)-dind"\\s',

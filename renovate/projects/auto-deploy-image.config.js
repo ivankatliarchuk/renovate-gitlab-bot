@@ -19,8 +19,9 @@ module.exports = createServerConfig([
       "maintenance::dependency",
     ],
     enabledManagers: ["regex"],
-    regexManagers: [
+    customManagers: [
       {
+        customType: "regex",
         enabled: true,
         fileMatch: [".gitlab-ci.yml"],
         matchStrings: ["HELM_INSTALL_IMAGE_VERSION: (?<currentValue>.*)\n"],

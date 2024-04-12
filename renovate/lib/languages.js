@@ -8,8 +8,9 @@ const updateNodeJS = {
       groupName: "NodeJS Version",
     },
   ],
-  regexManagers: (fileMatch = ["^.gitlab-ci.yml"]) => [
+  customManagers: (fileMatch = ["^.gitlab-ci.yml"]) => [
     {
+      customType: "regex",
       fileMatch,
       matchStrings: ["node:(?<currentValue>[\\d.]+)([a-z-]+)?"],
       depNameTemplate: "node",
