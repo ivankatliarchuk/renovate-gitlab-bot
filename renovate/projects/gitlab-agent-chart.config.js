@@ -15,7 +15,7 @@ module.exports = createServerConfig([
   {
     repository: "gitlab-renovate-forks/charts-gitlab-agent",
     ...baseConfig,
-    enabledManagers: ["regex"],
+    enabledManagers: ["custom.regex"],
     semanticCommits: "disabled",
     reviewers: ["timofurrer", "ash2k", "takax"],
     reviewersSampleSize: 2,

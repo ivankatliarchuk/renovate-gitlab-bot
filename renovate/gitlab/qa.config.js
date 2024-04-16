@@ -13,7 +13,7 @@ module.exports = createServerConfig([
     ...qaBaseConfig,
     rangeStrategy: "bump",
     branchPrefix: "renovate-qa/",
-    enabledManagers: ["bundler", "gitlabci-include", "regex"],
+    enabledManagers: ["bundler", "gitlabci-include", "custom.regex"],
     postUpdateOptions: ["bundlerConservative"],
     includePaths: ["qa/*", "qa/gdk/*", ".gitlab/ci/qa-common/*"],
     customManagers: [

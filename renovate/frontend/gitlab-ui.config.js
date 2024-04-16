@@ -29,7 +29,7 @@ module.exports = createServerConfig([
     minimumReleaseAge: "3 days",
     rangeStrategy: "auto",
     semanticCommits: "enabled",
-    enabledManagers: ["npm", "asdf", "regex", "nvm"],
+    enabledManagers: ["npm", "asdf", "custom.regex", "nvm"],
     packageRules: [
       ...semanticPrefixFixDepsChoreOthers,
       updateNothing,

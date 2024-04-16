@@ -20,7 +20,7 @@ module.exports = createServerConfig([
       "section::cd",
     ],
     postUpdateOptions: [],
-    enabledManagers: ["regex"],
+    enabledManagers: ["custom.regex"],
     includePaths: ["*", ".gitlab/*"],
     packageRules: [
       {

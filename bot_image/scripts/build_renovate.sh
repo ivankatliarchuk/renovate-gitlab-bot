@@ -2,7 +2,7 @@
 set -euo pipefail
 IFS=$'\n\t'
 
-FORK_BRANCH=gitlab-main-v37-1
+FORK_BRANCH=gitlab-main-v37-287
 
 if ! [ -d renovate-fork ]; then
   git clone https://gitlab.com/gitlab-org/frontend/renovate-fork.git
@@ -24,6 +24,7 @@ pnpm install
 pnpm build
 pnpm pack
 mv ./renovate*.tgz "../renovate-fork-$VERSION.tgz"
+git reset --hard "origin/$FORK_BRANCH"
 cd .. || exit 1
 
 if [ "${DOCKER_BUILD:-false}" = "true" ]; then

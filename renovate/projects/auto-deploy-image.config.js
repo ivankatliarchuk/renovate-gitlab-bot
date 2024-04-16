@@ -18,7 +18,7 @@ module.exports = createServerConfig([
       "type::maintenance",
       "maintenance::dependency",
     ],
-    enabledManagers: ["regex"],
+    enabledManagers: ["custom.regex"],
     customManagers: [
       {
         customType: "regex",

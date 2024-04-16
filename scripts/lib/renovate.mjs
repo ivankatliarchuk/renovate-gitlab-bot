@@ -11,7 +11,7 @@ const TOOL_INDEPENDENT_MANAGERS = [
   "gitlabci",
   "gitlabci-include",
   "nvm",
-  "regex",
+  "custom.regex",
   "terraform",
 ];
 

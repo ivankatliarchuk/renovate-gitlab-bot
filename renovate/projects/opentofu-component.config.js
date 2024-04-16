@@ -15,13 +15,13 @@ module.exports = createServerConfig([
       "group::environments",
       "Category:Infrastructure as Code",
     ],
-    enabledManagers: ["gitlabci", "regex"],
+    enabledManagers: ["gitlabci", "custom.regex"],
     reviewers: ["timofurrer"],
     packageRules: [
       {
         matchPackageNames: ["docker"],
         matchDatasources: ["docker"],
-        matchManagers: ["regex"],
+        matchManagers: ["custom.regex"],
         customChangelogUrl: "https://github.com/moby/moby",
       },
     ],

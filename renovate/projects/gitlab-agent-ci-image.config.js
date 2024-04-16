@@ -18,12 +18,12 @@ module.exports = createServerConfig([
       "devops::deploy",
       "section::cd",
     ],
-    enabledManagers: ["gitlabci", "regex"],
+    enabledManagers: ["gitlabci", "custom.regex"],
     packageRules: [
       {
         matchPackageNames: ["docker"],
         matchDatasources: ["docker"],
-        matchManagers: ["regex"],
+        matchManagers: ["custom.regex"],
         customChangelogUrl: "https://github.com/moby/moby",
       },
     ],

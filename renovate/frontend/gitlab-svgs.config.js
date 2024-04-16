@@ -17,7 +17,7 @@ module.exports = createServerConfig([
       "gitlab-svgs",
       "maintainer frontend"
     ),
-    enabledManagers: ["npm", "asdf", "regex"],
+    enabledManagers: ["npm", "asdf", "custom.regex"],
     rangeStrategy: "auto",
     packageRules: [
       updateNothing,
