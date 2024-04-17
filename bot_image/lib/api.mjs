@@ -40,7 +40,7 @@ export async function getUserIds(usernames) {
   return all.filter(Boolean);
 }
 
-async function getProjectFromSlug(projectSlug) {
+export async function getProjectFromSlug(projectSlug) {
   const { data: project } = await GitLabAPI.get(
     `/projects/${encodeURIComponent(projectSlug)}`
   );

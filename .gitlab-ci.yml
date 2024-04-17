@@ -16,14 +16,19 @@ stages:
   - forks
   - run
 
-execution-plan:
+.node:
   image: node:18
   stage: run
+  before_script:
+    - yarn install --frozen-lockfile
+
+execution-plan:
+  extends:
+    - .node
   needs: []
   variables:
     BASE_IMAGE: $CI_REGISTRY_IMAGE/renovate:$CI_COMMIT_REF_SLUG
   script:
-    - yarn install
     - node scripts/orchestrate-child-pipeline.mjs --ci-file .gitlab/child-pipeline/generated.yml --docker-files bot_image/docker_files/ --roulette-file renovate/roulette.json
   artifacts:
     paths:
@@ -45,14 +50,25 @@ execute:
         job: execution-plan
 
 delete-pipelines:
-  image: node:18
-  stage: run
+  extends:
+    - .node
   resource_group: $CI_COMMIT_REF_SLUG-cleanup
-  tags:
-    - gitlab-org
   script:
-    - yarn install
     - export "GITLAB_TOKEN=$DELETE_PIPELINES_TOKEN"
     - node ./scripts/delete-pipelines.mjs
   rules:
     - if: $DELETE_PIPELINES
+
+pages:
+  extends:
+    - .node
+  script:
+    - curl -O https://gitlab-org.gitlab.io/gitlab-roulette/roulette.json
+    - mv roulette.json renovate/
+    - node ./scripts/get-renovate-logs.mjs
+    - yarn run build
+    - cp -r webapp/dist/ public/
+  publish: public
+  artifacts:
+    paths:
+      - public

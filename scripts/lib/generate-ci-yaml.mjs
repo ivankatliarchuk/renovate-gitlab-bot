@@ -2,20 +2,26 @@ import { basename, dirname } from "node:path";
 
 const BASE_IMAGE_NAME = process.env.BASE_IMAGE ?? "renovate:latest";
 
+export function configPathToJobName(file) {
+  return basename(file, ".config.js").replace(/\W/g, "-").replace(/-+/g, "-");
+}
+
+export function configPathToJobStage(file) {
+  return basename(dirname(file));
+}
+
 /**
  * Serializes the actual job executing renovate
  */
 export function serializeExecutionJob(file, baseName, imageName) {
-  const jobName = basename(file, ".config.js")
-    .replace(/\W/g, "-")
-    .replace(/-+/g, "-");
+  const jobName = configPathToJobName(file);
 
   return {
     jobName,
     jobDefinition: {
       extends: [".beep-boop"],
       image: imageName,
-      stage: basename(dirname(file)),
+      stage: configPathToJobStage(file),
       variables: {
         CONFIG_FILE: file,
       },

@@ -93,6 +93,8 @@ async function getGemReviewers(gemFile, project) {
     return [];
   }
 
+  console.log("getting gem reviewers");
+
   const [gems, stages, team] = await Promise.all([
     parseRemoteGemfile(gemFile),
     parseStagesFile(),
