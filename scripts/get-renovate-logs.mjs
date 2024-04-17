@@ -26,22 +26,33 @@ const DATA_DIR = path.join(ROOT_DIR, "webapp", "public");
 
 async function addRenovateLogFromArtifacts(job) {
   log(`Loading data for ${job.name}...`);
-  const { data: logsRaw } = await GitLabAPI.get(
-    `${PROJECT_URL}/jobs/${job.id}/artifacts/renovate-log.txt`
-  );
 
-  const renovateLog = logsRaw
-    .trim()
-    .split(/\n+/)
-    .flatMap((x) => {
-      try {
-        return JSON.parse(x);
-      } catch (e) {
-        return [];
-      }
-    });
+  const artifactURL = `${PROJECT_URL}/jobs/${job.id}/artifacts/renovate-log.txt`;
 
-  return renovateLog;
+  try {
+    const { data: logsRaw } = await GitLabAPI.get(artifactURL);
+
+    const renovateLog = logsRaw
+      .trim()
+      .split(/\n+/)
+      .flatMap((x) => {
+        try {
+          return JSON.parse(x);
+        } catch (e) {
+          return [];
+        }
+      });
+    return { renovateLog, renovateLogErrors: [] };
+  } catch (e) {
+    return {
+      renovateLog: [
+        {
+          msg: `Error retrieving renovate log from ${artifactURL}`,
+          details: e.msg,
+        },
+      ],
+    };
+  }
 }
 
 function getMapFn(configs) {
@@ -65,6 +76,8 @@ function getMapFn(configs) {
 
     const results = [];
 
+    const { renovateLog } = await addRenovateLogFromArtifacts(job);
+
     for (const repositoryConfig of repositories) {
       await forEachMR([repositoryConfig], (mr) => {
         mergeRequests.push(mr);
@@ -76,7 +89,7 @@ function getMapFn(configs) {
         name: upstreamProject.path_with_namespace,
         repository: upstreamProject.web_url,
         managers: repositoryConfig.enabledManagers,
-        renovateLog: await addRenovateLogFromArtifacts(job),
+        renovateLog,
         mergeRequests,
         job,
         finishedAt: finishedAt.toISOString(),
