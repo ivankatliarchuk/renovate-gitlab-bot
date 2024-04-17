@@ -1,0 +1,58 @@
+@import "../node_modules/@gitlab/ui/dist/index.css";
+@import "../node_modules/@gitlab/ui/dist/utility_classes.css";
+body {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  color: #333;
+  font-weight: 300;
+  padding: 1rem;
+}
+
+h1,
+section {
+  margin: 1rem 0;
+}
+
+@media (min-width: 42rem) {
+  body {
+    padding: 0 5rem;
+  }
+}
+
+.log-table {
+  font-family: monospace;
+}
+
+table td {
+  vertical-align: baseline;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.log-table tr.level-30 {
+  color: #108548; /*  $green-500  */
+  font-weight: bold;
+}
+
+.log-table tr.level-40 {
+  color: #c17d10; /*  $orange-400  */
+  font-weight: bold;
+}
+
+.log-table tr.level-50 {
+  color: #dd2b0e; /*  red-500  */
+  font-weight: bold;
+}
+
+.log-table tr.level-60 {
+  background-color: #dd2b0e; /*  red-500  */
+  font-weight: bold;
+}
+
+.col-list {
+  columns: 2;
+}
+
+table .update-info:empty:before {
+  content: "/-/";
+  color: gray;
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head lang="en">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Renovate Bot Dashboard</title>
+    <link rel="preconnect" href="https://gitlab.com/" />
+    <link type="text/css" rel="stylesheet" href="./main.css" />
+  </head>
+  <body>
+    <h1>GitLab Renovate Bot Dashboard</h1>
+    <p>Below you can see the status quo of all renovated projects.</p>
+    <noscript>Please enable JavaScript for this page.</noscript>
+    <div id="app"></div>
+    <script>
+      window.require = (path) => {
+        // See: https://gitlab.com/gitlab-org/gitlab-ui/-/issues/2321
+        if (path === "@gitlab/svgs/dist/icons.json") {
+          return {
+            icons: [
+              "status_canceled",
+              "status_skipped",
+              "status_success",
+              "upgrade",
+            ],
+          };
+        }
+      };
+    </script>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
