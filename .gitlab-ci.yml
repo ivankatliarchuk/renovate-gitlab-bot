@@ -59,7 +59,7 @@ delete-pipelines:
   rules:
     - if: $DELETE_PIPELINES
 
-pages:
+.pages:
   extends:
     - .node
   script:
@@ -68,7 +68,26 @@ pages:
     - node ./scripts/get-renovate-logs.mjs
     - yarn run build
     - cp -r webapp/dist/ public/
-  publish: public
+    - time find public -type f ! -name "*.bz2" ! -name "*.gz"  -print0 | xargs -0 gzip -f -k
   artifacts:
     paths:
       - public
+
+pages:
+  extends:
+    - .pages
+  publish: public
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      needs:
+        - execute
+    # Allow pages job to deploy manually in MRs
+    - when: manual
+
+pages-dry-run:
+  extends:
+    - .pages
+  rules:
+    - if: $CI_MERGE_REQUEST_IID
+      needs:
+        - execute
