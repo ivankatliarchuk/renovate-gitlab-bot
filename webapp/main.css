@@ -56,3 +56,41 @@ table .update-info:empty:before {
   content: "/-/";
   color: gray;
 }
+
+.gitlab-corner-wrapper {
+  overflow: hidden;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 0;
+  right: 0
+}
+
+.gitlab-corner {
+  position: absolute;
+  top: -16px;
+  right: -50px;
+  transform: rotate(45deg);
+  background: #333;
+  border: 44px solid #333;
+  border-bottom: none;
+  border-top: #333 solid 16px
+}
+
+.gitlab-corner svg {
+  width: 60px;
+  height: 60px;
+  margin-bottom: -4px
+}
+
+.cls-g-1 {
+  fill: #aaa
+}
+
+.cls-g-2 {
+  fill: #888
+}
+
+.cls-g-3 {
+  fill: #eee
+}
