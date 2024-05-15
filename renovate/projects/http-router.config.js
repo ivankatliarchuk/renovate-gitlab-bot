@@ -9,6 +9,7 @@ const {
     {
       repository: "gitlab-renovate-forks/http-router",
       ...baseConfig,
+      ignoreDeps: ["vitest"],
       labels: [
         ...defaultLabels,
         "group::tenant scale",
