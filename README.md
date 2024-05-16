@@ -8,7 +8,9 @@ automatically create MRs for updating dependencies. These merge requests will be
 Due to limitations with upstream renovate regarding forked workflows we are maintaining a fork of renovate:
 https://gitlab.com/gitlab-org/frontend/renovate-fork
 
-The following repositories are currently being updated automatically.
+Visit the dashboard [here](https://gitlab-org.gitlab.io/frontend/renovate-gitlab-bot/).
+
+The following repositories are currently being updated automatically. A master list of upstream repositories is stored in the [forks/config.tfvars](forks/config.tfvars) file.
 
 <!-- rep -->
 
@@ -18,6 +20,7 @@ The following repositories are currently being updated automatically.
 - [gitlab-renovate-forks/auto-deploy-image](https://gitlab.com/gitlab-renovate-forks/auto-deploy-image)
 - [gitlab-renovate-forks/charts-gitlab-agent](https://gitlab.com/gitlab-renovate-forks/charts-gitlab-agent)
 - [gitlab-renovate-forks/container-registry](https://gitlab.com/gitlab-renovate-forks/container-registry)
+- [gitlab-renovate-forks/customers-gitlab-com](https://gitlab.com/gitlab-renovate-forks/contributors-gitlab-com)
 - [gitlab-renovate-forks/customers-gitlab-com](https://gitlab.com/gitlab-renovate-forks/customers-gitlab-com)
 - [gitlab-renovate-forks/design.gitlab.com](https://gitlab.com/gitlab-renovate-forks/design.gitlab.com)
 - [gitlab-renovate-forks/devkit](https://gitlab.com/gitlab-renovate-forks/devkit)
