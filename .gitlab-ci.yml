@@ -17,7 +17,7 @@ stages:
   - run
 
 .node:
-  image: node:18
+  image: node:20.13
   stage: run
   before_script:
     - yarn install --frozen-lockfile
