@@ -21,7 +21,7 @@ module.exports = createServerConfig(
             "type::maintenance",
             ],
             rangeStrategy: "bump",
-            enabledManagers: ["gomod"],
+            enabledManagers: ["gomod", "npm"],
             postUpdateOptions: ["gomodTidy", "gomodUpdateImportPaths"],
             packageRules: [],
         }
