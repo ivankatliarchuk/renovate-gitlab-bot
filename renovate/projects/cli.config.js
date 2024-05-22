@@ -25,6 +25,7 @@ module.exports = createServerConfig(
             enabledManagers: ["gomod", "npm"],
             postUpdateOptions: ["gomodTidy", "gomodUpdateImportPaths"],
             packageRules: [],
+            dependencyDashboard: false,
         }
     ]
 );
