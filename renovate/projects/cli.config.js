@@ -21,6 +21,7 @@ module.exports = createServerConfig(
             "type::maintenance",
             ],
             rangeStrategy: "bump",
+            includePaths: ["*", "scripts/commit-lint/*"],
             enabledManagers: ["gomod", "npm"],
             postUpdateOptions: ["gomodTidy", "gomodUpdateImportPaths"],
             packageRules: [],
