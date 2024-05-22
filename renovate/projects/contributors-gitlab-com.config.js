@@ -7,7 +7,7 @@ module.exports = createServerConfig([
   {
     repository: "gitlab-renovate-forks/contributors-gitlab-com",
     ...baseConfig,
-    branchPrefix: "renovate-gems/",
+    includePaths: ['contributors/*'],
     labels: [
       "Contributor Success"
     ],
