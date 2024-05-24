@@ -39,14 +39,12 @@ module.exports = createServerConfig([
         rangeStrategy: "update-lockfile",
       },
       {
-        matchPackagePatterns: ["bootstrap-vue"],
-        separateMultipleMajor: true,
-        reviewers: ["pgascouvaillancourt"],
+        groupName: 'Playwright',
+        matchPackagePatterns: ['playwright'],
         enabled: true,
-        groupName: "Bootstrap Vue",
       },
       {
-        matchPackagePatterns: ["@storybook/.*", "storybook"],
+        matchPackagePatterns: ["storybook"],
         reviewers: ["pgascouvaillancourt"],
         enabled: true,
         groupName: "Storybook",
