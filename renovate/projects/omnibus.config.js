@@ -33,7 +33,7 @@ module.exports = createServerConfig([
         fileMatch: ["config/software/libxml2.rb"],
         matchStrings: [
           "default_version '(?<currentValue>.*)'",
-          "version('(?<currentValue>.*)')",
+          "version\('(?<currentValue>.*)'\)",
         ],
         depNameTemplate: "libxml2",
         datasourceTemplate: "gitlab-tags",
