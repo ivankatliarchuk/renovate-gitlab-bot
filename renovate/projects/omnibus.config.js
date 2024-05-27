@@ -8,6 +8,9 @@ module.exports = createServerConfig([
   {
     repository: "gitlab-renovate-forks/omnibus-gitlab",
     ...baseConfig,
+    includePaths: [
+      'config/software/*',
+    ], 
     semanticCommits: "disabled",
     reviewers: availableRouletteReviewerByRole("omnibus-gitlab", [
       "reviewer",
