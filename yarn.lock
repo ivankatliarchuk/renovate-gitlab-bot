@@ -494,7 +494,7 @@ find-up@^4.1.0:
     locate-path "^5.0.0"
     path-exists "^4.0.0"
 
-follow-redirects@^1.15.0, follow-redirects@^1.15.6:
+follow-redirects@^1.15.6:
   version "1.15.6"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.6.tgz#7f815c0cda4249c74ff09e95ef97c23b5fd0399b"
   integrity sha512-wWN62YITEaOpSK584EZXJafH1AGpO8RVgElfkuXbTOrPX4fIfOyEpW/CsiNd8JdYrAoOvafRTOEnvsO++qCqFA==
@@ -585,6 +585,11 @@ isexe@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/isexe/-/isexe-2.0.0.tgz#e8fbf374dc556ff8947a10dcb0572d633f2cfa10"
   integrity sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==
+
+js-hcl-parser@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/js-hcl-parser/-/js-hcl-parser-1.0.1.tgz#846e1a169a1fdacb7bb76317b8ef452d9c6a3711"
+  integrity sha512-fCs/gex31g5FYiXItz6UJBJpKnQoRE7+B3yVv6YqPKce9/k/a0QlJXjoicfvt8jGLy8CHKJ641RXe93xSZCM7A==
 
 locate-path@^5.0.0:
   version "5.0.0"
