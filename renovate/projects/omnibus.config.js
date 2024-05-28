@@ -36,7 +36,7 @@ module.exports = createServerConfig([
         fileMatch: ["config/software/libxml2.rb"],
         matchStrings: [
           "default_version '(?<currentValue>.*)'",
-          "version\('(?<currentValue>.*)'\)",
+          "version\\('(?<currentValue>.*)'\\)",
         ],
         depNameTemplate: "libxml2",
         datasourceTemplate: "gitlab-tags",
@@ -47,7 +47,7 @@ module.exports = createServerConfig([
         customType: "regex",
         fileMatch: ["config/software/registry.rb"],
         matchStrings: [
-          "Gitlab::Version.new\('registry', '(?<currentValue>.*)'\)"
+          "Gitlab::Version.new\\('registry', 'v(?<currentValue>.*)-gitlab'\\)"
         ],
         depNameTemplate: "registry",
         datasourceTemplate: "gitlab-tags",
