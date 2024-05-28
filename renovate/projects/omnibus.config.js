@@ -43,6 +43,17 @@ module.exports = createServerConfig([
         registryUrlTemplate: "https://gitlab.gnome.org/",
         packageNameTemplate: "GNOME/libxml2",
       },
+      {
+        customType: "regex",
+        fileMatch: ["config/software/registry.rb"],
+        matchStrings: [
+          "Gitlab::Version.new\('registry', '(?<currentValue>.*)'\)"
+        ],
+        depNameTemplate: "registry",
+        datasourceTemplate: "gitlab-tags",
+        registryUrlTemplate: "https://gitlab.com/",
+        packageNameTemplate: "gitlab-org/container-registry",
+      },
     ],
   },
 ]);
