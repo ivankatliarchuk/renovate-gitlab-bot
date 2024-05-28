@@ -39,8 +39,8 @@ module.exports = createServerConfig([
         rangeStrategy: "update-lockfile",
       },
       {
-        groupName: 'Playwright',
-        matchPackagePatterns: ['playwright'],
+        groupName: "Playwright",
+        matchPackagePatterns: ["playwright"],
         enabled: true,
       },
       {
@@ -63,6 +63,16 @@ module.exports = createServerConfig([
         "^.gitlab-ci.yml",
         "^Dockerfile.puppeteer",
       ]),
+      {
+        customType: "regex",
+        fileMatch: ["^.gitlab-ci.yml"],
+        matchStrings: [
+          "mcr.microsoft.com/playwright:v(?<currentValue>[\\d.]+)([a-z-]+)?",
+        ],
+        depNameTemplate: "playwright",
+        datasourceTemplate: "npm",
+        versioningTemplate: "npm",
+      },
     ],
   },
 ]);
