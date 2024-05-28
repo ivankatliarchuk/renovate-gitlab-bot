@@ -47,12 +47,13 @@ module.exports = createServerConfig([
         customType: "regex",
         fileMatch: ["config/software/registry.rb"],
         matchStrings: [
-          "Gitlab::Version.new\\('registry', 'v(?<currentValue>.*)-gitlab'\\)"
+          "Gitlab::Version.new\\('registry', '(?<currentValue>.*)'\\)"
         ],
         depNameTemplate: "registry",
         datasourceTemplate: "gitlab-tags",
         registryUrlTemplate: "https://gitlab.com/",
         packageNameTemplate: "gitlab-org/container-registry",
+        versioningTemplate: "regex:^v(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-gitlab$", // only `-gitlab` tags/versions
       },
     ],
   },
