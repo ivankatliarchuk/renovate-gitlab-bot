@@ -16,6 +16,7 @@
     "emoji-regex": "^10.3.0",
     "gitlab-api-async-iterator": "^1.2.0",
     "glob": "^8.1.0",
+    "js-hcl-parser": "^1.0.1",
     "lodash-es": "^4.17.21",
     "luxon": "^2.4.0",
     "semver": "^7.3.8",
