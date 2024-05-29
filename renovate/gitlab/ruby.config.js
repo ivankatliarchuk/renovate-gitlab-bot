@@ -15,7 +15,6 @@ module.exports = async function () {
   );
 
   const packageRules = [
-    updateNothing,
     {
       matchPackageNames: [
         "better_errors",
@@ -117,11 +116,28 @@ module.exports = async function () {
       enabled: true,
       groupName: "Redis Gems",
     },
+    {
+      matchPackagePatterns: ["^opentelemetry"],
+      enabled: true,
+      groupName: "Open Telemetry Gems",
+    },
   ];
 
   const newPackageRules = Object.entries(gems).flatMap(([name, def]) => {
-    const existingPackageRule = packageRules.findIndex((rule) => {
-      return rule?.matchPackageNames?.includes?.(name);
+    const existingPackageRule = packageRules.findIndex((rule = {}) => {
+      const { matchPackageNames, matchPackagePatterns = [] } = rule;
+
+      if (matchPackageNames?.includes?.(name)) {
+        return true;
+      }
+
+      if (Array.isArray(matchPackagePatterns)) {
+        return matchPackagePatterns.some((pattern) => {
+          return new RegExp(pattern).test(name);
+        });
+      }
+
+      return false;
     });
 
     if (existingPackageRule >= 0) {
@@ -144,7 +160,7 @@ module.exports = async function () {
     return {
       matchPackageNames: [name],
       enabled: true,
-      reviewers: def.owners.length > 0 ? def.owners : undefined,
+      reviewers: def.owners.length > 0 ? def.owners : epBaseConfig.reviewers,
       groupName: name,
     };
   });
@@ -156,17 +172,18 @@ module.exports = async function () {
         dependencyDashboardTitle: "Dependency Dashboard (ruby)",
         ...baseConfig,
         ...epBaseConfig,
+        prConcurrentLimit: 30,
         branchPrefix: "renovate-gems/",
         enabledManagers: ["bundler"],
         semanticCommits: "disabled",
-        rangeStrategy: "bump",
+        rangeStrategy: "update-lockfile",
         postUpdateOptions: ["bundlerConservative"],
         postUpgradeTasks: {
           // Regenerate files that may change due to the dependency updates.
           commands: ["/workdir/renovate/gitlab/bundle-checksum.sh"],
           fileFilters: ["Gemfile.checksum"],
         },
-        packageRules: packageRules.concat(newPackageRules),
+        packageRules: [updateNothing, ...packageRules, ...newPackageRules],
       },
     ],
     {
