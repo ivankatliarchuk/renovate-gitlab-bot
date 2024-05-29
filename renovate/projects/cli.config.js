@@ -1,3 +1,4 @@
+const { updateNodeJS } = require("../lib/languages");
 const {
     createServerConfig,
     baseConfig,
@@ -22,9 +23,30 @@ module.exports = createServerConfig(
             ],
             rangeStrategy: "bump",
             includePaths: ["*", "scripts/commit-lint/*"],
-            enabledManagers: ["gomod", "npm"],
+            enabledManagers: ["asdf", "custom.regex", "gomod", "npm"],
             postUpdateOptions: ["gomodTidy", "gomodUpdateImportPaths"],
-            packageRules: [],
+            packageRules: [
+                {
+                    // We want updates to golang, but not vale in asdf
+                    matchManagers: ["asdf"],
+                    matchPackageNames: ["vale"],
+                    enabled: false,
+                },
+                {
+                    matchManagers: ["asdf", "gomod", "custom.regex"],
+                    matchPackageNames: ["golang"],
+                },
+            ],
+            customManagers: [
+                {
+                    customType: "regex",
+                    fielMatch: ["^.gitlab-ci.yml"],
+                    matchStrings: ['GO_VERSION: "?(?<currentValue>.*)"?\n'],
+                    depNameTemplate: "gomod",
+                    datasourceTemplate: "gomod",
+                    versioningTemplate: "go-mod-directive",
+                },
+            ],
             dependencyDashboard: false,
         }
     ]
