@@ -4,6 +4,8 @@ const extractor = join(__dirname, "gem_feature_categories.rb");
 const axios = require("axios");
 const { parse: parseYaml } = require("yaml");
 const roulette = require("../roulette.json");
+const { availableRouletteReviewerByRole, epBaseConfig } = require("./shared");
+const prettier = require("prettier");
 
 const STAGES_URL =
   "https://gitlab.com/gitlab-com/www-gitlab-com/raw/master/data/stages.yml";
@@ -59,31 +61,42 @@ function groupFromCategory(feature_category, groups) {
 
 function groupsFromStages(stages) {
   return Object.values(stages).flatMap((stage) => {
-    console.log(stage);
     return Object.values(stage.groups);
   });
 }
 
-function ownersByGroupName(team, project, groupName) {
-  if (!groupName) {
+function ownersByGroup(team, project, group = {}) {
+  const { name, be_team_tag } = group;
+  if (!name) {
     return [];
   }
-
-  return team.flatMap((person) => {
-    // Filter by specialty / group
-    const specialty = Array.isArray(person?.specialty)
-      ? person?.specialty
-      : [person?.specialty];
-    if (!specialty.some((specialty) => specialty?.includes(groupName))) {
-      return [];
-    }
-    // Filter by backend
-    const roles = [person?.projects?.[project] ?? []].flat();
+  return team.flatMap((person = {}) => {
+    const { specialty: _specialty, projects = {}, departments = [] } = person;
+    // Filter out people who don't have a backend role in the project
+    const roles = [projects?.[project] ?? []].flat();
     if (!roles.some((role) => role.includes("backend"))) {
       return [];
     }
+
+    // Logic from Handbook https://about.gitlab.com/handbook/product/categories/ page:
+    // https://gitlab.com/gitlab-com/content-sites/handbook/-/blob/0074793f86/layouts/partials/categories/developer-count.html#L1-23
+    // Lookup the `be_team_tag` in the stages, and it should be part of the person's department
+    if (
+      be_team_tag &&
+      Array.isArray(departments) &&
+      departments.some((dep) => dep === be_team_tag)
+    ) {
+      return person.username;
+    }
+
+    // Filter by specialty / group
+    const specialty = Array.isArray(_specialty) ? _specialty : [_specialty];
+    if (specialty.some((specialty) => specialty?.includes(name))) {
+      return person.username;
+    }
     // TODO: Filter by availability. Even though we might wanna do that later in the stack
-    return person.username;
+
+    return [];
   });
 }
 
@@ -103,10 +116,27 @@ async function getGemReviewers(gemFile, project) {
 
   const groups = groupsFromStages(stages);
 
-  const mapped = Object.entries(gems).map(([name, def]) => {
-    const group = groupFromCategory(def.feature_category, groups);
+  const logs = [];
 
-    const owners = ownersByGroupName(team, project, group?.name);
+  const mapped = Object.entries(gems).map(([name, def]) => {
+    const { feature_category } = def;
+    let owners;
+    let group;
+
+    let log = ` | ${name} | :${feature_category} |`;
+    if (feature_category === "shared") {
+      log += " available backend maintainers ";
+      owners = availableRouletteReviewerByRole(project, "maintainer backend");
+    } else if (feature_category === "tooling") {
+      log += " engineering productivity ";
+      owners = epBaseConfig.reviewers;
+      console.warn(`\tReviewers: Engineering Productivity`);
+    } else {
+      group = groupFromCategory(feature_category, groups);
+      owners = ownersByGroup(team, project, group);
+      log += ` ${group?.name} group `;
+    }
+    logs.push(`${log} (${owners.length} people) |`);
 
     return [
       name,
@@ -117,6 +147,15 @@ async function getGemReviewers(gemFile, project) {
       },
     ];
   });
+
+  console.warn(
+    await prettier.format(
+      ["| gem | feature_category | reviewer |", "| - | - | - |", ...logs].join(
+        "\n"
+      ),
+      { parser: "markdown" }
+    )
+  );
 
   return Object.fromEntries(mapped);
 }
