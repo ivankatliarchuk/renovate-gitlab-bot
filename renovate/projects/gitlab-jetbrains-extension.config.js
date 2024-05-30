@@ -25,6 +25,8 @@ const {
         "section::dev",
         "type::maintenance",
       ],
+      semanticCommits: "disabled",
+      prConcurrentLimit: 5,
       reviewers: availableRouletteReviewerByRole("gitlab-jetbrains-plugin"),
       reviewersSampleSize: 1,
       enabledManagers: ["npm"],
