@@ -248,6 +248,10 @@ function availableRouletteReviewerByProject(project) {
     );
   }
 
+  if (process.env.STABLE_REVIEWERS) {
+    return [project];
+  }
+
   let available = candidates.filter((person) => person.available);
 
   if (available.length === 0) {
