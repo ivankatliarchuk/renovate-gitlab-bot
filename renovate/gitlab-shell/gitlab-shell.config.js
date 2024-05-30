@@ -10,7 +10,7 @@ module.exports = createServerConfig([
     repository: "gitlab-renovate-forks/gitlab-shell",
     ...baseConfig,
     labels: [...defaultLabels],
-    reviewers: availableRouletteReviewerByRole("gitlab-shell", "maintainer"),
+    reviewers: availableRouletteReviewerByRole("gitlab-shell", "maintainer").concat(["jtapiab"]),
     reviewersSampleSize: 1,
     enabledManagers: ["asdf", "bundler", "gomod"],
     prConcurrentLimit: 4,
