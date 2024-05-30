@@ -14,6 +14,7 @@ projects = [
   { path = "gitlab-org/developer-relations/contributor-success/contributors-gitlab-com" },
   { path = "gitlab-org/editor-extensions/gitlab.vim" },
   { path = "gitlab-org/editor-extensions/gitlab-lsp" },
+  { path = "gitlab-org/editor-extensions/gitlab-jetbrains-plugin" },
   { path = "gitlab-org/frontend/pajamas-adoption-scanner" },
   { path = "gitlab-org/frontend/playground/accessibility-scanner" },
   { path = "gitlab-org/gitaly" },
