@@ -30,6 +30,7 @@ module.exports = createServerConfig([
     separateMinorPatch: true,
     separateMultipleMajor: true,
     packageRules: [],
+    commitBody: "Changelog: changed",
     customManagers: [
       {
         customType: "regex",
