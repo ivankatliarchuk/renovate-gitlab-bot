@@ -27,6 +27,7 @@ module.exports = createServerConfig([
     separateMinorPatch: true,
     separateMultipleMajor: true, // so that we get an MR for each minor of kubectl
     commitMessageExtra: "to v{{{newVersion}}}", // renovate's default template is wonky with kubectl major version override
+    commitBody: "Changelog: changed",
     packageRules: [
       {
         matchPackageNames: ["docker"],
