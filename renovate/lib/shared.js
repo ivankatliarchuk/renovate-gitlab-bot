@@ -237,6 +237,29 @@ function availableRouletteReviewerByRole(project, role = "maintainer") {
   return available.map((person) => person.username);
 }
 
+function availableRouletteReviewerByProject(project) {
+  const candidates = team.filter((person) =>
+    person?.projects?.[project]
+  );
+
+  if (candidates.length === 0) {
+    throw new Error(
+      `Found no candidates for project: ${project}`
+    );
+  }
+
+  let available = candidates.filter((person) => person.available);
+
+  if (available.length === 0) {
+    console.warn(
+      `${project}, no availability. Falling back to _all_.`
+    );
+    available = candidates;
+  }
+
+  return available.map((person) => person.username);
+}
+
 module.exports = {
   GITLAB_REPO,
   createServerConfig,
@@ -248,4 +271,5 @@ module.exports = {
   updateNothing,
   semanticPrefixFixDepsChoreOthers,
   availableRouletteReviewerByRole,
+  availableRouletteReviewerByProject,
 };
