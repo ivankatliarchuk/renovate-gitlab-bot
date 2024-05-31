@@ -22,14 +22,14 @@ Submit a Merge Request containing the following two changes:
 ## Considerations
 
 1. Do you have a CI step that to validate that your commits message align with [GitLab commit messages guidelines](https://docs.gitlab.com/ee/development/contributing/merge_request_workflow.html#commit-messages-guidelines)?
-   1. Yes, consider setting [semanticCommits](https://docs.renovatebot.com/configuration-options/#semanticcommits) to `"disabled"`.
-   2. No, you can ignore this setting.
+   * Yes, consider setting [semanticCommits](https://docs.renovatebot.com/configuration-options/#semanticcommits) to `"disabled"`.
+   * No, you can ignore this setting.
 2. Are you working on a project where keeping the merge request queue clean is important?
-   1. Yes, consider settings [prConcurrentLimit]https://docs.renovatebot.com/configuration-options/#prconcurrentlimit to a low number that your team is able to handle.
-   2. No, you can ignore this setting.
+   * Yes, consider settings [prConcurrentLimit]https://docs.renovatebot.com/configuration-options/#prconcurrentlimit to a low number that your team is able to handle.
+   * No, you can ignore this setting.
 3. Have you set aside time to handle to high amount of dependencies merge requests after the bot is installed?
-   1. No, consider increasing the weight of your dependabot setup issue as it may take more than a day to handle the dependencies update. Also consider spreading the message to your team to devide and conquer the merge requests.
-   2. Yes, you're all set.
+   * No, consider increasing the weight of your dependabot setup issue as it may take more than a day to handle the dependencies update. Also consider spreading the message to *ur team to devide and conquer the merge requests.
+   * Yes, you're all set.
 
 ## Implementation Details
 
