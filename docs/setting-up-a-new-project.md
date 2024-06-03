@@ -11,13 +11,25 @@ Submit a Merge Request containing the following two changes:
     +  "<PATH WITH NAMESPACE TO YOUR NEW PROJECT>"
      ]
     ```
-2. Add a renovate [config for your project](../renovate/).
+2. Add a renovate [config for your project](../renovate/). Have a look at the [considerations section](#considerations) if this is your first time setting up renovate for a project.
 
 3. Once your MR pipeline runs, review the Terraform Plan job and ensure the changes are expected.
 
 4. Run the manual Terraform Apply job - this will fork your repo. You may need to re-run subsequent pipeline jobs which probably failed due to the fork not existing when they originally ran. This job will fail with permission restrictions if triggered by roles less than maintainer. So [ask a maintainer](https://gitlab.com/gitlab-org/frontend/renovate-gitlab-bot/-/project_members?with_inherited_permissions=exclude) to run it for you in case you are not one. Once applied, the MR should be merged asap because it'll cause a state difference towards the default branch. Other pipelines may fail because of that.
 
 5. In the **execute -> Projects -> Your project** job, you can download and check the `renovate-log.txt` job artifact to see that Renovate did what you expected.
+
+## Considerations
+
+1. Do you have a CI step that to validate that your commits message align with [GitLab commit messages guidelines](https://docs.gitlab.com/ee/development/contributing/merge_request_workflow.html#commit-messages-guidelines)?
+   * Yes, consider setting [semanticCommits](https://docs.renovatebot.com/configuration-options/#semanticcommits) to `"disabled"`.
+   * No, you can ignore this setting.
+2. Are you working on a project where keeping the merge request queue clean is important?
+   * Yes, consider settings [prConcurrentLimit]https://docs.renovatebot.com/configuration-options/#prconcurrentlimit to a low number that your team is able to handle.
+   * No, you can ignore this setting.
+3. Have you set aside time to handle to high amount of dependencies merge requests after the bot is installed?
+   * No, consider increasing the weight of your dependabot setup issue as it may take more than a day to handle the dependencies update. Also consider spreading the message to *ur team to devide and conquer the merge requests.
+   * Yes, you're all set.
 
 ## Implementation Details
 
