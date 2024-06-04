@@ -20,6 +20,7 @@ const MANAGER_TO_ASDF_TOOL_MAP = {
   bundler: "ruby",
   npm: "nodejs",
   cargo: "rust",
+  gradle: "gradle",
 };
 
 /**

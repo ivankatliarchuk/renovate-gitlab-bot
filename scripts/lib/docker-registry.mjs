@@ -1,6 +1,9 @@
 import { getVersionRegistry } from "./asdf.mjs";
 import semver from "semver";
 import axios from "axios";
+import tar from "tar-stream";
+import { finished } from "node:stream/promises";
+import gunzip from "gunzip-maybe";
 
 const ALPINE_MIN_VERSION = "3.16";
 
@@ -14,6 +17,116 @@ async function imageExists(repository, tag = "latest") {
   } catch (e) {
     return false;
   }
+}
+
+async function getToken(repository) {
+  const { data } = await axios.get(
+    `https://auth.docker.io/token?scope=repository:library/${repository}:pull&service=registry.docker.io`
+  );
+  if (!data.token) {
+    throw new Error("Could not get token");
+  }
+  return data.token;
+}
+
+async function getManifest({ repository, tag, token }) {
+  const { data } = await axios.get(
+    `https://registry-1.docker.io/v2/library/${repository}/manifests/${tag}`,
+    {
+      headers: {
+        accept:
+          "application/vnd.oci.repository.manifest.v1+json, application/vnd.docker.distribution.manifest.list.v2+json",
+        authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  if (
+    [
+      "application/vnd.oci.repository.index.v1+json",
+      "application/vnd.docker.distribution.manifest.list.v2+json",
+    ].includes(data.mediaType)
+  ) {
+    const manifest = data?.manifests?.find((x) => {
+      return (
+        x.platform?.architecture === "amd64" && x?.platform?.os === "linux"
+      );
+    });
+    if (!manifest) {
+      throw new Error(`Could not find amd64 manifest for ${repository}:${tag}`);
+    }
+    return getManifest({ repository, tag: manifest.digest, token });
+  }
+
+  if (
+    [
+      "application/vnd.oci.repository.manifest.v1+json",
+      "application/vnd.docker.distribution.manifest.v2+json",
+    ].includes(data.mediaType)
+  ) {
+    return data;
+  }
+
+  throw new Error(`Unhandled media type ${data.mediaType}`);
+}
+
+async function extractFromLayer({ repository, digest, token }) {
+  const { data: stream } = await axios.get(
+    `https://registry-1.docker.io/v2/library/${repository}/blobs/${digest}`,
+    {
+      responseType: "stream",
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  const extract = tar.extract();
+
+  let version = null;
+
+  extract.on("entry", function (header, entityStream, next) {
+    entityStream.on("data", (chunk) => {
+      if (header.name === "etc/alpine-release") {
+        version ||= "";
+        version += chunk.toString();
+      }
+    });
+
+    entityStream.on("end", function () {
+      if (header.name === "etc/alpine-release") {
+        version = version.trim();
+      }
+      next(); // ready for next entry
+    });
+
+    entityStream.resume(); // just auto drain the stream
+  });
+
+  await finished(stream.pipe(gunzip()).pipe(extract));
+
+  return version;
+}
+
+const alpineVersionCache = {};
+
+async function getAlpineVersionFromImage(repository, tag = "latest") {
+  const key = repository + ":" + tag;
+  if (alpineVersionCache[key]) {
+    return alpineVersionCache[key];
+  }
+  const token = await getToken(repository);
+
+  const { layers } = await getManifest({ repository, tag, token });
+  if (layers[0]) {
+    alpineVersionCache[key] = await extractFromLayer({
+      repository,
+      digest: layers[0].digest,
+      token,
+    });
+    return alpineVersionCache[key];
+  }
+  return null;
 }
 
 function toolToRepo(tool) {
@@ -41,7 +154,23 @@ export async function mapToolsToDockerImage(toolsRaw) {
 
     for (const [tool, exact, minor] of tools) {
       const repository = toolToRepo(tool);
-      if (await imageExists(repository, `${exact}-alpine${alpine}`)) {
+      if (repository === "gradle") {
+        const tag = exact + "-alpine";
+        const alpineVersionFromImage = await getAlpineVersionFromImage(
+          repository,
+          tag
+        );
+        const coerced = semver.coerce(alpineVersionFromImage);
+        if (semver.lt(alpineVersion, coerced)) {
+          console.log(
+            `Alpine version in ${repository}:${tag} is ${alpineVersionFromImage}`
+          );
+          alpineVersion = coerced;
+          continue alpineVersion;
+        } else if (alpine === coerced.major + "." + coerced.minor) {
+          ret[tool] = `${repository}:${tag}`;
+        }
+      } else if (await imageExists(repository, `${exact}-alpine${alpine}`)) {
         ret[tool] = `${repository}:${exact}-alpine${alpine}`;
       } else if (await imageExists(repository, `${minor}-alpine${alpine}`)) {
         ret[tool] = `${repository}:${minor}-alpine${alpine}`;
