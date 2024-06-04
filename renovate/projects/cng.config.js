@@ -35,6 +35,10 @@ module.exports = createServerConfig([
         matchManagers: ["custom.regex"],
         customChangelogUrl: "https://github.com/moby/moby",
       },
+      {
+        matchPackagePatterns: ["rubygems", "bundler"],
+        groupName: "Rubygems and Bundler"
+      },
     ],
     customManagers: [
       {
@@ -63,6 +67,36 @@ module.exports = createServerConfig([
         datasourceTemplate: "github-tags",
         extractVersionTemplate: "^v?(?<version>.+)$",
         versioningTemplate: "regex:^1\\.(?<major>\\d+)\\.(?<minor>\\d+)$", // kubernetes does not follow semver
+      },
+      {
+        customType: "regex",
+        enabled: true,
+        includePaths: ["gitlab-ruby/*"],
+        fileMatch: [
+          "gitlab-ruby/Dockerfile",
+          "gitlab-ruby/Dockerfile.build.ubi8",
+        ],
+        matchStrings: [
+          "ARG RUBYGEMS_VERSION=(?<currentValue>.*)\n"
+        ],
+        depNameTemplate: "rubygems",
+        packageNameTemplate: "rubygems-update",
+        datasourceTemplate: "rubygems",
+      },
+      {
+        customType: "regex",
+        enabled: true,
+        includePaths: ["gitlab-ruby/*"],
+        fileMatch: [
+          "gitlab-ruby/Dockerfile",
+          "gitlab-ruby/Dockerfile.build.ubi8",
+        ],
+        matchStrings: [
+          "ARG BUNDLER_VERSION=(?<currentValue>.*)\n"
+        ],
+        depNameTemplate: "bundler",
+        packageNameTemplate: "bundler",
+        datasourceTemplate: "rubygems",
       },
     ],
   },
