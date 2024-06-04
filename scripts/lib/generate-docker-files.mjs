@@ -72,11 +72,15 @@ export async function serializeDockerFile(config) {
   console.log(tools, images);
 
   const targetImage =
-    images.ruby ?? images.rust ?? images.golang ?? images.alpine;
+    images.ruby ??
+    images.rust ??
+    images.gradle ??
+    images.golang ??
+    images.alpine;
 
-  if (images.rust && images.ruby) {
+  if ([images.ruby, images.gradle, images.rust].filter(Boolean).length > 1) {
     throw new Error(
-      "We do not support images that have both ruby and rust installed, yet."
+      "We do not support images that have more than one of the ruby, rust or gradle runtime installed, yet."
     );
   }
 

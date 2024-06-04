@@ -105,6 +105,35 @@ async function getGolangFromGoMod(repository, path = "*") {
   }
 }
 
+async function getGradleVersionFromProperties(repository, path) {
+  try {
+    const { data } = await GitLabAPI.get(
+      `/projects/${encodeURIComponent(
+        repository
+      )}/repository/files/${pathToFile(path, "gradle.properties")}/raw`,
+      {
+        params: {
+          ref: "HEAD",
+        },
+      }
+    );
+    const entries = data
+      .split(/[\r\n]+/)
+      .filter((line) => !line.match(/^\s*#/))
+      .filter((line) => line.includes("="))
+      .map((line) => line.split(/\s*=\s*/).map((x) => x.trim()));
+
+    const properties = Object.fromEntries(entries);
+
+    return {
+      gradle: properties["gradle.version"],
+      jdk: properties["platform.java.version"],
+    };
+  } catch (e) {
+    return false;
+  }
+}
+
 async function getToolVersionWithFallBack(repositoryConfig, tool) {
   const { repository, includePaths = ["*"] } = repositoryConfig;
 
@@ -125,13 +154,22 @@ async function getToolVersionWithFallBack(repositoryConfig, tool) {
           return golangVersion;
         }
       }
+      if (tool === "gradle") {
+        const gradleVersion = await getGradleVersionFromProperties(
+          repository,
+          path
+        );
+        if (gradleVersion) {
+          return gradleVersion;
+        }
+      }
     }
   }
 
   // Fallback to GDK version if present
   const gdkVersion = (await getToolVersionsFallbackGDK())[tool]?.[0];
   if (gdkVersion) {
-      return gdkVersion
+    return gdkVersion;
   }
 
   // If not defined in repo or GDK, try GitLab
@@ -156,6 +194,16 @@ export async function consolidateVersion(repositoryConfig, tool) {
     case "golang":
       version = semver.coerce(version);
       retVersion = semver.major(version) + "." + semver.minor(version);
+      break;
+    case "gradle":
+      const jdk = semver.coerce(version.jdk);
+      version = semver.coerce(version.gradle + "-jdk" + jdk.major);
+      retVersion =
+        semver.major(version) +
+        "." +
+        semver.minor(version) +
+        "-jdk" +
+        jdk.major;
       break;
     case "nodejs":
       const renNodeVersion = await getRenovateNodeVersion();
