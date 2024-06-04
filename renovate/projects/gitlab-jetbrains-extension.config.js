@@ -23,20 +23,39 @@ module.exports = createServerConfig([
       "type::maintenance",
     ],
     semanticCommits: "disabled",
-    prConcurrentLimit: 5,
+    prConcurrentLimit: 2,
     reviewers: availableRouletteReviewerByRole("gitlab-jetbrains-plugin"),
     reviewersSampleSize: 1,
     enabledManagers: ["npm", "gradle"],
     packageRules: [
       {
         ...enableWithBumpStrategy,
-        matchPackageNames: ["apollo3", "detekt", "kotlin"],
+        matchPackagePatterns: [
+          "^com\\.apollographql\\.apollo3",
+          "^io\\.gitlab\\.arturbosch\\.detekt",
+          "^org\\.jetbrains\\.kotlin",
+        ],
+        excludePackagePatterns: ["^org\\.jetbrains\\.kotlinx"],
         groupName: "JetBrains Plugin",
       },
       {
         ...enableWithBumpStrategy,
-        matchPackageNames: ["junit", "kotest", "remoterobot"],
+        matchPackagePatterns: [
+          "^org\\.junit",
+          "^io\\.kotest",
+          "^com\\.intellij\\.remoterobot",
+        ],
         groupName: "Testing",
+      },
+      {
+        ...enableWithBumpStrategy,
+        matchPackagePatterns: ["^io\\.ktor"],
+        groupName: "ktor",
+      },
+      {
+        ...enableWithBumpStrategy,
+        matchPackagePatterns: ["^com\\.fasterxml\\.jackson"],
+        groupName: "jackson",
       },
       {
         ...enableWithBumpStrategy,
