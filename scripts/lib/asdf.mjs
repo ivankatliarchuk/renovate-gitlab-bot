@@ -196,10 +196,14 @@ export async function consolidateVersion(repositoryConfig, tool) {
       retVersion = semver.major(version) + "." + semver.minor(version);
       break;
     case "gradle":
-      version = semver.coerce(version.gradle);
+      const jdk = semver.coerce(version.jdk);
+      version = semver.coerce(version.gradle + "-jdk" + jdk.major);
       retVersion =
-        semver.major(version) + "." + semver.minor(version) + "-jdk17";
-      version = version + "-jdk17";
+        semver.major(version) +
+        "." +
+        semver.minor(version) +
+        "-jdk" +
+        jdk.major;
       break;
     case "nodejs":
       const renNodeVersion = await getRenovateNodeVersion();
