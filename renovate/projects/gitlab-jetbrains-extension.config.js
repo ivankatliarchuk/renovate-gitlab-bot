@@ -30,31 +30,31 @@ module.exports = createServerConfig([
     packageRules: [
       {
         ...enableWithBumpStrategy,
-        matchPackagePatterns: [
-          "^com\\.apollographql\\.apollo3",
-          "^io\\.gitlab\\.arturbosch\\.detekt",
-          "^org\\.jetbrains\\.kotlin",
+        matchPackagePrefixes: [
+          "com.apollographql.apollo3",
+          "io.gitlab.arturbosch.detekt",
+          "org.jetbrains.kotlin",
         ],
-        excludePackagePatterns: ["^org\\.jetbrains\\.kotlinx"],
+        excludePackagePrefixes: ["org.jetbrains.kotlinx"],
         groupName: "JetBrains Plugin",
       },
       {
         ...enableWithBumpStrategy,
-        matchPackagePatterns: [
-          "^org\\.junit",
-          "^io\\.kotest",
-          "^com\\.intellij\\.remoterobot",
+        matchPackagePrefixes: [
+          "org.junit",
+          "io.kotest",
+          "com.intellij.remoterobot",
         ],
         groupName: "Testing",
       },
       {
         ...enableWithBumpStrategy,
-        matchPackagePatterns: ["^io\\.ktor"],
+        matchPackagePrefixes: ["io.ktor"],
         groupName: "ktor",
       },
       {
         ...enableWithBumpStrategy,
-        matchPackagePatterns: ["^com\\.fasterxml\\.jackson"],
+        matchPackagePrefixes: ["com.fasterxml.jackson"],
         groupName: "jackson",
       },
       {
