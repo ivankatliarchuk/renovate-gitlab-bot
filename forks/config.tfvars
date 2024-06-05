@@ -32,6 +32,7 @@ projects = [
   { path = "gitlab-org/gitlab-zoekt-indexer" },
   { path = "gitlab-org/omnibus-gitlab" },
   { path = "gitlab-org/quality/triage-ops" },
+  { path = "gitlab-org/remote-development/gitlab-workspaces-tools" },
   { path = "gitlab-org/ruby/gems/gitlab-styles" },
   { path = "gitlab-org/ruby/gems/prometheus-client-mmap" },
   { path = "gitlab-org/security-products/analyzers/gemnasium" },
