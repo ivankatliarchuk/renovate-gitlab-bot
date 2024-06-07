@@ -36,6 +36,15 @@ module.exports = createServerConfig([
           "https://gitlab.com/gitlab-org/quality/pipeline-common.git",
         datasourceTemplate: "git-tags",
       },
+      {
+        customType: "regex",
+        fileMatch: [".gitlab/ci/qa-common/variables.gitlab-ci.yml"],
+        matchStrings: ['GITLAB_HELM_CHART_REF: "(?<currentDigest>.*?)"'],
+        currentValueTemplate: "master",
+        depNameTemplate: "gitlab",
+        packageNameTemplate: "https://gitlab.com/gitlab-org/charts/gitlab.git",
+        datasourceTemplate: "git-refs",
+      },
     ],
     packageRules: [
       {
