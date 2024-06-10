@@ -98,7 +98,7 @@ FROM ${targetImage}
 # Install some build tools needed, e.g. for gitaly and sanity
 # And the newest git version available.
 RUN apk add --update --no-cache \\
-  bash make cmake g++ curl pkgconf yq \\
+  bash make cmake g++ curl pkgconf yq patch \\
   && apk add --update --no-cache \\
   --repository=https://dl-cdn.alpinelinux.org/alpine/edge/main \\
   git
