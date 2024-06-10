@@ -56,7 +56,7 @@ const list = projects
       return `${listItem} none |`;
     }
 
-    const configs = configFiles.map((y) => `[${y}](./[${y}])`).join(" <br/> ");
+    const configs = configFiles.map((y) => `[${y}](./${y})`).join(" <br/> ");
 
     return `${listItem} ${configs}|`;
   })
