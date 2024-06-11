@@ -18,6 +18,12 @@ module.exports = createServerConfig(
       ],
       enabledManagers: ["gitlabci", "custom.regex"],
       reviewers: ["timofurrer"],
+      includePaths: [
+        // NOTE: the default of renovate
+        "*",
+        // NOTE: the templates directory which is affected by the post upgrade tasks
+        "templates/*",
+      ],
       packageRules: [
         {
           matchPackageNames: ["docker"],
