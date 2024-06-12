@@ -20,7 +20,9 @@ please review this Merge Request with the same scrutiny as any community contrib
 
     _Note_: This might not be available in projects, in that case merging right away is an option
 
-5.  Merge away!
+5.  Assign the current milestone to the MR
+
+6.  Merge away!
 
 ## Troubleshooting
 
