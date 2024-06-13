@@ -24,7 +24,7 @@ module.exports = createServerConfig([
       "workflow::ready for review",
     ],
     enabledManagers: ["custom.regex"],
-    separateMinorPatch: true,
+    separateMinorPatch: false, // This flag is being evaluated on https://gitlab.com/gitlab-org/frontend/renovate-gitlab-bot/-/issues/68
     separateMultipleMajor: true, // so that we get an MR for each minor of kubectl
     commitMessageExtra: "to v{{{newVersion}}}", // renovate's default template is wonky with kubectl major version override
     commitBody: "Changelog: changed",
@@ -38,6 +38,11 @@ module.exports = createServerConfig([
       {
         matchPackagePatterns: ["rubygems", "bundler"],
         groupName: "Rubygems and Bundler"
+      },
+      {
+        matchPackageNames: ["aws/aws-cli"],
+        matchManagers: ["custom.regex"],
+        allowedVersions: "<2.0.0",
       },
     ],
     customManagers: [
@@ -97,6 +102,25 @@ module.exports = createServerConfig([
         depNameTemplate: "bundler",
         packageNameTemplate: "bundler",
         datasourceTemplate: "rubygems",
+      },
+      {
+        enabled: true,
+        customType: "regex",
+        includePaths: [
+          "gitlab-toolbox/*",
+          "ci_files/*",
+        ],
+        fileMatch: [
+          "^gitlab-toolbox/Dockerfile$",
+          "^gitlab-toolbox/Dockerfile.build.ubi8$",
+          "^ci_files/variables.yml$",
+        ],
+        matchStrings: [
+          "AWSCLI_VERSION=(?<quote>\"?)(?<currentValue>.*)\k<quote>",
+          "AWSCLI_VERSION: \"(?<currentValue>.*)\"",
+        ],
+        depNameTemplate: "aws/aws-cli",
+        datasourceTemplate: "github-tags",
       },
     ],
   },
