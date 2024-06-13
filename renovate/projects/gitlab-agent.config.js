@@ -4,6 +4,7 @@ const {
   baseConfig,
   availableRouletteReviewerByRole,
 } = require("../lib/shared");
+const { updateDangerReviewComponent } = require("../lib/components");
 
 module.exports = createServerConfig([
   {
@@ -95,6 +96,7 @@ module.exports = createServerConfig([
           "gitlab-org/security-products/analyzers/trivy-k8s-wrapper",
         extractVersionTemplate: "^v(?<version>.*)$",
       },
+      ...updateDangerReviewComponent.customManagers,
     ],
   },
 ]);

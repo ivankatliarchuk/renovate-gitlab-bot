@@ -3,6 +3,7 @@ const {
   baseConfig,
   availableRouletteReviewerByRole,
 } = require("../lib/shared");
+const { updateDangerReviewComponent } = require("../lib/components");
 
 module.exports = createServerConfig([
   {
@@ -10,7 +11,7 @@ module.exports = createServerConfig([
     ...baseConfig,
     includePaths: [
       'config/software/*',
-    ], 
+    ],
     semanticCommits: "disabled",
     reviewers: availableRouletteReviewerByRole("omnibus-gitlab", [
       "reviewer",
@@ -57,5 +58,6 @@ module.exports = createServerConfig([
         versioningTemplate: "regex:^v(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-gitlab$", // only `-gitlab` tags/versions
       },
     ],
+    ...updateDangerReviewComponent,
   },
 ]);

@@ -3,6 +3,7 @@ const {
   baseConfig,
   epBaseConfig,
 } = require("../lib/shared");
+const { updateDangerReviewComponent } = require("../lib/components");
 
 module.exports = createServerConfig([
   {
@@ -10,7 +11,7 @@ module.exports = createServerConfig([
     ...baseConfig,
     ...epBaseConfig,
     branchPrefix: "renovate-gems/",
-    enabledManagers: ["bundler"],
+    enabledManagers: ["bundler", "custom.regex"],
     postUpdateOptions: ["bundlerConservative"],
     semanticCommits: "disabled",
     packageRules: [
@@ -36,5 +37,6 @@ module.exports = createServerConfig([
         groupName: "Ruby development dependencies",
       },
     ],
+    ...updateDangerReviewComponent,
   },
 ]);

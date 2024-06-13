@@ -5,6 +5,7 @@ const {
   defaultLabels,
   availableRouletteReviewerByRole,
 } = require("../lib/shared");
+const { updateDangerReviewComponent } = require("../lib/components");
 
 module.exports = createServerConfig([
   {
@@ -48,6 +49,7 @@ module.exports = createServerConfig([
         packageNameTemplate: "golang/go",
         extractVersionTemplate: "^go(?<version>\\S+)",
       },
+      ...updateDangerReviewComponent.customManagers,
     ],
     dependencyDashboard: false,
   },

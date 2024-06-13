@@ -4,6 +4,7 @@ const {
   defaultLabels,
   availableRouletteReviewerByRole,
 } = require("../lib/shared");
+const { updateDangerReviewComponent } = require("../lib/components");
 
 const enableWithBumpStrategy = {
   rangeStrategy: "bump",
@@ -26,7 +27,7 @@ module.exports = createServerConfig([
     prConcurrentLimit: 2,
     reviewers: availableRouletteReviewerByRole("gitlab-jetbrains-plugin"),
     reviewersSampleSize: 1,
-    enabledManagers: ["npm", "gradle"],
+    enabledManagers: ["npm", "gradle", "custom.regex"],
     packageRules: [
       {
         ...enableWithBumpStrategy,
@@ -72,5 +73,6 @@ module.exports = createServerConfig([
         enabled: false,
       },
     ],
+    ...updateDangerReviewComponent,
   },
 ]);

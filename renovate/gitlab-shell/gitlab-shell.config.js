@@ -4,6 +4,7 @@ const {
   defaultLabels,
   availableRouletteReviewerByRole,
 } = require("../lib/shared");
+const { updateDangerReviewComponent } = require("../lib/components");
 
 module.exports = createServerConfig([
   {
@@ -12,7 +13,8 @@ module.exports = createServerConfig([
     labels: [...defaultLabels],
     reviewers: availableRouletteReviewerByRole("gitlab-shell", "maintainer").concat(["jtapiab"]),
     reviewersSampleSize: 1,
-    enabledManagers: ["asdf", "bundler", "gomod"],
+    enabledManagers: ["asdf", "bundler", "gomod", "custom.regex"],
+    ...updateDangerReviewComponent,
     prConcurrentLimit: 4,
     semanticCommits: "disabled",
     postUpdateOptions: ["gomodTidy", "gomodUpdateImportPaths"],

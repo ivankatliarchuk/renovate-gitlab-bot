@@ -3,6 +3,7 @@ const {
   baseConfig,
   availableRouletteReviewerByRole,
 } = require("../lib/shared");
+const { updateDangerReviewComponent } = require("../lib/components");
 
 module.exports = createServerConfig([
   {
@@ -122,6 +123,7 @@ module.exports = createServerConfig([
         depNameTemplate: "aws/aws-cli",
         datasourceTemplate: "github-tags",
       },
+      ...updateDangerReviewComponent.customManagers,
     ],
   },
 ]);

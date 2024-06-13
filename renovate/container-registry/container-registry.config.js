@@ -4,6 +4,7 @@ const {
   defaultLabels,
   availableRouletteReviewerByRole,
 } = require("../lib/shared");
+const { updateDangerReviewComponent } = require("../lib/components");
 
 module.exports = createServerConfig(
   [
@@ -26,7 +27,8 @@ module.exports = createServerConfig(
       minimumReleaseAge: 7,
       prCreation: "not-pending",
       prConcurrentLimit: 4,
-      enabledManagers: ["gomod"],
+      enabledManagers: ["gomod", "custom.regex"],
+      ...updateDangerReviewComponent,
       postUpdateOptions: ["gomodTidy", "gomodUpdateImportPaths"],
       packageRules: [
         {

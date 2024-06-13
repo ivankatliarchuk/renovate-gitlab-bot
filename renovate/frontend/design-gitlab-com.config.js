@@ -12,6 +12,7 @@ const {
   prGitLabUISVG,
   prGitLabScopeAndLinters,
 } = require("../lib/npm");
+const { updateDangerReviewComponent } = require("../lib/components");
 
 module.exports = createServerConfig([
   {
@@ -27,7 +28,8 @@ module.exports = createServerConfig([
     minimumReleaseAge: "3 days",
     rangeStrategy: "auto",
     semanticCommits: "enabled",
-    enabledManagers: ["npm"],
+    enabledManagers: ["npm", "custom.regex"],
+    ...updateDangerReviewComponent,
     packageRules: [
       ...semanticPrefixFixDepsChoreOthers,
       ...prGitLabScopeAndLinters,
