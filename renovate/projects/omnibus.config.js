@@ -27,7 +27,7 @@ module.exports = createServerConfig([
       "workflow::ready for review",
     ],
     enabledManagers: ["custom.regex"],
-    separateMinorPatch: true,
+    separateMinorPatch: false, // This flag is being evaluated on https://gitlab.com/gitlab-org/frontend/renovate-gitlab-bot/-/issues/68
     separateMultipleMajor: true,
     packageRules: [],
     commitBody: "Changelog: changed",
