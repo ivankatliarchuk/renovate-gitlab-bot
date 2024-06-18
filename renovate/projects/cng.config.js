@@ -116,7 +116,10 @@ module.exports = createServerConfig([
           "^ci_files/variables.yml$",
         ],
         matchStrings: [
-          "AWSCLI_VERSION=(?<quote>\"?)(?<currentValue>.*)\k<quote>",
+          // With quotes
+          "AWSCLI_VERSION=\"(?<currentValue>.*)\"",
+          // Without quotes
+          "AWSCLI_VERSION=(?<currentValue>\\d+\\.\\d+\\.\\d+)",
           "AWSCLI_VERSION: \"(?<currentValue>.*)\"",
         ],
         depNameTemplate: "aws/aws-cli",
