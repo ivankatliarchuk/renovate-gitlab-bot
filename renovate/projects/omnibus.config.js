@@ -30,7 +30,16 @@ module.exports = createServerConfig([
     enabledManagers: ["custom.regex"],
     separateMinorPatch: false, // This flag is being evaluated on https://gitlab.com/gitlab-org/frontend/renovate-gitlab-bot/-/issues/68
     separateMultipleMajor: true,
-    packageRules: [],
+    packageRules: [
+        {
+          matchPackageNames: ["libxml2"],
+          postUpgradeTasks: {
+            commands: ["./scripts/renovate/checksums/software/libxml2.sh"],
+            fileFilters: ["config/software/libxml2.rb"],
+            executionMode: "branch",
+          }
+        },
+    ],
     commitBody: "Changelog: changed",
     customManagers: [
       {
