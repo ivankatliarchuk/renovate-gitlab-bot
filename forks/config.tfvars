@@ -5,6 +5,7 @@ projects = [
   { path = "gitlab-org/cells/http-router" },
   { path = "gitlab-org/charts/gitlab-agent", fork_path = "charts-gitlab-agent" },
   { path = "gitlab-org/cli" },
+  { path = "gitlab-org/cloud-native/gitlab-operator" },
   { path = "gitlab-org/cluster-integration/auto-build-image" },
   { path = "gitlab-org/cluster-integration/auto-deploy-image" },
   { path = "gitlab-org/cluster-integration/gitlab-agent" },
