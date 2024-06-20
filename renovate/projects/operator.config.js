@@ -38,6 +38,14 @@ module.exports = createServerConfig([
         postUpdateOptions: ["gomodTidy", "gomodUpdateImportPaths"],
         matchDepTypes: ["indirect"],
       },
+      {
+        matchPackagePatterns: [".*k8s.io\/.*"],
+        groupName: "k8s.io"
+      },
+      {
+        matchPackagePatterns: ["github.com\/onsi\/.*"],
+        groupName: "testing"
+      },
     ],
   },
 ]);
