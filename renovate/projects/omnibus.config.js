@@ -32,7 +32,7 @@ module.exports = createServerConfig([
     separateMultipleMajor: true,
     packageRules: [
         {
-          matchPackageNames: ["libxml2"],
+          matchPackageNames: ["GNOME/libxml2"],
           postUpgradeTasks: {
             commands: ["./scripts/renovate/checksums/software/libxml2.sh"],
             fileFilters: ["config/software/libxml2.rb"],
@@ -68,5 +68,8 @@ module.exports = createServerConfig([
       },
     ],
     ...updateDangerReviewComponent,
+  }],
+  {
+    allowedPostUpgradeCommands: ["^./scripts/renovate/checksums/software/libxml2.sh$"],
   },
-]);
+);
