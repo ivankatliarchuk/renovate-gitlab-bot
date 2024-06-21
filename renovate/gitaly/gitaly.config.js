@@ -4,6 +4,7 @@ const {
   defaultLabels,
   availableRouletteReviewerByRole,
 } = require("../lib/shared");
+const { updateDangerReviewComponent } = require("../lib/components");
 
 module.exports = createServerConfig(
   [
@@ -96,6 +97,7 @@ module.exports = createServerConfig(
           depNameTemplate: "git",
           packageNameTemplate: "git/git",
         },
+        ...updateDangerReviewComponent.customManagers,
       ],
     },
   ],

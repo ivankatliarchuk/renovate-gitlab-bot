@@ -4,6 +4,7 @@ const {
   defaultLabels,
   availableRouletteReviewerByRole,
 } = require("../lib/shared");
+const { updateDangerReviewComponent } = require("../lib/components");
 
 module.exports = createServerConfig([
   {
@@ -12,7 +13,8 @@ module.exports = createServerConfig([
     labels: [...defaultLabels, "group::global search"],
     reviewers: availableRouletteReviewerByRole("gitlab-zoekt-indexer", "maintainer"),
     reviewersSampleSize: 1,
-    enabledManagers: ["asdf", "gomod"],
+    enabledManagers: ["asdf", "gomod", "custom.regex"],
+    ...updateDangerReviewComponent,
     prConcurrentLimit: 4,
     semanticCommits: "disabled",
     packageRules: [],

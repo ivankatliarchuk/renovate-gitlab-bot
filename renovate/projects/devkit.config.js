@@ -6,6 +6,7 @@ const {
   baseConfig,
   defaultLabels,
 } = require("../lib/shared");
+const { updateDangerReviewComponent } = require("../lib/components");
 
 module.exports = createServerConfig([
   {
@@ -25,7 +26,7 @@ module.exports = createServerConfig([
     minimumReleaseAge: "3 days",
     rangeStrategy: "auto",
     semanticCommits: "enabled",
-    enabledManagers: ["docker-compose"],
+    enabledManagers: ["docker-compose", "custom.regex"],
     packageRules: [
       {
         matchPackagePatterns: [".+"],
@@ -33,6 +34,7 @@ module.exports = createServerConfig([
         extends: ["schedule:weekly"],
       },
     ],
+    ...updateDangerReviewComponent,
   },
 ],
 {

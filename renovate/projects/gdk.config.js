@@ -4,6 +4,7 @@ const {
   epBaseConfig,
   availableRouletteReviewerByRole,
 } = require("../lib/shared");
+const { updateDangerReviewComponent } = require("../lib/components");
 
 module.exports = createServerConfig([
   {
@@ -12,7 +13,7 @@ module.exports = createServerConfig([
     labels: [...epBaseConfig.labels, "Category:GDK"],
     reviewers: availableRouletteReviewerByRole("gitlab-development-kit"),
     reviewersSampleSize: 1,
-    enabledManagers: ["npm", "bundler"],
+    enabledManagers: ["npm", "bundler", "custom.regex"],
     packageRules: [
       {
         schedule: ["before 05:00 on Monday"],
@@ -22,5 +23,6 @@ module.exports = createServerConfig([
         groupName: "Ruby dependencies",
       },
     ],
+    ...updateDangerReviewComponent,
   },
 ]);

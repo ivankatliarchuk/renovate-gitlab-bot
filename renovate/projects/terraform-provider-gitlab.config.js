@@ -4,6 +4,7 @@ const {
   defaultLabels,
   availableRouletteReviewerByRole,
 } = require("../lib/shared");
+const { updateDangerReviewComponent } = require("../lib/components");
 const fs = require("fs");
 const path = require("path");
 
@@ -27,7 +28,7 @@ module.exports = createServerConfig(
       ],
       rangeStrategy: "bump",
       semanticCommits: "disabled",
-      enabledManagers: ["gitlabci", "gomod"],
+      enabledManagers: ["gitlabci", "gomod", "custom.regex"],
       reviewers: availableRouletteReviewerByRole("terraform-provider-gitlab"),
       reviewersSampleSize: 2,
       packageRules: [
@@ -69,6 +70,7 @@ module.exports = createServerConfig(
           },
         },
       ],
+      ...updateDangerReviewComponent,
     },
   ],
   {

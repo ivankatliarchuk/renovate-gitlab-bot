@@ -7,6 +7,7 @@ const {
 } = require("../lib/shared");
 const { updateNodeJS } = require("../lib/languages");
 const { prGitLabScopeAndLinters } = require("../lib/npm");
+const { updateDangerReviewComponent } = require("../lib/components");
 
 module.exports = createServerConfig([
   {
@@ -27,7 +28,10 @@ module.exports = createServerConfig([
         minimumReleaseAge: "3 weeks",
       },
     ],
-    customManagers: [...updateNodeJS.customManagers()],
+    customManagers: [
+      ...updateNodeJS.customManagers(),
+      ...updateDangerReviewComponent.customManagers,
+    ],
     semanticCommits: "disabled",
   },
 ]);

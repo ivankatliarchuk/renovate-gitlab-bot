@@ -4,6 +4,7 @@ const {
   defaultLabels,
   availableRouletteReviewerByRole,
 } = require("../lib/shared");
+const { updateDangerReviewComponent } = require("../lib/components");
 
 const enableWithBumpStrategy = {
   rangeStrategy: "bump",
@@ -22,7 +23,7 @@ module.exports = createServerConfig([
     ],
     reviewers: availableRouletteReviewerByRole("gitlab-lsp"),
     reviewersSampleSize: 1,
-    enabledManagers: ["npm"],
+    enabledManagers: ["npm", "custom.regex"],
     packageRules: [
       {
         ...enableWithBumpStrategy,
@@ -61,5 +62,6 @@ module.exports = createServerConfig([
         enabled: false,
       },
     ],
+    ...updateDangerReviewComponent,
   },
 ]);

@@ -4,6 +4,7 @@ const {
   baseConfig,
   defaultLabels,
 } = require("../lib/shared");
+const { updateDangerReviewComponent } = require("../lib/components");
 
 module.exports = createServerConfig([
   {
@@ -25,7 +26,7 @@ module.exports = createServerConfig([
     separateMultipleMajor: true,
     minimumReleaseAge: "3 days",
     prConcurrentLimit: 5,
-    enabledManagers: ["bundler"],
+    enabledManagers: ["bundler", "custom.regex"],
     packageRules: [
       {
         matchPackagePatterns: [".+"],
@@ -56,5 +57,6 @@ module.exports = createServerConfig([
         groupName: "Testing gems",
       },
     ],
+    ...updateDangerReviewComponent,
   },
 ]);

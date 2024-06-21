@@ -4,6 +4,7 @@ const {
   epBaseConfig,
   GITLAB_REPO,
 } = require("../lib/shared");
+const { updateDangerReviewComponent  } = require("../lib/components");
 
 module.exports = createServerConfig([
   {
@@ -13,9 +14,10 @@ module.exports = createServerConfig([
     ...epBaseConfig,
     rangeStrategy: "bump",
     branchPrefix: "renovate-ep/",
-    enabledManagers: ["gitlabci-include"],
+    enabledManagers: ["gitlabci-include", "custom.regex"],
     includePaths: [".gitlab/ci/**/*"],
     ignorePaths: [".gitlab/ci/qa-common/*"],
+    ...updateDangerReviewComponent,
     packageRules: [
       {
         enabled: true,
