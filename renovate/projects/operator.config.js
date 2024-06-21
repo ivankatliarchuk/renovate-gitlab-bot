@@ -8,7 +8,6 @@ module.exports = createServerConfig([
   {
     repository: "gitlab-renovate-forks/gitlab-operator",
     ...baseConfig,
-    includePaths: ["**/*"],
     semanticCommits: "disabled",
     reviewers: availableRouletteReviewerByRole("gitlab-operator", [
       "reviewer",
