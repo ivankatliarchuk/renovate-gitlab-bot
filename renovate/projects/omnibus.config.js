@@ -42,6 +42,7 @@ module.exports = createServerConfig([
     ],
     commitBody: "Changelog: changed",
     customManagers: [
+      ...updateDangerReviewComponent.customManagers,
       {
         customType: "regex",
         fileMatch: ["config/software/libxml2.rb"],
@@ -67,7 +68,6 @@ module.exports = createServerConfig([
         versioningTemplate: "regex:^v(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-gitlab$", // only `-gitlab` tags/versions
       },
     ],
-    ...updateDangerReviewComponent,
   }],
   {
     allowedPostUpgradeCommands: ["^./scripts/renovate/checksums/software/libxml2.sh$"],
