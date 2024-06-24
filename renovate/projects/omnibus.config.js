@@ -30,9 +30,19 @@ module.exports = createServerConfig([
     enabledManagers: ["custom.regex"],
     separateMinorPatch: false, // This flag is being evaluated on https://gitlab.com/gitlab-org/frontend/renovate-gitlab-bot/-/issues/68
     separateMultipleMajor: true,
-    packageRules: [],
+    packageRules: [
+        {
+          matchPackageNames: ["GNOME/libxml2"],
+          postUpgradeTasks: {
+            commands: ["./scripts/renovate/checksums/software/libxml2.sh"],
+            fileFilters: ["config/software/libxml2.rb"],
+            executionMode: "branch",
+          }
+        },
+    ],
     commitBody: "Changelog: changed",
     customManagers: [
+      ...updateDangerReviewComponent.customManagers,
       {
         customType: "regex",
         fileMatch: ["config/software/libxml2.rb"],
@@ -58,6 +68,8 @@ module.exports = createServerConfig([
         versioningTemplate: "regex:^v(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-gitlab$", // only `-gitlab` tags/versions
       },
     ],
-    ...updateDangerReviewComponent,
+  }],
+  {
+    allowedPostUpgradeCommands: ["^./scripts/renovate/checksums/software/libxml2.sh$"],
   },
-]);
+);
