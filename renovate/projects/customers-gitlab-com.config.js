@@ -28,7 +28,7 @@ module.exports = createServerConfig([
         matchManagers: ["bundler"],
         groupName: "Ruby dependencies",
         reviewers: availableRouletteReviewerByRole("customers-app", [
-          "maintainer backend",
+          "reviewer backend",
         ]),
       },
       {
