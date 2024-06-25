@@ -13,7 +13,7 @@ module.exports = createServerConfig([
     repository:
       "gitlab-renovate-forks/devkit",
     ...baseConfig,
-    reviewers: ["elwyn-gitlab", "halilcoban", "jiaan", "mwoolf", "rob.hunt"],
+    reviewers: ["jiaan", "mwoolf", "rob.hunt"],
     reviewersSampleSize: 1,
     labels: [
       ...defaultLabels,
