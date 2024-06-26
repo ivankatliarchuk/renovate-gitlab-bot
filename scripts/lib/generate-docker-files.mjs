@@ -57,7 +57,7 @@ RUN mkdir -p "$GOPATH/src" "$GOPATH/bin" \\
   ];
 };
 const UPDATE_GEM_INSTRUCTIONS = `
-RUN gem update --system \\
+RUN gem update --system 3.5.11 \\
   && gem install rubocop \\
   && echo "ruby: $(ruby -v)" \\
   && echo "gem: $(gem -v)" \\
