@@ -6,6 +6,7 @@ const {
   updateNothing,
 } = require("../lib/shared");
 const { prGitLabScopeAndLinters } = require("../lib/npm");
+const { updateDangerReviewComponent } = require("../lib/components");
 
 module.exports = createServerConfig([
   {
@@ -17,7 +18,8 @@ module.exports = createServerConfig([
       "maintainer frontend",
     ]),
     semanticCommits: "disabled",
-    enabledManagers: ["npm", "bundler"],
+    enabledManagers: ["npm", "bundler", "custom.regex"],
+    ...updateDangerReviewComponent,
     packageRules: [
       updateNothing,
       ...prGitLabScopeAndLinters,
