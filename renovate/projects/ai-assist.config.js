@@ -8,13 +8,12 @@ const { updateDangerReviewComponent } = require("../lib/components");
 
 module.exports = createServerConfig([
   {
-    repository: "gitlab-renovate-forks/operator",
+    repository: "gitlab-renovate-forks/ai-assist",
     ...baseConfig,
     labels: [
       ...defaultLabels,
     ],
-    reviewers: availableRouletteReviewerByRole("gitlab-operator", "reviewer"),
-    branchPrefix: "renovate-gems/",
+    reviewers: availableRouletteReviewerByRole("ai-gateway", "reviewer"),
     enabledManagers: ["custom.regex"],
     semanticCommits: "disabled",
     ...updateDangerReviewComponent,
