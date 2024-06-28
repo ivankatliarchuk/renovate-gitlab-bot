@@ -56,6 +56,14 @@ module.exports = createServerConfig([
       },
       {
         customType: "regex",
+        fileMatch: [".gitlab-ci.yml"],
+        matchStrings: ['BUILDKIT_IMAGE: "(?<depName>.*):(?<currentValue>.*)"\\s'],
+        depNameTemplate: "moby/buildkit",
+        datasourceTemplate: "docker",
+        extractVersionTemplate: "^v?(?<version>.*)$",
+      },
+      {
+        customType: "regex",
         enabled: true,
         includePaths: ["kubectl/*", "ci_files/*"],
         fileMatch: [
