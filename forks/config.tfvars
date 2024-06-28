@@ -1,8 +1,6 @@
 // List of project sorted alphabetically.
 projects = [
   { path = "gitlab-org/analytics-section/analytics-manager" },
-  # We cannot fork the following project since it's private
-  # { path = "gitlab-org/analytics-section/product-analytics/analytics-stack" },
   { path = "gitlab-org/analytics-section/product-analytics/devkit" },
   { path = "gitlab-org/analytics-section/product-analytics/helm-charts", fork_path = "product-analytics-helm-charts" },
   { path = "gitlab-org/build/CNG" },
@@ -19,7 +17,6 @@ projects = [
   { path = "gitlab-org/cluster-integration/helm-install-image" },
   { path = "gitlab-org/code-creation/repository-x-ray" },
   { path = "gitlab-org/container-registry" },
-  { path = "gitlab-org/customers-gitlab-com" },
   { path = "gitlab-org/developer-relations/contributor-success/contributors-gitlab-com" },
   { path = "gitlab-org/editor-extensions/gitlab.vim" },
   { path = "gitlab-org/editor-extensions/gitlab-lsp" },
@@ -59,4 +56,8 @@ projects = [
   { path = "gitlab-org/terraform-images" }, // Deprecated
   { path = "gitlab-org/terraform-provider-gitlab" },
   { path = "components/opentofu" },
+  # We cannot fork the following project since they are private
+  # See: https://gitlab.com/gitlab-org/frontend/renovate-gitlab-bot/-/issues/12
+  # { path = "gitlab-org/analytics-section/product-analytics/analytics-stack" },
+  # { path = "gitlab-org/customers-gitlab-com" },
 ]
