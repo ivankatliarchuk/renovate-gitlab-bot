@@ -10,12 +10,11 @@ module.exports = createServerConfig([
   {
     repository: "gitlab-renovate-forks/ai-assist",
     ...baseConfig,
-    labels: [
-      ...defaultLabels,
-    ],
+    labels: [...defaultLabels],
     reviewers: availableRouletteReviewerByRole("ai-gateway", "reviewer"),
     enabledManagers: ["custom.regex"],
-    semanticCommits: "disabled",
+    semanticCommits: "enabled",
+    semanticCommitType: "chore(deps)",
     ...updateDangerReviewComponent,
   },
 ]);
