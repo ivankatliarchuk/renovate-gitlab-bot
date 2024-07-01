@@ -14,7 +14,7 @@ module.exports = createServerConfig([
     reviewers: availableRouletteReviewerByRole("ai-gateway", "reviewer"),
     enabledManagers: ["custom.regex"],
     semanticCommits: "enabled",
-    semanticCommitType: "chore(deps)",
+    semanticCommitType: "chore",
     ...updateDangerReviewComponent,
   },
 ]);
