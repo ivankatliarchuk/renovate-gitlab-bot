@@ -27,6 +27,7 @@ module.exports = createServerConfig([
     commitBody: "Changelog: changed",
     enabledManagers: [
       "gomod",
+      "custom.regex", // used by danger component
       "dockerfile",
     ],
     ...updateDangerReviewComponent,
