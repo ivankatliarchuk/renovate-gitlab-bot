@@ -25,7 +25,10 @@ module.exports = createServerConfig([
       "workflow::ready for review",
     ],
     commitBody: "Changelog: changed",
-    enabledManagers: ["gomod", "custom.regex"],
+    enabledManagers: [
+      "gomod",
+      "dockerfile",
+    ],
     ...updateDangerReviewComponent,
     constraints: {
       "go": "1.22",
@@ -34,6 +37,10 @@ module.exports = createServerConfig([
       "helm.sh/helm/v3", // Helm version needs to stay in sync with GitLab chart helm version
     ],
     packageRules: [
+      {
+        matchManager: ["dockerfile"],
+        ignoreDeps: [ "golang" ], // Golang version is managed in .gitlab-ci.yml.
+      },
       {
         matchManagers: ["gomod"],
         postUpdateOptions: ["gomodTidy", "gomodUpdateImportPaths"],
