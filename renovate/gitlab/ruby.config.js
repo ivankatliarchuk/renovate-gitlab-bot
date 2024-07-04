@@ -121,6 +121,10 @@ module.exports = async function () {
       enabled: true,
       groupName: "Open Telemetry Gems",
     },
+    {
+      matchPackageNames: ["googleauth"],
+      enabled: false,
+    }
   ];
 
   const newPackageRules = Object.entries(gems).flatMap(([name, def]) => {
