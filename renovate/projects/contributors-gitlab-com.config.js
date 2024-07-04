@@ -7,7 +7,7 @@ module.exports = createServerConfig([
   {
     repository: "gitlab-renovate-forks/contributors-gitlab-com",
     ...baseConfig,
-    includePaths: ['contributors/*'],
+    includePaths: ['*', 'contributors/*', 'docker/*'],
     labels: ["Contributor Success"],
     reviewers: ["stingrayza", "leetickett-gitlab"],
     enabledManagers: ["bundler", "npm", "docker-compose", "dockerfile"],
