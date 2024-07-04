@@ -14,6 +14,8 @@ module.exports = createServerConfig([
     reviewers: availableRouletteReviewerByRole("gitlab-development-kit"),
     reviewersSampleSize: 1,
     enabledManagers: ["npm", "bundler", "custom.regex"],
+    postUpdateOptions: ["bundlerConservative"],
+    semanticCommits: "disabled",
     packageRules: [
       {
         schedule: ["before 05:00 on Monday"],
