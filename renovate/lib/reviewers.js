@@ -64,14 +64,14 @@ function ownersByGroup(team, project, group = {}) {
     return [];
   }
   return team.flatMap((person = {}) => {
-    const { specialty: _specialty, projects = {}, available } = person;
-    if (!person.available) {
+    const { specialty, projects = {}, available } = person;
+    if (!available) {
       return [];
     }
 
     // Filter out people who don't have a backend role in the project
     const roles = [projects?.[project] ?? []].flat();
-    if (!roles.some((role) => role.includes("backend"))) {
+    if (project === "gitlab" && !roles.some((role) => role.includes("backend"))) {
       return [];
     }
 
@@ -80,8 +80,8 @@ function ownersByGroup(team, project, group = {}) {
     }
 
     // Filter by specialty / group
-    const specialty = Array.isArray(_specialty) ? _specialty : [_specialty];
-    if (specialty.some((specialty) => specialty?.includes(name))) {
+    const specialties = Array.isArray(specialty) ? specialty : [specialty];
+    if (specialties.some((specialty) => specialty?.includes(name))) {
       return person.username;
     }
 
@@ -110,19 +110,27 @@ async function getGemReviewers(gemFile, project) {
     let owners;
     let group;
     let log = ` | ${name} | :${feature_category} |`;
+    let rouletteProject = project;
 
-    switch (feature_category.status) {
+    if (feature_category === "gitaly") {
+      rouletteProject = "gitaly";
+    }
+
+    switch (feature_category) {
       case "shared":
         log += " available backend maintainers ";
-        owners = availableRouletteReviewerByRole(project, "maintainer backend");
+        owners = availableRouletteReviewerByRole(rouletteProject, "maintainer backend");
+        break;
       case "tooling":
         log += " engineering productivity ";
         owners = epBaseConfig.reviewers;
         console.warn(`\tReviewers: Engineering Productivity`);
+        break;
       default:
         group = groupFromCategory(feature_category, groups);
-        owners = ownersByGroup(team, project, group);
-        log += ` ${group?.name} group `;
+        owners = ownersByGroup(team, rouletteProject, group);
+        log += ` ${group?.name} group (rouletteProject: ${rouletteProject}) `;
+        break;
     }
 
     logs.push(`${log} (${owners.length} people) |`);
