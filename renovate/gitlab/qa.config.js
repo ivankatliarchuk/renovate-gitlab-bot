@@ -69,7 +69,7 @@ module.exports = createServerConfig(
           // cng orchestrator is part of main qa Gemfile
           // when runtime deps are updated, it needs to be reflected in main Gemfile.lock as well
           postUpgradeTasks: {
-            commands: ["bundle install --gemfile ../../Gemfile"],
+            commands: ["bundle install --gemfile qa/Gemfile"],
             fileFilters: ["Gemfile.lock"],
             executionMode: "branch",
           },
