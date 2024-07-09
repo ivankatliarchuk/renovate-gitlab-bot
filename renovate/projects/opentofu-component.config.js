@@ -53,6 +53,9 @@ module.exports = createServerConfig(
           matchStrings: ["latest_version: '(?<currentValue>.*?)'\\n"],
           depNameTemplate: "opentofu/opentofu",
           datasourceTemplate: "github-releases",
+          // NOTE: since OpenTofu is pretty new and fast developing, 
+          // let's include pre-releases.
+          ignoreUnstable: false,
         },
       ],
       postUpgradeTasks: {
