@@ -46,6 +46,7 @@ module.exports = createServerConfig([
         matchManagers: ["gomod"],
         postUpdateOptions: ["gomodTidy", "gomodUpdateImportPaths"],
         matchDepTypes: ["indirect"],
+        commitMessageTopic: "{{{replace 'github.com\/prometheus-operator\/prometheus-operator\/pkg\/apis' 'prom-op-api' depName}}}",
       },
       {
         matchPackagePatterns: [".*k8s.io\/.*"],
