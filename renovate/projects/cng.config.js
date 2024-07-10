@@ -35,6 +35,8 @@ module.exports = createServerConfig([
         matchDatasources: ["docker"],
         matchManagers: ["custom.regex"],
         customChangelogUrl: "https://github.com/moby/moby",
+        minimumReleaseAge: "3 days",
+        internalChecksFilter: "strict",
       },
       {
         matchPackagePatterns: ["rubygems", "bundler"],
