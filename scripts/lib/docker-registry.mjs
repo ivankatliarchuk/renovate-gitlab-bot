@@ -4,6 +4,7 @@ import axios from "axios";
 import tar from "tar-stream";
 import { finished } from "node:stream/promises";
 import gunzip from "gunzip-maybe";
+import pMemoize from "p-memoize";
 
 const ALPINE_MIN_VERSION = "3.16";
 
@@ -108,26 +109,22 @@ async function extractFromLayer({ repository, digest, token }) {
   return version;
 }
 
-const alpineVersionCache = {};
+const getAlpineVersionFromImage = pMemoize(
+  async function getAlpineVersionFromImage(repository, tag = "latest") {
+    const token = await getToken(repository);
 
-async function getAlpineVersionFromImage(repository, tag = "latest") {
-  const key = repository + ":" + tag;
-  if (alpineVersionCache[key]) {
-    return alpineVersionCache[key];
-  }
-  const token = await getToken(repository);
-
-  const { layers } = await getManifest({ repository, tag, token });
-  if (layers[0]) {
-    alpineVersionCache[key] = await extractFromLayer({
-      repository,
-      digest: layers[0].digest,
-      token,
-    });
-    return alpineVersionCache[key];
-  }
-  return null;
-}
+    const { layers } = await getManifest({ repository, tag, token });
+    if (layers[0]) {
+      return await extractFromLayer({
+        repository,
+        digest: layers[0].digest,
+        token,
+      });
+    }
+    return null;
+  },
+  { cacheKey: (args) => args.join(":") }
+);
 
 function toolToRepo(tool) {
   if (tool === "nodejs") {
@@ -137,15 +134,36 @@ function toolToRepo(tool) {
 }
 
 /**
+ * Memoized function to get
+ */
+const getAvailableAlpineVersions = pMemoize(
+  async function getAvailableAlpineVersions() {
+    const validAlpineVersions = [];
+    let alpineVersion = semver.coerce(ALPINE_MIN_VERSION);
+
+    while (
+      await imageExists(
+        "alpine",
+        alpineVersion.major + "." + alpineVersion.minor
+      )
+    ) {
+      validAlpineVersions.unshift(semver.parse(alpineVersion.toString()));
+      alpineVersion.inc("minor");
+    }
+    return validAlpineVersions;
+  }
+);
+
+/**
  * Maps a list of tools (e.g. ['node-16', 'ruby-3.0.5'] to corresponding docker images
- * with matching alpine versions
+ * with matching alpine versions. Highest alpine version is taken.
  */
 export async function mapToolsToDockerImage(toolsRaw) {
   const tools = toolsRaw.map((x) => getVersionRegistry()[x]);
-  let alpineVersion = semver.coerce(ALPINE_MIN_VERSION);
-  alpineVersion: while (
-    await imageExists("alpine", alpineVersion.major + "." + alpineVersion.minor)
-  ) {
+
+  const validAlpineVersions = await getAvailableAlpineVersions();
+
+  alpineVersion: for (const alpineVersion of validAlpineVersions) {
     const alpine = alpineVersion.major + "." + alpineVersion.minor;
 
     const ret = {
@@ -161,14 +179,10 @@ export async function mapToolsToDockerImage(toolsRaw) {
           tag
         );
         const coerced = semver.coerce(alpineVersionFromImage);
-        if (semver.lt(alpineVersion, coerced)) {
-          console.log(
-            `Alpine version in ${repository}:${tag} is ${alpineVersionFromImage}`
-          );
-          alpineVersion = coerced;
-          continue alpineVersion;
-        } else if (alpine === coerced.major + "." + coerced.minor) {
+        if (alpine === coerced.major + "." + coerced.minor) {
           ret[tool] = `${repository}:${tag}`;
+        } else {
+          continue alpineVersion;
         }
       } else if (await imageExists(repository, `${exact}-alpine${alpine}`)) {
         ret[tool] = `${repository}:${exact}-alpine${alpine}`;
