@@ -63,8 +63,6 @@ module.exports = createServerConfig([
           "ruby-lsp",
           "ruby-lsp-rails",
           "ruby-lsp-rspec",
-          "solargraph",
-          "solargraph-rails",
         ],
         enabled: true,
         groupName: "Development gems",
