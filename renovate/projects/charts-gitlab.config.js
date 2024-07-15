@@ -13,7 +13,10 @@ module.exports = createServerConfig([
     labels: [
       ...defaultLabels,
     ],
-    reviewers: availableRouletteReviewerByRole("gitlab-chart", "reviewer"),
+    reviewers: availableRouletteReviewerByRole("gitlab-chart", [
+      "reviewer",
+      "trainee_maintainer",
+    ]),
     enabledManagers: ["custom.regex"],
     semanticCommits: "disabled",
     ...updateDangerReviewComponent,

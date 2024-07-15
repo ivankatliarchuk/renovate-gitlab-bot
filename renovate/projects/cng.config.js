@@ -13,7 +13,6 @@ module.exports = createServerConfig([
     reviewers: availableRouletteReviewerByRole("cng", [
       "reviewer",
       "trainee_maintainer",
-      "maintainer",
     ]),
     reviewersSampleSize: 1,
     labels: [
