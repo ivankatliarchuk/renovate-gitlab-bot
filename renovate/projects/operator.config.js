@@ -13,7 +13,10 @@ module.exports = createServerConfig([
     labels: [
       ...defaultLabels,
     ],
-    reviewers: availableRouletteReviewerByRole("gitlab-operator", "reviewer"),
+    reviewers: availableRouletteReviewerByRole("gitlab-operator", [
+      "reviewer",
+      "trainee_maintainer",
+    ]),
     branchPrefix: "renovate-gems/",
     enabledManagers: ["custom.regex"],
     semanticCommits: "disabled",

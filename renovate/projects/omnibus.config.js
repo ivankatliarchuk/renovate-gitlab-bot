@@ -16,7 +16,6 @@ module.exports = createServerConfig([
     reviewers: availableRouletteReviewerByRole("omnibus-gitlab", [
       "reviewer",
       "trainee_maintainer",
-      "maintainer",
     ]),
     reviewersSampleSize: 1,
     labels: [
