@@ -1,0 +1,17 @@
+# CODEOWNERS for Renovate
+
+
+# Group::* Sections largely intended to provide groups agency in their configuration
+
+# Distribution - matched to project maintainers/* groups
+[Distribution projects] @gitlab-org/distribution
+/renovate/distribution/*
+# Omnibus GitLab
+/renovate/distribution/omnibus.config.js @gitlab-org/distribution @gitlab-org/maintainers/distribution-build
+# Cloud Native GitLab
+/renovate/distribution/cng.config.js @gitlab-org/distribution @gitlab-org/maintainers/cloud-native-images
+/renovate/distribution/charts-gitlab.config.js @gitlab-org/distribution  @gitlab-org/maintainers/helm-charts-gitlab
+# Operator v1
+/renovate/distribution/gitlab-operator.config.js @gitlab-org/distribution @gitlab-org/maintainers/gitlab-operator
+# Operator v2
+/renovate/distribution/operator.config.js @gitlab-org/distribution @gitlab-org/maintainers/gitlab-operator
