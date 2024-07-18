@@ -70,10 +70,10 @@ module.exports = createServerConfig([
       },
       {
         customType: "regex",
-        fileMatch: ["WORKSPACE"],
+        fileMatch: ["MODULE.bazel"],
         matchStrings: [
           "\n#\\s*(?<currentValue>\\S+)\\s+from.*?\n" +
-            "\\s*oci_pull\\(\n" +
+            "\\s*oci\\.pull\\(\n" +
             '\\s*name\\s*=\\s*"[^"]+",\n' +
             '\\s*digest\\s*=\\s*"(?<currentDigest>sha256:[a-f0-9]+)",\n' +
             '\\s*image\\s*=\\s*"(?<image>[^"]+)"',
