@@ -32,6 +32,14 @@ module.exports = createServerConfig([
             executionMode: "branch",
           }
         },
+        {
+          matchPackageNames: ["libarchive/libarchive"],
+          postUpgradeTasks: {
+            commands: ["./scripts/renovate/checksums/software/libarchive.sh"],
+            fileFilters: ["config/software/libarchive.rb"],
+            executionMode: "branch",
+          }
+        },
     ],
     commitBody: "Changelog: changed",
     customManagers: [
@@ -60,9 +68,21 @@ module.exports = createServerConfig([
         packageNameTemplate: "gitlab-org/container-registry",
         versioningTemplate: "regex:^v(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-gitlab$", // only `-gitlab` tags/versions
       },
+      {
+        customType: "regex",
+        fileMatch: ["config/software/libarchive.rb"],
+        matchStrings: [
+          "default_version '(?<currentValue>.*)'",
+        ],
+        depNameTemplate: "libarchive/libarchive",
+        datasourceTemplate: "github-releases",
+      }
     ],
   }],
   {
-    allowedPostUpgradeCommands: ["^./scripts/renovate/checksums/software/libxml2.sh$"],
+    allowedPostUpgradeCommands: [
+      "^./scripts/renovate/checksums/software/libxml2.sh$",
+      "^./scripts/renovate/checksums/software/libarchive.sh$",
+    ],
   },
 );
