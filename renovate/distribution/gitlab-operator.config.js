@@ -43,8 +43,12 @@ module.exports = createServerConfig([
       },
       {
         matchManagers: ["gomod"],
-        postUpdateOptions: ["gomodTidy", "gomodUpdateImportPaths"],
         matchDepTypes: ["indirect"],
+        enabled: true,
+      },
+      {
+        matchManagers: ["gomod"],
+        postUpdateOptions: ["gomodTidy", "gomodUpdateImportPaths"],
         commitMessageTopic: "{{{replace 'github.com\\/prometheus-operator\\/prometheus-operator\\/pkg\\/apis' 'prom-op-api' depName}}}",
       },
       {
