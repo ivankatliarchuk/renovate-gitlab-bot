@@ -120,14 +120,14 @@ module.exports = createServerConfig([
         groupName: "Content Editor Packages - prosemirror",
       },
       {
-        reviewers: ["rob.hunt", "jiaan", "elwyn-gitlab"],
+        reviewers: ["rob.hunt", "jiaan"],
         matchPackagePatterns: ["@cubejs-client/.*"],
         enabled: true,
         groupName: "Analytics dashboards - cubejs",
         addLabels: ["group::product analytics", "frontend"],
       },
       {
-        reviewers: ["rob.hunt", "jiaan", "elwyn-gitlab"],
+        reviewers: ["rob.hunt", "jiaan"],
         matchPackagePatterns: ["gridstack"],
         enabled: true,
         groupName: "Customizable dashboards packages",
