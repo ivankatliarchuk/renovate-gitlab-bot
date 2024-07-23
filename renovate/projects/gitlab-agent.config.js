@@ -39,6 +39,13 @@ module.exports = createServerConfig([
         ],
         reviewers: ["nilieskou"],
       },
+      {
+        matchPackageNames: ["docker"],
+        matchDatasources: ["docker"],
+        matchManagers: ["custom.regex"],
+        customChangelogUrl: "https://github.com/moby/moby",
+        minimumReleaseAge: "1 days",
+      },
     ],
     customManagers: [
       {
