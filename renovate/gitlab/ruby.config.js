@@ -124,6 +124,14 @@ module.exports = async function () {
     {
       matchPackageNames: ["googleauth"],
       enabled: false,
+    },
+    {
+      matchPackageNames: ["google-cloud-compute-v1"],
+      enabled: false,
+    },
+    {
+      matchPackageNames: ["google-cloud-artifact_registry-v1"],
+      enabled: false,
     }
   ];
 
