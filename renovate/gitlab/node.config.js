@@ -136,7 +136,7 @@ module.exports = createServerConfig([
       {
         enabled: true,
         matchPackageNames: ["@sentry/browser", "sentrybrowser"],
-        reviewers: ["samdbeckham", "mrincon", "sheldonled"],
+        reviewers: ["mrincon", "sheldonled"],
         groupName: "Frontend Observability Packages",
         schedule: ["before 05:00 on Monday"],
       },
