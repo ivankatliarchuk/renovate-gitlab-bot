@@ -45,7 +45,7 @@ module.exports = createServerConfig([
         matchManagers: ["gomod"],
         matchDepTypes: ["indirect"],
         enabled: true,
-        groupName: "inidrect",
+        groupName: "indirect",
       },
       {
         matchManagers: ["gomod"],
