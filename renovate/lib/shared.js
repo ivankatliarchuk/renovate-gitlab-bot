@@ -26,6 +26,16 @@ const foundationLabels = [
   "section::dev",
 ];
 
+const distributionLabels = [
+  ...defaultLabels,
+  "group::distribution",
+  "devops::systems",
+  "section::core platform",
+  "type::maintenance",
+  "maintenance::dependency",
+  "workflow::ready for review",
+];
+
 const epBaseConfig = {
   reviewers: [
     "ddieulivol",

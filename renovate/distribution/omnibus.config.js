@@ -1,6 +1,7 @@
 const {
   createServerConfig,
   baseConfig,
+  distributionLabels,
   availableRouletteReviewerByRole,
 } = require("../lib/shared");
 const { updateDangerReviewComponent } = require("../lib/components");
@@ -18,14 +19,7 @@ module.exports = createServerConfig([
       "trainee_maintainer",
     ]),
     reviewersSampleSize: 1,
-    labels: [
-      "group::distribution",
-      "devops::systems",
-      "section::core platform",
-      "type::maintenance",
-      "maintenance::dependency",
-      "workflow::ready for review",
-    ],
+    labels: distributionLabels,
     enabledManagers: ["custom.regex"],
     separateMinorPatch: false, // This flag is being evaluated on https://gitlab.com/gitlab-org/frontend/renovate-gitlab-bot/-/issues/68
     separateMultipleMajor: true,
