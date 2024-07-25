@@ -1,7 +1,7 @@
 const {
   createServerConfig,
   baseConfig,
-  defaultLabels,
+  distributionLabels,
   availableRouletteReviewerByRole,
 } = require("../lib/shared");
 const { updateDangerReviewComponent } = require("../lib/components");
@@ -10,9 +10,7 @@ module.exports = createServerConfig([
   {
     repository: "gitlab-renovate-forks/charts-gitlab",
     ...baseConfig,
-    labels: [
-      ...defaultLabels,
-    ],
+    labels: distributionLabels,
     reviewers: availableRouletteReviewerByRole("gitlab-chart", [
       "reviewer",
       "trainee_maintainer",

@@ -1,6 +1,7 @@
 const {
   createServerConfig,
   baseConfig,
+  distributionLabels,
   availableRouletteReviewerByRole,
 } = require("../lib/shared");
 const { updateDangerReviewComponent } = require("../lib/components");
@@ -15,14 +16,7 @@ module.exports = createServerConfig([
       "trainee_maintainer",
     ]),
     reviewersSampleSize: 1,
-    labels: [
-      "group::distribution",
-      "devops::systems",
-      "section::core platform",
-      "type::maintenance",
-      "maintenance::dependency",
-      "workflow::ready for review",
-    ],
+    labels: distributionLabels,
     commitBody: "Changelog: changed",
     enabledManagers: [
       "gomod",
