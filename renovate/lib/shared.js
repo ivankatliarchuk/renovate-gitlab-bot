@@ -279,6 +279,7 @@ module.exports = {
   createServerConfig,
   defaultLabels,
   foundationLabels,
+  distributionLabels,
   epBaseConfig,
   qaBaseConfig,
   baseConfig,
