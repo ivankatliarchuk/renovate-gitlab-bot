@@ -122,17 +122,14 @@ module.exports = async function () {
       groupName: "Open Telemetry Gems",
     },
     {
-      matchPackageNames: ["googleauth"],
+      matchPackageNames: [
+        "googleauth",
+        "google-cloud-compute-v1",
+        "google-cloud-artifact_registry-v1",
+      ],
+      // re-enable after: https://gitlab.com/gitlab-org/gitlab/-/issues/449019
       enabled: false,
     },
-    {
-      matchPackageNames: ["google-cloud-compute-v1"],
-      enabled: false,
-    },
-    {
-      matchPackageNames: ["google-cloud-artifact_registry-v1"],
-      enabled: false,
-    }
   ];
 
   const newPackageRules = Object.entries(gems).flatMap(([name, def]) => {
