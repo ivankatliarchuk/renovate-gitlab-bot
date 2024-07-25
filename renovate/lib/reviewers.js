@@ -71,7 +71,10 @@ function ownersByGroup(team, project, group = {}) {
 
     // Filter out people who don't have a backend role in the project
     const roles = [projects?.[project] ?? []].flat();
-    if (project === "gitlab" && !roles.some((role) => role.includes("backend"))) {
+    if (
+      project === "gitlab" &&
+      !roles.some((role) => role.includes("backend"))
+    ) {
       return [];
     }
 
@@ -119,7 +122,10 @@ async function getGemReviewers(gemFile, project) {
     switch (feature_category) {
       case "shared":
         log += " available backend maintainers ";
-        owners = availableRouletteReviewerByRole(rouletteProject, "maintainer backend");
+        owners = availableRouletteReviewerByRole(
+          rouletteProject,
+          "maintainer backend"
+        );
         break;
       case "tooling":
         log += " engineering productivity ";
@@ -141,6 +147,7 @@ async function getGemReviewers(gemFile, project) {
         ...def,
         group: group?.name ?? "UNKNOWN",
         owners,
+        groupLabel: group?.label ?? null,
       },
     ];
   });

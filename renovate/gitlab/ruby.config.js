@@ -133,6 +133,8 @@ module.exports = async function () {
   ];
 
   const newPackageRules = Object.entries(gems).flatMap(([name, def]) => {
+    const { groupLabel, owners } = def;
+
     const existingPackageRule = packageRules.findIndex((rule = {}) => {
       const { matchPackageNames, matchPackagePatterns = [] } = rule;
 
@@ -150,26 +152,44 @@ module.exports = async function () {
     });
 
     if (existingPackageRule >= 0) {
-      if (def.owners.length) {
+      let mutated;
+      if (owners.length) {
         console.warn(
-          `gem: ${name} already has a rule, adding ${def.owners.join(
+          `gem: ${name} already has a rule, adding ${owners.join(
             ", "
           )} as reviewers.`
         );
         packageRules[existingPackageRule].reviewers = concatUnique(
           packageRules[existingPackageRule].reviewers ?? [],
-          def.owners
+          owners
         );
-      } else {
+        mutated = true;
+      }
+
+      if (groupLabel) {
+        console.warn(
+          `gem: ${name} already has a rule, adding ${groupLabel} to MR.`
+        );
+        packageRules[existingPackageRule].addLabels = concatUnique(
+          packageRules[existingPackageRule].addLabels ?? [],
+          groupLabel
+        );
+        mutated = true;
+      }
+      if (!mutated) {
         console.warn(`gem: ${name} already has a rule. skipping.`);
       }
+
       return [];
     }
 
     return {
       matchPackageNames: [name],
       enabled: true,
-      reviewers: def.owners.length > 0 ? def.owners : epBaseConfig.reviewers,
+      // Fall back to engineering productivity
+      reviewers: owners.length > 0 ? owners : epBaseConfig.reviewers,
+      // If we have a group label, add it
+      addLabels: groupLabel ? [groupLabel] : [],
       groupName: name,
     };
   });
