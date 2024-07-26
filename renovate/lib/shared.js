@@ -31,8 +31,6 @@ const distributionLabels = [
   "group::distribution",
   "devops::systems",
   "section::core platform",
-  "type::maintenance",
-  "maintenance::dependency",
   "workflow::ready for review",
 ];
 
@@ -279,6 +277,7 @@ module.exports = {
   createServerConfig,
   defaultLabels,
   foundationLabels,
+  distributionLabels,
   epBaseConfig,
   qaBaseConfig,
   baseConfig,
