@@ -21,7 +21,7 @@ module.exports = createServerConfig([
       "section::cd",
     ],
     postUpdateOptions: [],
-    enabledManagers: ["custom.regex"],
+    enabledManagers: ["gomod", "custom.regex"],
     includePaths: ["*", ".gitlab/*"],
     packageRules: [
       {
@@ -45,6 +45,27 @@ module.exports = createServerConfig([
         matchManagers: ["custom.regex"],
         customChangelogUrl: "https://github.com/moby/moby",
         minimumReleaseAge: "1 days",
+      },
+      {
+        // This is our basic rule for Go packages.
+        matchManagers: ["gomod"],
+        enabled: true,
+        commitMessagePrefix: "go:",
+        postUpdateOptions: ["gomodTidy", "gomodUpdateImportPaths"],
+      },
+      {
+        // The Go version cannot easily be upgraded in an automated way as
+        // this needs to be coordinated globally across all GitLab
+        // components. We thus disable upgrades to the Go language version.
+        matchManagers: ["gomod"],
+        matchDepTypes: ["golang"],
+        enabled: false,
+      },
+      {
+        // We don't want transitive dependencies to be updated.
+        matchManagers: ["gomod"],
+        matchDepTypes: ["indirect"],
+        enabled: false,
       },
     ],
     customManagers: [
