@@ -60,6 +60,14 @@ module.exports = createServerConfig([
       },
       {
         customType: "regex",
+        fileMatch: ["docs/ci-variables.md"],
+        matchStrings: ['BUILDKIT_IMAGE[^`]+`(?<depName>[^:]+):v(?<currentValue>.*)`'],
+        depNameTemplate: "moby/buildkit",
+        datasourceTemplate: "docker",
+        extractVersionTemplate: "^v?(?<version>.*)$",
+      },
+      {
+        customType: "regex",
         enabled: true,
         includePaths: ["kubectl/*", "ci_files/*"],
         fileMatch: [
