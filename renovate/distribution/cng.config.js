@@ -53,7 +53,7 @@ module.exports = createServerConfig([
       {
         customType: "regex",
         fileMatch: [".gitlab-ci.yml"],
-        matchStrings: ['BUILDKIT_IMAGE: "(?<depName>.*):(?<currentValue>.*)"\\s'],
+        matchStrings: ['BUILDKIT_IMAGE: "(?<depName>.*):v(?<currentValue>.*)"\\s'],
         depNameTemplate: "moby/buildkit",
         datasourceTemplate: "docker",
         extractVersionTemplate: "^v?(?<version>.*)$",
