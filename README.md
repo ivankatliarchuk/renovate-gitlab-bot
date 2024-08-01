@@ -164,7 +164,7 @@ A master list of upstream repositories is stored in the [forks/config.tfvars](./
 [release-cli_fork]: https://gitlab.com/gitlab-renovate-forks/release-cli
 [release-tools]: https://gitlab.com/gitlab-org/release-tools
 [release-tools_fork]: https://gitlab.com/gitlab-renovate-forks/release-tools
-[gitlab-workspaces-tools]: https://gitlab.com/gitlab-org/remote-development/gitlab-workspaces-tools
+[gitlab-workspaces-tools]: https://gitlab.com/gitlab-org/workspaces/gitlab-workspaces-tools
 [gitlab-workspaces-tools_fork]: https://gitlab.com/gitlab-renovate-forks/gitlab-workspaces-tools
 [rspec_profiling_stats]: https://gitlab.com/gitlab-org/rspec_profiling_stats
 [rspec_profiling_stats_fork]: https://gitlab.com/gitlab-renovate-forks/rspec_profiling_stats
