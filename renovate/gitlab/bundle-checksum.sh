@@ -5,12 +5,14 @@ IFS=$'\n\t'
 # Function to print to stderr, for easier debugging
 function echo_err() { echo "$@" 1>&2; }
 
+DEFAULT_BUNDLE_CHECKSUM_FILE=Gemfile.checksum
+BUNDLE_CHECKSUM_FILE="${BUNDLE_CHECKSUM_FILE:-$DEFAULT_BUNDLE_CHECKSUM_FILE}"
 PWD=$(pwd)
 echo_err "Current working dir: $PWD"
 
 # Check whether we need to execute
-if [ ! -f "Gemfile.checksum" ]; then
-  echo_err "Gemfile.checksum does not exist; skipping regeneration"
+if [ ! -f "${BUNDLE_CHECKSUM_FILE}" ]; then
+  echo_err "${BUNDLE_CHECKSUM_FILE} does not exist; skipping regeneration"
 
   # Exit early
   exit 0
