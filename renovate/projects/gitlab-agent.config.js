@@ -10,6 +10,9 @@ module.exports = createServerConfig([
   {
     repository: "gitlab-renovate-forks/gitlab-agent",
     ...baseConfig,
+    // NOTE: groups k8s.io Go package updates, see
+    // https://docs.renovatebot.com/presets-group/#groupkubernetes
+    extends: ['group:kubernetes'],
     reviewers: availableRouletteReviewerByRole("gitlab-agent", [
       "maintainer",
       "trainee_maintainer",
