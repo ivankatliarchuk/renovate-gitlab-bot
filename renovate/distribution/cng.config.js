@@ -60,6 +60,7 @@ module.exports = createServerConfig([
       },
       {
         customType: "regex",
+        includePaths: ["docs/*"],
         fileMatch: ["docs/ci-variables.md"],
         matchStrings: ['BUILDKIT_IMAGE[^`]+`(?<depName>[^:]+):v(?<currentValue>.*)`'],
         depNameTemplate: "moby/buildkit",
