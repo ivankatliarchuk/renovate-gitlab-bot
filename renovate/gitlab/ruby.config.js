@@ -208,9 +208,11 @@ module.exports = async function () {
         rangeStrategy: "update-lockfile",
         postUpdateOptions: ["bundlerConservative"],
         postUpgradeTasks: {
-          // Regenerate files that may change due to the dependency updates.
-          commands: ["/workdir/renovate/gitlab/bundle-checksum.sh"],
-          fileFilters: ["Gemfile.checksum"],
+          commands: [
+            "/workdir/renovate/gitlab/bundle-checksum.sh", // Regenerate files that may change due to the dependency updates.
+            "/workdir/renovate/gitlab/bundle-install-next.sh", // Generate lock and checksum files for Gemfile.next.
+          ],
+          fileFilters: ["Gemfile.checksum", "Gemfile.next.lock", "Gemfile.next.checksum"],
         },
         packageRules: [updateNothing, ...packageRules, ...newPackageRules],
       },
@@ -218,6 +220,7 @@ module.exports = async function () {
     {
       allowedPostUpgradeCommands: [
         "^/workdir/renovate/gitlab/bundle-checksum.sh$", // Allow to regenerate Gemfile.checksum.
+        "^/workdir/renovate/gitlab/bundle-install-next.sh$", // Allow to regenerate Gemfile.next.lock and Gemfile.next.checksum.
       ],
     }
   );
