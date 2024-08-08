@@ -70,6 +70,17 @@ module.exports = createServerConfig([
       },
       {
         customType: "regex",
+        fileMatch: ["config/software/pgbouncer-exporter.rb"],
+        matchStrings: [
+          "Gitlab::Version.new\\('pgbouncer-exporter', '(?<currentValue>.*)'\\)"
+        ],
+        depNameTemplate: "pgbouncer_exporter",
+        datasourceTemplate: "gitlab-tags",
+        registryUrlTemplate: "https://gitlab.com/",
+        packageNameTemplate: "gitlab-org/build/omnibus-mirror/pgbouncer_exporter",
+      },
+      {
+        customType: "regex",
         fileMatch: ["config/software/libarchive.rb"],
         matchStrings: [
           "default_version '(?<currentValue>.*)'",
