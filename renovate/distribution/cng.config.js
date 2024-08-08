@@ -52,7 +52,7 @@ module.exports = createServerConfig([
       },
       {
         customType: "regex",
-        includePaths: ["docs/*"],
+        includePaths: ["*", "docs/*"],
         fileMatch: [".gitlab-ci.yml", "docs/ci-variables.md"],
         matchStrings: [
           'BUILDKIT_IMAGE: "(?<depName>.*):v(?<currentValue>.*)"\\s',
