@@ -97,7 +97,15 @@ module.exports = createServerConfig([
         ],
         depNameTemplate: "libarchive/libarchive",
         datasourceTemplate: "github-releases",
-      }
+      },
+      {
+        customType: "regex",
+        fileMatch: ["config/software/rubygems.rb"],
+        matchStrings: ["default_version '(?<currentValue>.*)'"],
+        depNameTemplate: "rubygems",
+        packageNameTemplate: "rubygems-update",
+        datasourceTemplate: "rubygems",
+      },
     ],
   }],
   {
