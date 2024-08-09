@@ -70,13 +70,42 @@ module.exports = createServerConfig([
       },
       {
         customType: "regex",
+        fileMatch: ["config/software/pgbouncer.rb"],
+        matchStrings: [
+          "Gitlab::Version.new\\('pgbouncer', '(?<currentValue>.*)'\\)"
+        ],
+        depNameTemplate: "pgbouncer/pgbouncer",
+        datasourceTemplate: "github-releases",
+        versioningTemplate: "regex:^pgbouncer_(?<major>\\d+)\\_(?<minor>\\d+)\\_(?<patch>\\d+)$",
+      },
+      {
+        customType: "regex",
+        fileMatch: ["config/software/pgbouncer-exporter.rb"],
+        matchStrings: [
+          "Gitlab::Version.new\\('pgbouncer-exporter', '(?<currentValue>.*)'\\)"
+        ],
+        depNameTemplate: "pgbouncer_exporter",
+        datasourceTemplate: "gitlab-tags",
+        registryUrlTemplate: "https://gitlab.com/",
+        packageNameTemplate: "gitlab-org/build/omnibus-mirror/pgbouncer_exporter",
+      },
+      {
+        customType: "regex",
         fileMatch: ["config/software/libarchive.rb"],
         matchStrings: [
           "default_version '(?<currentValue>.*)'",
         ],
         depNameTemplate: "libarchive/libarchive",
         datasourceTemplate: "github-releases",
-      }
+      },
+      {
+        customType: "regex",
+        fileMatch: ["config/software/rubygems.rb"],
+        matchStrings: ["default_version '(?<currentValue>.*)'"],
+        depNameTemplate: "rubygems",
+        packageNameTemplate: "rubygems-update",
+        datasourceTemplate: "rubygems",
+      },
     ],
   }],
   {
