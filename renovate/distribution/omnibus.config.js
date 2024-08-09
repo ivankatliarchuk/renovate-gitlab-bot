@@ -76,6 +76,7 @@ module.exports = createServerConfig([
         ],
         depNameTemplate: "pgbouncer/pgbouncer",
         datasourceTemplate: "github-releases",
+        extractVersionTemplate: "^(?<version>.+?)(?:-fixed)?$",
         versioningTemplate: "regex:^pgbouncer_(?<major>\\d+)\\_(?<minor>\\d+)\\_(?<patch>\\d+)$",
       },
       {
