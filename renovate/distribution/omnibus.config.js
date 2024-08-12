@@ -107,6 +107,15 @@ module.exports = createServerConfig([
         packageNameTemplate: "rubygems-update",
         datasourceTemplate: "rubygems",
       },
+      {
+        customType: "regex",
+        fileMatch: ["config/software/prometheus.rb"],
+        matchStrings: [
+          "Gitlab::Version.new\\('prometheus', '(?<currentValue>.*)'\\)"
+        ],
+        depNameTemplate: "prometheus/prometheus",
+        datasourceTemplate: "github-releases",
+      },
     ],
   }],
   {
