@@ -41,6 +41,17 @@ module.exports = createServerConfig([
         matchManagers: ["custom.regex"],
         allowedVersions: "<2.0.0",
       },
+      {
+        matchPackageNames: ["Azure/azure-storage-azcopy"],
+        postUpgradeTasks: {
+          commands: ["./.gitlab/scripts/renovate/azcopy_update_url.sh"],
+          fileFilters: [
+            "gitlab-toolbox/Dockerfile",
+            "gitlab-toolbox/Dockerfile.build.ubi",
+          ],
+          executionMode: "branch",
+        }
+      },
     ],
     customManagers: [
       {
@@ -134,7 +145,28 @@ module.exports = createServerConfig([
         depNameTemplate: "aws/aws-cli",
         datasourceTemplate: "github-tags",
       },
+      {
+        enabled: true,
+        customType: "regex",
+        includePaths: [
+          "gitlab-toolbox/*",
+        ],
+        matchStrings: [
+          "ARG AZCOPY_STATIC_URL=\".*_(?<currentValue>.*).tar.gz\"",
+        ],
+        fileMatch: [
+          "^gitlab-toolbox/Dockerfile$",
+          "^gitlab-toolbox/Dockerfile.build.ubi8$",
+        ],
+        depNameTemplate: "Azure/azure-storage-azcopy",
+        datasourceTemplate: "github-releases",
+      },
       ...updateDangerReviewComponent.customManagers,
     ],
+  }],
+  {
+    allowedPostUpgradeCommands: [
+      "^./.gitlab/scripts/renovate/azcopy_update_url.sh$",
+    ],
   },
-]);
+);
