@@ -160,6 +160,47 @@ module.exports = createServerConfig([
         depNameTemplate: "Azure/azure-storage-azcopy",
         datasourceTemplate: "github-releases",
       },
+      {
+        enabled: true,
+        customType: "regex",
+        includePaths: [
+          "kubectl/*",
+          "ci_files/*",
+        ],
+        fileMatch: [
+          "^kubectl/Dockerfile$",
+          "^kubectl/Dockerfile.build.ubi8$",
+          "^ci_files/variables.yml$",
+        ],
+        matchStrings: [
+          // With quotes
+          "YQ_VERSION=\"(?<currentValue>.*)\"",
+          // Without quotes
+          "YQ_VERSION=(?<currentValue>\\d+\\.\\d+\\.\\d+)",
+          "YQ_VERSION: \"(?<currentValue>.*)\"",
+        ],
+        depNameTemplate: "mikefarah/yq",
+        datasourceTemplate: "github-releases",
+      },
+      {
+        enabled: true,
+        customType: "regex",
+        includePaths: [
+          "gitlab-exporter/*",
+          "ci_files/*",
+        ],
+        fileMatch: [
+          "^gitlab-exporter/Dockerfile$",
+          "^gitlab-exporter/Dockerfile.build.ubi8$",
+          "^ci_files/variables.yml$",
+        ],
+        matchStrings: [
+          "GITLAB_EXPORTER_VERSION=(?<currentValue>\\d+\\.\\d+\\.\\d+)",
+          "GITLAB_EXPORTER_VERSION: \"(?<currentValue>.*)\"",
+        ],
+        depNameTemplate: "gitlab-exporter",
+        datasourceTemplate: "rubygems",
+      },
       ...updateDangerReviewComponent.customManagers,
     ],
   }],
