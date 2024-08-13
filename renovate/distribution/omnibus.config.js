@@ -12,6 +12,7 @@ module.exports = createServerConfig([
     ...baseConfig,
     includePaths: [
       'config/software/*',
+      'config/templates/omnibus-gitlab-gems/*'
     ],
     semanticCommits: "disabled",
     reviewers: availableRouletteReviewerByRole("omnibus-gitlab", [
@@ -20,7 +21,7 @@ module.exports = createServerConfig([
     ]),
     reviewersSampleSize: 1,
     labels: distributionLabels,
-    enabledManagers: ["custom.regex"],
+    enabledManagers: ["custom.regex", "bundler"], 
     separateMinorPatch: false, // This flag is being evaluated on https://gitlab.com/gitlab-org/frontend/renovate-gitlab-bot/-/issues/68
     separateMultipleMajor: true,
     packageRules: [
@@ -40,6 +41,22 @@ module.exports = createServerConfig([
             executionMode: "branch",
           }
         },
+        {
+          // In bundler we use an allowlist
+          // Default is to exclude dependency from renovate
+          matchManagers: ["bundler"],
+          matchPackagePatterns: ["*"],
+          enabled: false
+        },
+        {
+          matchManagers: ["bundler"],
+          fileMatch: ["config/templates/omnibus-gitlab-gems/Gemfile"],
+          matchDepNames: ["chef"],
+          groupName: "chef",
+          enabled: true,
+          versioning: "ruby",
+          rangeStrategy: "replace"
+        }
     ],
     commitBody: "Changelog: changed",
     customManagers: [
@@ -116,7 +133,7 @@ module.exports = createServerConfig([
         depNameTemplate: "prometheus/prometheus",
         datasourceTemplate: "github-releases",
       },
-    ],
+    ]
   }],
   {
     allowedPostUpgradeCommands: [
