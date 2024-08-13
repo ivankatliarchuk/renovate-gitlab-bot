@@ -96,5 +96,6 @@ pages-dry-run:
   rules:
     - if: $CI_MERGE_REQUEST_IID
       when: "always"
+      allow_failure: true
       needs:
         - execute

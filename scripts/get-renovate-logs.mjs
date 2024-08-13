@@ -65,6 +65,12 @@ function getMapFn(configs) {
 
   return async function getData(job) {
     const configPath = jobNameToConfigPaths[job.name];
+    if (!configPath) {
+      console.warn(
+        `Could not find config for job ${job.name}. Likely the config was deleted.`
+      );
+      return [];
+    }
     const relPath = path.relative(ROOT_DIR, configPath);
     //TODO: If we run it in-line, this won't be there...
     const finishedAt = new Date(job?.finished_at);
