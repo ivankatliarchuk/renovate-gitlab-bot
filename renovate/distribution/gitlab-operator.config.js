@@ -36,10 +36,11 @@ module.exports = createServerConfig([
         ignoreDeps: [ "golang" ], // Golang version is managed in .gitlab-ci.yml.
       },
       {
+        // At the moment we have too many indirect dependencies which would
+        // need updating, therefore we disable them (for now)
         matchManagers: ["gomod"],
         matchDepTypes: ["indirect"],
-        enabled: true,
-        groupName: "indirect",
+        enabled: false,
       },
       {
         matchManagers: ["gomod"],
