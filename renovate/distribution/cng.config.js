@@ -79,7 +79,7 @@ module.exports = createServerConfig([
         includePaths: ["kubectl/*", "ci_files/*"],
         fileMatch: [
           "kubectl/Dockerfile",
-          "kubectl/Dockerfile.build.ubi8",
+          "kubectl/Dockerfile.build.ubi",
           "ci_files/variables.yml",
         ],
         matchStrings: [
@@ -99,7 +99,7 @@ module.exports = createServerConfig([
         includePaths: ["gitlab-ruby/*"],
         fileMatch: [
           "gitlab-ruby/Dockerfile",
-          "gitlab-ruby/Dockerfile.build.ubi8",
+          "gitlab-ruby/Dockerfile.build.ubi",
         ],
         matchStrings: [
           "ARG RUBYGEMS_VERSION=(?<currentValue>.*)\n"
@@ -114,7 +114,7 @@ module.exports = createServerConfig([
         includePaths: ["gitlab-ruby/*"],
         fileMatch: [
           "gitlab-ruby/Dockerfile",
-          "gitlab-ruby/Dockerfile.build.ubi8",
+          "gitlab-ruby/Dockerfile.build.ubi",
         ],
         matchStrings: [
           "ARG BUNDLER_VERSION=(?<currentValue>.*)\n"
@@ -132,7 +132,7 @@ module.exports = createServerConfig([
         ],
         fileMatch: [
           "^gitlab-toolbox/Dockerfile$",
-          "^gitlab-toolbox/Dockerfile.build.ubi8$",
+          "^gitlab-toolbox/Dockerfile.build.ubi$",
           "^ci_files/variables.yml$",
         ],
         matchStrings: [
@@ -155,7 +155,7 @@ module.exports = createServerConfig([
         ],
         fileMatch: [
           "^gitlab-toolbox/Dockerfile$",
-          "^gitlab-toolbox/Dockerfile.build.ubi8$",
+          "^gitlab-toolbox/Dockerfile.build.ubi$",
         ],
         depNameTemplate: "Azure/azure-storage-azcopy",
         datasourceTemplate: "github-releases",
@@ -169,7 +169,7 @@ module.exports = createServerConfig([
         ],
         fileMatch: [
           "^kubectl/Dockerfile$",
-          "^kubectl/Dockerfile.build.ubi8$",
+          "^kubectl/Dockerfile.build.ubi$",
           "^ci_files/variables.yml$",
         ],
         matchStrings: [
@@ -191,7 +191,7 @@ module.exports = createServerConfig([
         ],
         fileMatch: [
           "^gitlab-exporter/Dockerfile$",
-          "^gitlab-exporter/Dockerfile.build.ubi8$",
+          "^gitlab-exporter/Dockerfile.build.ubi$",
           "^ci_files/variables.yml$",
         ],
         matchStrings: [
