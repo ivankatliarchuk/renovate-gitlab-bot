@@ -46,14 +46,14 @@ module.exports = createServerConfig([
           // Default is to exclude dependency from renovate
           matchManagers: ["bundler"],
           matchPackagePatterns: ["*"],
+          excludePackagePatterns: ["chef"],
           enabled: false
         },
         {
           matchManagers: ["bundler"],
           fileMatch: ["config/templates/omnibus-gitlab-gems/Gemfile"],
-          matchDepNames: ["chef"],
+          matchPackagePatterns: ["chef"],
           groupName: "chef",
-          enabled: true,
           versioning: "ruby",
           rangeStrategy: "replace"
         }
