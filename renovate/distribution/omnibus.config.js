@@ -149,8 +149,8 @@ module.exports = createServerConfig([
         fileMatch: ["config/software/chef-gem.rb"], 
         matchStrings: [ "default_version '(?<currentValue>.*)'"],
         registryUrlTemplate: "https://packagecloud.io/cinc-project/stable",
+        packageNameTemplate: "chef",
         depNameTemplate: "chef",
-        packageNameTemplate: "cinc-project/chef",
         datasourceTemplate: "rubygems",
       }
     ]
