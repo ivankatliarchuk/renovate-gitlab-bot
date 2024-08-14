@@ -210,7 +210,7 @@ module.exports = createServerConfig([
           "ARG GIT_FILTER_REPO_VERSION=\"(?<currentValue>.*)\"",
           "GIT_FILTER_REPO_VERSION: \"(?<currentValue>.*)\"",
         ],
-        depNameTemplate: "newren/git-filter-repo",
+        depNameTemplate: "git-filter-repo",
         datasourceTemplate: "pypi",
       },
       ...updateDangerReviewComponent.customManagers,
