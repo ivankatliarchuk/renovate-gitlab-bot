@@ -146,7 +146,6 @@ module.exports = createServerConfig([
         datasourceTemplate: "github-tags",
       },
       {
-        enabled: true,
         customType: "regex",
         includePaths: [
           "gitlab-toolbox/*",
