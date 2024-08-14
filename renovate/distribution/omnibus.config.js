@@ -133,6 +133,26 @@ module.exports = createServerConfig([
         depNameTemplate: "prometheus/prometheus",
         datasourceTemplate: "github-releases",
       },
+      {
+        customType: "regex",
+        fileMatch: ["config/software/chef-acme.rb"], 
+        matchStrings: [
+          "Gitlab::Version.new\\(name, 'v(?<currentValue>.*)'\\)"
+        ],
+        depNameTemplate: "chef-acme",
+        packageNameTemplate: "schubergphilis/chef-acme",
+        datasourceTemplate: "github-tags",
+        extractVersionTemplate: "^v?(?<version>.+)$",
+      },
+      {
+        customType: "regex",
+        fileMatch: ["config/software/chef-gem.rb"], 
+        matchStrings: [ "default_version '(?<currentValue>.*)'"],
+        registryUrlTemplate: "https://packagecloud.io/cinc-project/stable",
+        depNameTemplate: "chef",
+        packageNameTemplate: "cinc-project/chef",
+        datasourceTemplate: "rubygems",
+      }
     ]
   }],
   {
