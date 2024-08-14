@@ -75,11 +75,10 @@ module.exports = createServerConfig([
       },
       {
         customType: "regex",
-        enabled: true,
         includePaths: ["kubectl/*", "ci_files/*"],
         fileMatch: [
           "kubectl/Dockerfile",
-          "kubectl/Dockerfile.build.ubi8",
+          "kubectl/Dockerfile.build.ubi",
           "ci_files/variables.yml",
         ],
         matchStrings: [
@@ -95,11 +94,10 @@ module.exports = createServerConfig([
       },
       {
         customType: "regex",
-        enabled: true,
         includePaths: ["gitlab-ruby/*"],
         fileMatch: [
           "gitlab-ruby/Dockerfile",
-          "gitlab-ruby/Dockerfile.build.ubi8",
+          "gitlab-ruby/Dockerfile.build.ubi",
         ],
         matchStrings: [
           "ARG RUBYGEMS_VERSION=(?<currentValue>.*)\n"
@@ -110,11 +108,10 @@ module.exports = createServerConfig([
       },
       {
         customType: "regex",
-        enabled: true,
         includePaths: ["gitlab-ruby/*"],
         fileMatch: [
           "gitlab-ruby/Dockerfile",
-          "gitlab-ruby/Dockerfile.build.ubi8",
+          "gitlab-ruby/Dockerfile.build.ubi",
         ],
         matchStrings: [
           "ARG BUNDLER_VERSION=(?<currentValue>.*)\n"
@@ -124,7 +121,6 @@ module.exports = createServerConfig([
         datasourceTemplate: "rubygems",
       },
       {
-        enabled: true,
         customType: "regex",
         includePaths: [
           "gitlab-toolbox/*",
@@ -132,7 +128,7 @@ module.exports = createServerConfig([
         ],
         fileMatch: [
           "^gitlab-toolbox/Dockerfile$",
-          "^gitlab-toolbox/Dockerfile.build.ubi8$",
+          "^gitlab-toolbox/Dockerfile.build.ubi$",
           "^ci_files/variables.yml$",
         ],
         matchStrings: [
@@ -155,10 +151,49 @@ module.exports = createServerConfig([
         ],
         fileMatch: [
           "^gitlab-toolbox/Dockerfile$",
-          "^gitlab-toolbox/Dockerfile.build.ubi8$",
+          "^gitlab-toolbox/Dockerfile.build.ubi$",
         ],
         depNameTemplate: "Azure/azure-storage-azcopy",
         datasourceTemplate: "github-releases",
+      },
+      {
+        customType: "regex",
+        includePaths: [
+          "kubectl/*",
+          "ci_files/*",
+        ],
+        fileMatch: [
+          "^kubectl/Dockerfile$",
+          "^kubectl/Dockerfile.build.ubi$",
+          "^ci_files/variables.yml$",
+        ],
+        matchStrings: [
+          // With quotes
+          "YQ_VERSION=\"(?<currentValue>.*)\"",
+          // Without quotes
+          "YQ_VERSION=(?<currentValue>\\d+\\.\\d+\\.\\d+)",
+          "YQ_VERSION: \"(?<currentValue>.*)\"",
+        ],
+        depNameTemplate: "mikefarah/yq",
+        datasourceTemplate: "github-releases",
+      },
+      {
+        customType: "regex",
+        includePaths: [
+          "gitlab-exporter/*",
+          "ci_files/*",
+        ],
+        fileMatch: [
+          "^gitlab-exporter/Dockerfile$",
+          "^gitlab-exporter/Dockerfile.build.ubi$",
+          "^ci_files/variables.yml$",
+        ],
+        matchStrings: [
+          "GITLAB_EXPORTER_VERSION=(?<currentValue>\\d+\\.\\d+\\.\\d+)",
+          "GITLAB_EXPORTER_VERSION: \"(?<currentValue>.*)\"",
+        ],
+        depNameTemplate: "gitlab-exporter",
+        datasourceTemplate: "rubygems",
       },
       ...updateDangerReviewComponent.customManagers,
     ],
