@@ -75,7 +75,6 @@ module.exports = createServerConfig([
       },
       {
         customType: "regex",
-        enabled: true,
         includePaths: ["kubectl/*", "ci_files/*"],
         fileMatch: [
           "kubectl/Dockerfile",
@@ -95,7 +94,6 @@ module.exports = createServerConfig([
       },
       {
         customType: "regex",
-        enabled: true,
         includePaths: ["gitlab-ruby/*"],
         fileMatch: [
           "gitlab-ruby/Dockerfile",
@@ -110,7 +108,6 @@ module.exports = createServerConfig([
       },
       {
         customType: "regex",
-        enabled: true,
         includePaths: ["gitlab-ruby/*"],
         fileMatch: [
           "gitlab-ruby/Dockerfile",
@@ -124,7 +121,6 @@ module.exports = createServerConfig([
         datasourceTemplate: "rubygems",
       },
       {
-        enabled: true,
         customType: "regex",
         includePaths: [
           "gitlab-toolbox/*",
@@ -161,7 +157,6 @@ module.exports = createServerConfig([
         datasourceTemplate: "github-releases",
       },
       {
-        enabled: true,
         customType: "regex",
         includePaths: [
           "kubectl/*",
@@ -183,7 +178,6 @@ module.exports = createServerConfig([
         datasourceTemplate: "github-releases",
       },
       {
-        enabled: true,
         customType: "regex",
         includePaths: [
           "gitlab-exporter/*",
