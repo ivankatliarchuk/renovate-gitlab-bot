@@ -152,8 +152,17 @@ module.exports = createServerConfig([
         packageNameTemplate: "chef",
         depNameTemplate: "chef",
         datasourceTemplate: "rubygems",
-      }
-    ]
+      },
+      {
+        customType: "regex",
+        fileMatch: ["config/software/git-filter-repo.rb"],
+        matchStrings: [
+          "Gitlab::Version.new\\('git-filter-repo', 'v(?<currentValue>.*)'\\)"
+        ],
+        depNameTemplate: "git-filter-repo",
+        datasourceTemplate: "pypi",
+      },
+    ],
   }],
   {
     allowedPostUpgradeCommands: [
