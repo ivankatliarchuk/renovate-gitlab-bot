@@ -195,6 +195,24 @@ module.exports = createServerConfig([
         depNameTemplate: "gitlab-exporter",
         datasourceTemplate: "rubygems",
       },
+      {
+        customType: "regex",
+        includePaths: [
+          "gitaly/*",
+          "ci_files/*",
+        ],
+        fileMatch: [
+          "^gitaly/Dockerfile$",
+          "^gitaly/Dockerfile.build.ubi$",
+          "^ci_files/variables.yml$",
+        ],
+        matchStrings: [
+          "ARG GIT_FILTER_REPO_VERSION=\"(?<currentValue>.*)\"",
+          "GIT_FILTER_REPO_VERSION: \"(?<currentValue>.*)\"",
+        ],
+        depNameTemplate: "git-filter-repo",
+        datasourceTemplate: "pypi",
+      },
       ...updateDangerReviewComponent.customManagers,
     ],
   }],

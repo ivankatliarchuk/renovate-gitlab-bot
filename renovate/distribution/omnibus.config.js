@@ -116,6 +116,15 @@ module.exports = createServerConfig([
         depNameTemplate: "prometheus/prometheus",
         datasourceTemplate: "github-releases",
       },
+      {
+        customType: "regex",
+        fileMatch: ["config/software/git-filter-repo.rb"],
+        matchStrings: [
+          "Gitlab::Version.new\\('git-filter-repo', 'v(?<currentValue>.*)'\\)"
+        ],
+        depNameTemplate: "git-filter-repo",
+        datasourceTemplate: "pypi",
+      },
     ],
   }],
   {
