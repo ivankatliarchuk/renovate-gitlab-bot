@@ -46,7 +46,7 @@ module.exports = createServerConfig([
           // Default is to exclude dependency from renovate
           matchManagers: ["bundler"],
           matchPackagePatterns: ["*"],
-          excludePackagePatterns: ["chef", "ohai","mixlib-log"],
+          excludePackagePatterns: ["chef", "ohai"],
           enabled: false
         },
         {
