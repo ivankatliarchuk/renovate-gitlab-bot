@@ -52,6 +52,15 @@ module.exports = createServerConfig([
           executionMode: "branch",
         }
       },
+      {
+        matchPackageNames: [
+          "hairyhenderson/gomplate"
+        ],
+        matchManagers: [
+          "custom.regex"
+        ],
+        allowedVersions: "<4.0.0"
+      },
     ],
     customManagers: [
       {
@@ -212,6 +221,56 @@ module.exports = createServerConfig([
         ],
         depNameTemplate: "git-filter-repo",
         datasourceTemplate: "pypi",
+      },
+      {
+        customType: "regex",
+        includePaths: [
+          "gitlab-toolbox/*",
+        ],
+        fileMatch: [
+          "^gitlab-toolbox/Dockerfile$",
+          "^gitlab-toolbox/Dockerfile.build.ubi$"
+        ],
+        matchStrings: [
+          "GSUTIL_VERSION=\"?(?<currentValue>[^\"\\s]+)\"?"
+        ],
+        depNameTemplate: "GoogleCloudPlatform/gsutil",
+        datasourceTemplate: "github-tags",
+        extractVersionTemplate: "^v?(?<version>.*)$"
+      },
+      {
+        customType: "regex",
+        includePaths: [
+          "gitlab-exiftool/*",
+        ],
+        fileMatch: [
+          "^gitlab-exiftool/Dockerfile$",
+          "^gitlab-exiftool/Dockerfile.build.ubi$"
+        ],
+        matchStrings: [
+          "EXIFTOOL_VERSION=\"?(?<currentValue>[^\"\\s]+)\"?"
+        ],
+        depNameTemplate: "exiftool/exiftool",
+        datasourceTemplate: "github-tags"
+      },
+      {
+        customType: "regex",
+        includePaths: [
+          "gitlab-gomplate/*",
+          "ci_files/*",
+        ],
+        fileMatch: [
+          "^gitlab-gomplate/Dockerfile$",
+          "^gitlab-gomplate/Dockerfile.build.ubi$",
+          "^ci_files/variables.yml$"
+        ],
+        matchStrings: [
+          "GOMPLATE_VERSION=\"?v(?<currentValue>[^\"\\s]+)\"?",
+          "GOMPLATE_VERSION: \"v(?<currentValue>\\S+)\""
+        ],
+        depNameTemplate: "hairyhenderson/gomplate",
+        datasourceTemplate: "github-tags",
+        extractVersionTemplate: "^v?(?<version>.*)$"
       },
       ...updateDangerReviewComponent.customManagers,
     ],
