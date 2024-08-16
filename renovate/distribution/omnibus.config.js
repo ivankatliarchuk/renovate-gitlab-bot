@@ -51,6 +51,7 @@ module.exports = createServerConfig([
         },
         {
           matchManagers: ["bundler"],
+          matchPaths: ["config/templates/omnibus-gitlab-gems/*"]
           fileMatch: ["config/templates/omnibus-gitlab-gems/Gemfile"],
           matchPackagePatterns: ["chef", "ohai", "mixlib-log"],
           groupName: "chef",
