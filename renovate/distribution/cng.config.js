@@ -71,6 +71,12 @@ module.exports = createServerConfig([
         matchManagers: ["custom.regex"],
         allowedVersions: "<1.23.0",
       },
+      {
+        matchPackageNames: [
+          "python"
+        ],
+        allowedVersions: "<3.10.0"
+      },
     ],
     customManagers: [
       {
@@ -332,6 +338,103 @@ module.exports = createServerConfig([
         depNameTemplate: "golang/go",
         datasourceTemplate: "github-tags",
         extractVersionTemplate: "go(?<version>\\d+\\.\\d+\\.\\d+)"
+      },
+      {
+        customType: "regex",
+        includePaths: [
+          "ci_files/*",
+          "gitlab-container-registry/*",
+        ],
+        fileMatch: [
+          "^ci_files/variables.yml$",
+          "^gitlab-container-registry/Dockerfile$",
+          "^gitlab-container-registry/Dockerfile.build.ubi$"
+        ],
+        matchStrings: [
+          "GITLAB_CONTAINER_REGISTRY_VERSION: \"(?<currentValue>\\S+)\"",
+          "ARG REGISTRY_VERSION=(?<currentValue>\\S+)"
+        ],
+        depNameTemplate: "gitlab-org/container-registry",
+        datasourceTemplate: "gitlab-tags",
+        versioningTemplate: "regex:^v(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-gitlab$"
+      },
+      {
+        customType: "regex",
+        includePaths: [
+          "gitlab-mailroom/*",
+        ],
+        fileMatch: [
+          "^gitlab-mailroom/scripts/install-dependencies$",
+          "^gitlab-mailroom/Dockerfile.build.ubi$"
+        ],
+        matchStrings: [
+          "redis-client:(?<currentValue>\\S+)"
+        ],
+        depNameTemplate: "redis-client",
+        packageNameTemplate: "redis-client",
+        datasourceTemplate: "rubygems"
+      },
+      {
+        customType: "regex",
+        includePaths: [
+          "gitlab-mailroom/*",
+        ],
+        fileMatch: [
+          "^gitlab-mailroom/scripts/install-dependencies$",
+          "^gitlab-mailroom/Dockerfile.build.ubi$"
+        ],
+        matchStrings: [
+          "redis:(?<currentValue>\\S+)"
+        ],
+        depNameTemplate: "redis",
+        packageNameTemplate: "redis",
+        datasourceTemplate: "rubygems"
+      },
+      {
+        customType: "regex",
+        includePaths: [
+          "ci_files/*",
+          "gitlab-toolbox/*",
+        ],
+        fileMatch: [
+          "^ci_files/variables.yml$",
+          "^gitlab-toolbox/Dockerfile$",
+          "^gitlab-toolbox/Dockerfile.build.ubi$"
+        ],
+        matchStrings: [
+          "S3CMD_VERSION: \"(?<currentValue>\\S+)\"",
+          "ARG S3CMD_VERSION=\"?(?<currentValue>[^\"\\s]+)\"?"
+        ],
+        depNameTemplate: "s3tools/s3cmd",
+        datasourceTemplate: "github-tags",
+        extractVersionTemplate: "^v?(?<version>.*)$"
+      },
+      {
+        customType: "regex",
+        includePaths: [
+          "ci_files/*",
+          "gitlab-python/*",
+          "gitlab-sidekiq/*",
+          "gitlab-toolbox/*",
+          "gitaly/*",
+          "gitlab-webservice/*",
+        ],
+        fileMatch: [
+          "^gitlab-python/Dockerfile$",
+          "^gitlab-python/Dockerfile.build.ubi$",
+          "^gitlab-sidekiq/Dockerfile$",
+          "^gitlab-toolbox/Dockerfile$",
+          "^gitaly/Dockerfile$",
+          "^gitlab-webservice/Dockerfile$",
+          "^ci_files/variables.yml$"
+        ],
+        matchStrings: [
+          "ARG PYTHON_VERSION=\"?(?<currentValue>[^\"\\s]+)\"?",
+          "ARG PYTHON_TAG=\"?(?<currentValue>[^\"\\s]+)\"?",
+          "PYTHON_VERSION: \"(?<currentValue>\\S+)\""
+        ],
+        datasourceTemplate: "python-version",
+        depNameTemplate: "python"
       },
       ...updateDangerReviewComponent.customManagers,
     ],
