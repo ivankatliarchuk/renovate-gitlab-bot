@@ -12,6 +12,7 @@ module.exports = createServerConfig([
     ...baseConfig,
     includePaths: [
       'config/software/*',
+      'config/templates/omnibus-gitlab-gems/*'
     ],
     semanticCommits: "disabled",
     reviewers: availableRouletteReviewerByRole("omnibus-gitlab", [
@@ -20,7 +21,7 @@ module.exports = createServerConfig([
     ]),
     reviewersSampleSize: 1,
     labels: distributionLabels,
-    enabledManagers: ["custom.regex"],
+    enabledManagers: ["custom.regex", "bundler"], 
     separateMinorPatch: false, // This flag is being evaluated on https://gitlab.com/gitlab-org/frontend/renovate-gitlab-bot/-/issues/68
     separateMultipleMajor: true,
     packageRules: [
@@ -40,6 +41,23 @@ module.exports = createServerConfig([
             executionMode: "branch",
           }
         },
+        {
+          // In bundler we use an allowlist
+          // Default is to exclude dependency from renovate
+          matchManagers: ["bundler"],
+          matchPackagePatterns: ["*"],
+          excludePackagePatterns: ["chef", "ohai"],
+          enabled: false
+        },
+        {
+          matchManagers: ["bundler"],
+          matchPaths: ["config/templates/omnibus-gitlab-gems/*"],
+          fileMatch: ["config/templates/omnibus-gitlab-gems/Gemfile"],
+          matchPackagePatterns: ["chef", "ohai", "mixlib-log"],
+          groupName: "chef",
+          versioning: "ruby",
+          rangeStrategy: "replace"
+        }
     ],
     commitBody: "Changelog: changed",
     customManagers: [
@@ -115,6 +133,26 @@ module.exports = createServerConfig([
         ],
         depNameTemplate: "prometheus/prometheus",
         datasourceTemplate: "github-releases",
+      },
+      {
+        customType: "regex",
+        fileMatch: ["config/software/chef-acme.rb"], 
+        matchStrings: [
+          "Gitlab::Version.new\\(name, 'v(?<currentValue>.*)'\\)"
+        ],
+        depNameTemplate: "chef-acme",
+        packageNameTemplate: "schubergphilis/chef-acme",
+        datasourceTemplate: "github-tags",
+        extractVersionTemplate: "^v?(?<version>.+)$",
+      },
+      {
+        customType: "regex",
+        fileMatch: ["config/software/chef-gem.rb"], 
+        matchStrings: [ "default_version '(?<currentValue>.*)'"],
+        registryUrlTemplate: "https://packagecloud.io/cinc-project/stable",
+        packageNameTemplate: "chef",
+        depNameTemplate: "chef",
+        datasourceTemplate: "rubygems",
       },
       {
         customType: "regex",
