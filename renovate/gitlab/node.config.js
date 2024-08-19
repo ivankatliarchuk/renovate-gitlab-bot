@@ -51,6 +51,12 @@ module.exports = createServerConfig([
         groupName: "GitLab Web IDE",
       },
       {
+        enabled: true,
+        reviewers: ["himkp"],
+        matchPackageNames: ["@gitlab/query-language"],
+        groupName: "GitLab Query Language",
+      },
+      {
         ...foundationPackages,
         matchPackagePatterns: [
           ".*-loader",
