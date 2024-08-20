@@ -80,6 +80,8 @@ export default {
     },
   },
   async created() {
+    const url = new URL(window.location.href);
+    this.searchString = url.searchParams.get("search") || "";
     this.repositories = await this.dataPromise;
   },
   mounted() {
@@ -96,6 +98,17 @@ export default {
   },
   beforeMount() {
     performance.mark("mountStart");
+  },
+  watch: {
+    searchString() {
+      const url = new URL(window.location.href);
+      if (this.searchString) {
+        url.searchParams.set("search", this.searchString);
+      } else {
+        url.searchParams.delete("search");
+      }
+      history.replaceState({}, "", url.href);
+    },
   },
   computed: {
     showAll() {
