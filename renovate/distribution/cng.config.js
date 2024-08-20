@@ -119,28 +119,18 @@ module.exports = createServerConfig([
       },
       {
         customType: "regex",
-        includePaths: ["gitlab-ruby/*"],
-        fileMatch: [
-          "gitlab-ruby/Dockerfile",
-          "gitlab-ruby/Dockerfile.build.ubi",
-        ],
-        matchStrings: [
-          "ARG RUBYGEMS_VERSION=(?<currentValue>.*)\n"
-        ],
+        includePaths: ["ci_files/*"],
+        fileMatch: ["ci_files/variables.yml"],
+        matchStrings: ["RUBYGEMS_VERSION: \"(?<currentValue>.*)\""],
         depNameTemplate: "rubygems",
         packageNameTemplate: "rubygems-update",
         datasourceTemplate: "rubygems",
       },
       {
         customType: "regex",
-        includePaths: ["gitlab-ruby/*"],
-        fileMatch: [
-          "gitlab-ruby/Dockerfile",
-          "gitlab-ruby/Dockerfile.build.ubi",
-        ],
-        matchStrings: [
-          "ARG BUNDLER_VERSION=(?<currentValue>.*)\n"
-        ],
+        includePaths: ["ci_files/*"],
+        fileMatch: ["ci_files/variables.yml"],
+        matchStrings: ["BUNDLER_VERSION: \"(?<currentValue>.*)\""],
         depNameTemplate: "bundler",
         packageNameTemplate: "bundler",
         datasourceTemplate: "rubygems",
