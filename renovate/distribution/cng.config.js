@@ -351,6 +351,7 @@ module.exports = createServerConfig([
       {
         customType: "regex",
         includePaths: [
+          "gitlab-mailroom/scripts/*",
           "gitlab-mailroom/*",
         ],
         fileMatch: [
@@ -367,6 +368,7 @@ module.exports = createServerConfig([
       {
         customType: "regex",
         includePaths: [
+          "gitlab-mailroom/scripts/*",
           "gitlab-mailroom/*",
         ],
         fileMatch: [
