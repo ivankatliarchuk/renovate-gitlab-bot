@@ -52,7 +52,7 @@ module.exports = createServerConfig([
         {
           matchPaths: ["config/templates/omnibus-gitlab-gems/*"],
           fileMatch: ["config/templates/omnibus-gitlab-gems/Gemfile"],
-          matchPackagePatterns: ["chef", "ohai", "mixlib-log"],
+          matchPackagePatterns: ["chef", "ohai"],
           groupName: "chef",
           versioning: "ruby",
           rangeStrategy: "replace"
