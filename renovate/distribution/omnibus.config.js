@@ -8,7 +8,7 @@ const { updateDangerReviewComponent } = require("../lib/components");
 
 module.exports = createServerConfig([
   {
-    repository: "axugl/omnibus-gitlab-downgrade-test",
+    repository: "gitlab-renovate-forks/omnibus-gitlab",
     ...baseConfig,
     includePaths: [
       'config/software/*',
