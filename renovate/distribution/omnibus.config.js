@@ -50,12 +50,36 @@ module.exports = createServerConfig([
           enabled: false
         },
         {
-          matchPaths: ["config/templates/omnibus-gitlab-gems/*"],
-          fileMatch: ["config/templates/omnibus-gitlab-gems/Gemfile"],
+          matchfileNames: [
+            "config/templates/omnibus-gitlab-gems/Gemfile"
+          ],
           matchPackagePatterns: ["chef", "ohai"],
-          groupName: "chef",
           versioning: "ruby",
           rangeStrategy: "replace"
+        },
+        {
+          matchfileNames: [
+            "config/templates/omnibus-gitlab-gems/Gemfile",
+            "config/software/chef-gem.rb"
+          ],
+          matchPackagePatterns: ["chef", "ohai"],
+          groupName: "chef",
+        },
+        {
+          matchfileNames: [
+            "config/templates/omnibus-gitlab-gems/Gemfile"
+          ],
+          matchPackagePatterns: ["acme"],
+          versioning: "ruby",
+          rangeStrategy: "replace"
+        },
+        {
+          matchfileNames: [
+            "config/templates/omnibus-gitlab-gems/Gemfile",
+            "config/software/chef-acme.rb"
+          ],
+          matchPackagePatterns: ["acme"],
+          groupName: "acme"
         }
     ],
     commitBody: "Changelog: changed",
