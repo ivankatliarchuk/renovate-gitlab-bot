@@ -187,6 +187,17 @@ module.exports = createServerConfig([
         packageNameTemplate: "gitlab-org/build/omnibus-mirror/alertmanager",
         datasourceTemplate: "gitlab-tags",
         extractVersionTemplate: "^v?(?<version>.+)$"
+      },
+      {
+        customType: "regex",
+        fileMatch: ["config/software/compat_resource.rb"], 
+        matchStrings: [
+          "Gitlab::Version.new\\('compat_resource', 'v(?<currentValue>.*)'\\)"
+        ],
+        depNameTemplate: "compat_resource",
+        packageNameTemplate: "chef-boneyard/compat_resource",
+        datasourceTemplate: "github-tags",
+        extractVersionTemplate: "^v?(?<version>.+)$",
       }
     ],
   }],
