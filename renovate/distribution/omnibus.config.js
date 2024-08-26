@@ -12,7 +12,9 @@ module.exports = createServerConfig([
     ...baseConfig,
     includePaths: [
       'config/software/*',
-      'config/templates/omnibus-gitlab-gems/*'
+      'config/templates/omnibus-gitlab-gems/*',
+      'files/gitlab-ctl-commands-ee/lib/*',
+      'files/gitlab-cookbooks/**'
     ],
     semanticCommits: "disabled",
     reviewers: availableRouletteReviewerByRole("omnibus-gitlab", [
@@ -198,6 +200,24 @@ module.exports = createServerConfig([
         packageNameTemplate: "chef-boneyard/compat_resource",
         datasourceTemplate: "github-tags",
         extractVersionTemplate: "^v?(?<version>.+)$",
+      },
+      {
+        customType: "regex",
+        fileMatch: [
+          "config/software/consul.rb",
+          "files/gitlab-ctl-commands-ee/lib/consul_download.rb",
+          "files/gitlab-cookbooks/consul/libraries/consul_helper.rb"
+        ], 
+        matchStrings: [
+          "Gitlab::Version.new\\('consul', 'v(?<currentValue>.*)'\\)",
+          "DEFAULT_VERSION = (?<currentValue>.*)",
+          "SUPPORTED_MINOR = (?<currentValue>.*)"
+        ],
+        depNameTemplate: "consul",
+        packageNameTemplate: "hashicorp/consul",
+        datasourceTemplate: "github-tags",
+        extractVersionTemplate: "^v?(?<version>.+)$",
+        allowedVersions: "< 1.19.0"
       }
     ],
   }],
