@@ -45,7 +45,7 @@ module.exports = createServerConfig([
           // In bundler we use an allowlist. Default to exclude. 
           matchManagers: ["bundler"],
           matchPackagePatterns: ["*"],
-          excludePackagePatterns: ["chef", "ohai"],
+          excludePackagePatterns: ["chef", "ohai", "acme-client"],
           enabled: false
         },
         {
