@@ -15,3 +15,8 @@
 /renovate/distribution/gitlab-operator.config.js @gitlab-org/distribution @gitlab-org/maintainers/gitlab-operator
 # Operator v2
 /renovate/distribution/operator.config.js @gitlab-org/distribution @gitlab-org/maintainers/gitlab-operator
+
+[group::environments projects]
+/renovate/projects/gitlab-agent.config.js @ash2k @timofurrer @takax @tigerwnz
+/renovate/projects/gitlab-agent-chart.config.js @ash2k @timofurrer @takax @tigerwnz
+/renovate/projects/gitlab-agent-ci-image.config.js @ash2k @timofurrer @takax @tigerwnz
