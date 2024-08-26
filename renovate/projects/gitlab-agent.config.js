@@ -70,6 +70,18 @@ module.exports = createServerConfig([
         matchDepTypes: ["indirect"],
         enabled: false,
       },
+      {
+        groupName: "opentelemetry packages",
+        groupSlug: "otel-go",
+        matchDatasources: [
+          "go",
+        ],
+        matchPackageNames: [
+          "go.opentelemetry.io/otel",
+          "go.opentelemetry.io/otel**",
+          "go.opentelemetry.io/contrib/**",
+        ],
+      },
     ],
     customManagers: [
       {
