@@ -62,7 +62,7 @@ module.exports = createServerConfig([
             "config/templates/omnibus-gitlab-gems/Gemfile",
             "config/software/chef-gem.rb"
           ],
-          matchPackagePatterns: ["chef", "ohai"],
+          matchPackagePatterns: ["chef"],
           groupName: "chef",
         },
         {
@@ -74,6 +74,8 @@ module.exports = createServerConfig([
           rangeStrategy: "replace"
         },
         {
+          // groups are overriden based on order, therefore
+          // chef-acme will be in the acme group, not chef.
           matchfileNames: [
             "config/templates/omnibus-gitlab-gems/Gemfile",
             "config/software/chef-acme.rb"
