@@ -177,6 +177,17 @@ module.exports = createServerConfig([
         depNameTemplate: "git-filter-repo",
         datasourceTemplate: "pypi",
       },
+      {
+        customType: "regex",
+        fileMatch: ["config/software/alertmanager.rb"], 
+        matchStrings: [
+          "Gitlab::Version.new\\('alertmanager', '(?<currentValue>.*)'\\)"
+        ],
+        depNameTemplate: "alertmanager",
+        packageNameTemplate: "gitlab-org/build/omnibus-mirror/alertmanager",
+        datasourceTemplate: "gitlab-tags",
+        extractVersionTemplate: "^v?(?<version>.+)$"
+      }
     ],
   }],
   {
