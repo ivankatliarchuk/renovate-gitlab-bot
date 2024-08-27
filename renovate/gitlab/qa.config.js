@@ -16,6 +16,7 @@ module.exports = createServerConfig(
       branchPrefix: "renovate-qa/",
       enabledManagers: ["bundler", "gitlabci-include", "custom.regex"],
       postUpdateOptions: ["bundlerConservative"],
+      semanticCommitType: "QA",
       includePaths: [
         "qa/*",
         "qa/gdk/*",
