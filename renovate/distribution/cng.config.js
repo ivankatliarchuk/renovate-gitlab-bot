@@ -248,13 +248,16 @@ module.exports = createServerConfig([
         customType: "regex",
         includePaths: [
           "gitlab-exiftool/*",
+          "ci_files/*",
         ],
         fileMatch: [
           "^gitlab-exiftool/Dockerfile$",
-          "^gitlab-exiftool/Dockerfile.build.ubi$"
+          "^gitlab-exiftool/Dockerfile.build.ubi$",
+          "^ci_files/variables.yml$"
         ],
         matchStrings: [
-          "EXIFTOOL_VERSION=\"?(?<currentValue>[^\"\\s]+)\"?"
+          "EXIFTOOL_VERSION=\"?(?<currentValue>[^\"\\s]+)\"?",
+          "EXIFTOOL_VERSION: \"(?<currentValue>.*)\"",
         ],
         depNameTemplate: "exiftool/exiftool",
         datasourceTemplate: "github-tags"
