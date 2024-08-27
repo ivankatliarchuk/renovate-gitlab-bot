@@ -82,6 +82,17 @@ module.exports = createServerConfig([
           "go.opentelemetry.io/contrib/**",
         ],
       },
+      {
+        groupName: "google.golang.org/genproto/googleapis/rpc package",
+        groupSlug: "genproto-googleapis-rpc",
+        matchDatasources: [
+          "go",
+        ],
+        matchPackageNames: [
+          "google.golang.org/genproto/googleapis/rpc",
+        ],
+        extends: ["schedule:weekly"],
+      },
     ],
     customManagers: [
       {
