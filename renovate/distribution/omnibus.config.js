@@ -59,7 +59,7 @@ module.exports = createServerConfig([
             "config/templates/omnibus-gitlab-gems/Gemfile",
             "config/software/chef-gem.rb"
           ],
-          matchPackagePatterns: ["chef"],
+          matchPackagePatterns: ["chef", "ohai"],
           groupName: "chef",
         },
         {
