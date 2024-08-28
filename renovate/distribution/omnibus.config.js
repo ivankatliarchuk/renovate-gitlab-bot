@@ -42,8 +42,7 @@ module.exports = createServerConfig([
           }
         },
         {
-          // In bundler we use an allowlist
-          // Default is to exclude dependency from renovate
+          // In bundler we use an allowlist. Default to exclude. 
           matchManagers: ["bundler"],
           matchPackagePatterns: ["*"],
           excludePackagePatterns: ["chef", "ohai"],
@@ -51,12 +50,27 @@ module.exports = createServerConfig([
         },
         {
           matchManagers: ["bundler"],
-          matchPaths: ["config/templates/omnibus-gitlab-gems/*"],
-          fileMatch: ["config/templates/omnibus-gitlab-gems/Gemfile"],
-          matchPackagePatterns: ["chef", "ohai", "mixlib-log"],
-          groupName: "chef",
+          matchPackagePatterns: ["*"],
           versioning: "ruby",
           rangeStrategy: "replace"
+        },
+        {
+          matchfileNames: [
+            "config/templates/omnibus-gitlab-gems/Gemfile",
+            "config/software/chef-gem.rb"
+          ],
+          matchPackagePatterns: ["chef", "ohai"],
+          groupName: "chef",
+        },
+        {
+          // groups are overriden based on order, therefore
+          // chef-acme will be in the acme group, not chef.
+          matchfileNames: [
+            "config/templates/omnibus-gitlab-gems/Gemfile",
+            "config/software/chef-acme.rb"
+          ],
+          matchPackagePatterns: ["acme"],
+          groupName: "acme"
         }
     ],
     commitBody: "Changelog: changed",
