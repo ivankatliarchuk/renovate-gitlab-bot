@@ -73,6 +73,14 @@ module.exports = createServerConfig([
           ],
           matchPackagePatterns: ["acme"],
           groupName: "acme"
+        },
+        {
+          matchPackagePatterns: [ "^chef$", "^chef-bin$", "^ohai$" ],
+          allowedVersions: "< 19.0"
+        },
+        {
+          matchPackagePatterns: [ "^consul$"],
+          allowedVersions: "< 1.19.0"
         }
     ],
     commitBody: "Changelog: changed",
@@ -217,7 +225,6 @@ module.exports = createServerConfig([
         packageNameTemplate: "hashicorp/consul",
         datasourceTemplate: "github-tags",
         extractVersionTemplate: "^v?(?<version>.+)$",
-        allowedVersions: "< 1.19.0"
       }
     ],
   }],
