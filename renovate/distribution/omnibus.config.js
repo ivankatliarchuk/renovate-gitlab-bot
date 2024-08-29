@@ -12,7 +12,9 @@ module.exports = createServerConfig([
     ...baseConfig,
     includePaths: [
       'config/software/*',
-      'config/templates/omnibus-gitlab-gems/*'
+      'config/templates/omnibus-gitlab-gems/*',
+      'files/gitlab-ctl-commands-ee/lib/*',
+      'files/gitlab-cookbooks/consul/**'
     ],
     semanticCommits: "disabled",
     reviewers: availableRouletteReviewerByRole("omnibus-gitlab", [
@@ -45,7 +47,7 @@ module.exports = createServerConfig([
           // In bundler we use an allowlist. Default to exclude. 
           matchManagers: ["bundler"],
           matchPackagePatterns: ["*"],
-          excludePackagePatterns: ["chef", "ohai"],
+          excludePackagePatterns: ["chef", "ohai", "acme-client"],
           enabled: false
         },
         {
@@ -71,6 +73,14 @@ module.exports = createServerConfig([
           ],
           matchPackagePatterns: ["acme"],
           groupName: "acme"
+        },
+        {
+          matchPackagePatterns: [ "^chef$", "^chef-bin$", "^ohai$" ],
+          allowedVersions: "< 19.0"
+        },
+        {
+          matchPackagePatterns: [ "^consul$"],
+          allowedVersions: "< 1.19.0"
         }
     ],
     commitBody: "Changelog: changed",
@@ -177,6 +187,45 @@ module.exports = createServerConfig([
         depNameTemplate: "git-filter-repo",
         datasourceTemplate: "pypi",
       },
+      {
+        customType: "regex",
+        fileMatch: ["config/software/alertmanager.rb"], 
+        matchStrings: [
+          "Gitlab::Version.new\\('alertmanager', '(?<currentValue>.*)'\\)"
+        ],
+        depNameTemplate: "alertmanager",
+        packageNameTemplate: "gitlab-org/build/omnibus-mirror/alertmanager",
+        datasourceTemplate: "gitlab-tags",
+        extractVersionTemplate: "^v?(?<version>.+)$"
+      },
+      {
+        customType: "regex",
+        fileMatch: ["config/software/compat_resource.rb"], 
+        matchStrings: [
+          "Gitlab::Version.new\\('compat_resource', 'v(?<currentValue>.*)'\\)"
+        ],
+        depNameTemplate: "compat_resource",
+        packageNameTemplate: "chef-boneyard/compat_resource",
+        datasourceTemplate: "github-tags",
+        extractVersionTemplate: "^v?(?<version>.+)$",
+      },
+      {
+        customType: "regex",
+        fileMatch: [
+          "config/software/consul.rb",
+          "files/gitlab-ctl-commands-ee/lib/consul_download.rb",
+          "files/gitlab-cookbooks/consul/libraries/consul_helper.rb"
+        ], 
+        matchStrings: [
+          "Gitlab::Version.new\\('consul', 'v(?<currentValue>.*)'\\)",
+          "DEFAULT_VERSION = (?<currentValue>.*)",
+          "SUPPORTED_MINOR = (?<currentValue>.*)"
+        ],
+        depNameTemplate: "consul",
+        packageNameTemplate: "hashicorp/consul",
+        datasourceTemplate: "github-tags",
+        extractVersionTemplate: "^v?(?<version>.+)$",
+      }
     ],
   }],
   {
