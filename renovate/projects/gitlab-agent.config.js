@@ -104,6 +104,16 @@ module.exports = createServerConfig([
         ],
         extends: ["schedule:weekly"],
       },
+      {
+        groupName: "github.com/redis/rueidis packages",
+        groupSlug: "redis-rueidis-go",
+        matchDatasources: [
+          "go",
+        ],
+        matchPackageNames: [
+          "github.com/redis/rueidis",
+        ],
+      }
     ],
     customManagers: [
       {
