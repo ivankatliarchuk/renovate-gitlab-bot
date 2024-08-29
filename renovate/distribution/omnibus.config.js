@@ -14,7 +14,7 @@ module.exports = createServerConfig([
       'config/software/*',
       'config/templates/omnibus-gitlab-gems/*',
       'files/gitlab-ctl-commands-ee/lib/*',
-      'files/gitlab-cookbooks/**'
+      'files/gitlab-cookbooks/consul/**'
     ],
     semanticCommits: "disabled",
     reviewers: availableRouletteReviewerByRole("omnibus-gitlab", [
