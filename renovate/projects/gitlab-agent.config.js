@@ -93,6 +93,17 @@ module.exports = createServerConfig([
         ],
         extends: ["schedule:weekly"],
       },
+      {
+        groupName: "google.golang.org/api package",
+        groupSlug: "google-golang-org-api",
+        matchDatasources: [
+          "go",
+        ],
+        matchPackageNames: [
+          "google.golang.org/api",
+        ],
+        extends: ["schedule:weekly"],
+      },
     ],
     customManagers: [
       {
