@@ -112,6 +112,7 @@ module.exports = createServerConfig([
         ],
         matchPackageNames: [
           "github.com/redis/rueidis",
+          "github.com/redis/rueidis**",
         ],
       }
     ],
