@@ -161,9 +161,9 @@ module.exports = createServerConfig([
       {
         customType: "regex",
         includePaths: ["internal/module/starboard_vulnerability/agent/*"],
-        fileMatch: ["internal/module/starboard_vulnerability/agent/scanner.go"],
+        fileMatch: ["internal/module/starboard_vulnerability/agent/worker.go"],
         matchStrings: [
-          '\n\\s*trivyK8sWrapper\\s*=\\s*"registry.gitlab.com/security-products/trivy-k8s-wrapper:(?<currentValue>.*)"\n',
+          '\n\\s*defaultTrivyK8sWrapperImageTag\\s*=\\s*"(?<currentValue>.*)"\n',
         ],
         datasourceTemplate: "gitlab-releases", // although it is a docker image, use gitlab-releases so we get richer information in the MR
         registryUrlTemplate: "https://gitlab.com",
