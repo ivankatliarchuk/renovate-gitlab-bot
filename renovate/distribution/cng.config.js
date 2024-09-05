@@ -282,6 +282,36 @@ module.exports = createServerConfig([
         extractVersionTemplate: "^v?(?<version>.*)$"
       },
       {
+          customType: "regex",
+          fileMatch: [
+              "ci_files/variables.yml",
+              "gitlab-go/Dockerfile.build.fips"
+          ],
+          matchStrings: [
+              "GO_FIPS_TAG:\\s*\"(?<currentValue>\\S+)\"",
+              "GO_FIPS_TAG=(?<currentValue>\\S+)"
+          ],
+          depNameTemplate: "golang-fips/go",
+          packageNameTemplate: "golang-fips/go",
+          datasourceTemplate: "github-tags",
+          versioningTemplate: "regex:^go(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-(?<build>\\d+)-openssl-fips$"
+      },
+      {
+          customType: "regex",
+          fileMatch: [
+              "ci_files/variables.yml",
+              "gitlab-go/Dockerfile.build.fips"
+          ],
+          matchStrings: [
+              "ARG GO_VERSION=(?<currentValue>\\S+)\\n",
+              "GO_FIPS_VERSION:\\s*\"(?<currentValue>\\S+)\"\\n"
+          ],
+          depNameTemplate: "golang-fips/go-version",
+          packageNameTemplate: "golang-fips/go",
+          datasourceTemplate: "github-tags",
+          extractVersionTemplate: "^go(?<version>.*)-\\d+-openssl-fips$"
+      },
+      {
         customType: "regex",
         includePaths: [
           "ci_files/*",
