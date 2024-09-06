@@ -65,11 +65,13 @@ module.exports = createServerConfig([
         matchPackageNames: ["golang-fips/go"],
         matchManagers: ["custom.regex"],
         allowedVersions: "<1.23.0",
+        groupName: "golang-fips/go"
       },
       {
         matchPackageNames: ["golang/go"],
         matchManagers: ["custom.regex"],
         allowedVersions: "<1.23.0",
+	groupName: "golang/go"
       },
       {
         matchPackageNames: [
