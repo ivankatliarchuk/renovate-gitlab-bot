@@ -16,8 +16,10 @@ if [ ! -f "Gemfile.next" ]; then
   exit 0
 fi
 
-echo_err "Running bundle lock for Gemfile.next"
+echo_err "Copy Gemfile.lock to Gemfile.next.lock"
+cp Gemfile.lock Gemfile.next.lock
 
+echo_err "Running bundle lock for Gemfile.next"
 BUNDLE_GEMFILE=Gemfile.next bundle lock
 
 echo_err "Running bundle-checksum.sh for Gemfile.next"
