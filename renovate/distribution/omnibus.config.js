@@ -225,7 +225,16 @@ module.exports = createServerConfig([
         packageNameTemplate: "hashicorp/consul",
         datasourceTemplate: "github-tags",
         extractVersionTemplate: "^v?(?<version>.+)$",
-      }
+      },
+      {
+        customType: "regex",
+        fileMatch: ["config/software/exiftool.rb"],
+        matchStrings: [
+          "Gitlab::Version.new\\('exiftool', '(?<currentValue>.*)'\\)"
+        ],
+        depNameTemplate: "exiftool/exiftool",
+        datasourceTemplate: "github-tags",
+      },
     ],
   }],
   {
