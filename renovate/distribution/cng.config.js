@@ -72,9 +72,7 @@ module.exports = createServerConfig([
         allowedVersions: "<1.23.0",
       },
       {
-        matchPackageNames: [
-          "python"
-        ],
+        matchPackageNames: ["python/cpython"],
         allowedVersions: "<3.10.0"
       },
     ],
@@ -428,8 +426,8 @@ module.exports = createServerConfig([
           "ARG PYTHON_TAG=\"?(?<currentValue>[^\"\\s]+)\"?",
           "PYTHON_VERSION: \"(?<currentValue>\\S+)\""
         ],
-        datasourceTemplate: "python-version",
-        depNameTemplate: "python"
+        depNameTemplate: "python/cpython",
+        datasourceTemplate: "github-tags",
       },
       ...updateDangerReviewComponent.customManagers,
     ],
