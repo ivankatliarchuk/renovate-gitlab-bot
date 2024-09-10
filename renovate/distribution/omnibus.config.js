@@ -81,6 +81,14 @@ module.exports = createServerConfig([
         {
           matchPackagePatterns: [ "^consul$"],
           allowedVersions: "< 1.19.0"
+        },
+        {
+          matchPackageNames: ["redis/redis"],
+          allowedVersions: "< 7.2.0"
+        },
+        {
+          matchPackageNames: ["libjpeg-turbo/libjpeg-turbo"],
+          allowedVersions: "< 2.1.90"
         }
     ],
     commitBody: "Changelog: changed",
@@ -234,6 +242,64 @@ module.exports = createServerConfig([
         ],
         depNameTemplate: "exiftool/exiftool",
         datasourceTemplate: "github-tags",
+      },
+      {
+        customType: "regex",
+        fileMatch: [
+          "config/software/curl.rb"
+        ],
+        matchStrings: [
+          "Gitlab::Version.new\\('curl', '(?<currentValue>.*)'\\)"
+        ],
+        depNameTemplate: "curl/curl",
+        datasourceTemplate: "github-tags",
+        versioningTemplate: "regex:^curl-(?<major>\\d+)_(?<minor>\\d+)_(?<patch>\\d+)$"
+      },
+      {
+        customType: "regex",
+        fileMatch: [
+          "config/software/redis.rb"
+        ],
+        matchStrings: [
+          "Gitlab::Version.new\\('redis', '(?<currentValue>.*)'\\)"
+        ],
+        depNameTemplate: "redis/redis",
+        datasourceTemplate: "github-tags"
+      },
+      {
+        customType: "regex",
+        fileMatch: [
+          "config/software/libtiff.rb"
+        ],
+        matchStrings: [
+          "Gitlab::Version.new\\('libtiff', '(?<currentValue>.*)'\\)"
+        ],
+        depNameTemplate: "libtiff/libtiff",
+        datasourceTemplate: "gitlab-tags"
+      },
+      {
+        customType: "regex",
+        fileMatch: [
+          "config/software/libjpeg-turbo.rb"
+        ],
+        matchStrings: [
+          "Gitlab::Version.new\\('libjpeg-turbo', '(?<currentValue>.*)'\\)"
+        ],
+        depNameTemplate: "libjpeg-turbo/libjpeg-turbo",
+        datasourceTemplate: "github-tags",
+        versioningTemplate: "regex:^(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)(\\.?(?<build>\\d+))?$"
+      },
+      {
+        customType: "regex",
+        fileMatch: [
+          "config/software/pcre2.rb"
+        ],
+        matchStrings: [
+          "Gitlab::Version.new\\('pcre2', '(?<currentValue>.*)'\\)"
+        ],
+        depNameTemplate: "PCRE2Project/pcre2",
+        datasourceTemplate: "github-tags",
+        versioningTemplate: "regex:^pcre2-(?<major>\\d+)\\.(?<minor>\\d+)$"
       },
     ],
   }],
