@@ -23,73 +23,73 @@ module.exports = createServerConfig([
     ]),
     reviewersSampleSize: 1,
     labels: distributionLabels,
-    enabledManagers: ["custom.regex", "bundler"], 
+    enabledManagers: ["custom.regex", "bundler"],
     separateMinorPatch: false, // This flag is being evaluated on https://gitlab.com/gitlab-org/frontend/renovate-gitlab-bot/-/issues/68
     separateMultipleMajor: true,
     packageRules: [
-        {
-          matchPackageNames: ["GNOME/libxml2"],
-          postUpgradeTasks: {
-            commands: ["./scripts/renovate/checksums/software/libxml2.sh"],
-            fileFilters: ["config/software/libxml2.rb"],
-            executionMode: "branch",
-          }
-        },
-        {
-          matchPackageNames: ["libarchive/libarchive"],
-          postUpgradeTasks: {
-            commands: ["./scripts/renovate/checksums/software/libarchive.sh"],
-            fileFilters: ["config/software/libarchive.rb"],
-            executionMode: "branch",
-          }
-        },
-        {
-          // In bundler we use an allowlist. Default to exclude. 
-          matchManagers: ["bundler"],
-          matchPackagePatterns: ["*"],
-          excludePackagePatterns: ["chef", "ohai", "acme-client"],
-          enabled: false
-        },
-        {
-          matchManagers: ["bundler"],
-          matchPackagePatterns: ["*"],
-          versioning: "ruby",
-          rangeStrategy: "replace"
-        },
-        {
-          matchfileNames: [
-            "config/templates/omnibus-gitlab-gems/Gemfile",
-            "config/software/chef-gem.rb"
-          ],
-          matchPackagePatterns: ["chef", "ohai"],
-          groupName: "chef",
-        },
-        {
-          // groups are overriden based on order, therefore
-          // chef-acme will be in the acme group, not chef.
-          matchfileNames: [
-            "config/templates/omnibus-gitlab-gems/Gemfile",
-            "config/software/chef-acme.rb"
-          ],
-          matchPackagePatterns: ["acme"],
-          groupName: "acme"
-        },
-        {
-          matchPackagePatterns: [ "^chef$", "^chef-bin$", "^ohai$" ],
-          allowedVersions: "< 19.0"
-        },
-        {
-          matchPackagePatterns: [ "^consul$"],
-          allowedVersions: "< 1.19.0"
-        },
-        {
-          matchPackageNames: ["redis/redis"],
-          allowedVersions: "< 7.2.0"
-        },
-        {
-          matchPackageNames: ["libjpeg-turbo/libjpeg-turbo"],
-          allowedVersions: "< 2.1.90"
+      {
+        matchPackageNames: ["GNOME/libxml2"],
+        postUpgradeTasks: {
+          commands: ["./scripts/renovate/checksums/software/libxml2.sh"],
+          fileFilters: ["config/software/libxml2.rb"],
+          executionMode: "branch",
         }
+      },
+      {
+        matchPackageNames: ["libarchive/libarchive"],
+        postUpgradeTasks: {
+          commands: ["./scripts/renovate/checksums/software/libarchive.sh"],
+          fileFilters: ["config/software/libarchive.rb"],
+          executionMode: "branch",
+        }
+      },
+      {
+        // In bundler we use an allowlist. Default to exclude. 
+        matchManagers: ["bundler"],
+        matchPackagePatterns: ["*"],
+        excludePackagePatterns: ["chef", "ohai", "acme-client"],
+        enabled: false
+      },
+      {
+        matchManagers: ["bundler"],
+        matchPackagePatterns: ["*"],
+        versioning: "ruby",
+        rangeStrategy: "replace"
+      },
+      {
+        matchfileNames: [
+          "config/templates/omnibus-gitlab-gems/Gemfile",
+          "config/software/chef-gem.rb"
+        ],
+        matchPackagePatterns: ["chef", "ohai"],
+        groupName: "chef",
+      },
+      {
+        // groups are overriden based on order, therefore
+        // chef-acme will be in the acme group, not chef.
+        matchfileNames: [
+          "config/templates/omnibus-gitlab-gems/Gemfile",
+          "config/software/chef-acme.rb"
+        ],
+        matchPackagePatterns: ["acme"],
+        groupName: "acme"
+      },
+      {
+        matchPackagePatterns: ["^chef$", "^chef-bin$", "^ohai$"],
+        allowedVersions: "< 19.0"
+      },
+      {
+        matchPackagePatterns: ["^consul$"],
+        allowedVersions: "< 1.19.0"
+      },
+      {
+        matchPackageNames: ["redis/redis"],
+        allowedVersions: "< 7.2.0"
+      },
+      {
+        matchPackageNames: ["libjpeg-turbo/libjpeg-turbo"],
+        allowedVersions: "< 2.1.90"
+      }
     ],
     commitBody: "Changelog: changed",
     customManagers: [
@@ -168,7 +168,7 @@ module.exports = createServerConfig([
       },
       {
         customType: "regex",
-        fileMatch: ["config/software/chef-acme.rb"], 
+        fileMatch: ["config/software/chef-acme.rb"],
         matchStrings: [
           "Gitlab::Version.new\\(name, 'v(?<currentValue>.*)'\\)"
         ],
@@ -179,8 +179,8 @@ module.exports = createServerConfig([
       },
       {
         customType: "regex",
-        fileMatch: ["config/software/chef-gem.rb"], 
-        matchStrings: [ "default_version '(?<currentValue>.*)'"],
+        fileMatch: ["config/software/chef-gem.rb"],
+        matchStrings: ["default_version '(?<currentValue>.*)'"],
         registryUrlTemplate: "https://packagecloud.io/cinc-project/stable",
         packageNameTemplate: "chef",
         depNameTemplate: "chef",
@@ -197,7 +197,7 @@ module.exports = createServerConfig([
       },
       {
         customType: "regex",
-        fileMatch: ["config/software/alertmanager.rb"], 
+        fileMatch: ["config/software/alertmanager.rb"],
         matchStrings: [
           "Gitlab::Version.new\\('alertmanager', '(?<currentValue>.*)'\\)"
         ],
@@ -208,7 +208,7 @@ module.exports = createServerConfig([
       },
       {
         customType: "regex",
-        fileMatch: ["config/software/compat_resource.rb"], 
+        fileMatch: ["config/software/compat_resource.rb"],
         matchStrings: [
           "Gitlab::Version.new\\('compat_resource', 'v(?<currentValue>.*)'\\)"
         ],
@@ -223,7 +223,7 @@ module.exports = createServerConfig([
           "config/software/consul.rb",
           "files/gitlab-ctl-commands-ee/lib/consul_download.rb",
           "files/gitlab-cookbooks/consul/libraries/consul_helper.rb"
-        ], 
+        ],
         matchStrings: [
           "Gitlab::Version.new\\('consul', 'v(?<currentValue>.*)'\\)",
           "DEFAULT_VERSION = (?<currentValue>.*)",
