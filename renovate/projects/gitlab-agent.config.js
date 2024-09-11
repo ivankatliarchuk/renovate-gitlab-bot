@@ -15,7 +15,6 @@ module.exports = createServerConfig([
     extends: ['group:kubernetes'],
     reviewers: availableRouletteReviewerByRole("gitlab-agent", [
       "maintainer",
-      "trainee_maintainer",
     ]),
     labels: [
       ...defaultLabels,
@@ -77,9 +76,7 @@ module.exports = createServerConfig([
           "go",
         ],
         matchPackageNames: [
-          "go.opentelemetry.io/otel",
-          "go.opentelemetry.io/otel**",
-          "go.opentelemetry.io/contrib/**",
+          "/^go\\.opentelemetry\\.io/",
         ],
       },
       {
