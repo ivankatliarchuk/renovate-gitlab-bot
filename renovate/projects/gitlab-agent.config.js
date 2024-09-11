@@ -15,7 +15,6 @@ module.exports = createServerConfig([
     extends: ['group:kubernetes'],
     reviewers: availableRouletteReviewerByRole("gitlab-agent", [
       "maintainer",
-      "trainee_maintainer",
     ]),
     labels: [
       ...defaultLabels,
