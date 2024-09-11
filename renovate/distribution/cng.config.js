@@ -65,11 +65,13 @@ module.exports = createServerConfig([
         matchPackageNames: ["golang-fips/go"],
         matchManagers: ["custom.regex"],
         allowedVersions: "<1.23.0",
+        groupName: "golang-fips/go"
       },
       {
         matchPackageNames: ["golang/go"],
         matchManagers: ["custom.regex"],
         allowedVersions: "<1.23.0",
+	groupName: "golang/go"
       },
       {
         matchPackageNames: ["python/cpython"],
@@ -280,36 +282,34 @@ module.exports = createServerConfig([
         extractVersionTemplate: "^v?(?<version>.*)$"
       },
       {
-        customType: "regex",
-        includePaths: [
-          "ci_files/*",
-        ],
-        fileMatch: [
-          "^ci_files/variables.yml$"
-        ],
-        matchStrings: [
-          "GO_FIPS_VERSION:\\s*\"\\S+\"\\n\\s*GO_FIPS_TAG:\\s*\"(?<currentValue>\\S+)\""
-        ],
-        autoReplaceStringTemplate: "GO_FIPS_VERSION: \"{{{newMajor}}}.{{{newMinor}}}.{{{newPatch}}}\"\n  GO_FIPS_TAG: \"{{{newValue}}}\"",
-        depNameTemplate: "golang-fips/go",
-        datasourceTemplate: "github-tags",
-        versioningTemplate: "regex:^go(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-(?<build>\\d+)-openssl-fips$"
+          customType: "regex",
+          fileMatch: [
+              "ci_files/variables.yml",
+              "gitlab-go/Dockerfile.build.fips"
+          ],
+          matchStrings: [
+              "GO_FIPS_TAG:\\s*\"(?<currentValue>\\S+)\"",
+              "GO_FIPS_TAG=(?<currentValue>\\S+)"
+          ],
+          depNameTemplate: "golang-fips/go",
+          packageNameTemplate: "golang-fips/go",
+          datasourceTemplate: "github-tags",
+          versioningTemplate: "regex:^go(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-(?<build>\\d+)-openssl-fips$"
       },
       {
-        customType: "regex",
-        includePaths: [
-          "gitlab-go/*",
-        ],
-        fileMatch: [
-          "^gitlab-go/Dockerfile.build.fips$"
-        ],
-        matchStrings: [
-          "ARG GO_VERSION=\\S+\\nARG GO_FIPS_TAG=(?<currentValue>\\S+)"
-        ],
-        autoReplaceStringTemplate: "ARG GO_VERSION={{{newMajor}}}.{{{newMinor}}}.{{{newPatch}}}\nARG GO_FIPS_TAG={{{newValue}}}",
-        depNameTemplate: "golang-fips/go",
-        datasourceTemplate: "github-tags",
-        versioningTemplate: "regex:^go(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)-(?<build>\\d+)-openssl-fips$"
+          customType: "regex",
+          fileMatch: [
+              "ci_files/variables.yml",
+              "gitlab-go/Dockerfile.build.fips"
+          ],
+          matchStrings: [
+              "ARG GO_VERSION=(?<currentValue>\\S+)\\n",
+              "GO_FIPS_VERSION:\\s*\"(?<currentValue>\\S+)\"\\n"
+          ],
+          depNameTemplate: "golang-fips/go-version",
+          packageNameTemplate: "golang-fips/go",
+          datasourceTemplate: "github-tags",
+          extractVersionTemplate: "^go(?<version>.*)-\\d+-openssl-fips$"
       },
       {
         customType: "regex",
