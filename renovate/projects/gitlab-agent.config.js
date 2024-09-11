@@ -76,9 +76,7 @@ module.exports = createServerConfig([
           "go",
         ],
         matchPackageNames: [
-          "go.opentelemetry.io/otel",
-          "go.opentelemetry.io/otel**",
-          "go.opentelemetry.io/contrib/**",
+          "/^go\\.opentelemetry\\.io/",
         ],
       },
       {
