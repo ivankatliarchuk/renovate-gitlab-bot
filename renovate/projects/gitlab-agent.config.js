@@ -108,8 +108,7 @@ module.exports = createServerConfig([
           "go",
         ],
         matchPackageNames: [
-          "github.com/redis/rueidis",
-          "github.com/redis/rueidis**",
+          "/^github\\.com\\/redis\\/rueidis/",
         ],
       }
     ],
