@@ -35,8 +35,8 @@ module.exports = createServerConfig(
       customManagers: [
         {
           customType: "regex",
-          fileMatch: ["^.gitlab-ci.yml$"],
-          matchStrings: ['BASE_IMAGE: "(?<depName>.*):(?<currentValue>.*)"\\s'],
+          fileMatch: ["^Dockerfile.*$"],
+          matchStrings: ['ARG BASE_IMAGE=(?<depName>.*):(?<currentValue>.*)\\s'],
           datasourceTemplate: "docker",
         },
         {
@@ -53,6 +53,20 @@ module.exports = createServerConfig(
           matchStrings: ["latest_version: '(?<currentValue>.*?)'\\n"],
           depNameTemplate: "opentofu/opentofu",
           datasourceTemplate: "github-releases",
+        },
+        {
+          customType: "regex",
+          fileMatch: ["^Dockerfile.debian$"],
+          matchStrings: ["ARG COSIGN_VERSION=(?<currentValue>.*?)\\n"],
+          depNameTemplate: "sigstore/cosign",
+          datasourceTemplate: "github-releases",
+        },
+        {
+          customType: "regex",
+          fileMatch: ["^Dockerfile.debian$"],
+          matchStrings: ["ARG GLAB_VERSION=(?<currentValue>.*?)\\n"],
+          depNameTemplate: "gitlab-org/cli",
+          datasourceTemplate: "gitlab-releases",
         },
       ],
       postUpgradeTasks: {
