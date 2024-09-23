@@ -30,7 +30,7 @@ module.exports = createServerConfig([
         customChangelogUrl: "https://github.com/moby/moby",
         minimumReleaseAge: "3 days",
         internalChecksFilter: "strict",
-        labels: "Docker",
+        addLabels: ["Docker"],
       },
       {
         matchPackagePatterns: ["rubygems", "bundler"],
