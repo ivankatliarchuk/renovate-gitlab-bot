@@ -3,7 +3,7 @@ const {
   baseConfig,
   availableRouletteReviewerByRole,
   updateNothing,
-  foundationLabels,
+  designSystemLabels,
 } = require("../lib/shared");
 const { updateNodeJS } = require("../lib/languages");
 const { prGitLabScopeAndLinters } = require("../lib/npm");
@@ -13,7 +13,7 @@ module.exports = createServerConfig([
   {
     repository: "gitlab-renovate-forks/gitlab-svgs",
     ...baseConfig,
-    labels: foundationLabels,
+    labels: designSystemLabels,
     reviewers: availableRouletteReviewerByRole(
       "gitlab-svgs",
       "maintainer frontend"

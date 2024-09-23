@@ -3,7 +3,7 @@ const {
   baseConfig,
   semanticPrefixFixDepsChoreOthers,
   availableRouletteReviewerByRole,
-  foundationLabels,
+  designSystemLabels,
 } = require("../lib/shared");
 const {
   prVueMajor2,
@@ -18,7 +18,7 @@ module.exports = createServerConfig([
   {
     repository: "gitlab-renovate-forks/design.gitlab.com",
     ...baseConfig,
-    labels: foundationLabels,
+    labels: designSystemLabels,
     reviewers: availableRouletteReviewerByRole(
       "design.gitlab.com",
       "maintainer frontend"
