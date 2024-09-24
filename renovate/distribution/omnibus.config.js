@@ -327,7 +327,7 @@ module.exports = createServerConfig([
         customType: "regex",
         fileMatch: ["config/software/libpng.rb"],
         matchStrings: [
-          "Gitlab::Version.new\\('libpng', '(?<currentValue>.*)'\\)"
+          "Gitlab::Version.new\\('libpng', 'v(?<currentValue>.*)'\\)"
         ],
         depNameTemplate: "libpng",
 	packageNameTemplate: "https://git.code.sf.net/p/libpng/code.git",
