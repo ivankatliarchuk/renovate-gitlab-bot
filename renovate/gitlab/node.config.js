@@ -3,7 +3,6 @@ const {
   updateNothing,
   baseConfig,
   availableRouletteReviewerByRole,
-  foundationLabels,
   defaultLabels,
   GITLAB_REPO,
 } = require("../lib/shared");
@@ -17,9 +16,13 @@ const {
   prStylelint,
 } = require("../lib/npm");
 
-const foundationPackages = {
+const eipiPackages = {
   reviewers: ["leipert"],
-  addLabels: [...foundationLabels],
+  addLabels: [
+    "group::personal productivity",
+    "devops::foundations",
+    "section::core platform",
+  ],
 };
 
 module.exports = createServerConfig([
@@ -57,7 +60,7 @@ module.exports = createServerConfig([
         groupName: "GitLab Query Language",
       },
       {
-        ...foundationPackages,
+        ...eipiPackages,
         matchPackagePatterns: [
           ".*-loader",
           ".*-webpack-plugin",
@@ -78,23 +81,23 @@ module.exports = createServerConfig([
         enabled: true,
       },
       {
-        ...foundationPackages,
+        ...eipiPackages,
         matchPackageNames: ["webpack", "webpack-cli", "webpack-dev-server"],
         enabled: true,
         groupName: "Webpack core packages",
       },
       {
-        ...foundationPackages,
+        ...eipiPackages,
         matchPackageNames: ["core-js"],
         enabled: true,
       },
       {
-        ...foundationPackages,
+        ...eipiPackages,
         matchPackageNames: ["commander"],
         enabled: true,
       },
       {
-        ...foundationPackages,
+        ...eipiPackages,
         matchPackageNames: ["yarn-deduplicate"],
         enabled: true,
       },

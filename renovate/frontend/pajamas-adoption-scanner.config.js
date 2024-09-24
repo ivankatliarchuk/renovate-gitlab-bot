@@ -1,7 +1,7 @@
 const {
   createServerConfig,
   baseConfig,
-  foundationLabels,
+  designSystemLabels,
   updateNothing,
 } = require("../lib/shared");
 const { prVueMajor2, prBabel, prJest, prGitLabUISVG } = require("../lib/npm");
@@ -10,7 +10,7 @@ module.exports = createServerConfig([
   {
     repository: "gitlab-renovate-forks/pajamas-adoption-scanner",
     ...baseConfig,
-    labels: foundationLabels,
+    labels: designSystemLabels,
     includePaths: [
       // The top-level package
       "*",

@@ -19,11 +19,11 @@ const defaultLabels = [
   "automation:bot-authored",
 ];
 
-const foundationLabels = [
+const designSystemLabels = [
   ...defaultLabels,
-  "group::foundations",
-  "devops::manage",
-  "section::dev",
+  "group::design system",
+  "devops::foundations",
+  "section::core platform",
 ];
 
 const distributionLabels = [
@@ -246,14 +246,10 @@ function availableRouletteReviewerByRole(project, role = "maintainer") {
 }
 
 function availableRouletteReviewerByProject(project) {
-  const candidates = team.filter((person) =>
-    person?.projects?.[project]
-  );
+  const candidates = team.filter((person) => person?.projects?.[project]);
 
   if (candidates.length === 0) {
-    throw new Error(
-      `Found no candidates for project: ${project}`
-    );
+    throw new Error(`Found no candidates for project: ${project}`);
   }
 
   if (process.env.STABLE_REVIEWERS) {
@@ -263,9 +259,7 @@ function availableRouletteReviewerByProject(project) {
   let available = candidates.filter((person) => person.available);
 
   if (available.length === 0) {
-    console.warn(
-      `${project}, no availability. Falling back to _all_.`
-    );
+    console.warn(`${project}, no availability. Falling back to _all_.`);
     available = candidates;
   }
 
@@ -276,7 +270,7 @@ module.exports = {
   GITLAB_REPO,
   createServerConfig,
   defaultLabels,
-  foundationLabels,
+  designSystemLabels,
   distributionLabels,
   epBaseConfig,
   qaBaseConfig,
