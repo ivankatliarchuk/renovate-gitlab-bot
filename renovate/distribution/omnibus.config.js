@@ -301,6 +301,74 @@ module.exports = createServerConfig([
         datasourceTemplate: "github-tags",
         versioningTemplate: "regex:^pcre2-(?<major>\\d+)\\.(?<minor>\\d+)$"
       },
+      {
+        customType: "regex",
+        fileMatch: [
+          "config/software/go-crond.rb"
+        ],
+        matchStrings: [
+          "Gitlab::Version.new\\('go-crond', '(?<currentValue>.*)'\\)"
+        ],
+        depNameTemplate: "webdevops/go-crond",
+        datasourceTemplate: "github-tags"
+      },
+      {
+        customType: "regex",
+        fileMatch: [
+          "config/software/jemalloc.rb"
+        ],
+        matchStrings: [
+          "Gitlab::Version.new\\('jemalloc', '(?<currentValue>.*)'\\)"
+        ],
+        depNameTemplate: "jemalloc/jemalloc",
+        datasourceTemplate: "github-tags"
+      },
+      {
+        customType: "regex",
+        fileMatch: ["config/software/libpng.rb"],
+        matchStrings: [
+          "Gitlab::Version.new\\('libpng', '(?<currentValue>.*)'\\)"
+        ],
+        depNameTemplate: "libpng",
+	packageNameTemplate: "https://git.code.sf.net/p/libpng/code.git",
+        datasourceTemplate: "git-tags",
+        extractVersionTemplate: "^v?(?<version>.+)$"
+      },
+      {
+        customType: "regex",
+        fileMatch: [
+          "config/software/logrotate.rb"
+        ],
+        matchStrings: [
+          "Gitlab::Version.new\\(name, '(?<currentValue>.*)'\\)"
+        ],
+        depNameTemplate: "gitlab-org/build/omnibus-mirror/logrotate",
+        datasourceTemplate: "gitlab-tags"
+      },
+      {
+        customType: "regex",
+        fileMatch: [
+          "config/software/nginx.rb"
+        ],
+        matchStrings: [
+          "Gitlab::Version.new\\('nginx', '(?<currentValue>.*)'\\)"
+        ],
+        depNameTemplate: "nginx/nginx",
+        datasourceTemplate: "github-tags",
+        versioningTemplate: "regex:^release-(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)$"
+      },
+      {
+        customType: "regex",
+        fileMatch: [
+          "config/software/nginx-module-vts.rb"
+        ],
+        matchStrings: [
+          "Gitlab::Version.new\\('nginx-module-vts', '(?<currentValue>.*)'\\)"
+        ],
+        depNameTemplate: "gitlab-org/build/omnibus-mirror/nginx-module-vts",
+        datasourceTemplate: "gitlab-tags",
+        extractVersionTemplate: "^v(?<version>.+)$"
+      }
     ],
   }],
   {
