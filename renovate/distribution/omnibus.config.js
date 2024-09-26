@@ -330,7 +330,7 @@ module.exports = createServerConfig([
           "Gitlab::Version.new\\('libpng', 'v(?<currentValue>.*)'\\)"
         ],
         depNameTemplate: "libpng",
-	packageNameTemplate: "https://git.code.sf.net/p/libpng/code.git",
+        packageNameTemplate: "https://git.code.sf.net/p/libpng/code.git",
         datasourceTemplate: "git-tags",
         extractVersionTemplate: "^v?(?<version>.+)$"
       },
@@ -368,7 +368,71 @@ module.exports = createServerConfig([
         depNameTemplate: "gitlab-org/build/omnibus-mirror/nginx-module-vts",
         datasourceTemplate: "gitlab-tags",
         extractVersionTemplate: "^v(?<version>.+)$"
-      }
+      },
+      {
+        customType: "regex",
+        fileMatch: [
+          "^config/software/redis-exporter.rb$"
+        ],
+        matchStrings: [
+          "Gitlab::Version\\.new\\('redis-exporter', '(?<currentValue>.*)'\\)"
+        ],
+        depNameTemplate: "redis-exporter",
+        packageNameTemplate: "gitlab-org/build/omnibus-mirror/redis_exporter",
+        datasourceTemplate: "gitlab-tags",
+        extractVersionTemplate: "^v(?<version>.+)$"
+      },
+      {
+        customType: "regex",
+        fileMatch: [
+          "^config/software/postgres-exporter.rb$"
+        ],
+        matchStrings: [
+          "Gitlab::Version\\.new\\('postgres-exporter', '(?<currentValue>.*)'\\)"
+        ],
+        depNameTemplate: "postgres-exporter",
+        packageNameTemplate: "gitlab-org/build/omnibus-mirror/postgres_exporter",
+        datasourceTemplate: "gitlab-tags",
+        extractVersionTemplate: "^v(?<version>.+)$"
+      },
+      {
+        customType: "regex",
+        fileMatch: [
+          "^config/software/node-exporter.rb$"
+        ],
+        matchStrings: [
+          "Gitlab::Version\\.new\\('node-exporter', '(?<currentValue>.*)'\\)"
+        ],
+        depNameTemplate: "node-exporter",
+        packageNameTemplate: "gitlab-org/build/omnibus-mirror/node_exporter",
+        datasourceTemplate: "gitlab-tags",
+        extractVersionTemplate: "^v(?<version>.+)$"
+      },
+      {
+        customType: "regex",
+        fileMatch: [
+          "^config/software/gitlab-exporter.rb$"
+        ],
+        matchStrings: [
+          "default_version '(?<currentValue>.*)'"
+        ],
+        depNameTemplate: "gitlab-exporter",
+        packageNameTemplate: "gitlab-org/gitlab-exporter",
+        datasourceTemplate: "gitlab-tags",
+        extractVersionTemplate: "^v(?<version>.+)$"
+      },
+      {
+        customType: "regex",
+        fileMatch: [
+          "^config/software/zlib.rb$"
+        ],
+        matchStrings: [
+          "Gitlab::Version\\.new\\('zlib', 'v(?<currentValue>.*)'\\)"
+        ],
+        depNameTemplate: "madler/zlib",
+        datasourceTemplate: "github-tags",
+        extractVersionTemplate: "^v(?<version>.+)$"
+      },
     ],
   }],
   {
