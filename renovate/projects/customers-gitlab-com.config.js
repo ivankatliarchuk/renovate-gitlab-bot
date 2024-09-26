@@ -42,6 +42,7 @@ module.exports = createServerConfig([
           "rspec-parameterized",
           "rspec-rails",
           "selenium-webdriver",
+          "selenium-devtools",
           "shoulda-matchers",
           "simplecov",
           "test-prof",
