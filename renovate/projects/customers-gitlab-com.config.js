@@ -60,8 +60,6 @@ module.exports = createServerConfig([
           "listen",
           "rack-mini-profiler",
           "rails-erd",
-          "ruby-lsp",
-          "ruby-lsp-rails",
           "ruby-lsp-rspec",
         ],
         enabled: true,
