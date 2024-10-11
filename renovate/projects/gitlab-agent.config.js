@@ -12,10 +12,8 @@ module.exports = createServerConfig([
     ...baseConfig,
     // NOTE: groups k8s.io Go package updates, see
     // https://docs.renovatebot.com/presets-group/#groupkubernetes
-    extends: ['group:kubernetes'],
-    reviewers: availableRouletteReviewerByRole("gitlab-agent", [
-      "maintainer",
-    ]),
+    extends: ["group:kubernetes"],
+    reviewers: availableRouletteReviewerByRole("gitlab-agent", ["maintainer"]),
     labels: [
       ...defaultLabels,
       "group::environments",
@@ -26,6 +24,18 @@ module.exports = createServerConfig([
     enabledManagers: ["gomod", "custom.regex"],
     includePaths: ["*", ".gitlab/*"],
     packageRules: [
+      {
+        groupName: "opentelemetry packages",
+        groupSlug: "otel-go",
+        matchDatasources: ["go"],
+        matchPackageNames: ["/^go\\.opentelemetry\\.io/"],
+      },
+      {
+        groupName: "github.com/redis/rueidis packages",
+        groupSlug: "redis-rueidis-go",
+        matchDatasources: ["go"],
+        matchPackageNames: ["/^github\\.com\\/redis\\/rueidis/"],
+      },
       {
         matchDepNames: ["gitlab-agent-ci-image"],
         groupName: "gitlab-agent-ci-image",
@@ -69,48 +79,21 @@ module.exports = createServerConfig([
         matchDepTypes: ["indirect"],
         enabled: false,
       },
-      {
-        groupName: "opentelemetry packages",
-        groupSlug: "otel-go",
-        matchDatasources: [
-          "go",
-        ],
-        matchPackageNames: [
-          "/^go\\.opentelemetry\\.io/",
-        ],
-      },
+
       {
         groupName: "google.golang.org/genproto/googleapis/rpc package",
         groupSlug: "genproto-googleapis-rpc",
-        matchDatasources: [
-          "go",
-        ],
-        matchPackageNames: [
-          "google.golang.org/genproto/googleapis/rpc",
-        ],
+        matchDatasources: ["go"],
+        matchPackageNames: ["google.golang.org/genproto/googleapis/rpc"],
         extends: ["schedule:weekly"],
       },
       {
         groupName: "google.golang.org/api package",
         groupSlug: "google-golang-org-api",
-        matchDatasources: [
-          "go",
-        ],
-        matchPackageNames: [
-          "google.golang.org/api",
-        ],
+        matchDatasources: ["go"],
+        matchPackageNames: ["google.golang.org/api"],
         extends: ["schedule:weekly"],
       },
-      {
-        groupName: "github.com/redis/rueidis packages",
-        groupSlug: "redis-rueidis-go",
-        matchDatasources: [
-          "go",
-        ],
-        matchPackageNames: [
-          "/^github\\.com\\/redis\\/rueidis/",
-        ],
-      }
     ],
     customManagers: [
       {
