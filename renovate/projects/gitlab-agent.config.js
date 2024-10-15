@@ -28,19 +28,17 @@ module.exports = createServerConfig([
         groupName: "opentelemetry packages",
         groupSlug: "otel-go",
         matchDatasources: ["go"],
-        matchPackageNames: [
+        matchPackagePrefixes: [
           "go.opentelemetry.io/otel",
-          "go.opentelemetry.io/otel/**",
-          "go.opentelemetry.io/contrib/**",
+          "go.opentelemetry.io/contrib",
         ],
       },
       {
         groupName: "github.com/redis/rueidis packages",
         groupSlug: "redis-rueidis-go",
         matchDatasources: ["go"],
-        matchPackageNames: [
+        matchPackagePrefixes: [
           "github.com/redis/rueidis",
-          "github.com/redis/rueidis/**",
         ],
       },
       {
