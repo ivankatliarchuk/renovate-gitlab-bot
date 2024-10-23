@@ -21,7 +21,7 @@ module.exports = createServerConfig([
       "section::cd",
     ],
     postUpdateOptions: [],
-    enabledManagers: ["gomod", "custom.regex"],
+    enabledManagers: ["gomod", "custom.regex", "bazel-module"],
     includePaths: ["*", ".gitlab/*"],
     packageRules: [
       {
