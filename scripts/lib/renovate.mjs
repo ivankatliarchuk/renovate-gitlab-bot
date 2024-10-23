@@ -6,6 +6,7 @@ import { loadRawRenovateConfig } from "../../bot_image/lib/load-raw-renovate-con
  */
 const TOOL_INDEPENDENT_MANAGERS = [
   "asdf",
+  "bazel-module",
   "dockerfile",
   "docker-compose",
   "gitlabci",
