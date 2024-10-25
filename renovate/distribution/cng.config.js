@@ -22,7 +22,9 @@ module.exports = createServerConfig([
     separateMultipleMajor: true, // so that we get an MR for each minor of kubectl
     commitMessageExtra: "to v{{{newVersion}}}", // renovate's default template is wonky with kubectl major version override
     commitBody: "Changelog: changed",
-    prBodyNotes: "* Reviewer needs to initiate new pipeline",
+    prBodyNotes: "### Notes for Reviewer\n\n"+
+                 "* [For security reasons](https://gitlab.com/gitlab-org/frontend/renovate-gitlab-bot/-/blob/main/docs/setting-up-a-new-project.md#ci-protected-variables-secrets-and-renovate-forks), our Renovate fork cannot trigger chart pipelines\n"+
+                 "\t* :warning: Reviewer needs to initiate new MR pipeline, subsequently triggering chart pipeline from it. :warning:",
     packageRules: [
       {
         matchPackageNames: ["docker"],
