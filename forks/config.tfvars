@@ -4,7 +4,6 @@ projects = [
   { path = "gitlab-org/analytics-section/product-analytics/devkit" },
   { path = "gitlab-org/analytics-section/product-analytics/helm-charts", fork_path = "product-analytics-helm-charts" },
   { path = "gitlab-org/build/CNG" },
-  { path = "gitlab-org/cells/http-router" }, // Deprecated
   { path = "gitlab-org/charts/gitlab-agent", fork_path = "charts-gitlab-agent" },
   { path = "gitlab-org/charts/gitlab", fork_path = "charts-gitlab" },
   { path = "gitlab-org/cli" },
