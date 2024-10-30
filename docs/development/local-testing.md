@@ -12,10 +12,10 @@ To test Renovate changes locally, use the test-renovate.sh script located in /sc
 ## Steps
 
 1. Fork the target repository.
-1. Run the script `./test-renovate.sh --dry-run=full to/your/fork`.
-   * Remove the `--dry-run` flag to actually create the PR.
+1. Run the script `./test-renovate.sh`. A usage text is included for specific arguments needed.
 
 ## Example `renovate.json` file
+
 ```json
 {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
