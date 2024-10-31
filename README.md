@@ -83,8 +83,6 @@ A master list of upstream repositories is stored in the [forks/config.tfvars](./
 [product-analytics-helm-charts_fork]: https://gitlab.com/gitlab-renovate-forks/product-analytics-helm-charts
 [CNG]: https://gitlab.com/gitlab-org/build/CNG
 [CNG_fork]: https://gitlab.com/gitlab-renovate-forks/CNG
-[http-router]: https://gitlab.com/gitlab-org/cells/http-router
-[http-router_fork]: https://gitlab.com/gitlab-renovate-forks/http-router
 [charts-gitlab]: https://gitlab.com/gitlab-org/charts/gitlab
 [charts-gitlab_fork]: https://gitlab.com/gitlab-renovate-forks/charts-gitlab
 [charts-gitlab-agent]: https://gitlab.com/gitlab-org/charts/gitlab-agent
