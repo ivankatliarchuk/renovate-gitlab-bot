@@ -57,6 +57,8 @@ if [ -z "$TARGET_REPO" ]; then
     exit 1
 fi
 
+RENOVATE_CONFIG_PATH=$(realpath "$RENOVATE_CONFIG_PATH")
+
 echo -e "\nRenovate version: $RENOVATE_VERSION"
 echo "Config file: $RENOVATE_CONFIG_PATH"
 echo -e "Target repository: $TARGET_REPO\n"
