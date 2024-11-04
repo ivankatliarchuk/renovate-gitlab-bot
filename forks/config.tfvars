@@ -8,6 +8,7 @@ projects = [
   { path = "gitlab-org/charts/gitlab", fork_path = "charts-gitlab" },
   { path = "gitlab-org/cli" },
   { path = "gitlab-org/cloud-native/gitlab-operator" },
+  { path = "gitlab-org/cloud-native/preflight" },
   { path = "gitlab-org/cloud-native/operator" },
   { path = "gitlab-org/cluster-integration/auto-build-image" },
   { path = "gitlab-org/cluster-integration/auto-deploy-image" },
