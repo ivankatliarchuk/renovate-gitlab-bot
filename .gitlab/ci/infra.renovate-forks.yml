@@ -1,9 +1,9 @@
 ---
 include:
-  - component: gitlab.com/components/opentofu/validate-plan-apply@0.16.0
+  - component: gitlab.com/components/opentofu/validate-plan-apply@0.38.0
     inputs:
-      version: 0.16.0
-      opentofu_version: 1.6.1
+      version: 0.38.0
+      opentofu_version: 1.8.4
       # Location of our IaC project related to the forks
       root_dir: forks
       # We only want a single stage for all infra jobs related to the forks
@@ -11,10 +11,11 @@ include:
       stage_validate: forks
       stage_build: forks
       stage_deploy: forks
+      var_file: config.tfvars
 
 variables:
   TF_VAR_gitlab_renovate_bot_token: $TERRAFORM_TOKEN
-  TF_CLI_ARGS_plan: "-lock=false -var-file=../forks/config.tfvars"
+  TF_CLI_ARGS_plan: "-lock=false"
 
 plan:
   needs:
