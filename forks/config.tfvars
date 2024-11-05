@@ -1,6 +1,6 @@
 // List of project sorted alphabetically.
 projects = [
-  { path = "gitlab-com/gl-security/product-security/product-security-engineering" },
+  { path = "gitlab-com/gl-security/product-security/appsec/tooling/public-mr-confidential-issue-detector" },
   { path = "gitlab-org/analytics-section/analytics-manager" },
   { path = "gitlab-org/analytics-section/product-analytics/devkit" },
   { path = "gitlab-org/analytics-section/product-analytics/helm-charts", fork_path = "product-analytics-helm-charts" },

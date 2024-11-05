@@ -25,7 +25,7 @@ Submit a Merge Request containing the following two changes:
    * Yes, consider setting [semanticCommits](https://docs.renovatebot.com/configuration-options/#semanticcommits) to `"disabled"`.
    * No, you can ignore this setting.
 2. Are you working on a project where keeping the merge request queue clean is important?
-   * Yes, consider settings [prConcurrentLimit]https://docs.renovatebot.com/configuration-options/#prconcurrentlimit to a low number that your team is able to handle.
+   * Yes, consider settings [prConcurrentLimit](https://docs.renovatebot.com/configuration-options/#prconcurrentlimit) to a low number that your team is able to handle.
    * No, you can ignore this setting.
 3. Have you set aside time to handle to high amount of dependencies merge requests after the bot is installed?
    * No, consider increasing the weight of your dependabot setup issue as it may take more than a day to handle the dependencies update. Also consider spreading the message to *ur team to devide and conquer the merge requests.
