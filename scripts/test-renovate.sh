@@ -18,7 +18,7 @@ RENOVATE_CONFIG_PATH=""
 TARGET_REPO=""
 RENOVATE_ARGS=""
 
-while getopts "v:p:r:h" opt; do
+while getopts "v:p:r:h:d" opt; do
   case ${opt} in
     v )
       RENOVATE_VERSION=$OPTARG
