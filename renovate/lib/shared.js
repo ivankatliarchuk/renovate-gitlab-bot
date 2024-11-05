@@ -47,6 +47,16 @@ const epBaseConfig = {
   labels: [...defaultLabels, "backend", "Engineering Productivity"],
 };
 
+const PSEBaseConfig = {
+  reviewers: [
+    "nmalcolm",
+    "fvpotvin",
+    "ashmckenzie",
+  ],
+  reviewersSampleSize: 1,
+  labels: [...defaultLabels, "team::Product Security Engineering"],
+};
+
 const qaBaseConfig = {
   reviewers: availableRouletteReviewerByRole("gitlab", "maintainer qa"),
   reviewersSampleSize: 1,
