@@ -8,7 +8,13 @@ automatically create MRs for updating dependencies. These merge requests will be
 Due to limitations with upstream renovate regarding forked workflows we are maintaining a fork of renovate:
 https://gitlab.com/gitlab-org/frontend/renovate-fork
 
-Visit the dashboard [here](https://gitlab-org.gitlab.io/frontend/renovate-gitlab-bot/).
+- [Integrated Projects](#integrated-projects).
+- [Renovate Dashbaord](https://gitlab-org.gitlab.io/frontend/renovate-gitlab-bot/).
+- [Process](./docs/process.md) describing how our update flow works.
+- [Set up a new project](./docs/setting-up-a-new-project.md).
+- [How to validate changes](./docs/development/validate-changes.md).
+
+## Integrated Projects
 
 <!-- rep -->
 
@@ -185,8 +191,3 @@ A master list of upstream repositories is stored in the [forks/config.tfvars](./
 [gitlab-workspaces-tools_fork]: https://gitlab.com/gitlab-renovate-forks/gitlab-workspaces-tools
 
 <!-- rep -->
-
-For more details, refer to our documentation:
-
-- [Process](./docs/process.md) describing how our update flow works
-- [Setting up a new project](./docs/setting-up-a-new-project.md)
