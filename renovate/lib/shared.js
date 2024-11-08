@@ -283,6 +283,7 @@ module.exports = {
   designSystemLabels,
   distributionLabels,
   epBaseConfig,
+  PSEBaseConfig,
   qaBaseConfig,
   baseConfig,
   updateNothing,
