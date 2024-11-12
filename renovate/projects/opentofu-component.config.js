@@ -16,6 +16,7 @@ module.exports = createServerConfig(
         "group::environments",
         "Category:Infrastructure as Code",
       ],
+      dependencyDashboard: false,
       enabledManagers: ["gitlabci", "custom.regex"],
       reviewers: ["timofurrer"],
       includePaths: [
