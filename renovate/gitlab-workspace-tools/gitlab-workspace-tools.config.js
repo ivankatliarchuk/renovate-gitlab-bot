@@ -20,10 +20,10 @@ module.exports = createServerConfig([
     reviewersSampleSize: 1,
     labels: [
       ...defaultLabels,
-      "group::ide",
+      "group::remote development",
       "devops::create",
       "section::dev",
-      "Category:Remote Development",
+      "Category:Workspaces",
     ],
     enabledManagers: ["custom.regex"],
     separateMinorPatch: true,
