@@ -15,7 +15,6 @@ module.exports = createServerConfig([
       "ealcantara",
       "cindy-halim",
       "zhaochen_li",
-      "hkhanna2",
       "saahmed",
     ],
     reviewersSampleSize: 1,
