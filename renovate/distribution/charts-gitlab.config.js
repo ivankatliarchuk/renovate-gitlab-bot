@@ -23,6 +23,9 @@ module.exports = createServerConfig([
     separateMinorPatch: false, // This flag is being evaluated on https://gitlab.com/gitlab-org/frontend/renovate-gitlab-bot/-/issues/68
     separateMultipleMajor: true, // so that we get an MR for each minor of kubectl
     commitBody: "Changelog: changed",
+    prBodyNotes: "### Notes for Reviewer\n\n"+
+        "* [For security reasons](https://gitlab.com/gitlab-org/frontend/renovate-gitlab-bot/-/blob/main/docs/setting-up-a-new-project.md#ci-protected-variables-secrets-and-renovate-forks), our Renovate fork cannot trigger canonical chart pipelines\n"+
+        "\t* :warning: Reviewer needs to initiate new MR pipeline, subsequently triggering chart pipeline from it. :warning:",
     packageRules: [
       {
         matchPackageNames: ["cert-manager"],
