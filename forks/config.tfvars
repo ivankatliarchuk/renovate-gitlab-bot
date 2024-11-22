@@ -57,6 +57,7 @@ projects = [
   { path = "gitlab-org/terraform-images" }, // Deprecated
   { path = "gitlab-org/terraform-provider-gitlab" },
   { path = "components/opentofu" },
+  { path = "gitlab-org/gitlab-query-language/glql-rust" },
   # We cannot fork the following project since they are private
   # See: https://gitlab.com/gitlab-org/frontend/renovate-gitlab-bot/-/issues/12
   # { path = "gitlab-org/analytics-section/product-analytics/analytics-stack" },
