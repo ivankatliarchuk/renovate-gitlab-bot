@@ -11,13 +11,15 @@ Submit a Merge Request containing the following two changes:
     +  "<PATH WITH NAMESPACE TO YOUR NEW PROJECT>"
      ]
     ```
-2. Add a renovate [config for your project](../renovate/). Have a look at the [considerations section](#considerations) if this is your first time setting up renovate for a project.
+2. Create a merge request that only adds your project. This is so that other merge requests won't fail because their config mismatches the state.
 
-3. Once your MR pipeline runs, review the Terraform Plan job and ensure the changes are expected.
+3. Review the OpenTofu plan from the `plan` job and ensure the changes are expected.
+   Ask for a review and make sure the person merging the MR applies to manual OpenTofu `apply` job on the default branch once merged.
 
-4. Run the manual Terraform Apply job - this will fork your repo. You may need to re-run subsequent pipeline jobs which probably failed due to the fork not existing when they originally ran. This job will fail with permission restrictions if triggered by roles less than maintainer. So [ask a maintainer](https://gitlab.com/gitlab-org/frontend/renovate-gitlab-bot/-/project_members?with_inherited_permissions=exclude) to run it for you in case you are not one. Once applied, the MR should be merged asap because it'll cause a state difference towards the default branch. Other pipelines may fail because of that.
+4. Add a renovate [config for your project](../renovate/). Have a look at the [considerations section](#considerations) if this is your first time setting up renovate for a project.
+   In the **execute -> Projects -> Your project** job, you can download and check the `renovate-log.txt` job artifact to see that Renovate did what you expected.
 
-5. In the **execute -> Projects -> Your project** job, you can download and check the `renovate-log.txt` job artifact to see that Renovate did what you expected.
+5. Create another merge request with that configuration, review and get it merged.
 
 ## Considerations
 
@@ -33,7 +35,7 @@ Submit a Merge Request containing the following two changes:
 
 ## Implementation Details
 
-The CI/CD pipeline in this project will import your project to the [gitlab-renovate-forks](https://gitlab.com/gitlab-renovate-forks) group 
+The CI/CD pipeline in this project will import your project to the [gitlab-renovate-forks](https://gitlab.com/gitlab-renovate-forks) group
 and setup a pull mirror to the upstream repository using the [GitLab Terraform Provider](https://gitlab.com/gitlab-org/terraform-provider-gitlab).
 
 ## Update the comment from renovate

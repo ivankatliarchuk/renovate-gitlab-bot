@@ -1,8 +1,8 @@
 ---
 include:
-  - component: gitlab.com/components/opentofu/validate-plan-apply@0.38.0
+  - component: gitlab.com/components/opentofu/validate-plan-apply@0.44.0
     inputs:
-      version: 0.38.0
+      version: 0.44.0
       opentofu_version: 1.8.4
       # Location of our IaC project related to the forks
       root_dir: forks
@@ -12,6 +12,11 @@ include:
       stage_build: forks
       stage_deploy: forks
       var_file: config.tfvars
+      apply_rules:
+        - if: '$CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH'
+          when: never
+        - when: manual
+          allow_failure: true
 
 variables:
   TF_VAR_gitlab_renovate_bot_token: $TERRAFORM_TOKEN
@@ -21,9 +26,3 @@ plan:
   needs:
     - fmt
     - validate
-
-apply:
-  needs: [plan]
-  rules:
-    - when: manual
-      allow_failure: true
