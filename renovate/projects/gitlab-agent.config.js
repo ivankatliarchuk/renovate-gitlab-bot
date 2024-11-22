@@ -156,6 +156,15 @@ module.exports = createServerConfig([
           "gitlab-org/security-products/analyzers/trivy-k8s-wrapper",
         extractVersionTemplate: "^v(?<version>.*)$",
       },
+      {
+        customType: "regex",
+        fileMatch: ["Makefile"],
+        matchStrings: [
+          '\nGCI_VERSION\\s*:=\\s*(?<currentValue>v.*?)\n',
+        ],
+        depNameTemplate: "daixiang0/gci",
+        datasourceTemplate: "github-releases",
+      },
       ...updateDangerReviewComponent.customManagers,
     ],
   },
