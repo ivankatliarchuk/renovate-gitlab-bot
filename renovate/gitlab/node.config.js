@@ -56,7 +56,7 @@ module.exports = createServerConfig([
       {
         enabled: true,
         reviewers: ["himkp"],
-        matchPackageNames: ["@gitlab/query-language"],
+        matchPackageNames: ["@gitlab/query-language", "@gitlab/query-language-rust"],
         groupName: "GitLab Query Language",
       },
       {
