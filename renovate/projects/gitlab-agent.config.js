@@ -99,6 +99,16 @@ module.exports = createServerConfig([
         matchPackageNames: ["google.golang.org/api"],
         extends: ["schedule:weekly"],
       },
+      {
+        groupName: "GitLab trivy-k8s-wrapper",
+        groupSlug: "gitlab-trivy-k8s-wrapper",
+        matchPackageNames: [
+          // Dependency inside Go code
+          "gitlab-org/security-products/analyzers/trivy-k8s-wrapper",
+          // Dependency in go.mod
+          "gitlab.com/gitlab-org/security-products/analyzers/trivy-k8s-wrapper",
+        ],
+      },
     ],
     customManagers: [
       {
