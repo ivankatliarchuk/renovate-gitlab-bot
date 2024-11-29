@@ -24,8 +24,8 @@ module.exports = createServerConfig(
       customManagers: [
         {
           customType: "regex",
-          fileMatch: ["^.gitlab-ci.yml$"],
-          matchStrings: ['\\n\\s*-\\s*name:\\s*registry.gitlab.com/gitlab-org/cluster-integration/test-utils/k3s-gitlab-ci/releases/(?<currentValue>.*?)-k3s1\\n'],
+          fileMatch: ["^README.md$"],
+          matchStrings: ['\\n\\s*-\\s*name:\\s*registry.gitlab.com\/gitlab-org\/cluster-integration\/test-utils\/k3s-gitlab-ci\/releases\/(?<currentValue>.*?)-k3s1\\n'],
           depNameTemplate: "kubernetes/kubernetes",
           datasourceTemplate: "github-releases",
         },
