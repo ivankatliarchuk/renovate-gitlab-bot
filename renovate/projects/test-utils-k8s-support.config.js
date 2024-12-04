@@ -21,6 +21,20 @@ module.exports = createServerConfig(
       dependencyDashboard: false,
       enabledManagers: ["custom.regex"],
       reviewers: ["nagyv-gitlab", "nmezzopera"],
+      packageRules: [
+        // NOTE: we don't want to get patch updates
+        {
+          matchManagers: ["custom.regex"],
+          matchPackageNames: ["kubernetes/kubernetes"],
+          separateMinorPatch: true,
+        },
+        {
+          matchManagers: ["custom.regex"],
+          matchPackageNames: ["kubernetes/kubernetes"],
+          matchUpdateTypes: ["patch"],
+          enabled: false,
+        },
+      ],
       customManagers: [
         {
           customType: "regex",
