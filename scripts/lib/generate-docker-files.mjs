@@ -10,6 +10,7 @@ WORKDIR /workdir
 ENV DOCKER_BUILD=true
 
 RUN apk add --update --no-cache python3 make g++ git bash
+RUN apk add --update --no-cache py3-setuptools linux-headers
 
 RUN bash scripts/build_renovate.sh`;
 const COPY_RENOVATE_INSTRUCTIONS = `
