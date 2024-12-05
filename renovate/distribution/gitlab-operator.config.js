@@ -25,11 +25,14 @@ module.exports = createServerConfig([
     ],
     ...updateDangerReviewComponent,
     constraints: {
-      "go": "1.22",
+      "go": "1.23",
     },
     ignoreDeps: [
       "helm.sh/helm/v3", // Helm version needs to stay in sync with GitLab chart helm version
     ],
+    docker: {
+      pinDigests: true,
+    },
     packageRules: [
       {
         matchManager: ["dockerfile"],
@@ -49,11 +52,11 @@ module.exports = createServerConfig([
       },
       {
         matchPackagePatterns: [".*k8s.io\/.*"],
-        groupName: "k8s.io"
+        groupName: "k8s.io dependencies"
       },
       {
         matchPackagePatterns: ["github.com\/onsi\/.*"],
-        groupName: "testing"
+        groupName: "testing dependencies"
       },
     ],
   },
