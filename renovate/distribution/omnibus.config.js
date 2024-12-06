@@ -90,7 +90,16 @@ module.exports = createServerConfig([
       {
         matchPackageNames: ["libjpeg-turbo/libjpeg-turbo"],
         allowedVersions: "< 2.1.90"
-      }
+      },
+      {
+        matchPackageNames: ["python/cpython"],
+        allowedVersions: "<3.10.0",
+        postUpgradeTasks: {
+          commands: ["./scripts/renovate/checksums/software/python3.sh"],
+          fileFilters: ["config/software/python3.rb"],
+          executionMode: "branch",
+        }
+      },
     ],
     commitBody: "Changelog: changed",
     customManagers: [
@@ -437,12 +446,24 @@ module.exports = createServerConfig([
         datasourceTemplate: "github-tags",
         extractVersionTemplate: "^v(?<version>.+)$"
       },
+      {
+        customType: "regex",
+        fileMatch: [
+          "^config/software/python3.rb$"
+        ],
+        matchStrings: [
+          "default_version '(?<currentValue>.*)'",
+        ],
+        depNameTemplate: "python/cpython",
+        datasourceTemplate: "github-tags",
+      },
     ],
   }],
   {
     allowedPostUpgradeCommands: [
       "^./scripts/renovate/checksums/software/libxml2.sh$",
       "^./scripts/renovate/checksums/software/libarchive.sh$",
+      "^./scripts/renovate/checksums/software/python3.sh$",
     ],
   },
 );
