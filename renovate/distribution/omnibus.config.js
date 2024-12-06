@@ -14,7 +14,8 @@ module.exports = createServerConfig([
       'config/software/*',
       'config/templates/omnibus-gitlab-gems/*',
       'files/gitlab-ctl-commands-ee/lib/*',
-      'files/gitlab-cookbooks/consul/**'
+      'files/gitlab-cookbooks/consul/**',
+      'gitlab-ci-config/*',
     ],
     semanticCommits: "disabled",
     reviewers: availableRouletteReviewerByRole("omnibus-gitlab", [
@@ -44,7 +45,7 @@ module.exports = createServerConfig([
         }
       },
       {
-        // In bundler we use an allowlist. Default to exclude. 
+        // In bundler we use an allowlist. Default to exclude.
         matchManagers: ["bundler"],
         matchPackagePatterns: ["*"],
         excludePackagePatterns: ["chef", "ohai", "acme-client", "remote_syslog"],
@@ -93,7 +94,10 @@ module.exports = createServerConfig([
     ],
     commitBody: "Changelog: changed",
     customManagers: [
-      ...updateDangerReviewComponent.customManagers,
+      {
+        ...updateDangerReviewComponent.customManagers[0],
+        fileMatch: ["gitlab-ci-config/gitlab-com.yml"],
+      },
       {
         customType: "regex",
         fileMatch: ["config/software/libxml2.rb"],
