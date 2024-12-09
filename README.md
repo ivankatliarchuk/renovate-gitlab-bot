@@ -9,7 +9,7 @@ Due to limitations with upstream renovate regarding forked workflows we are main
 https://gitlab.com/gitlab-org/frontend/renovate-fork
 
 - [Integrated Projects](#integrated-projects).
-- [Renovate Dashbaord](https://gitlab-org.gitlab.io/frontend/renovate-gitlab-bot/).
+- [Renovate Dashboard](https://gitlab-org.gitlab.io/frontend/renovate-gitlab-bot/).
 - [Process](./docs/process.md) describing how our update flow works.
 - [Set up a new project](./docs/setting-up-a-new-project.md).
 - [How to validate changes](./docs/development/validate-changes.md).
