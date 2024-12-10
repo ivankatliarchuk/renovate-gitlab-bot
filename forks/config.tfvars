@@ -4,6 +4,7 @@ projects = [
   { path = "gitlab-org/analytics-section/analytics-manager" },
   { path = "gitlab-org/analytics-section/product-analytics/devkit" },
   { path = "gitlab-org/analytics-section/product-analytics/helm-charts", fork_path = "product-analytics-helm-charts" },
+  { path = "gitlab-org/api/client-go", fork_path = "api-client-go" },
   { path = "gitlab-org/build/CNG" },
   { path = "gitlab-org/charts/gitlab-agent", fork_path = "charts-gitlab-agent" },
   { path = "gitlab-org/charts/gitlab", fork_path = "charts-gitlab" },
