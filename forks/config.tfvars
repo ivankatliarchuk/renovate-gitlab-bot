@@ -19,6 +19,7 @@ projects = [
   { path = "gitlab-org/code-creation/repository-x-ray" },
   { path = "gitlab-org/container-registry" },
   { path = "gitlab-org/developer-relations/contributor-success/contributors-gitlab-com" },
+  { path = "gitlab-org/developer-relations/contributor-success/toolbox", fork_path = "contributor-success-toolbox" },
   { path = "gitlab-org/editor-extensions/gitlab.vim" },
   { path = "gitlab-org/editor-extensions/gitlab-lsp" },
   { path = "gitlab-org/editor-extensions/gitlab-jetbrains-plugin" },
