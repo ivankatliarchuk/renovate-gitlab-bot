@@ -125,7 +125,7 @@ module.exports = createServerConfig([
         matchStrings: [
           "Gitlab::Version.new\\('registry', '(?<currentValue>.*)'\\)"
         ],
-        depNameTemplate: "registry",
+        depNameTemplate: "container-registry",
         datasourceTemplate: "gitlab-tags",
         registryUrlTemplate: "https://gitlab.com/",
         packageNameTemplate: "gitlab-org/container-registry",
