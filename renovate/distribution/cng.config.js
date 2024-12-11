@@ -80,6 +80,19 @@ module.exports = createServerConfig([
         matchPackageNames: ["python/cpython"],
         allowedVersions: "<3.10.0"
       },
+      {
+        // Red Hat ubi9/ubi-*
+        matchManagers: ["custom.regex"],
+        matchDatasources: ["docker"],
+        matchDepNames: [
+          "ubi9/ubi-micro",
+          "ubi9/ubi-minimal"
+        ],
+        // disable pinning digest: images use rolling distro repoistory, no use pinning
+        pinDigests: false,
+        // Float specifically on MAJOR.MINOR
+        versioningTemplate: "regex:^(?<major>\\d+)\\.(?<minor>\\d+)"
+      }
     ],
     customManagers: [
       {
@@ -439,6 +452,24 @@ module.exports = createServerConfig([
         ],
         depNameTemplate: "python/cpython",
         datasourceTemplate: "github-tags",
+      },
+      {
+        customType: "regex",
+        fileMatch: ["ci_files/variables.yml"],
+        matchStrings: [
+            "UBI_IMAGE: \"(?<registryUrl>[^/]*)\\/(?<depName>[^:@]*)(?::(?<currentValue>[^@\\n]+))?(?:@(?<currentDigest>sha256:[a-f0-9]+[^\\n]))?\""
+        ],
+        datasourceTemplate: "docker",
+        registryUrlTemplate: "https://{{{registryUrl}}}",
+      },
+      {
+        customType: "regex",
+        fileMatch: ["ci_files/variables.yml"],
+        matchStrings: [
+            "UBI_MICRO_IMAGE: \"(?<registryUrl>[^/]*)\\/(?<depName>[^:@]*)(?::(?<currentValue>[^@\\n]+))?(?:@(?<currentDigest>sha256:[a-f0-9]+[^\\n]))?\""
+        ],
+        datasourceTemplate: "docker",
+        registryUrlTemplate: "https://{{{registryUrl}}}",
       },
       ...updateDangerReviewComponent.customManagers,
     ],
