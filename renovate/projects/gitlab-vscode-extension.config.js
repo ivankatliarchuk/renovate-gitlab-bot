@@ -37,7 +37,6 @@ module.exports = createServerConfig([
           "sinon",
           "mocha",
           "mocha-junit-reporter",
-          "msw",
         ],
         groupName: "Integration testing",
       },
@@ -76,7 +75,9 @@ module.exports = createServerConfig([
         reviewers: ["tristan.read", "ohoral", "erran", "viktomas"],
       },
       {
-        matchPackageNames: ["@types/node", "@types/vscode", "vscode"],
+        matchPackageNames: ["@types/node", "@types/vscode", "vscode",
+          "msw" // disabled until https://gitlab.com/gitlab-org/gitlab-vscode-extension/-/issues/1726 is addressed
+        ],
         enabled: false,
       },
     ],
