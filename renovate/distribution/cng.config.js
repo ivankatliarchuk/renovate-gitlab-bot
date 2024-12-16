@@ -457,16 +457,8 @@ module.exports = createServerConfig([
         customType: "regex",
         fileMatch: ["ci_files/variables.yml"],
         matchStrings: [
-            "UBI_IMAGE: \"(?<registryUrl>[^/]*)\\/(?<depName>[^:@]*)(?::(?<currentValue>[^@\\n]+))?(?:@(?<currentDigest>sha256:[a-f0-9]+[^\\n]))?\""
-        ],
-        datasourceTemplate: "docker",
-        registryUrlTemplate: "https://{{{registryUrl}}}",
-      },
-      {
-        customType: "regex",
-        fileMatch: ["ci_files/variables.yml"],
-        matchStrings: [
-            "UBI_MICRO_IMAGE: \"(?<registryUrl>[^/]*)\\/(?<depName>[^:@]*)(?::(?<currentValue>[^@\\n]+))?(?:@(?<currentDigest>sha256:[a-f0-9]+[^\\n]))?\""
+          "UBI_IMAGE: \"(?<registryUrl>[^/]*)\\/(?<depName>[^:@]*)(?::(?<currentValue>[^@\\n]+))?(?:@(?<currentDigest>sha256:[a-f0-9]+[^\\n]))?\"",
+          "UBI_MICRO_IMAGE: \"(?<registryUrl>[^/]*)\\/(?<depName>[^:@]*)(?::(?<currentValue>[^@\\n]+))?(?:@(?<currentDigest>sha256:[a-f0-9]+[^\\n]))?\""
         ],
         datasourceTemplate: "docker",
         registryUrlTemplate: "https://{{{registryUrl}}}",
