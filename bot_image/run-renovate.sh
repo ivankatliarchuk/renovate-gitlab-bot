@@ -44,7 +44,7 @@ echo "Starting renovate for $DIR/$CONFIG_FILE"
 
 run_preprocessing "$DIR/$CONFIG_FILE" || fail "Execution of preprocessing failed"
 
-run_renovate "$DIR/$CONFIG_FILE" || fail "Execution of renovate for $file failed"
+run_renovate "$DIR/$CONFIG_FILE" || fail "Execution of renovate failed"
 
 run_postprocessing "$DIR/$CONFIG_FILE" || fail "Execution of postprocessing failed"
 
