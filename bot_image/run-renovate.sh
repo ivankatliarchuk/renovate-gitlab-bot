@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
+
 set -euo pipefail
+
 IFS=$'\n\t'
-
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
-
 CONFIG_FILE="$1"
 
 export NODE_OPTIONS="--max-old-space-size=4096"
