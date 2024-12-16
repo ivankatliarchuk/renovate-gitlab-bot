@@ -455,6 +455,7 @@ module.exports = createServerConfig([
       },
       {
         customType: "regex",
+        includePaths: ["ci_files/*"],
         fileMatch: ["ci_files/variables.yml"],
         matchStrings: [
           "UBI_IMAGE: \"(?<registryUrl>[^/]*)\\/(?<depName>[^:@]*)(?::(?<currentValue>[^@\\n]+))?(?:@(?<currentDigest>sha256:[a-f0-9]+[^\\n]))?\"",
