@@ -45,6 +45,7 @@ projects = [
   { path = "gitlab-org/modelops/applied-ml/code-suggestions/ai-assist" },
   { path = "gitlab-org/omnibus-gitlab" },
   { path = "gitlab-org/quality/triage-ops" },
+  { path = "gitlab-org/quality/ci_test" },
   { path = "gitlab-org/workspaces/gitlab-workspaces-tools" },
   { path = "gitlab-org/release-cli" },
   { path = "gitlab-org/release-tools" },
